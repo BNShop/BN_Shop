@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="135" id="KGk-i7-Jjw" customClass="BN_ShoppingCartCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="134"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="133.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-PT-yza">
+                        <rect key="frame" x="4" y="50" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="BaK-hL-RYq"/>
+                            <constraint firstAttribute="width" constant="34" id="Nft-vr-lxa"/>
+                        </constraints>
+                        <state key="normal" image="Shop_ShoppingCart_Unselected"/>
+                        <state key="selected" image="Shop_ShoppingCart_Selected"/>
+                        <connections>
+                            <action selector="selectAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ckO-AO-adT"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="52y-mR-UbL">
+                        <rect key="frame" x="46" y="12" width="105.5" height="105.5"/>
+                        <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="52y-mR-UbL" secondAttribute="height" multiplier="1:1" id="Z0d-Gj-OIF"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfb-BF-nK4">
+                        <rect key="frame" x="159.5" y="15" width="140.5" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="4kP-Bg-OEJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pm9-Kk-VpB" customClass="PKYStepper">
+                        <rect key="frame" x="220" y="94.5" width="80" height="20"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="9aj-Fj-Sq7"/>
+                            <constraint firstAttribute="height" constant="20" id="BM0-uv-bUM"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tq-qu-kkj">
+                        <rect key="frame" x="0.0" y="133" width="320" height="0.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="dqf-hI-OlJ"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zf-Sp-wfT">
+                        <rect key="frame" x="159.5" y="60.5" width="140.5" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="dSg-4g-LVh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5tq-qu-kkj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="0BL-Ph-zfk"/>
+                    <constraint firstItem="vf3-PT-yza" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2rc-Qb-MJf"/>
+                    <constraint firstItem="Pm9-Kk-VpB" firstAttribute="bottom" secondItem="52y-mR-UbL" secondAttribute="bottom" constant="-3" id="8bl-pK-8ub"/>
+                    <constraint firstItem="bfb-BF-nK4" firstAttribute="top" secondItem="52y-mR-UbL" secondAttribute="top" constant="3" id="8v8-p6-7xD"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="5tq-qu-kkj" secondAttribute="trailing" constant="-8" id="Cn9-cA-Ip0"/>
+                    <constraint firstItem="4Zf-Sp-wfT" firstAttribute="leading" secondItem="bfb-BF-nK4" secondAttribute="leading" id="ORk-vA-FsN"/>
+                    <constraint firstItem="4Zf-Sp-wfT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SME-DT-Egd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Pm9-Kk-VpB" secondAttribute="trailing" constant="12" id="VIq-Cp-Pd7"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="5tq-qu-kkj" secondAttribute="bottom" constant="-8" id="WNO-XX-Cd6"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="4Zf-Sp-wfT" secondAttribute="trailing" constant="12" id="WlL-Cb-LVv"/>
+                    <constraint firstItem="52y-mR-UbL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="Zvj-5J-95z"/>
+                    <constraint firstItem="vf3-PT-yza" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-4" id="b67-B1-Wtv"/>
+                    <constraint firstItem="bfb-BF-nK4" firstAttribute="leading" secondItem="52y-mR-UbL" secondAttribute="trailing" constant="8" id="e94-uq-Jxf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bfb-BF-nK4" secondAttribute="trailing" constant="12" id="nXa-yJ-gzL"/>
+                    <constraint firstItem="52y-mR-UbL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="38" id="u7h-Os-Xh2"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="52y-mR-UbL" secondAttribute="bottom" constant="8" id="vty-ch-o0W"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bottomLineView" destination="5tq-qu-kkj" id="mdA-Og-2y3"/>
+                <outlet property="priceLabel" destination="4Zf-Sp-wfT" id="acd-AP-rxa"/>
+                <outlet property="radioButton" destination="vf3-PT-yza" id="WRa-jL-CRr"/>
+                <outlet property="stepper" destination="Pm9-Kk-VpB" id="7CA-Gj-JNf"/>
+                <outlet property="thumbnailImageView" destination="52y-mR-UbL" id="1do-3l-iTz"/>
+                <outlet property="titleLabel" destination="bfb-BF-nK4" id="lC9-Zz-lgY"/>
+            </connections>
+            <point key="canvasLocation" x="-25" y="-14"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Shop_ShoppingCart_Selected" width="14" height="14"/>
+        <image name="Shop_ShoppingCart_Unselected" width="14" height="14"/>
+    </resources>
+</document>

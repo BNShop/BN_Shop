@@ -11,4 +11,5 @@ pod 'SDCycleScrollView','~> 1.64'
 pod 'CocoaLumberjack'
 pod 'GLPubSub'
 pod 'SWTableViewCell'
+pod 'PKYStepper', '~> 0.0.1'
 end

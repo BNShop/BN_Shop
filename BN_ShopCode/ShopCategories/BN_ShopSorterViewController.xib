@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BN_ShopSorterViewController">
+            <connections>
+                <outlet property="contentCollectionView" destination="XC2-oW-frz" id="oYi-dE-5By"/>
+                <outlet property="titleTableView" destination="ggT-jP-HPD" id="Dd3-Th-FO7"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ggT-jP-HPD">
+                    <rect key="frame" x="0.0" y="0.0" width="126" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="htE-3V-5iB"/>
+                    </connections>
+                </tableView>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XC2-oW-frz">
+                    <rect key="frame" x="126" y="0.0" width="249" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8ye-6I-Kah">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="DRX-xe-ppt"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="XC2-oW-frz" secondAttribute="trailing" id="2Na-o2-IB1"/>
+                <constraint firstItem="ggT-jP-HPD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3nC-Ae-IzQ"/>
+                <constraint firstItem="ggT-jP-HPD" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="126:667" id="Trd-Xl-Njb"/>
+                <constraint firstItem="XC2-oW-frz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cys-F5-Pzo"/>
+                <constraint firstAttribute="bottom" secondItem="ggT-jP-HPD" secondAttribute="bottom" id="hlz-J7-Inl"/>
+                <constraint firstItem="XC2-oW-frz" firstAttribute="leading" secondItem="ggT-jP-HPD" secondAttribute="trailing" id="quy-lD-hlb"/>
+                <constraint firstItem="ggT-jP-HPD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sBH-lC-Gsm"/>
+                <constraint firstAttribute="bottom" secondItem="XC2-oW-frz" secondAttribute="bottom" id="tZS-M0-LxX"/>
+            </constraints>
+            <point key="canvasLocation" x="45.5" y="62.5"/>
+        </view>
+    </objects>
+</document>
