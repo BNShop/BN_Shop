@@ -12,6 +12,7 @@
 #import "BN_ShopListViewController.h"
 #import "BN_ShopSorterViewController.h"
 #import "BN_ShopGoodDetailViewController.h"
+#import "BN_ShopSpecialSubjectViewController.h"
 #import "ST_TabBarController.h"
 
 #import "BN_ShopHomeFlashSaleView.h"
@@ -149,6 +150,8 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 #warning 点击广告图的跳转
                 @strongify(self);
                 id adObj = [self.adViewModel adItemWithIndex:currentIndex];
+                BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] init];
+                [self.navigationController pushViewController:ctr animated:YES];
             };
         }
         [view addSubview:self.SDScrollViw];

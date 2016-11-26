@@ -8,6 +8,7 @@
 
 #import "ST_TabBarController.h"
 #import "BN_ShopViewController.h"
+#import "BN_ShopHomeViewController.h"
 
 @interface ST_TabBarController ()<UITabBarControllerDelegate>
 {
@@ -62,7 +63,7 @@
 {
     Base_BaseViewController *viewController1        = [[BN_ShopViewController alloc]init];
     Base_BaseViewController *viewController2        = [[BN_ShopViewController alloc]init];
-    Base_BaseViewController *viewController3        = [[BN_ShopViewController alloc]init];
+    Base_BaseViewController *viewController3        = [[BN_ShopHomeViewController alloc]init];
 
     Base_BaseViewController *viewController4  = [[BN_ShopViewController alloc]init];
     UIViewController *viewController5        = [[UIViewController alloc]init];

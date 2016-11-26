@@ -81,4 +81,7 @@
     self.thumbnailScrollView.showPageControl = NO;
 }
 
+- (CGFloat)getViewHeight {
+    return DeviceWidth+31;
+}
 @end

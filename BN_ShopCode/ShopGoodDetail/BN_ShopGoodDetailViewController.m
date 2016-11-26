@@ -8,7 +8,9 @@
 
 #import "BN_ShopGoodDetailViewController.h"
 #import "BN_ShoppingcartViewController.h"
-
+#import "BN_ShopGoodSpecificDetailsViewController.h"
+#import "BN_ShopGoodDetailConsultancyViewController.h"
+#import "BN_ShopGoodDetailCommentViewController.h"
 
 #import "BN_ShopGoodDetailToolBar.h"
 #import "BN_ShopGoodDetailSimpleShowView.h"
@@ -17,6 +19,9 @@
 #import "BN_ShopGoodDetaiNormalStateView.h"
 #import "BN_ShopGoodDetaiForwardStateView.h"
 #import "BN_ShopGoodDetaiPanicStateView.h"
+#import "BN_ShopGoodDetailTransitionToolBar.h"
+#import "BN_ShopGoodDetailNewArrivalsView.h"
+#import "BN_ShopGoodDetailNewArribalsCell.h"
 
 #import "UIBarButtonItem+BlocksKit.h"
 #import "UIView+BlocksKit.h"
@@ -24,6 +29,9 @@
 
 #import "BN_ShopGoodDetailSimpleShowViewModel.h"
 #import "BN_ShopGoodDetaiStateViewModel.h"
+#import "BN_ShopGoodDetailNewArrivalsViewModel.h"
+
+#import "TestObjectHeader.h"
 
 @interface BN_ShopGoodDetailViewController ()
 
@@ -32,17 +40,36 @@
 @property (nonatomic, strong) BN_ShopGoodDetailFriendlyWarning *friendlyWarningView;
 @property (nonatomic, strong) BN_ShopGoodDetailSellersView *sellersView;
 @property (nonatomic, strong) UIView *stateView;
+@property (nonatomic, strong) BN_ShopGoodDetailTransitionToolBar *transitionToolBar;
+@property (nonatomic, strong) UIView *headeView;
+@property (nonatomic, strong) NSArray *subHeadeViews;
+@property (nonatomic, strong) BN_ShopGoodDetailNewArrivalsView *arribalsView;
 
 @property (nonatomic, strong) BN_ShopGoodDetailSimpleShowViewModel *simpleShowViewModel;
 @property (nonatomic, strong) BN_ShopGoodDetaiStateViewModel *stateViewModel;
+@property (nonatomic, strong) BN_ShopGoodDetailNewArrivalsViewModel *arribalsViewModel;
+
+@property (nonatomic, strong) NSMutableArray *controllers;
+
+@property (nonatomic, weak) UIViewController *curController;
 
 @end
+
+static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDetailNewArrivalsCellIdentifier";
 
 @implementation BN_ShopGoodDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self buildSimpleShowViewModel];
+    [self bulidStateViewModel];
+    [self buildArribalsViewModel];
+    [self buildHeadView];
+    [self buildArribalsView];
+    
+    [self buildTransitionControllers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,11 +90,8 @@
 
 - (void)buildControls {
     [super buildControls];
+    self.navigationController.navigationBar.translucent = NO;
     [self buildToolBar];
-    [self buildSimpleShowView];
-    [self buildFriendWarningView];
-    [self buildSellersView];
-    
     
 }
 
@@ -75,6 +99,24 @@
 - (void)setControlsFrame
 {
     
+}
+
+- (void)buildHeadView {
+    self.headeView = [[UIView alloc] init];
+    [self buildSimpleShowView];
+    [self buildStateView];
+    [self buildFriendWarningView];
+    [self buildSellersView];
+    [self buildTransitionToolBar];
+    
+    CGFloat stateHeight = 54.0f;
+    CGFloat height = [self.simpleShowView getViewHeight] + stateHeight + [self.friendlyWarningView getViewHeight] + [self.sellersView getViewHeight] + [self.transitionToolBar getViewHeight];
+    self.headeView.frame = CGRectMake(0, 0, WIDTH(self.view), height);
+    NSMutableArray *tmpArray = [NSMutableArray array];
+    for (NSInteger index=0; index<3; index++) {
+        [tmpArray addObject:[[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.view), height)]];
+    }
+    self.subHeadeViews = tmpArray.copy;
 }
 
 - (void)buildToolBar {
@@ -96,11 +138,13 @@
     [self.toolBar autoSetDimension:ALDimensionHeight toSize:[self.toolBar getViewHeight]];
 }
 
-- (void)buildSimpleShowView {
-    
+- (void)buildSimpleShowViewModel {
     self.simpleShowViewModel = [[BN_ShopGoodDetailSimpleShowViewModel alloc] init];
     self.simpleShowViewModel.shortDescription = @"木材面包口感扎实绵密";
-    
+}
+
+- (void)buildSimpleShowView {
+
     self.simpleShowView = [BN_ShopGoodDetailSimpleShowView nib];
     [self.simpleShowView updateThumbnailWith:self.simpleShowViewModel.thumbnailUrlList];
     [self.simpleShowView updateWith:self.simpleShowViewModel.shortDescription schedule:[self.simpleShowViewModel scheduleWith:0]];
@@ -114,29 +158,29 @@
         NSLog(@"点击了第几张 %@", x);
     }];
     
-    [self.view addSubview:self.simpleShowView];
-    [self.simpleShowView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
-    [self.simpleShowView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
-    [self.simpleShowView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.view];
-    [self.simpleShowView autoSetDimension:ALDimensionHeight toSize:DeviceWidth+31];
+    [self.headeView addSubview:self.simpleShowView];
+    [self.simpleShowView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.headeView];
+    [self.simpleShowView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.headeView];
+    [self.simpleShowView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.headeView];
+    [self.simpleShowView autoSetDimension:ALDimensionHeight toSize:[self.simpleShowView getViewHeight]];
     
 }
 
 - (void)buildFriendWarningView {
     self.friendlyWarningView = [BN_ShopGoodDetailFriendlyWarning nib];
-    [self.view addSubview:self.friendlyWarningView];
-    [self.friendlyWarningView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
-    [self.friendlyWarningView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
-    [self.friendlyWarningView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.simpleShowView];
+    [self.headeView addSubview:self.friendlyWarningView];
+    [self.friendlyWarningView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.headeView];
+    [self.friendlyWarningView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.headeView];
+    [self.friendlyWarningView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.stateView];
     [self.friendlyWarningView autoSetDimension:ALDimensionHeight toSize:[self.friendlyWarningView getViewHeight]];
     [self.friendlyWarningView updateWith:@"满99包邮" point:@"购买可送12积分" deliver:@"第三方发货"];
 }
 
 - (void)buildSellersView {
     self.sellersView = [BN_ShopGoodDetailSellersView nib];
-    [self.view addSubview:self.sellersView];
-    [self.sellersView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
-    [self.sellersView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
+    [self.headeView addSubview:self.sellersView];
+    [self.sellersView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.headeView];
+    [self.sellersView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.headeView];
     [self.sellersView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.friendlyWarningView];
     [self.sellersView autoSetDimension:ALDimensionHeight toSize:[self.sellersView getViewHeight]];
     [self.sellersView updateWith:@"阿里巴巴" iconUrl:nil];
@@ -146,17 +190,103 @@
     }];
 }
 
+- (void)bulidStateViewModel {
+    self.stateViewModel = [[BN_ShopGoodDetaiStateViewModel alloc] init];
+    self.stateViewModel.state = random() % 3;
+    self.stateViewModel.realPrice = @"345";
+    self.stateViewModel.frontPrice = @"567";
+    self.stateViewModel.followNum = @"78";
+    self.stateViewModel.date = [NSDate dateWithTimeIntervalSinceNow:5*60*60+4*60+18];
+    self.stateViewModel.saleNum = @"109";
+    self.stateViewModel.residueNum = @"19090";
+    self.stateViewModel.tips = @"反正会准时开抢，所以自己准备好枪！";
+}
 
 - (void)buildStateView {
-//    BN_ShopGoodDetaiForwardStateView *test = [BN_ShopGoodDetaiForwardStateView nib];
-//    [self.view addSubview:test];
-//    [test autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
-//    [test autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
-//    [test autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.view withOffset:100];
-//    [test autoSetDimension:ALDimensionHeight toSize:test.getViewHeight];
-//    [test updateWith:@"¥768" frontPrice:[[NSAttributedString alloc] initWithString:@"¥8970"] tips:@"下午九点 尊师开枪呀" follow:@"9030跟随"];
-//    [test updateWith:[NSDate dateWithTimeIntervalSinceNow:3*60*60+90] countdownToLastSeconds:0];
-//    [test setNeedsLayout];
+    CGFloat height = 54.0f;
+    switch (self.stateViewModel.state) {
+        case GoodDetaiState_Forward:
+        {
+            BN_ShopGoodDetaiForwardStateView *stateView = [BN_ShopGoodDetaiForwardStateView nib];
+            [stateView updateWith:self.stateViewModel.date countdownToLastSeconds:0];
+            [stateView updateWith:self.stateViewModel.realPrice frontPrice:self.stateViewModel.frontPriceAttrStr tips:self.stateViewModel.tips follow:self.stateViewModel.followNumStr];
+            self.stateView = stateView;
+            height = [stateView getViewHeight];
+        }
+            break;
+        case GoodDetaiState_Panic:
+        {
+            BN_ShopGoodDetaiPanicStateView *stateView = [BN_ShopGoodDetaiPanicStateView nib];
+            [stateView updateWith:self.stateViewModel.date countdownToLastSeconds:0];
+            [stateView updateWith:self.stateViewModel.realPrice frontPrice:self.stateViewModel.frontPriceAttrStr saleNum:self.stateViewModel.saleNumStr residue:self.stateViewModel.residueNumStr];
+            self.stateView = stateView;
+            height = [stateView getViewHeight];
+        }
+            break;
+            
+        default:
+        {
+            BN_ShopGoodDetaiNormalStateView *stateView = [BN_ShopGoodDetaiNormalStateView nib];
+            [stateView updateWith:self.stateViewModel.realPrice frontPrice:self.stateViewModel.frontPriceAttrStr];
+            self.stateView = stateView;
+            height = [stateView getViewHeight];
+        }
+            break;
+    }
+    [self.headeView addSubview:self.stateView];
+    [self.stateView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.headeView];
+    [self.stateView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.headeView];
+    [self.stateView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.simpleShowView];
+    [self.stateView autoSetDimension:ALDimensionHeight toSize:height];
+    
+}
+
+- (void)buildArribalsViewModel {
+    self.arribalsViewModel = [[BN_ShopGoodDetailNewArrivalsViewModel alloc] init];
+    self.arribalsViewModel.title = @"相关推荐";
+    self.arribalsViewModel.subTitle = @" | New Arribals";
+    self.arribalsViewModel.dataSource = [[TableDataSource alloc] initWithItems:testImgs cellIdentifier:ShopGoodDetailNewArrivalsCellIdentifier configureCellBlock:^(id cell, id item) {
+        [(BN_ShopGoodDetailNewArribalsCell *)cell updateWith:item];
+    }];
+}
+
+- (void)buildArribalsView {
+    self.arribalsView = [[BN_ShopGoodDetailNewArrivalsView alloc] init];
+    [self.arribalsView updateWith:ShopGoodDetailNewArrivalsCellIdentifier registerNib:[BN_ShopGoodDetailNewArribalsCell nib]];
+    [self.arribalsView updateWith:self.arribalsViewModel.dataSource];
+    [self.arribalsView updateWith:self.arribalsViewModel.title subTitle:self.arribalsViewModel.subTitle];
+//    [[self.arribalsView rac_collectionViewDidSelectItemSignal] subscribeNext:^(id x) {
+////        x为NSIndexPath
+//#warning -----点击新推荐的图片跳转
+//    }];
+}
+
+- (void)buildTransitionToolBar {
+    self.transitionToolBar = [BN_ShopGoodDetailTransitionToolBar nib];
+    @weakify(self);
+    [self.transitionToolBar updateWith:@"68" segmentedControlChangedValue:^(NSInteger selectedIndex) {
+#warning 视图页面的跳转
+        @strongify(self);
+        UIViewController *newController = self.curController;
+        if (selectedIndex >= 0 && selectedIndex < self.controllers.count) {
+            newController = [self.controllers objectAtIndex:selectedIndex];
+        }
+        if (newController != self.curController) {
+            if ([self.curController respondsToSelector:@selector(setHeadView:)]) {
+                [self.curController performSelectorOnMainThread:@selector(setHeadView:) withObject:[self.subHeadeViews objectAtIndex:selectedIndex] waitUntilDone:NO];
+            }
+            if ([newController respondsToSelector:@selector(setHeadView:)]) {
+                [newController performSelectorOnMainThread:@selector(setHeadView:) withObject:self.headeView waitUntilDone:NO];
+            }
+        }
+        [self replaceController:self.curController newController:newController];
+    }];
+    
+    [self.headeView addSubview:self.transitionToolBar];
+    [self.transitionToolBar autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.headeView];
+    [self.transitionToolBar autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.headeView];
+    [self.transitionToolBar autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.sellersView];
+    [self.transitionToolBar autoSetDimension:ALDimensionHeight toSize:[self.transitionToolBar getViewHeight]];
 }
 
 #pragma mark - action's for nav
@@ -179,4 +309,61 @@
 
 - (void)addToCart {
 }
+
+#pragma mark - 页面跳转
+- (void)buildTransitionControllers {
+    self.controllers = [NSMutableArray array];
+    NSString *readmePath = [[NSBundle mainBundle] pathForResource:@"README.html" ofType:nil];
+    NSString *html = [NSString stringWithContentsOfFile:readmePath encoding:NSUTF8StringEncoding error:NULL];
+    BN_ShopGoodSpecificDetailsViewController *detailCtr = [[BN_ShopGoodSpecificDetailsViewController alloc] initWithHtml:html];
+    BN_ShopGoodDetailCommentViewController *commetnCtr = [[BN_ShopGoodDetailCommentViewController alloc] init];
+    BN_ShopGoodDetailConsultancyViewController *consultancCtr = [[BN_ShopGoodDetailConsultancyViewController alloc] init];
+
+    detailCtr.automaticallyAdjustsScrollViewInsets = NO;
+    commetnCtr.automaticallyAdjustsScrollViewInsets = NO;
+    consultancCtr.automaticallyAdjustsScrollViewInsets = NO;
+    [detailCtr setHeadView:[self.subHeadeViews objectAtIndex:0]];
+    [commetnCtr setHeadView:[self.subHeadeViews objectAtIndex:1]];
+    [consultancCtr setHeadView:[self.subHeadeViews objectAtIndex:2]];
+    [self.controllers addObject:detailCtr];
+    [self addChildViewController:detailCtr];
+    [self.controllers addObject:commetnCtr];
+    [self addChildViewController:commetnCtr];
+    [self.controllers addObject:consultancCtr];
+    [self addChildViewController:consultancCtr];
+    
+    
+    [detailCtr setHeadView:self.headeView];
+    [self.view addSubview:detailCtr.view];
+    self.curController = detailCtr;
+    
+    [self.view bringSubviewToFront:self.toolBar];
+
+}
+
+- (void)replaceController:(UIViewController *)oldController newController:(UIViewController *)newController
+{
+    if (oldController == newController) {
+        return;
+    }
+    
+    
+    [self addChildViewController:newController];
+    [self transitionFromViewController:oldController toViewController:newController duration:0.0 options:UIViewAnimationOptionTransitionNone animations:nil completion:^(BOOL finished) {
+        
+        if (finished) {
+            
+            [oldController didMoveToParentViewController:nil];
+            [oldController removeFromParentViewController];
+            [newController didMoveToParentViewController:self];
+            self.curController = newController;
+            
+            [self.view bringSubviewToFront:self.toolBar];
+        }else{
+            self.curController = oldController;
+        }
+        
+    }];
+}
+
 @end

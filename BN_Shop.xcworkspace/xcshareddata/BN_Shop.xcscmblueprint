@@ -1,21 +1,28 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "c7e35e2a-59cb-4199-89bd-0fe7ff3ab383++186",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CEDCAD53F62E3F52F449E807004D8913940E88B1",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
     "c7e35e2a-59cb-4199-89bd-0fe7ff3ab383++186" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "c7e35e2a-59cb-4199-89bd-0fe7ff3ab383++186" : 9223372036854775807
+    "c7e35e2a-59cb-4199-89bd-0fe7ff3ab383++186" : 9223372036854775807,
+    "CEDCAD53F62E3F52F449E807004D8913940E88B1" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E4F2C6E2-5F96-4DA3-B9D8-2C6BC2BA5160",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "c7e35e2a-59cb-4199-89bd-0fe7ff3ab383++186" : ".."
+    "c7e35e2a-59cb-4199-89bd-0fe7ff3ab383++186" : "..",
+    "CEDCAD53F62E3F52F449E807004D8913940E88B1" : "BN_Shop\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "BN_Shop",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BN_Shop.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/BNShop\/BN_Shop.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CEDCAD53F62E3F52F449E807004D8913940E88B1"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/112.74.31.159",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",

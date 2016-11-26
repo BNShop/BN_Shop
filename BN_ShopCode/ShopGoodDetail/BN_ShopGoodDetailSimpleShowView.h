@@ -15,4 +15,6 @@
 
 - (void)updateWith:(NSString *)title schedule:(NSString *)schedule;
 - (void)updateThumbnailWith:(NSArray *)thumbnailUrls;
+
+- (CGFloat)getViewHeight;
 @end
