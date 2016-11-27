@@ -7,14 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-//分类
-@interface BN_ShopCategoryModel : NSObject
-
-@property (nonatomic, copy) NSString *name; //分类名称
-@property (nonatomic, assign) long category_id;//id
-
-@end
+#import "BN_ShopCategoryModel.h"
 
 @interface BN_ShopHomeCategoryViewModel : NSObject
 

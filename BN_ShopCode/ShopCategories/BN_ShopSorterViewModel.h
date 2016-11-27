@@ -8,19 +8,24 @@
 
 #import <Foundation/Foundation.h>
 #import "TableDataSource.h"
+#import "BN_ShopCategoryModel.h"
 
 @interface BN_ShopSorterViewModel : NSObject
 
-@property (nonatomic, assign) NSInteger selectionIndex;
+@property (nonatomic, assign) long curCategoryId;
+@property (nonatomic, strong) NSMutableArray *categories;
 @property (nonatomic, strong, readonly) TableDataSource *titleDataSource;
-@property (nonatomic, strong, readonly) TableDataSource *selectionDataSource;
+@property (nonatomic, strong, readonly) TableDataSource *secondCategoryDataSource;
 
 - (TableDataSource *)getTitleDataSourceWith:(NSArray *)titles
                              cellIdentifier:(NSString *)aCellIdentifier
                          configureCellBlock:(TableViewCellConfigureBlock)aConfigureCellBlock;
-- (TableDataSource *)getSectionDataSourceWith:(NSArray *)sections
+- (TableDataSource *)getSecondDataSourceWith:(NSArray *)items
                                cellIdentifier:(NSString *)aCellIdentifier
                            configureCellBlock:(TableViewCellConfigureBlock)aConfigureCellBlock;
+- (TableDataSource *)getSecondDataSourceWith:(NSArray *)items;
 
+- (void)getCategories;
+- (void)getSecondCategories:(BN_ShopCategoryModel *)categoryModel;
 @end
 

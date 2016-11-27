@@ -38,9 +38,6 @@
         {
             NSArray *array = [dic objectForKey:@"rows"];
             NSArray *returnArray = [BN_ShopSouvenirModel mj_objectArrayWithKeyValuesArray:array];
-//            for (BN_ShopSouvenirModel *model in returnArray) {
-//                model.goodsList = [BN_ShopSouvenirGoodModel mj_objectArrayWithKeyValuesArray:model.goodsList];
-//            }
             
             [temp.souvenirs removeAllObjects];
             

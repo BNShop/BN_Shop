@@ -38,6 +38,15 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
 
 @implementation BN_ShopListViewController
 
+- (instancetype)initWithCategoryId:(long)CategoryId
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -202,14 +211,14 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
     }
     
     if (self.listViewModel.isHorizontalCell) {
-        [self.listViewModel getSectionDataSourceWith:array cellIdentifier:ShopListHorizontalCellIdentifier configureCellBlock:^(id cell, TestCartItem *item) {
-            [(BN_ShopGoodHorizontalCell *)cell updateWith:@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg" title:[@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%40] front:item.front_price real:[item.real_price strikethroughAttribute] additional:@"9090条评论"];
-        }];
+//        [self.listViewModel getSectionDataSourceWith:array cellIdentifier:ShopListHorizontalCellIdentifier configureCellBlock:^(id cell, TestCartItem *item) {
+//            [(BN_ShopGoodHorizontalCell *)cell updateWith:@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg" title:[@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%40] front:item.front_price real:[item.real_price strikethroughAttribute] additional:@"9090条评论"];
+//        }];
     } else {
         
-        [self.listViewModel getSectionDataSourceWith:array cellIdentifier:ShopListGridCellIdentifier configureCellBlock:^(id cell, TestCartItem *item) {
-            [(BN_ShopGoodCell *)cell updateWith:@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg" title:[@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%30] front:item.front_price real:[item.real_price strikethroughAttribute] additional:@"9090条评论"];
-        }];
+//        [self.listViewModel getSectionDataSourceWith:array cellIdentifier:ShopListGridCellIdentifier configureCellBlock:^(id cell, TestCartItem *item) {
+//            [(BN_ShopGoodCell *)cell updateWith:@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg" title:[@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%30] front:item.front_price real:[item.real_price strikethroughAttribute] additional:@"9090条评论"];
+//        }];
     }
     self.collectionView.dataSource = self.listViewModel.dataSource;
     [self.collectionView reloadData];

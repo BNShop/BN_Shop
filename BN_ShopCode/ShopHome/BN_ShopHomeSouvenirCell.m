@@ -121,6 +121,7 @@
         return tuple.allObjects;
     }];
     
+    
     objc_setAssociatedObject(self, _cmd, signal, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return signal;
 }

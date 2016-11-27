@@ -30,7 +30,6 @@
     self.adList.loadSupport.loadEvent = NetLoadingEvent;
     
     [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSLog(@"%@", operation.currentRequest);
         NSDictionary *dic = responseObject;
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if(codeNumber.intValue == 0)

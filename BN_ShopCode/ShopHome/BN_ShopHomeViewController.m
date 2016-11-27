@@ -144,7 +144,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     self.viewModel.dataSource = [[TableDataSource alloc] initWithItems:array cellIdentifier:ShopHomeCellIdentifier configureCellBlock:^(id cell, id item) {
         @strongify(self);
         [[(BN_ShopHomeSouvenirCell *)cell collectionView] registerNib:[BN_ShopGoodCell nib] forCellWithReuseIdentifier:ShopHomeSouvenirCellIdentifier];
-        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeSouvenirCellSignal] subscribeNext:^(id x) {
+        [[[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeSouvenirCellSignal] takeLast:1] subscribeNext:^(id x) {
             
             UITableViewCell *cell = [(NSArray *)x firstObject];
             NSIndexPath *indexPath = [(NSArray *)x lastObject];
@@ -157,7 +157,9 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
         [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeClickTitleSignal] subscribeNext:^(id x) {
             @strongify(self);
             NSIndexPath *sectionIndex = [self.tableView indexPathForCell:(UITableViewCell *)x];
-            NSLog(@"首页点击Title section = %ld", (long)sectionIndex.row);
+            BN_ShopSouvenirModel *categoryM = [self.viewModel.souvenirs objectAtIndex:sectionIndex.row];
+            BN_ShopSorterViewController *ctr = [[BN_ShopSorterViewController alloc] initWith:categoryM.category_id];
+            [self.navigationController pushViewController:ctr animated:YES];
         }];
         [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeClickThumbnailSignal] subscribeNext:^(id x) {
             @strongify(self);
@@ -266,9 +268,13 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     self.categoryView = [BN_ShopHomeCategoryView nib];
     @weakify(self);
     [[self.categoryView rac_shopHomeCategorySignal] subscribeNext:^(id x) {
-        //            NSInteger tag = [x integerValue];
+        NSInteger tag = [x integerValue];
         @strongify(self);
-        BN_ShopSorterViewController *ctr = [[BN_ShopSorterViewController alloc] init];
+        BN_ShopCategoryModel *categoryM = nil;
+        if (tag-1 > 0 && tag-1 < self.categoryViewModel.categorys.count) {
+            categoryM = [self.categoryViewModel.categorys objectAtIndex:tag-1];
+        }
+        BN_ShopSorterViewController *ctr = [[BN_ShopSorterViewController alloc] initWith:categoryM.category_id];
         [self.navigationController pushViewController:ctr animated:YES];
     }];
 }

@@ -9,5 +9,5 @@
 #import "Base_BaseViewController.h"
 
 @interface BN_ShopListViewController : Base_BaseViewController
-
+- (instancetype)initWithCategoryId:(long)CategoryId;
 @end

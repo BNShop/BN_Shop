@@ -8,10 +8,6 @@
 
 #import "BN_ShopHomeCategoryViewModel.h"
 
-@implementation BN_ShopCategoryModel
-
-@end
-
 @implementation BN_ShopHomeCategoryViewModel
 
 

@@ -169,6 +169,8 @@
 		6A0B13701DE2AE1B00B3715E /* BN_ShopGoodDetailNewArrivalsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0B136F1DE2AE1B00B3715E /* BN_ShopGoodDetailNewArrivalsView.m */; };
 		6A0B13721DE2AE2600B3715E /* BN_ShopGoodDetailNewArrivalsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0B13711DE2AE2600B3715E /* BN_ShopGoodDetailNewArrivalsView.xib */; };
 		6A0B13751DE2C45A00B3715E /* BN_ShopGoodDetailNewArrivalsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0B13741DE2C45A00B3715E /* BN_ShopGoodDetailNewArrivalsViewModel.m */; };
+		6A313BC51DEAA8A700BC9AF8 /* BN_ShopGoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A313BC41DEAA8A700BC9AF8 /* BN_ShopGoodModel.m */; };
+		6A313BC81DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A313BC71DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m */; };
 		6A4C91C71DE5D8B600588F43 /* BN_ShopSpecialSubjectCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4C91C61DE5D8B600588F43 /* BN_ShopSpecialSubjectCellModel.m */; };
 		C96514F01DD61C86004B5F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514EF1DD61C86004B5F05 /* main.m */; };
 		C96514F31DD61C86004B5F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514F21DD61C86004B5F05 /* AppDelegate.m */; };
@@ -520,6 +522,10 @@
 		6A0B13711DE2AE2600B3715E /* BN_ShopGoodDetailNewArrivalsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopGoodDetailNewArrivalsView.xib; sourceTree = "<group>"; };
 		6A0B13731DE2C45A00B3715E /* BN_ShopGoodDetailNewArrivalsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodDetailNewArrivalsViewModel.h; sourceTree = "<group>"; };
 		6A0B13741DE2C45A00B3715E /* BN_ShopGoodDetailNewArrivalsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodDetailNewArrivalsViewModel.m; sourceTree = "<group>"; };
+		6A313BC31DEAA8A700BC9AF8 /* BN_ShopGoodModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodModel.h; sourceTree = "<group>"; };
+		6A313BC41DEAA8A700BC9AF8 /* BN_ShopGoodModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodModel.m; sourceTree = "<group>"; };
+		6A313BC61DEAAE9000BC9AF8 /* BN_ShopCategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopCategoryModel.h; sourceTree = "<group>"; };
+		6A313BC71DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopCategoryModel.m; sourceTree = "<group>"; };
 		6A4C91A61DE5380500588F43 /* TestObjectHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjectHeader.h; sourceTree = "<group>"; };
 		6A4C91C51DE5D8B600588F43 /* BN_ShopSpecialSubjectCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopSpecialSubjectCellModel.h; sourceTree = "<group>"; };
 		6A4C91C61DE5D8B600588F43 /* BN_ShopSpecialSubjectCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopSpecialSubjectCellModel.m; sourceTree = "<group>"; };
@@ -909,6 +915,8 @@
 		6A033EFF1DE1B220000446A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6A313BC61DEAAE9000BC9AF8 /* BN_ShopCategoryModel.h */,
+				6A313BC71DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1125,6 +1133,8 @@
 		6A033F0B1DE1B2DF000446A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6A313BC31DEAA8A700BC9AF8 /* BN_ShopGoodModel.h */,
+				6A313BC41DEAA8A700BC9AF8 /* BN_ShopGoodModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1618,6 +1628,7 @@
 				6A033E8B1DE1ACD3000446A0 /* UISearchBar+FMAdd.m in Sources */,
 				6A033EC21DE1ACD3000446A0 /* BN_ShopHomeViewController.m in Sources */,
 				6A0B13751DE2C45A00B3715E /* BN_ShopGoodDetailNewArrivalsViewModel.m in Sources */,
+				6A313BC81DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m in Sources */,
 				6A033ECD1DE1ACD3000446A0 /* BN_ShopListViewController.m in Sources */,
 				6A033EEE1DE1ACD3000446A0 /* V_LineLayer.m in Sources */,
 				6A033EBF1DE1ACD3000446A0 /* BN_ShopHomeSouvenirCell.m in Sources */,
@@ -1691,6 +1702,7 @@
 				6A033E921DE1ACD3000446A0 /* TableDataSource.m in Sources */,
 				6A033E8A1DE1ACD3000446A0 /* NSString+URL.m in Sources */,
 				6A033E951DE1ACD3000446A0 /* BN_ShoppingCartEndView.m in Sources */,
+				6A313BC51DEAA8A700BC9AF8 /* BN_ShopGoodModel.m in Sources */,
 				6A035C161DE69A48009617A7 /* BN_ShopGoodDetailConsultancyHeadView.m in Sources */,
 				6A033EEB1DE1ACD3000446A0 /* BGButton.m in Sources */,
 				6A035C1C1DE69D0E009617A7 /* BN_ShopGoodDetailConsultancyCell.m in Sources */,

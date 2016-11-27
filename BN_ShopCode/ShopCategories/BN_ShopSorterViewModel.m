@@ -8,43 +8,20 @@
 
 #import "BN_ShopSorterViewModel.h"
 
-@interface BN_ShopSorterViewModel ()
-
-@property (nonatomic, strong) TableDataSource *titleDataSource;
-@property (nonatomic, strong) NSMutableArray *sorterDataSources;//里面也是TableDataSource
-
-@end
-
 @implementation BN_ShopSorterViewModel
 
 - (instancetype)init {
     if (self = [super init]) {
-        _selectionIndex = -1;
+        self.curCategoryId = -1;
+        self.categories = [[NSMutableArray alloc] initFromNet];
     }
     return self;
 }
 
 
-- (void)setSelectionIndex:(NSInteger)selectionIndex {
-//    if (_selectionIndex != selectionIndex) {
-//        _selectionIndex = selectionIndex;
-//        if ([_sorterDataSources count] <= _selectionIndex || _selectionIndex < 0) {
-//            _selectionDataSource = nil;
-//#warning 去获取新的对应类型的数据
-//        } else {
-//            _selectionDataSource = [_sorterDataSources objectAtIndex:selectionIndex];
-//            if ([_selectionDataSource isEqual:[NSNull null]]) {
-//                _selectionDataSource = nil;
-//#warning 去获取新的对应类型的数据
-//            }
-//        }
-//    }
-}
-
-
 - (TableDataSource *)getTitleDataSourceWith:(NSArray *)titles
                              cellIdentifier:(NSString *)aCellIdentifier
-                         configureCellBlock:(TableViewCellConfigureBlock)aConfigureCellBlock{
+                         configureCellBlock:(TableViewCellConfigureBlock)aConfigureCellBlock {
     if (!_titleDataSource) {
         _titleDataSource = [[TableDataSource alloc] initWithItems:titles cellIdentifier:aCellIdentifier configureCellBlock:aConfigureCellBlock];
     } else {
@@ -54,28 +31,94 @@
 }
 
 
-- (TableDataSource *)getSectionDataSourceWith:(NSArray *)sections
-                             cellIdentifier:(NSString *)aCellIdentifier
-                         configureCellBlock:(TableViewCellConfigureBlock)aConfigureCellBlock{
-    if (!_selectionDataSource) {
-        _selectionDataSource = [[TableDataSource alloc] initWithItems:sections cellIdentifier:aCellIdentifier configureCellBlock:aConfigureCellBlock];
+- (TableDataSource *)getSecondDataSourceWith:(NSArray *)items
+                              cellIdentifier:(NSString *)aCellIdentifier
+                          configureCellBlock:(TableViewCellConfigureBlock)aConfigureCellBlock {
+    if (!_secondCategoryDataSource) {
+        _secondCategoryDataSource = [[TableDataSource alloc] initWithItems:items cellIdentifier:aCellIdentifier configureCellBlock:aConfigureCellBlock];
     } else {
-        [_selectionDataSource resetItems:sections cellIdentifier:aCellIdentifier configureCellBlock:aConfigureCellBlock];
+        [_secondCategoryDataSource resetItems:items cellIdentifier:aCellIdentifier configureCellBlock:aConfigureCellBlock];
     }
-    return _selectionDataSource;
+    return _secondCategoryDataSource;
 }
 
-- (NSMutableArray *)sorterDataSources {
-    if (!_sorterDataSources) {
-        _sorterDataSources = [NSMutableArray array];
-    }
-    return _sorterDataSources;
+- (TableDataSource *)getSecondDataSourceWith:(NSArray *)items {
+    [_secondCategoryDataSource resetItems:items];
+    return _secondCategoryDataSource;
 }
+
 
 
 #pragma mark - 获取titles的数据
+- (void)getCategories
+{
+    NSString *url = [NSString stringWithFormat:@"%@/mall/categoryList", BASEURL];
+    __weak typeof(self) temp = self;
+    self.categories.loadSupport.loadEvent = NetLoadingEvent;
+    
+    [[BC_ToolRequest sharedManager] GET:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@"%@", operation.currentRequest);
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if(codeNumber.intValue == 0)
+        {
+            NSArray *array = [dic objectForKey:@"rows"];
+            NSArray *returnArray = [BN_ShopCategoryModel mj_objectArrayWithKeyValuesArray:array];
+            
+            [temp.categories removeAllObjects];
+            
+            [temp.categories addObjectsFromArray:returnArray];
+            temp.categories.networkTotal = [dic objectForKey:@"total"];
+        }
+        else
+        {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+        }
+        
+        temp.categories.loadSupport.loadEvent = codeNumber.intValue;
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+        temp.categories.loadSupport.loadEvent = NetLoadFailedEvent;
+    }];
+    
+}
 
 
-#pragma mark - 获取对应的section的数据
+
+#pragma mark - 获取对应的second的数据
+- (void)getSecondCategories:(BN_ShopCategoryModel *)categoryModel
+{
+    NSDictionary *paraDic = @{
+                              @"parentCategoryId":[NSNumber numberWithLong:categoryModel.category_id]
+                              };
+    
+    NSString *url = [NSString stringWithFormat:@"%@/mall/secondCategoryList",BASEURL];
+    __weak typeof(categoryModel) temp = categoryModel;
+    categoryModel.secondCategories.loadSupport.loadEvent = NetLoadingEvent;
+    
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if(codeNumber.intValue == 0)
+        {
+            NSArray *array = [dic objectForKey:@"rows"];
+            NSArray *returnArray = [BN_ShopSecondCategoryModel mj_objectArrayWithKeyValuesArray:array];
+            
+            [temp.secondCategories removeAllObjects];
+            [temp.secondCategories addObjectsFromArray:returnArray];
+            temp.secondCategories.networkTotal = [dic objectForKey:@"total"];
+        }
+        else
+        {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+        }
+        
+        temp.secondCategories.loadSupport.loadEvent = codeNumber.intValue;
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+        temp.secondCategories.loadSupport.loadEvent = NetLoadFailedEvent;
+    }];
+    
+}
 
 @end
