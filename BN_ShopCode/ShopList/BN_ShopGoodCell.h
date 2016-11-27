@@ -13,6 +13,6 @@
 
 - (void)typeFace;
 - (void)typeFace0;
-- (void)updateWith:(NSString *)thumbnailUrl title:(NSString *)title front:(NSString *)front real:(NSAttributedString *)real additional:(NSString *)additional;
+- (void)updateWith:(NSString *)thumbnailUrl title:(NSString *)title front:(NSAttributedString *)front real:(NSString *)real additional:(NSString *)additional;
 
 @end

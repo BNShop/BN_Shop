@@ -20,6 +20,7 @@
 @property (nonatomic, assign) int timeleft;//剩余时间（秒）
 @property (nonatomic, assign) int buying_state;//0:未开始 1:抢购中 2:已结束
 
+
 @end
 
 @interface BN_ShopHomeFlashSaleViewModel : NSObject

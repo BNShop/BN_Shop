@@ -46,7 +46,7 @@
 }
 
 - (void)updateWith:(NSString *)imgUrl title:(NSString *)title subTitle:(NSString *)subTitle tip:(NSString *)tip {
-    [self.imageView sd_setImageWithURL:[imgUrl URL] placeholderImage:IMAGE(@"")];
+    [self.imageView sd_setImageWithURL:[imgUrl URL] placeholderImage:nil];
     self.titleLabel.text = title;
     self.subTitleLabel.text = subTitle;
     self.tipLabel.text = tip;

@@ -34,7 +34,7 @@
 
 - (void)updateWith:(NSString *)sellerName iconUrl:(NSString *)iconUrl {
     self.sellerNameLabel.text = sellerName;
-    [self.iconImgView sd_setImageWithURL:[iconUrl URL] placeholderImage:IMAGE(@"")];
+    [self.iconImgView sd_setImageWithURL:[iconUrl URL] placeholderImage:nil];
 }
 
 - (CGFloat)getViewHeight {

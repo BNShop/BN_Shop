@@ -63,7 +63,7 @@
 
 - (void)updateWith:(BOOL)isSelect thumbnailUrl:(NSString *)thumbnailUrl title:(NSString *)title num:(NSInteger)num price:(NSString *)price {
     self.radioButton.selected = isSelect;
-    [self.thumbnailImageView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:IMAGE(@"")];
+    [self.thumbnailImageView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:nil];
     self.titleLabel.text = title;
     self.stepper.value = num;
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@", price];

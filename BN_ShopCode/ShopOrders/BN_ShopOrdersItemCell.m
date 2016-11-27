@@ -49,7 +49,7 @@
 
 
 - (void)updateWith:(NSString *)thumbnailUrl title:(NSString *)title num:(NSInteger)num price:(NSString *)price specification:(NSString *)specification {
-    [self.thumbnailImgView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:IMAGE(@"")];
+    [self.thumbnailImgView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:nil];
     self.titleLabel.text = title;
     self.unitPriceLabel.text = [NSString stringWithFormat:@"¥%@", price];
     self.specificationLabel.text = specification;

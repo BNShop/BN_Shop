@@ -25,7 +25,7 @@
 }
 
 - (void)updateWith:(NSString *)imgUrl {
-    [self.imgView sd_setImageWithURL:[imgUrl URL] placeholderImage:IMAGE(@"")];
+    [self.imgView sd_setImageWithURL:[imgUrl URL] placeholderImage:nil];
 }
 
 @end

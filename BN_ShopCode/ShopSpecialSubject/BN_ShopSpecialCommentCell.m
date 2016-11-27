@@ -74,7 +74,7 @@
 }
 
 - (void)updateWith:(NSString *)iconUrl name:(NSString *)name content:(NSString *)content date:(NSString *)date{
-    [self.iconImgView sd_setImageWithURL:[iconUrl URL] placeholderImage:IMAGE(@"")];
+    [self.iconImgView sd_setImageWithURL:[iconUrl URL] placeholderImage:nil];
     self.nameLabel.text = name;
     self.contentLabel.text = content;
     self.dateLabel.text = date;

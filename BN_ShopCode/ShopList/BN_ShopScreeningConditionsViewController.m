@@ -35,6 +35,18 @@ static NSString * const ShopScreeningSupplementaryIdentifier = @"ShopScreeningSu
 
 @implementation BN_ShopScreeningConditionsViewController
 
+- (instancetype)initWithBankTagId:(long)bankTagId priceTagId:(long)priceTagId suitTagId:(long)suitTagId
+{
+    self = [super init];
+    if (self) {
+        self.viewModel = [[BN_ShopScreeningConditionsViewModel alloc] init];
+        self.viewModel.brandTagId = bankTagId;
+        self.viewModel.priceTagId = priceTagId;
+        self.viewModel.suitTagId = suitTagId;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,30 +71,18 @@ static NSString * const ShopScreeningSupplementaryIdentifier = @"ShopScreeningSu
     [self.toolBar addOkEventHandler:^(id sender) {
         @strongify(self);
         NSArray *indexpaths = [self.collectionView indexPathsForSelectedItems];
-        NSIndexPath *indexPath = [indexpaths bk_match:^BOOL(id obj) {
-            if ([(NSIndexPath *)obj section] == 0) {
-                return YES;
+        for (NSIndexPath *indexpath in indexpaths) {
+            if (indexpath.section == 0) {
+                [self.viewModel curBankTagIdWith:indexpath];
+            } else if (indexpath.section == 1) {
+                [self.viewModel curSuitTagIdWith:indexpath];
+            } else if (indexpath.section == 2) {
+                [self.viewModel curPriceTagIdWith:indexpath];
             }
-            return NO;
-        }];
-        [self.viewModel curBankNameWith:indexPath];
-        indexPath = [indexpaths bk_match:^BOOL(id obj) {
-            if ([(NSIndexPath *)obj section] == 1) {
-                return YES;
-            }
-            return NO;
-        }];
-        [self.viewModel curTagIDNameWith:indexPath];
-        NSArray *array = [indexpaths bk_select:^BOOL(id obj) {
-            if ([(NSIndexPath *)obj section] == 3) {
-                return YES;
-            }
-            return NO;
-        }];
-        [self.viewModel curSuitableWith:array];
+        }
         
-        if ([self.delegate respondsToSelector:@selector(screeningConditionsWith:tagID:suitable:priceStart:priceEnd:)]) {
-            [self screeningConditionsWith:self.viewModel.brandName tagID:self.viewModel.tagID suitable:self.viewModel.suitable priceStart:self.viewModel.priceStart priceEnd:self.viewModel.priceEnd];
+        if ([self.delegate respondsToSelector:@selector(screeningConditionsWith:suitTagId:bankTagId:)]) {
+            [self screeningConditionsWith:self.viewModel.priceTagId suitTagId:self.viewModel.suitTagId bankTagId:self.viewModel.brandTagId];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
@@ -114,50 +114,80 @@ static NSString * const ShopScreeningSupplementaryIdentifier = @"ShopScreeningSu
 
 #pragma mark - viewModel
 - (void)buildViewModel {
-    self.viewModel = [[BN_ShopScreeningConditionsViewModel alloc] init];
-    [self testObects];
-#warning 初始化列表数据等等
+    if (!self.viewModel) {
+        self.viewModel = [[BN_ShopScreeningConditionsViewModel alloc] init];
+    }
+    [self.viewModel buildConditionsWith:BN_ShopConditionClasses_Souvenir];
+    [self.collectionView setBn_data:self.viewModel.conditions];
+    for (BN_ShopConditionModel *condition in self.viewModel.conditions) {
+        SectionDataSource *sectionDataSource = [self.viewModel getSectionDataSourceWith:condition.name items:condition.tags cellIdentifier:ShopScreeningConditionsCellIdentifier sectionIdentifier:ShopScreeningSupplementaryIdentifier configureCellBlock:^(id cell, BN_ShopConditionTagModel *item) {
+            [(BN_ShopBannerCell *)cell updateWith:item.tagName];
+        } configureSectionBlock:^(UIView *view, id sectionDataSource, NSString *kind, NSIndexPath *indexPath) {
+            [(BN_ShopScreeningReusableView *)view updateWith:[(SectionDataSource *)sectionDataSource Icon] title:[(SectionDataSource *)sectionDataSource Title]];
+        }];
+        sectionDataSource.Icon = condition.iconUrl;
+        sectionDataSource.Title = condition.name;
+        [self.viewModel addDataSourceWith:sectionDataSource];
+    }
+    self.collectionView.dataSource = self.viewModel.dataSource;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+        for (NSInteger index=0; index<3; index++) {
+            [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:index] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+        }
+    });
+    
+    for (BN_ShopConditionModel *condition in self.viewModel.conditions) {
+        @weakify(self);
+        @weakify(condition);
+        [condition.tags.loadSupport setDataRefreshblock:^{
+            @strongify(self);
+            @strongify(condition);
+            NSInteger index = [self.viewModel.conditions indexOfObject:condition];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectionView reloadData];
+                [self.collectionView deselectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:index] animated:NO];
+                [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:[self.viewModel curPriceIndex] inSection:2] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+                [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:[self.viewModel curBankIndex] inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+                [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:[self.viewModel curSuitIndex] inSection:1] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+            });
+            
+        }];
+        
+        [self.viewModel getConditionTagsWith:condition];
+        
+    }
+    
+
 }
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) {
-        [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-    } else if (indexPath.section != 2 && indexPath.section != 3) {
-        NSArray *indexpaths = [collectionView indexPathsForSelectedItems];
-        NSIndexPath *preIndexPath = [indexpaths bk_match:^BOOL(id obj) {
-            if ([(NSIndexPath *)obj compare:indexPath] != NSOrderedSame && [(NSIndexPath *)obj section] == indexPath.section) {
-                return YES;
-            }
-            return FALSE;
-        }];
-        if (preIndexPath) {
-            [collectionView deselectItemAtIndexPath:preIndexPath animated:YES];
+    NSArray *indexpaths = [collectionView indexPathsForSelectedItems];
+    NSIndexPath *preIndexPath = [indexpaths bk_match:^BOOL(id obj) {
+        if ([(NSIndexPath *)obj compare:indexPath] != NSOrderedSame && [(NSIndexPath *)obj section] == indexPath.section) {
+            return YES;
         }
+        return FALSE;
+    }];
+    if (preIndexPath) {
+        [collectionView deselectItemAtIndexPath:preIndexPath animated:YES];
     }
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 0) {
-        return NO;
-    }
-    return YES;
+    return NO;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section != 2;
+    return YES;
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section != 2) {
-        CGFloat width = (WIDTH(collectionView) - 5*2 - 14*2) / 3.0;
-        return CGSizeMake(width, 26);
-    } else {
-        CGFloat width = (WIDTH(collectionView) - 14*2);
-        return CGSizeMake(width, 40);
-    }
+    CGFloat width = (WIDTH(collectionView) - 5*2 - 14*2) / 3.0;
+    return CGSizeMake(width, 26);
     
 }
 
@@ -180,58 +210,6 @@ static NSString * const ShopScreeningSupplementaryIdentifier = @"ShopScreeningSu
     return CGSizeMake(WIDTH(collectionView), 36.0f);
 }
 
-#pragma mark - data source test
-
-- (void)testObects {
-    NSString *tag = @"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元";
-    NSArray *titles = @[@"品牌", @"标签", @"价格", @"合适人群"];
-    NSArray *images = @[@"Shop_Screen_Brand", @"Shop_Screen_Tag", @"Shop_Screen_Price", @"Shop_Screen_Crowd"];
-    for (NSInteger i=0; i<4; i++) {
-        NSMutableArray *array = [NSMutableArray array];
-        for (NSInteger j=0; j<i+5; j++) {
-            [array addObject:[tag substringWithRange:NSMakeRange(random()%40, random()%7+1)]];
-        }
-        
-        SectionDataSource *section = nil;
-        NSString *title = [titles objectAtIndex:i];
-        if ([title isEqualToString:@"价格"]) {
-            @weakify(self);
-            section = [self.viewModel getSectionDataSourceWith:title items:[array subarrayWithRange:NSMakeRange(0, 1)] cellIdentifier:ShopScreeningConditionsPriceCellIdentifier sectionIdentifier:ShopScreeningSupplementaryIdentifier configureCellBlock:^(id cell, id item) {
-                [(BN_ShopScreeningResuablePriceCell *)cell updateWith:self.viewModel.priceStart maxPrice:self.viewModel.priceEnd];
-                [(BN_ShopScreeningResuablePriceCell *)cell setPriceChangedBlock:^(NSString *text, NSInteger indexPath) {
-                    @strongify(self);
-                    if (indexPath == 0) {
-                        self.viewModel.priceStart = text;
-                    } else if (indexPath == 1) {
-                        self.viewModel.priceEnd = text;
-                    }
-                }];
-                
-            } configureSectionBlock:^(UIView *view, id sectionDataSource, NSString *kind, NSIndexPath *indexPath) {
-                [(BN_ShopScreeningReusableView *)view updateWith:[(SectionDataSource *)sectionDataSource Icon] title:[(SectionDataSource *)sectionDataSource Title]];
-            }];
-        } else {
-           section = [self.viewModel getSectionDataSourceWith:title items:array cellIdentifier:ShopScreeningConditionsCellIdentifier sectionIdentifier:ShopScreeningSupplementaryIdentifier configureCellBlock:^(id cell, id item) {
-                [(BN_ShopBannerCell *)cell updateWith:item];
-            } configureSectionBlock:^(UIView *view, id sectionDataSource, NSString *kind, NSIndexPath *indexPath) {
-                [(BN_ShopScreeningReusableView *)view updateWith:[(SectionDataSource *)sectionDataSource Icon] title:[(SectionDataSource *)sectionDataSource Title]];
-            }];
-        }
-        
-        [self.viewModel addDataSourceWith:section];
-        section.Icon = [images objectAtIndex:i];
-        
-        
-    }
-    self.collectionView.dataSource = self.viewModel.dataSource;
-    [self.collectionView reloadData];
-    for (NSIndexPath *indexpath in self.viewModel.curIndexsInScreening) {
-        [self.collectionView selectItemAtIndexPath:indexpath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-    }
-    
-    
-}
-
 @end
 
 @implementation BN_ShopScreeningConditionsViewController (RAC)
@@ -243,7 +221,7 @@ static NSString * const ShopScreeningSupplementaryIdentifier = @"ShopScreeningSu
         return signal;
     }
     
-    signal = [[self rac_signalForSelector:@selector(screeningConditionsWith:tagID:suitable:priceStart:priceEnd:) fromProtocol:@protocol(BN_ShopScreeningConditionsViewControllerProtocol)] map:^id(RACTuple *tuple) {
+    signal = [[self rac_signalForSelector:@selector(screeningConditionsWith:suitTagId:bankTagId:) fromProtocol:@protocol(BN_ShopScreeningConditionsViewControllerProtocol)] map:^id(RACTuple *tuple) {
         return tuple.allObjects;
     }];
     

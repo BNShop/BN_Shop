@@ -16,6 +16,12 @@
 @property (nonatomic, strong) NSMutableArray <BN_ShopGoodModel*> *goods;
 @property (nonatomic, assign) BOOL isHorizontalCell;
 
+@property (nonatomic, copy) NSString *goodsName;//商品名
+@property (nonatomic, assign) long priceTagId;//价格标签
+@property (nonatomic, assign) long suitTagId;//适合人群
+@property (nonatomic, assign) long brandTagId;//品牌
+@property (nonatomic, assign) long categoryId;//二级分类Id
+
 - (void)getGoodsClearData:(BOOL)clear;
 
 - (TableDataSource *)getDataSourceWith:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock;
@@ -23,4 +29,5 @@
 
 - (void)setOrderWith:(NSInteger)radioIndex;
 - (BOOL)isDesc;
+- (NSString *)total_commentStr:(int)total_comment;
 @end

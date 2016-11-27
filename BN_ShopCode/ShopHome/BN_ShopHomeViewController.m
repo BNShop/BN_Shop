@@ -133,7 +133,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     for (BN_ShopSouvenirModel *model in self.viewModel.souvenirs) {
         TableDataSource *cellSource = [[TableDataSource alloc] initWithItems:model.goodsList cellIdentifier:ShopHomeSouvenirCellIdentifier configureCellBlock:^(id cell, BN_ShopSouvenirGoodModel *item) {
             [(BN_ShopGoodCell *)cell typeFace0];
-            [(BN_ShopGoodCell *)cell updateWith:item.pic_url title:item.name front:item.front_price real:[item.real_price strikethroughAttribute] additional:nil];
+            [(BN_ShopGoodCell *)cell updateWith:item.pic_url title:item.name front:[item.front_price strikethroughAttribute] real:item.real_price additional:nil];
         }];
         BN_ShopHomeSouvenirCellModel *cellModel = [[BN_ShopHomeSouvenirCellModel alloc] init];
         cellModel.dataSource = cellSource;
@@ -144,7 +144,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     self.viewModel.dataSource = [[TableDataSource alloc] initWithItems:array cellIdentifier:ShopHomeCellIdentifier configureCellBlock:^(id cell, id item) {
         @strongify(self);
         [[(BN_ShopHomeSouvenirCell *)cell collectionView] registerNib:[BN_ShopGoodCell nib] forCellWithReuseIdentifier:ShopHomeSouvenirCellIdentifier];
-        [[[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeSouvenirCellSignal] takeLast:1] subscribeNext:^(id x) {
+        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeSouvenirCellSignal]subscribeNext:^(id x) {
             
             UITableViewCell *cell = [(NSArray *)x firstObject];
             NSIndexPath *indexPath = [(NSArray *)x lastObject];

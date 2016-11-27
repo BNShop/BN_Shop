@@ -171,6 +171,7 @@
 		6A0B13751DE2C45A00B3715E /* BN_ShopGoodDetailNewArrivalsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0B13741DE2C45A00B3715E /* BN_ShopGoodDetailNewArrivalsViewModel.m */; };
 		6A313BC51DEAA8A700BC9AF8 /* BN_ShopGoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A313BC41DEAA8A700BC9AF8 /* BN_ShopGoodModel.m */; };
 		6A313BC81DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A313BC71DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m */; };
+		6A313BCB1DEAF37200BC9AF8 /* BN_ShopConditionTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A313BCA1DEAF37200BC9AF8 /* BN_ShopConditionTagModel.m */; };
 		6A4C91C71DE5D8B600588F43 /* BN_ShopSpecialSubjectCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4C91C61DE5D8B600588F43 /* BN_ShopSpecialSubjectCellModel.m */; };
 		C96514F01DD61C86004B5F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514EF1DD61C86004B5F05 /* main.m */; };
 		C96514F31DD61C86004B5F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514F21DD61C86004B5F05 /* AppDelegate.m */; };
@@ -526,6 +527,8 @@
 		6A313BC41DEAA8A700BC9AF8 /* BN_ShopGoodModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodModel.m; sourceTree = "<group>"; };
 		6A313BC61DEAAE9000BC9AF8 /* BN_ShopCategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopCategoryModel.h; sourceTree = "<group>"; };
 		6A313BC71DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopCategoryModel.m; sourceTree = "<group>"; };
+		6A313BC91DEAF37200BC9AF8 /* BN_ShopConditionTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopConditionTagModel.h; sourceTree = "<group>"; };
+		6A313BCA1DEAF37200BC9AF8 /* BN_ShopConditionTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopConditionTagModel.m; sourceTree = "<group>"; };
 		6A4C91A61DE5380500588F43 /* TestObjectHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjectHeader.h; sourceTree = "<group>"; };
 		6A4C91C51DE5D8B600588F43 /* BN_ShopSpecialSubjectCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopSpecialSubjectCellModel.h; sourceTree = "<group>"; };
 		6A4C91C61DE5D8B600588F43 /* BN_ShopSpecialSubjectCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopSpecialSubjectCellModel.m; sourceTree = "<group>"; };
@@ -1135,6 +1138,8 @@
 			children = (
 				6A313BC31DEAA8A700BC9AF8 /* BN_ShopGoodModel.h */,
 				6A313BC41DEAA8A700BC9AF8 /* BN_ShopGoodModel.m */,
+				6A313BC91DEAF37200BC9AF8 /* BN_ShopConditionTagModel.h */,
+				6A313BCA1DEAF37200BC9AF8 /* BN_ShopConditionTagModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1671,6 +1676,7 @@
 				6A0261F01DE34ADD00BA5AA3 /* BN_ShopSpecialCommentCell.m in Sources */,
 				C96514F31DD61C86004B5F05 /* AppDelegate.m in Sources */,
 				C96515261DD61E50004B5F05 /* BN_ShopViewController.m in Sources */,
+				6A313BCB1DEAF37200BC9AF8 /* BN_ShopConditionTagModel.m in Sources */,
 				6A033E8C1DE1ACD3000446A0 /* UISearchBar+RAC.m in Sources */,
 				6A033EC91DE1ACD3000446A0 /* BN_ShopGoodHorizontalCell.m in Sources */,
 				6A033E9B1DE1ACD3000446A0 /* BN_ShoppingCartViewModel.m in Sources */,

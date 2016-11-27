@@ -62,7 +62,7 @@
 
 - (void)updateWith:(NSString *)thumbnailUrl title:(NSString *)title instruction:(NSString *)instruction price:(NSAttributedString *)price {
     
-    [self.thumbnailImg sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:IMAGE(@"")];
+    [self.thumbnailImg sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:nil];
     self.titleLabel.text = title;
     self.instructionLabel.text = instruction;
     self.priceLabel.attributedText = price;

@@ -14,10 +14,11 @@
 
 @property (weak, nonatomic) id<BN_ShopScreeningConditionsViewControllerProtocol> delegate;
 
+- (instancetype)initWithBankTagId:(long)bankTagId priceTagId:(long)priceTagId suitTagId:(long)suitTagId;
 @end
 
 @protocol BN_ShopScreeningConditionsViewControllerProtocol <NSObject>
-- (void)screeningConditionsWith:(NSString *)brandName tagID:(NSInteger)tagID suitable:(NSArray *)suitable priceStart:(NSString *)priceStart priceEnd:(NSString *)priceEnd;
+- (void)screeningConditionsWith:(long)priceTagId suitTagId:(long)suitTagId bankTagId:(long)bankTagId;
 - (void)dismissConditions;
 @end
 

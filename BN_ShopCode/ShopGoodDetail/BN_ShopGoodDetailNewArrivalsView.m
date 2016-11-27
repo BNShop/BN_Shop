@@ -91,7 +91,7 @@
         return signal;
     }
     
-    signal = [[self rac_signalForSelector:@selector(collectionViewWith:didSelectItemAtIndexPath:) fromProtocol:@protocol(BN_ShopGoodDetailNewArrivalsViewDelegate)] map:^id(RACTuple *tuple) {
+    signal = [[self rac_signalForSelector:@selector(collectionWith:didSelectItemAtIndexPath:) fromProtocol:@protocol(BN_ShopGoodDetailNewArrivalsViewDelegate)] map:^id(RACTuple *tuple) {
         return tuple.second;
     }];
     

@@ -45,7 +45,7 @@
 
 - (void)updateWith:(NSString *)title iconUrl:(NSString *)iconUrl {
     self.titleLabel.text = title;
-    [self.contentIconView sd_setImageWithURL:[iconUrl URL] placeholderImage:IMAGE(@"")];
+    [self.contentIconView sd_setImageWithURL:[iconUrl URL] placeholderImage:nil];
 }
 
 @end

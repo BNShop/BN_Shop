@@ -48,7 +48,7 @@
 
 - (void)updateWith:(NSString *)iconUrl title:(NSString *)title {
     if (iconUrl.isURLString) {
-        [self.iconImage sd_setImageWithURL:[iconUrl URL] placeholderImage:IMAGE(@"")];
+        [self.iconImage sd_setImageWithURL:[iconUrl URL] placeholderImage:nil];
     } else {
         [self.iconImage setImage:IMAGE(iconUrl)];
     }

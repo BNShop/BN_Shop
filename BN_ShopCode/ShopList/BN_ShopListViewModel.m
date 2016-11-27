@@ -13,12 +13,6 @@
 //排序的情况选择
 @property (nonatomic, copy) NSString *order;//排序字段(‘out_buying_num’，‘real_price’)
 @property (nonatomic, copy) NSString *sort;
-
-@property (nonatomic, copy) NSString *goodsName;//商品名
-@property (nonatomic, assign) long priceTagId;//价格标签
-@property (nonatomic, assign) long suitTagId;//适合人群
-@property (nonatomic, assign) long brandTagId;//品牌
-@property (nonatomic, assign) long categoryId;//二级分类Id
 @property (nonatomic, copy) NSString *priceStart;//价格起始
 @property (nonatomic, copy) NSString *priceEnd;//价格结束
 
@@ -40,6 +34,7 @@ static NSString * const BN_ShopListSortOrderComposite = @"";
     if (self) {
         self.order = BN_ShopListSortOrderComposite;
         self.sort = BN_ShopListSortDesc;
+        self.goodsName = @"";
         self.goods = [[NSMutableArray alloc] initFromNet];
     }
     return self;
@@ -81,17 +76,37 @@ static NSString * const BN_ShopListSortOrderComposite = @"";
     return [self.sort isEqualToString:BN_ShopListSortDesc];
 }
 
+- (NSString *)total_commentStr:(int)total_comment {
+    return [NSString stringWithFormat:@"%d%@", total_comment, TEXT(@"条评论")];
+}
+
 #pragma mark - 数据获取
 
 
 - (void)getGoodsClearData:(BOOL)clear
 {
     int curPage = clear == YES ? 0 : round(self.goods.count/10.0);
-    NSDictionary *paraDic = @{
-                              @"curPage":[NSNumber numberWithInt:curPage],
-                              @"pageNum":[NSNumber numberWithInt:10],
-                              };
-    
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:curPage], @"curPage", [NSNumber numberWithInt:10], @"pageNum", nil];
+    if (self.order.length) {
+        [paraDic setObject:self.order forKey:@"order"];
+        [paraDic setObject:self.sort forKey:@"sort"];
+    }
+    if (self.goodsName.length) {
+        [paraDic setObject:self.goodsName forKey:@"goodsName"];
+    }
+    if (self.priceTagId) {
+        [paraDic setObject:[NSNumber numberWithLong:self.priceTagId] forKey:@"priceTagId"];
+    }
+    if (self.suitTagId) {
+        [paraDic setObject:[NSNumber numberWithLong:self.suitTagId] forKey:@"suitTagId"];
+    }
+    if (self.brandTagId) {
+        [paraDic setObject:[NSNumber numberWithLong:self.brandTagId] forKey:@"brandTagId"];
+    }
+    if (self.categoryId) {
+        [paraDic setObject:[NSNumber numberWithLong:self.categoryId] forKey:@"categoryId"];
+    }
+
     NSString *url = [NSString stringWithFormat:@"%@/mall/goodsListForFilter",BASEURL];
     __weak typeof(self) temp = self;
     self.goods.loadSupport.loadEvent = NetLoadingEvent;
@@ -99,6 +114,7 @@ static NSString * const BN_ShopListSortOrderComposite = @"";
     [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         NSNumber *codeNumber = [dic objectForKey:@"code"];
+        NSLog(@"url = %@", operation.currentRequest);
         if(codeNumber.intValue == 0)
         {
             NSArray *array = [dic objectForKey:@"rows"];

@@ -9,6 +9,7 @@
 #import "BN_ShopListViewController.h"
 #import "BN_ShopScreeningConditionsViewController.h"
 #import "BN_ShopSearchViewController.h"
+#import "BN_ShopGoodDetailViewController.h"
 #import "Base_BaseViewController+ControlCreate.h"
 
 #import "UIBarButtonItem+BlocksKit.h"
@@ -21,9 +22,9 @@
 #import "UIView+BlocksKit.h"
 #import "UISearchBar+RAC.h"
 
-#import "NSString+Attributed.h"
-#import "TestCartItem.h"
 
+#import "NSString+Attributed.h"
+#import "UICollectionView+TPCategory.h"
 
 @interface BN_ShopListViewController ()<UICollectionViewDelegate>
 
@@ -38,11 +39,12 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
 
 @implementation BN_ShopListViewController
 
-- (instancetype)initWithCategoryId:(long)CategoryId
+- (instancetype)initWithCategoryId:(long)categoryId
 {
     self = [super init];
     if (self) {
-        
+        self.listViewModel = [[BN_ShopListViewModel alloc] init];
+        self.listViewModel.categoryId = categoryId;
     }
     return self;
 }
@@ -76,23 +78,26 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
         [self.listViewModel setOrderWith:[[(NSArray *)x firstObject] integerValue]];
         [self.toolBar updatePriceButtonWith:[self.listViewModel isDesc]];
         [self.toolBar updateVLineWith:NO];
-#warning 进行数据请求并且对collectiveview刷新
+        [self.listViewModel getGoodsClearData:YES];
     }];
     [self.toolBar.rac_filterSignal subscribeNext:^(id x) {
         @strongify(self);
         [self.toolBar updateVLineWith:YES];
         
-        BN_ShopScreeningConditionsViewController *ctr = [[BN_ShopScreeningConditionsViewController alloc] init];
+        BN_ShopScreeningConditionsViewController *ctr = [[BN_ShopScreeningConditionsViewController alloc] initWithBankTagId:self.listViewModel.brandTagId priceTagId:self.listViewModel.priceTagId suitTagId:self.listViewModel.suitTagId];
         ctr.view.backgroundColor = [UIColor clearColor];
         [ctr setModalPresentationStyle:UIModalPresentationCustom];
         [ctr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
         [self presentViewController:ctr animated:YES completion:nil];
         @weakify(self);
         [[ctr rac_screeningConditionsSignal] subscribeNext:^(id x) {
-            
             @strongify(self);
             [self.toolBar updateVLineWith:NO];
-#warning 去刷新数据进行数据请求并且对collectiveview刷新
+            NSArray *tmplist = (NSArray *)x;
+            self.listViewModel.priceTagId = [tmplist.firstObject longValue];
+            self.listViewModel.suitTagId = [[tmplist objectAtIndex:1] longValue];
+            self.listViewModel.brandTagId = [tmplist.lastObject longValue];
+            [self.listViewModel getGoodsClearData:YES];
         }];
         [[ctr rac_dismissConditionsSignal] subscribeNext:^(id x) {
             @strongify(self);
@@ -137,9 +142,46 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
 
 #pragma mark - viewModel
 - (void)buildViewModel {
-    self.listViewModel = [[BN_ShopListViewModel alloc] init];
-    [self testObects];
-#warning 初始化列表数据等等
+    if (!self.listViewModel) {
+        self.listViewModel = [[BN_ShopListViewModel alloc] init];
+    }
+    if (self.listViewModel.isHorizontalCell) {
+        [self.listViewModel getDataSourceWith:ShopListHorizontalCellIdentifier configureCellBlock:^(id cell, BN_ShopGoodModel *item) {
+            [(BN_ShopGoodHorizontalCell *)cell updateWith:item.pic_url title:item.name front:[item.front_price strikethroughAttribute] real:item.real_price additional:[self.listViewModel total_commentStr:item.total_comment]];
+        }];
+    } else {
+        [self.listViewModel getDataSourceWith:ShopListGridCellIdentifier configureCellBlock:^(id cell, BN_ShopGoodModel *item) {
+            [(BN_ShopGoodCell *)cell updateWith:item.pic_url title:item.name front:[item.front_price strikethroughAttribute]  real:item.real_price additional:[self.listViewModel total_commentStr:item.total_comment]];
+        }];
+    }
+    
+    
+    @weakify(self);
+    [self.collectionView setHeaderRefreshDatablock:^{
+        @strongify(self);
+        [self.listViewModel getGoodsClearData:YES];
+    } footerRefreshDatablock:^{
+        @strongify(self);
+        [self.listViewModel getGoodsClearData:NO];
+    }];
+    
+    [self.collectionView setCollectionViewData:self.listViewModel.goods];
+    
+    [self.collectionView setBn_data:self.listViewModel.goods];
+    
+    [self.collectionView setRefreshBlock:^{
+        @strongify(self);
+        [self.listViewModel getGoodsClearData:YES];
+    }];
+    [self.listViewModel.goods.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        [self.collectionView reloadData];
+    }];
+    [self.listViewModel getGoodsClearData:YES];
+    
+    self.collectionView.dataSource = self.listViewModel.dataSource;
+    [self.collectionView reloadData];
+    
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -195,32 +237,6 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
     } else {
         [self.listViewModel.dataSource resetellIdentifier:ShopListGridCellIdentifier];
     }
-    [self.collectionView reloadData];
-}
-
-
-#pragma mark - data source test
-
-- (void)testObects {
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger j=0; j<13; j++) {
-        TestCartItem *item = [[TestCartItem alloc] init];
-        item.front_price = [NSString stringWithFormat:@"%ld", j+1];
-        item.real_price = [NSString stringWithFormat:@"%.2f", ((float)j+3)*(random()%30)];
-        [array addObject:item];
-    }
-    
-    if (self.listViewModel.isHorizontalCell) {
-//        [self.listViewModel getSectionDataSourceWith:array cellIdentifier:ShopListHorizontalCellIdentifier configureCellBlock:^(id cell, TestCartItem *item) {
-//            [(BN_ShopGoodHorizontalCell *)cell updateWith:@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg" title:[@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%40] front:item.front_price real:[item.real_price strikethroughAttribute] additional:@"9090条评论"];
-//        }];
-    } else {
-        
-//        [self.listViewModel getSectionDataSourceWith:array cellIdentifier:ShopListGridCellIdentifier configureCellBlock:^(id cell, TestCartItem *item) {
-//            [(BN_ShopGoodCell *)cell updateWith:@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg" title:[@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%30] front:item.front_price real:[item.real_price strikethroughAttribute] additional:@"9090条评论"];
-//        }];
-    }
-    self.collectionView.dataSource = self.listViewModel.dataSource;
     [self.collectionView reloadData];
 }
 

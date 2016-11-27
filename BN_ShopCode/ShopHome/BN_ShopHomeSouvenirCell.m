@@ -67,7 +67,7 @@
 
 - (void)updateWith:(NSString *)title thumbnailUrl:(NSString *)thumbnailUrl dataSource:(id <UICollectionViewDataSource>)dataSource {
     self.titleLabel.text = title;
-    [self.adImgView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:IMAGE(@"")];
+    [self.adImgView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:nil];
     self.collectionView.dataSource = dataSource;
     if ([dataSource collectionView:self.collectionView numberOfItemsInSection:0] == 0) {
         self.midLineView1.hidden = YES;

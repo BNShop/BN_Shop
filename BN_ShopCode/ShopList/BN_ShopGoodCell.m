@@ -48,11 +48,11 @@
     self.realLeadingToFrontTrailing.constant = 3.0f;
 }
 
-- (void)updateWith:(NSString *)thumbnailUrl title:(NSString *)title front:(NSString *)front real:(NSAttributedString *)real additional:(NSString *)additional {
-    [self.thumbnailImgView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:IMAGE(@"")];
+- (void)updateWith:(NSString *)thumbnailUrl title:(NSString *)title front:(NSAttributedString *)front real:(NSString *)real additional:(NSString *)additional {
+    [self.thumbnailImgView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:nil];
     self.titleLabel.text = title;
-    self.frontLabel.text = front;
-    self.realLabel.attributedText = real;
+    self.frontLabel.text = real;
+    self.realLabel.attributedText = front;
     self.additionalLabel.text = additional;
 }
 

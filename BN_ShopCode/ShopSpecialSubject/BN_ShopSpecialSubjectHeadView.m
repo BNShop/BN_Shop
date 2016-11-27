@@ -48,7 +48,7 @@
 }
 
 - (void)updateWith:(NSString *)imgUrl comment:(NSString *)comment follow:(NSString *)follow like:(NSString *)like content:(NSString *)content {
-    [self.imgView sd_setImageWithURL:[imgUrl URL] placeholderImage:IMAGE(@"")];
+    [self.imgView sd_setImageWithURL:[imgUrl URL] placeholderImage:nil];
     [self.commentLabel setText:comment];
     [self.followLabel setText:follow];
     [self.likeLabel setText:like];

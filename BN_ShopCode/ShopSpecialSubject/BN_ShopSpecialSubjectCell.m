@@ -106,7 +106,7 @@
         self.viewTopToImgBottom.constant = 10;
         self.imgHeight.constant = 20;
         @weakify(self);
-        [self.imgView sd_setImageWithURL:[imgUrl URL] placeholderImage:IMAGE(@"") completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.imgView sd_setImageWithURL:[imgUrl URL] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             @strongify(self);
             if (image.size.width > 0) {
                 self.imgHeight.constant = image.size.height * WIDTH(self) / image.size.width;
@@ -127,7 +127,7 @@
          self.contentTopToImgBottom.constant = 10;
         self.subImgHeight.constant = 20;
         @weakify(self);
-        [self.subImgView sd_setImageWithURL:[subImgUrl URL] placeholderImage:IMAGE(@"") completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.subImgView sd_setImageWithURL:[subImgUrl URL] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             @strongify(self);
             if (image.size.width > 0) {
                 self.subImgHeight.constant = image.size.height * WIDTH(self) / image.size.width;
