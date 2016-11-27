@@ -59,6 +59,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     [self buildViewModel];
 }
 
@@ -77,6 +78,9 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.tableView registerNib:[BN_ShopHomeSouvenirCell nib] forCellReuseIdentifier:ShopHomeCellIdentifier];
     
+    [self buildADView];
+    [self buildCategoryView];
+    [self buildFlashSaleView];
     [self tableHeaderView];
 }
 
@@ -118,13 +122,120 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 #pragma mark - viewModel
 - (void)buildViewModel {
 #warning 初始化列表数据等等
-    self.viewModel = [[BN_ShopHomeViewModel alloc] init];
+    [self buildADModel];
+    [self buildCategoryViewModel];
+    [self buildFlashSaleViewModel];
+    [self buildSouvenirModel];
+}
 
+- (void)buildSouvenirTableDataSource {
+    NSMutableArray *array = [NSMutableArray array];
+    for (BN_ShopSouvenirModel *model in self.viewModel.souvenirs) {
+        TableDataSource *cellSource = [[TableDataSource alloc] initWithItems:model.goodsList cellIdentifier:ShopHomeSouvenirCellIdentifier configureCellBlock:^(id cell, BN_ShopSouvenirGoodModel *item) {
+            [(BN_ShopGoodCell *)cell typeFace0];
+            [(BN_ShopGoodCell *)cell updateWith:item.pic_url title:item.name front:item.front_price real:[item.real_price strikethroughAttribute] additional:nil];
+        }];
+        BN_ShopHomeSouvenirCellModel *cellModel = [[BN_ShopHomeSouvenirCellModel alloc] init];
+        cellModel.dataSource = cellSource;
+        cellModel.souvenirModel = model;
+        [array addObject:cellModel];
+    }
+    @weakify(self);
+    self.viewModel.dataSource = [[TableDataSource alloc] initWithItems:array cellIdentifier:ShopHomeCellIdentifier configureCellBlock:^(id cell, id item) {
+        @strongify(self);
+        [[(BN_ShopHomeSouvenirCell *)cell collectionView] registerNib:[BN_ShopGoodCell nib] forCellWithReuseIdentifier:ShopHomeSouvenirCellIdentifier];
+        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeSouvenirCellSignal] subscribeNext:^(id x) {
+            
+            UITableViewCell *cell = [(NSArray *)x firstObject];
+            NSIndexPath *indexPath = [(NSArray *)x lastObject];
+            @strongify(self);
+            NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
+            NSLog(@"首页点击 section = %ld, row = %ld", (long)sectionIndex.row, (long)indexPath.row);
+            BN_ShopGoodDetailViewController *detailCtr = [[BN_ShopGoodDetailViewController alloc] init];
+            [self.navigationController pushViewController:detailCtr animated:YES];
+        }];
+        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeClickTitleSignal] subscribeNext:^(id x) {
+            @strongify(self);
+            NSIndexPath *sectionIndex = [self.tableView indexPathForCell:(UITableViewCell *)x];
+            NSLog(@"首页点击Title section = %ld", (long)sectionIndex.row);
+        }];
+        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeClickThumbnailSignal] subscribeNext:^(id x) {
+            @strongify(self);
+            NSIndexPath *sectionIndex = [self.tableView indexPathForCell:(UITableViewCell *)x];
+            NSLog(@"首页点击缩略图 section = %ld", (long)sectionIndex.row);
+        }];
+        BN_ShopHomeSouvenirCellModel *model = (BN_ShopHomeSouvenirCellModel *)item;
+        [(BN_ShopHomeSouvenirCell *)cell collectionView].dataSource = model.dataSource;
+        [(BN_ShopHomeSouvenirCell *)cell updateWith:model.title thumbnailUrl:model.thumbnailUrl dataSource:model.dataSource];
+        
+    }];
+    
+    self.tableView.dataSource = self.viewModel.dataSource;
+
+}
+
+- (void)buildSouvenirModel {
+    self.viewModel = [[BN_ShopHomeViewModel alloc] init];
+    @weakify(self);
+    [self.viewModel.souvenirs.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        [self buildSouvenirTableDataSource];
+        [self.tableView reloadData];
+    }];
+    [self.tableView setBn_data:self.viewModel.souvenirs];
+    [self.viewModel getSouvenirsData];
+    [self.tableView setRefreshBlock:^{
+        @strongify(self);
+        [self.viewModel getSouvenirsData];
+    }];
+}
+
+- (void)buildADModel {
     self.adViewModel = [[BN_ShopHomeADViewModel alloc] init];
-    self.flashSaleViewModel = [[BN_ShopHomeFlashSaleViewModel alloc] init];
+    @weakify(self);
+    [self.adViewModel.adList.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        self.SDScrollViw.imageURLStringsGroup = self.adViewModel.adUrlList;
+    }];
+    [self.SDScrollViw setBn_data:self.adViewModel.adList];
+    [self.adViewModel getADArray];
+    [self.SDScrollViw setRefreshBlock:^{
+        @strongify(self);
+        [self.adViewModel getADArray];
+    }];
+    
+}
+
+- (void)buildCategoryViewModel {
     self.categoryViewModel = [[BN_ShopHomeCategoryViewModel alloc] init];
-    [self testObects];
-    [self tableHeaderView];
+    @weakify(self);
+    [self.categoryViewModel.categorys.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        [self updateCategoryView];
+    }];
+    [self.categoryViewModel getCategoryArray];
+    [self.categoryView setBn_data:self.categoryViewModel.categorys];
+    [self.categoryView setRefreshBlock:^{
+        @strongify(self);
+        [self.categoryViewModel getCategoryArray];
+    }];
+    
+}
+
+- (void)buildFlashSaleViewModel {
+    self.flashSaleViewModel = [[BN_ShopHomeFlashSaleViewModel alloc] init];
+    @weakify(self);
+    [self.flashSaleViewModel.flashSaleModel.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        [self updateFlashSaleView];
+    }];
+    [self.flashSaleViewModel getFlashSaleData];
+    [self.flashSaleView setBn_data:self.flashSaleViewModel.flashSaleModel];
+    [self.flashSaleView setRefreshBlock:^{
+        @strongify(self);
+        [self.flashSaleViewModel getFlashSaleData];
+    }];
+    
 }
 
 #pragma mark - 
@@ -136,71 +247,71 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 
 #pragma mark - tableHeaderView
 
+- (void)buildADView {
+    self.SDScrollViw = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH(self.view), 160) imageURLStringsGroup:self.adViewModel.adUrlList];
+    self.SDScrollViw.autoScrollTimeInterval = 5.0f;
+    self.SDScrollViw.pageDotImage = IMAGE(@"Shop_Home_Dot");
+    self.SDScrollViw.currentPageDotImage = IMAGE(@"Shop_Home_CurrentDot");
+    @weakify(self);
+    self.SDScrollViw.clickItemOperationBlock = ^(NSInteger currentIndex) {
+#warning 点击广告图的跳转
+        @strongify(self);
+        id adObj = [self.adViewModel adItemWithIndex:currentIndex];
+        BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] init];
+        [self.navigationController pushViewController:ctr animated:YES];
+    };
+}
+
+- (void)buildCategoryView {
+    self.categoryView = [BN_ShopHomeCategoryView nib];
+    @weakify(self);
+    [[self.categoryView rac_shopHomeCategorySignal] subscribeNext:^(id x) {
+        //            NSInteger tag = [x integerValue];
+        @strongify(self);
+        BN_ShopSorterViewController *ctr = [[BN_ShopSorterViewController alloc] init];
+        [self.navigationController pushViewController:ctr animated:YES];
+    }];
+}
+
+- (void)buildFlashSaleView {
+    self.flashSaleView = [BN_ShopHomeFlashSaleView nib];
+}
+
 - (void)tableHeaderView {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.tableView), 0)];
     [self.SDScrollViw removeFromSuperview];
-    if (self.adViewModel.adCount) {
-        if (!self.SDScrollViw) {
-            self.SDScrollViw = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH(view), 160) imageURLStringsGroup:self.adViewModel.adUrlList];
-            self.SDScrollViw.autoScrollTimeInterval = 5.0f;
-            self.SDScrollViw.pageDotImage = IMAGE(@"Shop_Home_Dot");
-            self.SDScrollViw.currentPageDotImage = IMAGE(@"Shop_Home_CurrentDot");
-            @weakify(self);
-            self.SDScrollViw.clickItemOperationBlock = ^(NSInteger currentIndex) {
-#warning 点击广告图的跳转
-                @strongify(self);
-                id adObj = [self.adViewModel adItemWithIndex:currentIndex];
-                BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] init];
-                [self.navigationController pushViewController:ctr animated:YES];
-            };
-        }
+    if (self.SDScrollViw) {
         [view addSubview:self.SDScrollViw];
         [self.SDScrollViw autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:view];
         [self.SDScrollViw autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:view];
         [self.SDScrollViw autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:view];
         [self.SDScrollViw autoSetDimension:ALDimensionHeight toSize:160.0f];
-        
-    } else {
-        self.SDScrollViw = nil;
     }
     
     [self.categoryView removeFromSuperview];
-    if (!self.categoryView) {
-        self.categoryView = [BN_ShopHomeCategoryView nib];
-        [self updateCategoryView];
-        @weakify(self);
-        [[self.categoryView rac_shopHomeCategorySignal] subscribeNext:^(id x) {
-//            NSInteger tag = [x integerValue];
-            @strongify(self);
-            BN_ShopSorterViewController *ctr = [[BN_ShopSorterViewController alloc] init];
-            [self.navigationController pushViewController:ctr animated:YES];
-        }];
+    if (self.categoryView) {
+        [view addSubview:self.categoryView];
+        if (self.SDScrollViw) {
+            [self.categoryView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.SDScrollViw withOffset:0.0f];
+        } else {
+            [self.categoryView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:view withOffset:0.0f];
+        }
+        [self.categoryView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:view];
+        [self.categoryView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:view];
+        [self.categoryView autoSetDimension:ALDimensionHeight toSize:self.categoryView.getViewHeight];
     }
-    [view addSubview:self.categoryView];
-    if (self.SDScrollViw) {
-        [self.categoryView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.SDScrollViw withOffset:0.0f];
-    } else {
-        [self.categoryView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:view withOffset:0.0f];
-    }
-    [self.categoryView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:view];
-    [self.categoryView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:view];
-    [self.categoryView autoSetDimension:ALDimensionHeight toSize:self.categoryView.getViewHeight];
+    
+    
     
     [self.flashSaleView removeFromSuperview];
-    if (self.flashSaleViewModel) {
-        if (!self.flashSaleView) {
-            self.flashSaleView = [BN_ShopHomeFlashSaleView nib];
-            [self updateFlashSaleView];
-        }
+    if (self.flashSaleView) {
+        [self updateFlashSaleView];
         [view addSubview:self.flashSaleView];
         [self.flashSaleView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.categoryView withOffset:0.0f];
         [self.flashSaleView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:view];
         [self.flashSaleView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:view];
         [self.flashSaleView autoSetDimension:ALDimensionHeight toSize:self.flashSaleView.getViewHeight];
-    } else {
-        self.flashSaleView = nil;
     }
-    
     
     self.tableView.tableHeaderView = view;
     
@@ -212,8 +323,8 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 }
 
 - (void) updateFlashSaleView {
-    [self.flashSaleView updateWith:self.flashSaleViewModel.thumbnailUrl title:self.flashSaleViewModel.title instruction:self.flashSaleViewModel.instruction price:self.flashSaleViewModel.priceAttri];
-    [self.flashSaleView updateWith:self.flashSaleViewModel.date title:self.flashSaleViewModel.timeTitle countdownToLastSeconds:self.flashSaleViewModel.countdownToLastSeconds plus:self.flashSaleViewModel.plus];
+    [self.flashSaleView updateWith:self.flashSaleViewModel.flashSaleModel.pic_url title:self.flashSaleViewModel.flashSaleModel.name instruction:nil price:self.flashSaleViewModel.priceAttri];
+    [self.flashSaleView updateWith:self.flashSaleViewModel.date title:self.flashSaleViewModel.timeTitle countdownToLastSeconds:0 timeColor:self.flashSaleViewModel.timeColor];
 }
 
 - (void) updateCategoryView {
@@ -232,6 +343,10 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BN_ShopHomeSouvenirCellModel *model = [self.viewModel.dataSource itemAtIndexPath:indexPath];
+    if (model.souvenirModel.goodsList.count == 0) {
+        return 400.0-170.0;
+    }
     return 400.0f;
 }
 
@@ -253,14 +368,6 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 #pragma mark - data source test
 
 - (void)testObects {
-    self.flashSaleViewModel.title = @"安德鲁森的木材面包";
-    self.flashSaleViewModel.instruction = @"今天就今天，统统八五折";
-    self.flashSaleViewModel.price = @"554";
-    self.flashSaleViewModel.date = [NSDate dateWithTimeIntervalSinceNow:3*60 + 8];
-    self.flashSaleViewModel.timeTitle = @"距离结束还有";
-    self.flashSaleViewModel.countdownToLastSeconds = 30;
-    self.flashSaleViewModel.plus = NO;
-    [self updateFlashSaleView];
     
     NSMutableArray *array = [NSMutableArray array];
     

@@ -41,7 +41,7 @@
     
     LYFreeTimingPlate *plate = [LYFreeTimingPlate nib];
     plate.countdownToLastSeconds = 0;
-    [plate updateMinusPlate];
+//    [plate updatePlateWith:ColorRed];
     [self addSubview:plate];
     [plate autoSetDimension:ALDimensionHeight toSize:40];
     [plate autoSetDimension:ALDimensionWidth toSize:100];
@@ -50,8 +50,8 @@
     plate.delegate = self;
     self.timingPlate = plate;
     
-    self.thumbnailImg.q_BorderColor = ColorLine;
-    self.thumbnailImg.q_BorderWidth = 1.0f;
+//    self.thumbnailImg.q_BorderColor = ColorLine;
+//    self.thumbnailImg.q_BorderWidth = 1.0f;
 }
 
 - (void)dealloc
@@ -68,16 +68,11 @@
     self.priceLabel.attributedText = price;
 }
 
-- (void)updateWith:(NSDate *)countDownDate title:(NSString *)title countdownToLastSeconds:(NSInteger)countdownToLastSeconds plus:(BOOL)plus {
+- (void)updateWith:(NSDate *)countDownDate title:(NSString *)title countdownToLastSeconds:(NSInteger)countdownToLastSeconds timeColor:(UIColor *)timeColor {
     self.timingPlate.date = countDownDate;
     self.timingPlate.countdownToLastSeconds = countdownToLastSeconds;
     self.timingPlate.titleStr = title;
-    if (plus) {
-        [self.timingPlate updatePlusPlate];
-    } else {
-        [self.timingPlate updateMinusPlate];
-    }
-    
+    [self.timingPlate updatePlateWith:timeColor];
 }
 
 - (CGFloat)getViewHeight {

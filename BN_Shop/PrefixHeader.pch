@@ -15,6 +15,7 @@
 #ifdef __OBJC__
 
 #import "QJTL_Global.h"
+#define BASEURL @"http://112.74.31.159:26088/lbb-app"
 
 #endif
 

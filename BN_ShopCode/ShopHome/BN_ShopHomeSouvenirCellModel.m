@@ -8,14 +8,30 @@
 
 #import "BN_ShopHomeSouvenirCellModel.h"
 
+@implementation BN_ShopSouvenirGoodModel
+
+
+@end
+
+@implementation BN_ShopSouvenirModel
+- (void)setGoodsList:(NSMutableArray<BN_ShopSouvenirGoodModel *> *)goodsList {
+    NSMutableArray *array = (NSMutableArray *)[goodsList map:^id(NSDictionary *element) {
+        return [BN_ShopSouvenirGoodModel mj_objectWithKeyValues:element];
+    }];
+    _goodsList = array;
+}
+@end
+
 @implementation BN_ShopHomeSouvenirCellModel
 
 
 - (NSString *)thumbnailUrl {
-    return @"";
+    return self.souvenirModel.pic_horizontal_url;
 }
 
 - (NSString *)title {
-    return @"厦门伴手礼";
+    return self.souvenirModel.name;
 }
+
+
 @end

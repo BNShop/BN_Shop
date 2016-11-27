@@ -86,7 +86,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOg-Tg-grl">
-                            <rect key="frame" x="10" y="32" width="53" height="12"/>
+                            <rect key="frame" x="10" y="33" width="150" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="12" id="WoB-Vo-Sjm"/>
                             </constraints>
@@ -128,7 +128,7 @@
                 <outlet property="stateBackView" destination="lPh-64-RZ6" id="Xv8-am-CKm"/>
                 <outlet property="stateLabel" destination="EA0-kU-XTQ" id="NZw-wZ-W7o"/>
             </connections>
-            <point key="canvasLocation" x="55" y="58"/>
+            <point key="canvasLocation" x="-53" y="-93"/>
         </view>
     </objects>
 </document>

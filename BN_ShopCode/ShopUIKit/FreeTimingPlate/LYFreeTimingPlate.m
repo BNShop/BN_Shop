@@ -33,10 +33,8 @@
     self.labelMax.font = Font12;
     self.labelExtend.font = Font8;
     self.labelTitle.font = Font10;
-    self.labelMin.q_BorderWidth = 1.0f;
-    self.labelMid.q_BorderWidth = 1.0f;
-    self.labelMax.q_BorderWidth = 1.0f;
-    [self updatePlusPlate];
+    
+    [self updatePlateWith:ColorBtnYellow];
 }
 
 - (void)dealloc
@@ -86,31 +84,22 @@
 }
 
 #pragma mark - ui
-- (void)updatePlusPlate {
-    self.labelMin.q_BorderColor = [ColorBtnYellow colorWithAlphaComponent:0.2f];
-    self.labelMid.q_BorderColor = [ColorBtnYellow colorWithAlphaComponent:0.2f];
-    self.labelMax.q_BorderColor = [ColorBtnYellow colorWithAlphaComponent:0.2f];
-    self.labelMin.textColor = ColorBtnYellow;
-    self.labelMid.textColor = ColorBtnYellow;
-    self.labelMax.textColor = ColorBtnYellow;
-    self.labelColon0.textColor = ColorBtnYellow;
-    self.labelColon1.textColor = ColorBtnYellow;
-    self.labelTitle.textColor = [ColorBtnYellow colorWithAlphaComponent:0.6f];
-    self.labelExtend.textColor = [ColorBtnYellow colorWithAlphaComponent:0.6f];
+- (void)updatePlateWith:(UIColor *)color {
+    self.labelMin.q_BorderWidth = 1.0f;
+    self.labelMid.q_BorderWidth = 1.0f;
+    self.labelMax.q_BorderWidth = 1.0f;
+    self.labelMin.q_BorderColor = [color colorWithAlphaComponent:0.2f];
+    self.labelMid.q_BorderColor = [color colorWithAlphaComponent:0.2f];
+    self.labelMax.q_BorderColor = [color colorWithAlphaComponent:0.2f];
+    self.labelMin.textColor = color;
+    self.labelMid.textColor = color;
+    self.labelMax.textColor = color;
+    self.labelColon0.textColor = color;
+    self.labelColon1.textColor = color;
+    self.labelTitle.textColor = [color colorWithAlphaComponent:0.6f];
+    self.labelExtend.textColor = [color colorWithAlphaComponent:0.6f];
 }
 
-- (void)updateMinusPlate {
-    self.labelMin.q_BorderColor = [ColorRed colorWithAlphaComponent:0.2f];
-    self.labelMid.q_BorderColor = [ColorRed colorWithAlphaComponent:0.2f];
-    self.labelMax.q_BorderColor = [ColorRed colorWithAlphaComponent:0.2f];
-    self.labelMin.textColor = ColorRed;
-    self.labelMid.textColor = ColorRed;
-    self.labelMax.textColor = ColorRed;
-    self.labelColon0.textColor = ColorRed;
-    self.labelColon1.textColor = ColorRed;
-    self.labelTitle.textColor = [ColorRed colorWithAlphaComponent:0.6f];
-    self.labelExtend.textColor = [ColorRed colorWithAlphaComponent:0.6f];
-}
 
 - (void)updateMinusWhioutBorderPlate {
     self.labelMin.q_BorderWidth = 0.0f;

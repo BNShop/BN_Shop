@@ -14,7 +14,7 @@
 @property (nonatomic, weak) id<BN_ShopHomeFlashSaleViewDelegate> delegate;
 
 - (void)updateWith:(NSString *)thumbnailUrl title:(NSString *)title instruction:(NSString *)instruction price:(NSAttributedString *)price;
-- (void)updateWith:(NSDate *)countDownDate title:(NSString *)title countdownToLastSeconds:(NSInteger)countdownToLastSeconds plus:(BOOL)plus;
+- (void)updateWith:(NSDate *)countDownDate title:(NSString *)title countdownToLastSeconds:(NSInteger)countdownToLastSeconds timeColor:(UIColor *)timeColor;
 - (CGFloat)getViewHeight;
 @end
 

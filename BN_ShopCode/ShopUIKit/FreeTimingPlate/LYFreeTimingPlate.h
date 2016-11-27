@@ -21,8 +21,7 @@
 
 - (void)cancelTimer;
 
-- (void)updatePlusPlate;
-- (void)updateMinusPlate;
+- (void)updatePlateWith:(UIColor *)color;
 - (void)updateMinusWhioutBorderPlate;
 @end
 

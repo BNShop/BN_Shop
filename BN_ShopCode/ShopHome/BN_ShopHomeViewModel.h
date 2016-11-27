@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "TableDataSource.h"
+#import "BN_ShopHomeSouvenirCellModel.h"
+
+
 
 @interface BN_ShopHomeViewModel : NSObject
 
 @property (nonatomic, strong) TableDataSource *dataSource;
+@property (nonatomic, strong) NSMutableArray<BN_ShopSouvenirModel*> *souvenirs;
 
-
+- (void)getSouvenirsData;
 @end

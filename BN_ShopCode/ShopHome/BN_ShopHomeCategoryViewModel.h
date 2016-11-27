@@ -8,12 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+//分类
+@interface BN_ShopCategoryModel : NSObject
+
+@property (nonatomic, copy) NSString *name; //分类名称
+@property (nonatomic, assign) long category_id;//id
+
+@end
+
 @interface BN_ShopHomeCategoryViewModel : NSObject
 
-@property (strong, nonatomic, readonly) NSArray *categorys;
+@property (strong, nonatomic) NSMutableArray<BN_ShopCategoryModel*> *categorys;
 
-- (instancetype)initWith:(NSArray *)items;
-- (void)initCategorysWith:(NSArray *)items;
+- (void)getCategoryArray;
+
 - (id)categoryWithIndex:(NSInteger)index;
 - (NSArray *)categoryTitles;
 

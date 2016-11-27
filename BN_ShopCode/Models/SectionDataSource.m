@@ -54,28 +54,35 @@
 
 - (void)resetItems:(NSArray *)anItems
 {
-    if (anItems)
-        self.items = [NSMutableArray arrayWithArray:anItems];
-    else
-        self.items = nil;
+    if ([anItems isKindOfClass:[NSMutableArray class]]) {
+        self.items = (NSMutableArray *)anItems;
+    } else {
+        if (anItems)
+            self.items = [NSMutableArray arrayWithArray:anItems];
+        else
+            self.items = nil;
+    }
 }
 
 
 
 - (void)addItems:(NSArray *)anItems
 {
-    if (anItems)
+    if (!self.items)
     {
-        if (!self.items)
+        if ([anItems isKindOfClass:[NSMutableArray class]]) {
+            self.items = (NSMutableArray *)anItems;
+        } else {
             self.items = [NSMutableArray arrayWithArray:anItems];
-        else
-        {
-            @synchronized(_items)
-            {
-                [_items addObjectsFromArray:anItems];
-            }
         }
-        
+    }
+    
+    else
+    {
+        @synchronized(_items)
+        {
+            [_items addObjectsFromArray:anItems];
+        }
     }
 }
 

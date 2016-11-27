@@ -69,6 +69,13 @@
     self.titleLabel.text = title;
     [self.adImgView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:IMAGE(@"")];
     self.collectionView.dataSource = dataSource;
+    if ([dataSource collectionView:self.collectionView numberOfItemsInSection:0] == 0) {
+        self.midLineView1.hidden = YES;
+        self.collectionView.hidden = YES;
+    } else {
+        self.midLineView1.hidden = NO;
+        self.collectionView.hidden = NO;
+    }
 }
 
 
