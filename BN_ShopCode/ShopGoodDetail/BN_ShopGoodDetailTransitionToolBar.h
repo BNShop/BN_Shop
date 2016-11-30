@@ -10,5 +10,6 @@
 
 @interface BN_ShopGoodDetailTransitionToolBar : UIView
 - (void)updateWith:(NSString *)commentNum segmentedControlChangedValue:(void(^)(NSInteger selectedIndex))block;
+- (void)updateWith:(NSString *)commentNum;
 - (CGFloat)getViewHeight;
 @end

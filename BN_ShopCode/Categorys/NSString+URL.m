@@ -11,7 +11,9 @@
 @implementation NSString (URL)
 
 - (NSURL *)URL {
+    
     NSString *urlPath = [self Trim];
+    NSLog(@"url = %@", urlPath);
     if ([self length] == 0) {
         return nil;
     }

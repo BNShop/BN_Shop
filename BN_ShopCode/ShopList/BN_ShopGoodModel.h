@@ -19,4 +19,13 @@
 @property (nonatomic, assign) int avail_buying_num;//可买数量
 @property (nonatomic, assign) int out_buying_num;//已抢购数量
 @property (nonatomic, assign) int total_comment;//评论数
+@property (nonatomic, assign) long category_id;//long分类id
+@property (nonatomic, copy) NSString *category_name;//String类名
+
+@property (nonatomic, assign) long warn_id;//有值：已设置提醒，-1：没设置提醒
+@property (nonatomic, copy) NSString *warntime;//提醒时间
+@property (nonatomic, assign) int buying_state;//抢购状态0:未开始1:抢购中2:已结束
+@property (nonatomic, assign) int timeleft;//剩余时间
+- (NSDate *)date;//抢购时间点
+
 @end

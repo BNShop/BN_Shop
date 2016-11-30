@@ -11,6 +11,8 @@
 @interface BN_ShopGoodDetailConsultancyModel : NSObject
 
 @property (nonatomic, copy) NSString *question;
-@property (nonatomic, copy) NSString *answer;
+@property (nonatomic, copy) NSString *question_time;
+@property (nonatomic, copy) NSString *answers;
+@property (nonatomic, copy) NSString *answer_time;
 
 @end

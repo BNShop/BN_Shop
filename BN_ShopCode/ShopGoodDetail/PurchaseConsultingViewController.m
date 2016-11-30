@@ -59,8 +59,10 @@
 }
 */
 - (IBAction)submitAction:(id)sender {
-    if (self.contentsTextView.text) {
-#warning - 发送资讯请求
+    if (self.contentsTextView.text.length) {
+        if ([self.delegate respondsToSelector:@selector(purchaseConsultingViewControllerWith:)]) {
+            [self.delegate purchaseConsultingViewControllerWith:self.contentsTextView.text];
+        }
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

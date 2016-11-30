@@ -54,6 +54,10 @@
     self.block = block;
 }
 
+- (void)updateWith:(NSString *)commentNum {
+    self.segmentedControl.sectionTitles = @[TEXT(@"商品详情"), [NSString stringWithFormat:@"%@(%@)", TEXT(@"商品评论"), commentNum], TEXT(@"购买咨询")];
+}
+
 - (CGFloat)getViewHeight {
     return 38.0f;
 }

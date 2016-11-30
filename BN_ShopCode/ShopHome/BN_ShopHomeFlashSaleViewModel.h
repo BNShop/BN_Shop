@@ -25,15 +25,6 @@
 
 @interface BN_ShopHomeFlashSaleViewModel : NSObject
 
-//@property (nonatomic, copy) NSString *thumbnailUrl;
-//@property (nonatomic, copy) NSString *title;
-//@property (nonatomic, copy) NSString *instruction;
-//@property (nonatomic, copy) NSString *price;
-//
-//@property (nonatomic, copy) NSString *timeTitle;
-//@property (nonatomic, assign) NSInteger countdownToLastSeconds;
-//@property (nonatomic, assign) BOOL plus;
-
 @property (nonatomic, strong) BN_ShopFlashSaleModel *flashSaleModel;
 - (void)getFlashSaleData;
 - (NSAttributedString *)priceAttri;

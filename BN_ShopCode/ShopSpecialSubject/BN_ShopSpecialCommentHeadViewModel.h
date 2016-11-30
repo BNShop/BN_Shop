@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BN_ShopSpecialCommentHeadViewModel : NSObject
 
+@interface BN_ShopSpecialCommentHeadViewModel : NSObject
+@property (assign, nonatomic) long specialId;//专题主键
 @property (nonatomic, copy) NSString *num;
 @property (nonatomic, strong) NSArray *imgUrls;
 //@property (nonatomic, assign) BOOL isFollow;

@@ -8,13 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BN_ShopGoodDetailSimpleShowViewModel : NSObject
+@interface BN_ShopGoodDetailPicModel : NSObject
+@property (nonatomic, copy) NSString *image_url;
+@property (nonatomic, copy) NSString *pic_desc;
+@end
 
-@property (nonatomic, strong) NSArray *photoList;
+@interface BN_ShopGoodDetailSimpleShowViewModel : NSObject
+@property (nonatomic, assign) long goodsId;//商品ID
+@property (nonatomic, assign) int type;
+
+@property (nonatomic, strong) NSMutableArray<BN_ShopGoodDetailPicModel*> *photoList;
 @property (nonatomic, copy) NSString *shortDescription;
+
+- (void)getPicsData;
 
 - (NSArray *)thumbnailUrlList;
 - (NSInteger)thumbnailCount;
 - (NSString *)scheduleWith:(NSInteger)index;
+
+
+//http://xxx.xxx.xxx/mall/goodsDetail（
 
 @end

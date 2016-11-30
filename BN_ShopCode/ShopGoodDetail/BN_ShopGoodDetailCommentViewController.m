@@ -11,7 +11,6 @@
 #import "BN_ShopGoodDetailCommentsCell.h"
 
 #import "BN_ShopGoodDetailCommentViewModel.h"
-#import "BN_ShopGoodDetailCommentsCellModel.h"
 #import "TableDataSource.h"
 
 #import <UITableView+FDTemplateLayoutCell.h>
@@ -28,6 +27,17 @@
 static NSString * const ShopGoodDetailCommentCellIdentifier = @"ShopGoodDetailCommentCellIdentifier";
 
 @implementation BN_ShopGoodDetailCommentViewController
+
+- (instancetype)initWith:(long)goodId type:(int)type
+{
+    self = [super init];
+    if (self) {
+        self.viewModel = [[BN_ShopGoodDetailCommentViewModel alloc] init];
+        self.viewModel.objId = goodId;
+        self.viewModel.type = type;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,10 +80,43 @@ static NSString * const ShopGoodDetailCommentCellIdentifier = @"ShopGoodDetailCo
 }
 
 #pragma mark - viewModel
+- (void)setCommentAvgScore:(int)avg_score {
+    self.viewModel.avg_score = avg_score;
+}
+
 - (void)buildViewModel {
-    self.viewModel = [[BN_ShopGoodDetailCommentViewModel alloc] init];
-    [self testObects];
-#warning 初始化列表数据等等
+    if (!self.viewModel) {
+        self.viewModel = [[BN_ShopGoodDetailCommentViewModel alloc] init];
+    }
+
+    [self.viewModel.dataSource resetellIdentifier:ShopGoodDetailCommentCellIdentifier configureCellBlock:^(id cell, BN_ShopGoodCommentsModel *item) {
+        [(BN_ShopGoodDetailCommentsCell *)cell updateWith:item.pics];
+        [(BN_ShopGoodDetailCommentsCell *)cell updateWith:item.userName dateStr:item.commentDate content:item.remark goodStr:nil icon:item.userPicUrl];
+    }];
+    
+    @weakify(self);
+    [self.tableView setHeaderRefreshDatablock:^{
+        
+    } footerRefreshDatablock:^{
+        @strongify(self);
+        [self.viewModel getCommentsClearData:NO];
+    }];
+    
+    [self.tableView setTableViewData:self.viewModel.items];
+    
+    [self.tableView setBn_data:self.viewModel.items];
+    
+    [self.tableView setRefreshBlock:^{
+        @strongify(self);
+        [self.viewModel getCommentsClearData:YES];
+    }];
+    [self.viewModel.items.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        [self.tableView reloadData];
+    }];
+    [self.viewModel getCommentsClearData:YES];
+    
+    self.tableView.dataSource = self.viewModel.dataSource;
     [self.tableView reloadData];
 }
 
@@ -96,40 +139,11 @@ static NSString * const ShopGoodDetailCommentCellIdentifier = @"ShopGoodDetailCo
     @weakify(self);
     CGFloat height = [tableView fd_heightForCellWithIdentifier:ShopGoodDetailCommentCellIdentifier configuration:^(id cell) {
         @strongify(self);
-        BN_ShopGoodDetailCommentsCellModel *obj = [self.viewModel.dataSource itemAtIndexPath:indexPath];
-        [(BN_ShopGoodDetailCommentsCell *)cell updateWith:obj.imgUrls];
-        [(BN_ShopGoodDetailCommentsCell *)cell updateWith:obj.name dateStr:obj.date content:obj.content goodStr:obj.good icon:obj.iconUrl];
+        BN_ShopGoodCommentsModel *item = [self.viewModel.dataSource itemAtIndexPath:indexPath];
+        [(BN_ShopGoodDetailCommentsCell *)cell updateWith:item.pics];
+        [(BN_ShopGoodDetailCommentsCell *)cell updateWith:item.userName dateStr:item.commentDate content:item.remark goodStr:nil icon:item.userPicUrl];;
     }];
     return height;
 }
-
-#pragma mark - testObject
-- (void)testObects {
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger index = 0; index < 10; index++) {
-        BN_ShopGoodDetailCommentsCellModel *model = [[BN_ShopGoodDetailCommentsCellModel alloc] init];
-        model.name = [@"深耕母婴行业12年，四个维度构建公司差异" substringToIndex:random()%14];
-        model.date = @"11月30号";
-        model.content = [@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%80];
-        model.good = [@"白色 M 黑色 S 中小型" substringToIndex:random()%8];
-        model.iconUrl = @"";
-        if (random() % 2 == 0) {
-            model.imgUrls = @[];
-        } else {
-            model.imgUrls = @[@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg", @"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg", @"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg"];
-        }
-        [array addObject:model];
-    }
-    
-    self.viewModel.dataSource = [[TableDataSource alloc] initWithItems:array cellIdentifier:ShopGoodDetailCommentCellIdentifier configureCellBlock:^(id cell, id item) {
-        BN_ShopGoodDetailCommentsCellModel *obj = (BN_ShopGoodDetailCommentsCellModel *)item;
-        [(BN_ShopGoodDetailCommentsCell *)cell updateWith:obj.imgUrls];
-        [(BN_ShopGoodDetailCommentsCell *)cell updateWith:obj.name dateStr:obj.date content:obj.content goodStr:obj.good icon:obj.iconUrl];
-    }];
-    self.tableView.dataSource = self.viewModel.dataSource;
-    self.viewModel.avgort = @"3.0";
-    [self.headerView updateWith:self.viewModel.avgort];
-}
-
 
 @end

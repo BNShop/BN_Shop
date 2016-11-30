@@ -10,7 +10,6 @@
 #import "UIBarButtonItem+BlocksKit.h"
 
 #import "BN_ShopSpecialSubjectViewModel.h"
-#import "BN_ShopSpecialCommentCellModel.h"
 #import "BN_ShopSpecialCommentHeadViewModel.h"
 #import "BN_ShopSpecialSubjectHeadViewModel.h"
 #import "BN_ShopSpecialTopicCellModel.h"
@@ -28,8 +27,7 @@
 #import "BN_ShopSpecialCommentHeadView.h"
 
 #import "UITableView+FDTemplateLayoutCell.h"
-
-#import "TestObjectHeader.h"
+#import "NSString+Attributed.h"
 
 
 
@@ -55,6 +53,22 @@ static NSString * const ShopSpecialTopicCellIdentifier = @"ShopSpecialTopicCellI
 static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentCellIdentifier";
 
 @implementation BN_ShopSpecialSubjectViewController
+
+- (instancetype)initWith:(long)specialId
+{
+    self = [super init];
+    if (self) {
+        self.subjectHeadViewModel = [[BN_ShopSpecialSubjectHeadViewModel alloc] init];
+        self.subjectHeadViewModel.specialId = specialId;
+        
+        self.viewModel = [[BN_ShopSpecialSubjectViewModel alloc] init];
+        self.viewModel.specialId = specialId;
+        
+        self.commentHeadViewModel = [[BN_ShopSpecialCommentHeadViewModel alloc] init];
+        self.commentHeadViewModel.specialId = specialId;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,6 +102,11 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     [self.tableView registerNib:[BN_ShopSpecialCommentCell nib] forCellReuseIdentifier:ShopSpecialCommentCellIdentifier];
     [self.tableView registerNib:[BN_ShopSpecialTopicCell nib] forCellReuseIdentifier:ShopSpecialTopicCellIdentifier];
     [self.tableView registerNib:[BN_ShopSpecialSubjectCell nib] forCellReuseIdentifier:ShopSpecialSubjectCellIdentifier];
+    
+    [self buildTopicHeadView];
+    [self buildCommentFootView];
+    [self buildCommentHeadView];
+    [self buildSubjectHeadView];
 }
 
 #pragma mark - NAV's UI
@@ -102,109 +121,95 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
 }
 
 #pragma mark - viewModel
-- (void)buildViewModel {
-    self.viewModel = [[BN_ShopSpecialSubjectViewModel alloc] init];
-    self.viewModel.isFollow = random()%2;
-    
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger i=0; i<5; i++) {
-        BN_ShopSpecialSubjectCellModel *model = [[BN_ShopSpecialSubjectCellModel alloc] init];
-        model.No = [NSString stringWithFormat:@"%ld", (long)i];
-        model.title = @"白板南中的店";
-        model.subTitle = @"水珠麻将牌";
-        model.contentHtml = [testStr substringWithRange:NSMakeRange(random()%5, 120)];;
-        model.imgUrl = [testImgs objectAtIndex:random()%6];
-        model.subImgUrl = [testImgs objectAtIndex:random()%6+1];
-        model.follow = @"60";
-        model.price = @"540";
-        [array addObject:model];
+- (void)buildSubjectViewModel {
+    if (!self.viewModel) {
+        self.viewModel = [[BN_ShopSpecialSubjectViewModel alloc] init];
     }
     
-    SectionDataSource *section0 = [[SectionDataSource alloc] initWithItems:array title:nil];
-    section0.cellIdentifier = ShopSpecialSubjectCellIdentifier;
+    SectionDataSource *commentSection = [self.viewModel.dataSource sectionAtIndex:1];
+    commentSection.cellIdentifier = ShopSpecialCommentCellIdentifier;
+    commentSection.configureCellBlock = ^(id cell, BN_ShopGoodCommentsModel *item){
+        [(BN_ShopSpecialCommentCell *)cell updateWith:nil comentNum:[NSString stringWithFormat:@"%d",item.commentsNum] follow:NO];
+        [(BN_ShopSpecialCommentCell *)cell updateWith:item.userPicUrl name:item.userName content:item.remark date:item.commentDate];
+        [(BN_ShopSpecialCommentCell *)cell updateWith:item.pics];
+    };
     @weakify(self);
-    section0.configureCellBlock = ^(id cell, id item){
-        @strongify(self);
-        BN_ShopSpecialSubjectCellModel *model = (BN_ShopSpecialSubjectCellModel *)item;
-        [(BN_ShopSpecialSubjectCell *)cell updateWith:model.No title:model.title subTitle:model.subTitle content:[model contentAttributed] follow:[model followStr] price:[model priceAttributed]];
-        [(BN_ShopSpecialSubjectCell *)cell updateWith:model.imgUrl subImgUrl:model.subImgUrl completed:^(id cell) {
+    SectionDataSource *specialsSection = [self.viewModel.dataSource sectionAtIndex:0];
+    specialsSection.cellIdentifier = ShopSpecialSubjectCellIdentifier;
+    specialsSection.configureCellBlock = ^(id cell, BN_ShopGoodSpecialModel *item){
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[NSString stringWithFormat:@"%d",item.total_like] price:[self.viewModel realAttributedPrice:item.real_price]];
+        [(BN_ShopSpecialSubjectCell *)cell updateWith:item.pic_url subImgUrl:item.vice_pic_url completed:^(id cell) {
             @strongify(self);
             NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
             if (indexpath) {
                 [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationMiddle];
             }
         }];
-         [(BN_ShopSpecialSubjectCell *)cell  clickedAction:^(id sender) {
+        [(BN_ShopSpecialSubjectCell *)cell  clickedAction:^(id sender) {
 #warning 点击购买做什么呢
-         }];
+        }];
     };
     
-    array = [NSMutableArray array];
-    
-    for (NSInteger i=0; i<1; i++) {
-        BN_ShopSpecialCommentCellModel *model = [[BN_ShopSpecialCommentCellModel alloc] init];
-        model.iconUrl = @"http://img55.yeds.net/FileSource3/a8f24e78-b8ee-4d92-8273-d12428c2d41c.jpg";
-        model.name = @"九九归一表格";
-        model.content = [testStr substringWithRange:NSMakeRange(random()%10, 90)];
-        model.date = @"2016-11-27";
-        model.follow = @"80";
-        model.coment = @"134";
-        model.isFollow = random() % 2;
-        model.imgUrls = [testImgs subarrayWithRange:NSMakeRange(random()%3, random()%3)];
-        [array addObject:model];
-    }
-    SectionDataSource *section1 = [[SectionDataSource alloc] initWithItems:array title:nil];
-    section1.cellIdentifier = ShopSpecialCommentCellIdentifier;
-    section1.configureCellBlock = ^(id cell, id item){
-        BN_ShopSpecialCommentCellModel *model = (BN_ShopSpecialCommentCellModel *)item;
-        [(BN_ShopSpecialCommentCell *)cell updateWith:model.follow comentNum:model.coment follow:model.isFollow];
-        [(BN_ShopSpecialCommentCell *)cell updateWith:model.iconUrl name:model.name content:model.content date:model.date];
-        [(BN_ShopSpecialCommentCell *)cell updateWith:model.imgUrls];
+    SectionDataSource *tipsSection = [self.viewModel.dataSource sectionAtIndex:2];
+    tipsSection.cellIdentifier = ShopSpecialTopicCellIdentifier;
+    tipsSection.configureCellBlock = ^(id cell, BN_ShopSpecialTopicCellModel *item){
+        [(BN_ShopSpecialTopicCell *)cell updateWith:item.imgUrl title:item.title subTitle:item.subTitle tip:item.tip];
     };
     
-    array = [NSMutableArray array];
-    for (NSInteger i=0; i<2; i++) {
-        BN_ShopSpecialTopicCellModel *model = [[BN_ShopSpecialTopicCellModel alloc] init];
-        model.imgUrl = [testImgs objectAtIndex:random()%6];
-        model.title = @"生命的意义";
-        model.subTitle = @"睡觉哦范围 魔都佛 就放辣椒";
-        model.tip = @"奇偶发呕佛";
-        [array addObject:model];
-    }
-    SectionDataSource *section2 = [[SectionDataSource alloc] initWithItems:array title:nil];
-    section2.cellIdentifier = ShopSpecialTopicCellIdentifier;
-    section2.configureCellBlock = ^(id cell, id item){
-        BN_ShopSpecialTopicCellModel *model = (BN_ShopSpecialTopicCellModel *)item;
-        [(BN_ShopSpecialTopicCell *)cell updateWith:model.imgUrl title:model.title subTitle:model.subTitle tip:model.tip];
-    };
-    [self.viewModel addDataSourceWith:section0];
-    [self.viewModel addDataSourceWith:section1];
-    [self.viewModel addDataSourceWith:section2];
-    self.tableView.dataSource = self.viewModel.dataSource;
+    [self.commentHeadView setBn_data:self.viewModel.comments];
+    [self.commentHeadView setRefreshBlock:^{
+        @strongify(self);
+        [self.viewModel getCommentsClearData:YES];
+    }];
+    [self.viewModel.comments.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        [self.commentHeadView updateWith:[self.commentHeadViewModel numStr] follow:self.viewModel.isFollow];
+        [self.commentHeadView updateWith:self.commentHeadViewModel.imgUrls];
+        dispatch_async(dispatch_get_main_queue(), ^{
+        });
+        //数据处理
+        
+    }];
+    [self.viewModel getCommentsClearData:YES];
     
+    [self.viewModel.specials.loadSupport setDataRefreshblock:^{
+        //数据处理
+    }];
+    [self.viewModel getSpecialsData];
+    
+    [self.topicHeadView setBn_data:self.viewModel.topics];
+    [self.topicHeadView setRefreshBlock:^{
+        @strongify(self);
+        [self.viewModel getTopicsData];
+    }];
+    [self.viewModel.topics.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        //数据处理
+    }];
+    
+}
+
+- (void)buildViewModel {
     
     
     self.commentHeadViewModel = [[BN_ShopSpecialCommentHeadViewModel alloc] init];
     self.commentHeadViewModel.num = @"89";
-    self.commentHeadViewModel.imgUrls = [testImgs subarrayWithRange:NSMakeRange(0, 6)];
     
 
-    self.subjectHeadViewModel = [[BN_ShopSpecialSubjectHeadViewModel alloc] init];
-    self.subjectHeadViewModel.tips = @[@"芭蕾", @"就把", @"春来的会哭"];
-    self.subjectHeadViewModel.comment = @"9989898";
-    self.subjectHeadViewModel.follow = @"15";
-    self.subjectHeadViewModel.like = @"190";
-    self.subjectHeadViewModel.content = [testStr substringWithRange:NSMakeRange(random()%6, 70)];
-    self.subjectHeadViewModel.imgUrl = [testImgs objectAtIndex:random()%5];
+//    self.subjectHeadViewModel = [[BN_ShopSpecialSubjectHeadViewModel alloc] init];
+//    self.subjectHeadViewModel.tips = @[@"芭蕾", @"就把", @"春来的会哭"];
+//    self.subjectHeadViewModel.comment = @"9989898";
+//    self.subjectHeadViewModel.follow = @"15";
+//    self.subjectHeadViewModel.like = @"190";
+//    self.subjectHeadViewModel.content = [testStr substringWithRange:NSMakeRange(random()%6, 70)];
+//    self.subjectHeadViewModel.imgUrl = [testImgs objectAtIndex:random()%5];
     
     self.subjectHeadViewModel.dataSource = [[TableDataSource alloc] initWithItems:self.subjectHeadViewModel.tips cellIdentifier:ShopSpecialSubjectTipCellIdentifier configureCellBlock:^(id cell, id item) {
         [(BN_ShopSpecialSubjectTipCell *)cell updateWith:item];
     }];
     
-    [self buildTopicHeadView];
-    [self buildCommentFootView];
-    [self buildCommentHeadView];
-    [self buildSubjectHeadView];
+    
     
     [self.tableView reloadData];
 }
@@ -214,7 +219,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     self.subjectHeadView = [BN_ShopSpecialSubjectHeadView nib];
     [self.subjectHeadView collectionViewRegisterNib:[BN_ShopSpecialSubjectTipCell nib] forCellWithReuseIdentifier:ShopSpecialSubjectTipCellIdentifier];
     
-    [self.subjectHeadView updateWith:self.subjectHeadViewModel.imgUrl comment:self.subjectHeadViewModel.comment follow:self.subjectHeadViewModel.follow like:self.subjectHeadViewModel.like content:self.subjectHeadViewModel.content];
+    [self.subjectHeadView updateWith:self.subjectHeadViewModel.detailModel.cover_img comment:self.subjectHeadViewModel.detailModel.total_comment follow:self.subjectHeadViewModel.detailModel.total_collected like:self.subjectHeadViewModel.detailModel.total_like content:self.subjectHeadViewModel.detailModel.content];
     [self.subjectHeadView updateWith:self.subjectHeadViewModel.dataSource];
 
 }
@@ -261,12 +266,10 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
         @weakify(self);
         CGFloat height = [tableView fd_heightForCellWithIdentifier:ShopSpecialCommentCellIdentifier configuration:^(id cell) {
             @strongify(self);
-            BN_ShopSpecialCommentCellModel *model = [self.viewModel.dataSource itemAtIndexPath:indexPath];
-            [(BN_ShopSpecialCommentCell *)cell updateWith:model.iconUrl name:model.name content:model.content date:model.date];
-            [(BN_ShopSpecialCommentCell *)cell updateWith:model.follow comentNum:model.coment follow:model.isFollow];
-            [(BN_ShopSpecialCommentCell *)cell updateWith:model.imgUrls];
-            
-            
+            BN_ShopGoodCommentsModel *item = [self.viewModel.dataSource itemAtIndexPath:indexPath];
+            [(BN_ShopSpecialCommentCell *)cell updateWith:nil comentNum:[NSString stringWithFormat:@"%d",item.commentsNum] follow:NO];
+            [(BN_ShopSpecialCommentCell *)cell updateWith:item.userPicUrl name:item.userName content:item.remark date:item.commentDate];
+            [(BN_ShopSpecialCommentCell *)cell updateWith:item.pics];
         }];
         return height;
     } else if (indexPath.section == 2) {

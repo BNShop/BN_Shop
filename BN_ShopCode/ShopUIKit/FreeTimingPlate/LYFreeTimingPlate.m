@@ -70,6 +70,9 @@
     NSLog(@"开始啦 %@", date);
     if (!date) {
         _date = nil;
+        self.labelMax.text = @"00";
+        self.labelMid.text = @"00";
+        self.labelMin.text = @"00";
         [self cancelTimer];
     } else if (![_date isEqualToDate:date]) {
         _date = date;
@@ -100,18 +103,25 @@
     self.labelExtend.textColor = [color colorWithAlphaComponent:0.6f];
 }
 
-
-- (void)updateMinusWhioutBorderPlate {
+- (void)updateMinusWhioutBorderPlate:(UIColor *)color {
     self.labelMin.q_BorderWidth = 0.0f;
     self.labelMid.q_BorderWidth = 0.0f;
     self.labelMax.q_BorderWidth = 0.0f;
-    self.labelMin.textColor = ColorRed;
-    self.labelMid.textColor = ColorRed;
-    self.labelMax.textColor = ColorRed;
-    self.labelColon0.textColor = ColorRed;
-    self.labelColon1.textColor = ColorRed;
-    self.labelTitle.textColor = [ColorRed colorWithAlphaComponent:0.6f];
-    self.labelExtend.textColor = [ColorRed colorWithAlphaComponent:0.6f];
+    self.labelMin.q_BorderColor = [color colorWithAlphaComponent:0.2f];
+    self.labelMid.q_BorderColor = [color colorWithAlphaComponent:0.2f];
+    self.labelMax.q_BorderColor = [color colorWithAlphaComponent:0.2f];
+    self.labelMin.textColor = color;
+    self.labelMid.textColor = color;
+    self.labelMax.textColor = color;
+    self.labelColon0.textColor = color;
+    self.labelColon1.textColor = color;
+    self.labelTitle.textColor = [color colorWithAlphaComponent:0.6f];
+    self.labelExtend.textColor = [color colorWithAlphaComponent:0.6f];
+}
+
+
+- (void)updateMinusWhioutBorderPlate {
+    [self updateMinusWhioutBorderPlate:ColorRed];;
 }
 
 // 年 日/时/分 天 时/分/秒

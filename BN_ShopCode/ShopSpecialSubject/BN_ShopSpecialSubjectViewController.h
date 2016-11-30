@@ -9,5 +9,5 @@
 #import "Base_BaseViewController.h"
 
 @interface BN_ShopSpecialSubjectViewController : Base_BaseViewController
-
+- (instancetype)initWith:(long)specialId;
 @end

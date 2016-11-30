@@ -11,6 +11,8 @@
 #import "BN_ShopGoodSpecificDetailsViewController.h"
 #import "BN_ShopGoodDetailConsultancyViewController.h"
 #import "BN_ShopGoodDetailCommentViewController.h"
+#import "Base_BaseViewController+ControlCreate.h"
+#import "BN_ShopGoodDetailBuyViewController.h"
 
 #import "BN_ShopGoodDetailToolBar.h"
 #import "BN_ShopGoodDetailSimpleShowView.h"
@@ -33,7 +35,7 @@
 
 #import "TestObjectHeader.h"
 
-@interface BN_ShopGoodDetailViewController ()
+@interface BN_ShopGoodDetailViewController ()<BN_ShopGoodDetailBuyViewControllerDelegate>
 
 @property (nonatomic, strong) BN_ShopGoodDetailToolBar *toolBar;
 @property (nonatomic, strong) BN_ShopGoodDetailSimpleShowView *simpleShowView;
@@ -59,6 +61,17 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 @implementation BN_ShopGoodDetailViewController
 
+- (instancetype)initWith:(long)goodsId
+{
+    self = [super init];
+    if (self) {
+        self.simpleShowViewModel = [[BN_ShopGoodDetailSimpleShowViewModel alloc] init];
+        self.simpleShowViewModel.goodsId = goodsId;
+        self.simpleShowViewModel.type = 4;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -66,10 +79,9 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self buildSimpleShowViewModel];
     [self bulidStateViewModel];
     [self buildArribalsViewModel];
-    [self buildHeadView];
-    [self buildArribalsView];
     
-    [self buildTransitionControllers];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,6 +104,9 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [super buildControls];
     self.navigationController.navigationBar.translucent = NO;
     [self buildToolBar];
+    
+    [self buildHeadView];
+    [self buildArribalsView];
     
 }
 
@@ -137,14 +152,8 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.toolBar autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.view];
     [self.toolBar autoSetDimension:ALDimensionHeight toSize:[self.toolBar getViewHeight]];
 }
-
-- (void)buildSimpleShowViewModel {
-    self.simpleShowViewModel = [[BN_ShopGoodDetailSimpleShowViewModel alloc] init];
-    self.simpleShowViewModel.shortDescription = @"木材面包口感扎实绵密";
-}
-
 - (void)buildSimpleShowView {
-
+    
     self.simpleShowView = [BN_ShopGoodDetailSimpleShowView nib];
     [self.simpleShowView updateThumbnailWith:self.simpleShowViewModel.thumbnailUrlList];
     [self.simpleShowView updateWith:self.simpleShowViewModel.shortDescription schedule:[self.simpleShowViewModel scheduleWith:0]];
@@ -173,7 +182,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.friendlyWarningView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.headeView];
     [self.friendlyWarningView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.stateView];
     [self.friendlyWarningView autoSetDimension:ALDimensionHeight toSize:[self.friendlyWarningView getViewHeight]];
-    [self.friendlyWarningView updateWith:@"满99包邮" point:@"购买可送12积分" deliver:@"第三方发货"];
+    
 }
 
 - (void)buildSellersView {
@@ -183,33 +192,68 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.sellersView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.headeView];
     [self.sellersView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.friendlyWarningView];
     [self.sellersView autoSetDimension:ALDimensionHeight toSize:[self.sellersView getViewHeight]];
-    [self.sellersView updateWith:@"阿里巴巴" iconUrl:nil];
     
     [self.sellersView bk_whenTapped:^{
 #warning 跳转到哪里了呢
     }];
 }
 
+#pragma mark - buildViewModel
+
+- (void)buildSimpleShowViewModel {
+    if (!self.simpleShowViewModel) {
+        self.simpleShowViewModel = [[BN_ShopGoodDetailSimpleShowViewModel alloc] init];
+    }
+    [self.simpleShowView setBn_data:self.simpleShowViewModel.photoList];
+    @weakify(self);
+    [self.simpleShowView setRefreshBlock:^{
+        @strongify(self);
+        [self.simpleShowViewModel getPicsData];
+    }];
+    [self.simpleShowViewModel.photoList.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.simpleShowView updateThumbnailWith:self.simpleShowViewModel.thumbnailUrlList];
+            [self.simpleShowView updateWith:self.simpleShowViewModel.shortDescription schedule:[self.simpleShowViewModel scheduleWith:0]];
+        });
+    }];
+    [self.simpleShowViewModel getPicsData];
+}
+
 - (void)bulidStateViewModel {
     self.stateViewModel = [[BN_ShopGoodDetaiStateViewModel alloc] init];
-    self.stateViewModel.state = random() % 3;
-    self.stateViewModel.realPrice = @"345";
-    self.stateViewModel.frontPrice = @"567";
-    self.stateViewModel.followNum = @"78";
-    self.stateViewModel.date = [NSDate dateWithTimeIntervalSinceNow:5*60*60+4*60+18];
-    self.stateViewModel.saleNum = @"109";
-    self.stateViewModel.residueNum = @"19090";
-    self.stateViewModel.tips = @"反正会准时开抢，所以自己准备好枪！";
+    [self.view setBn_data:self.stateViewModel];
+    @weakify(self);
+    [self.view setRefreshBlock:^{
+        @strongify(self);
+        [self.stateViewModel getSimpleDetailDataWith:self.simpleShowViewModel.goodsId];
+    }];
+    [self.stateViewModel.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        self.simpleShowViewModel.shortDescription = self.stateViewModel.simpleDetailModel.name;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self buildStateView];
+            [self buildTransitionControllers];
+            [self.simpleShowView updateWith:self.simpleShowViewModel.shortDescription schedule:[self.simpleShowViewModel scheduleWith:0]];
+            [self.sellersView updateWith:self.stateViewModel.simpleDetailModel.shop_name iconUrl:self.stateViewModel.simpleDetailModel.shop_logo];
+            [self.transitionToolBar updateWith:self.stateViewModel.commentNumStr];
+            [self.friendlyWarningView updateWith:self.stateViewModel.freeShippingStatus point:self.stateViewModel.pointStr deliver:@"第三方发货"];
+        });
+       
+    }];
+    [self.stateViewModel getSimpleDetailDataWith:self.simpleShowViewModel.goodsId];
 }
 
 - (void)buildStateView {
     CGFloat height = 54.0f;
+    self.stateView.hidden = YES;
+    self.stateView = nil;
     switch (self.stateViewModel.state) {
         case GoodDetaiState_Forward:
         {
             BN_ShopGoodDetaiForwardStateView *stateView = [BN_ShopGoodDetaiForwardStateView nib];
             [stateView updateWith:self.stateViewModel.date countdownToLastSeconds:0];
-            [stateView updateWith:self.stateViewModel.realPrice frontPrice:self.stateViewModel.frontPriceAttrStr tips:self.stateViewModel.tips follow:self.stateViewModel.followNumStr];
+            [stateView updateWith:self.stateViewModel.realPriceStr frontPrice:self.stateViewModel.frontPriceAttrStr tips:self.stateViewModel.tips follow:self.stateViewModel.followNumStr];
             self.stateView = stateView;
             height = [stateView getViewHeight];
         }
@@ -218,7 +262,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         {
             BN_ShopGoodDetaiPanicStateView *stateView = [BN_ShopGoodDetaiPanicStateView nib];
             [stateView updateWith:self.stateViewModel.date countdownToLastSeconds:0];
-            [stateView updateWith:self.stateViewModel.realPrice frontPrice:self.stateViewModel.frontPriceAttrStr saleNum:self.stateViewModel.saleNumStr residue:self.stateViewModel.residueNumStr];
+            [stateView updateWith:self.stateViewModel.realPriceStr frontPrice:self.stateViewModel.frontPriceAttrStr saleNum:self.stateViewModel.saleNumStr residue:self.stateViewModel.residueNumStr];
             self.stateView = stateView;
             height = [stateView getViewHeight];
         }
@@ -227,7 +271,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         default:
         {
             BN_ShopGoodDetaiNormalStateView *stateView = [BN_ShopGoodDetaiNormalStateView nib];
-            [stateView updateWith:self.stateViewModel.realPrice frontPrice:self.stateViewModel.frontPriceAttrStr];
+            [stateView updateWith:self.stateViewModel.realPriceStr frontPrice:self.stateViewModel.frontPriceAttrStr];
             self.stateView = stateView;
             height = [stateView getViewHeight];
         }
@@ -243,11 +287,34 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 - (void)buildArribalsViewModel {
     self.arribalsViewModel = [[BN_ShopGoodDetailNewArrivalsViewModel alloc] init];
-    self.arribalsViewModel.title = @"相关推荐";
-    self.arribalsViewModel.subTitle = @" | New Arribals";
-    self.arribalsViewModel.dataSource = [[TableDataSource alloc] initWithItems:testImgs cellIdentifier:ShopGoodDetailNewArrivalsCellIdentifier configureCellBlock:^(id cell, id item) {
-        [(BN_ShopGoodDetailNewArribalsCell *)cell updateWith:item];
+    [self.arribalsViewModel.dataSource resetellIdentifier:ShopGoodDetailNewArrivalsCellIdentifier configureCellBlock:^(id cell, BN_ShopGoodDetailNewArrivalsModel *item) {
+        [(BN_ShopGoodDetailNewArribalsCell *)cell updateWith:item.pic_url];
     }];
+    
+    @weakify(self);
+    [self.arribalsView.collectionView setHeaderRefreshDatablock:^{
+        @strongify(self);
+        [self.arribalsViewModel getNewArrivalsClearData:YES goodsId:self.simpleShowViewModel.goodsId];
+    } footerRefreshDatablock:^{
+        @strongify(self);
+        [self.arribalsViewModel getNewArrivalsClearData:NO goodsId:self.simpleShowViewModel.goodsId];
+    }];
+    
+    [self.arribalsView.collectionView setCollectionViewData:self.arribalsViewModel.arrivals];
+    [self.arribalsView.collectionView setBn_data:self.arribalsViewModel.arrivals];
+    
+    [self.arribalsView.collectionView setRefreshBlock:^{
+        @strongify(self);
+         [self.arribalsViewModel getNewArrivalsClearData:YES goodsId:self.simpleShowViewModel.goodsId];
+    }];
+    [self.arribalsViewModel.arrivals.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        [self.arribalsView.collectionView reloadData];
+    }];
+    [self.arribalsViewModel getNewArrivalsClearData:YES goodsId:self.simpleShowViewModel.goodsId];
+    
+    self.arribalsView.collectionView.dataSource = self.arribalsViewModel.dataSource;
+    [self.arribalsView.collectionView reloadData];
 }
 
 - (void)buildArribalsView {
@@ -255,17 +322,16 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.arribalsView updateWith:ShopGoodDetailNewArrivalsCellIdentifier registerNib:[BN_ShopGoodDetailNewArribalsCell nib]];
     [self.arribalsView updateWith:self.arribalsViewModel.dataSource];
     [self.arribalsView updateWith:self.arribalsViewModel.title subTitle:self.arribalsViewModel.subTitle];
-//    [[self.arribalsView rac_collectionViewDidSelectItemSignal] subscribeNext:^(id x) {
-////        x为NSIndexPath
-//#warning -----点击新推荐的图片跳转
-//    }];
+    [[self.arribalsView rac_collectionViewDidSelectItemSignal] subscribeNext:^(id x) {
+//        x为NSIndexPath
+#warning -----点击新推荐的图片跳转
+    }];
 }
 
 - (void)buildTransitionToolBar {
     self.transitionToolBar = [BN_ShopGoodDetailTransitionToolBar nib];
     @weakify(self);
-    [self.transitionToolBar updateWith:@"68" segmentedControlChangedValue:^(NSInteger selectedIndex) {
-#warning 视图页面的跳转
+    [self.transitionToolBar updateWith:@"" segmentedControlChangedValue:^(NSInteger selectedIndex) {
         @strongify(self);
         UIViewController *newController = self.curController;
         if (selectedIndex >= 0 && selectedIndex < self.controllers.count) {
@@ -302,22 +368,31 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 #warning 工具栏的点击处理
 - (void)airLine {
+    
 }
 
 - (void)followAction {
 }
 
 - (void)addToCart {
+    
+    
+    BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:self.stateViewModel.simpleDetailModel.pic_url standards:self.stateViewModel.simpleDetailModel.name price:self.stateViewModel.simpleDetailModel.real_price];
+    ctr.view.backgroundColor = [ColorBlack colorWithAlphaComponent:0.17];
+    [ctr setModalPresentationStyle:UIModalPresentationCustom];
+    [ctr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    ctr.delegate = self;
+    [self presentViewController:ctr animated:YES completion:nil];
 }
 
 #pragma mark - 页面跳转
 - (void)buildTransitionControllers {
     self.controllers = [NSMutableArray array];
-    NSString *readmePath = [[NSBundle mainBundle] pathForResource:@"README.html" ofType:nil];
-    NSString *html = [NSString stringWithContentsOfFile:readmePath encoding:NSUTF8StringEncoding error:NULL];
-    BN_ShopGoodSpecificDetailsViewController *detailCtr = [[BN_ShopGoodSpecificDetailsViewController alloc] initWithHtml:html];
-    BN_ShopGoodDetailCommentViewController *commetnCtr = [[BN_ShopGoodDetailCommentViewController alloc] init];
-    BN_ShopGoodDetailConsultancyViewController *consultancCtr = [[BN_ShopGoodDetailConsultancyViewController alloc] init];
+//    NSString *readmePath = [[NSBundle mainBundle] pathForResource:@"Image.html" ofType:nil];
+//    self.stateViewModel.simpleDetailModel.goodDescription = [NSString stringWithContentsOfFile:readmePath encoding:NSUTF8StringEncoding error:NULL];
+    BN_ShopGoodSpecificDetailsViewController *detailCtr = [[BN_ShopGoodSpecificDetailsViewController alloc] initWithHtml:self.stateViewModel.simpleDetailModel.goodDescription];
+    BN_ShopGoodDetailCommentViewController *commetnCtr = [[BN_ShopGoodDetailCommentViewController alloc] initWith:self.simpleShowViewModel.goodsId type:self.simpleShowViewModel.type];
+    BN_ShopGoodDetailConsultancyViewController *consultancCtr = [[BN_ShopGoodDetailConsultancyViewController alloc] initWith:self.simpleShowViewModel.goodsId];
 
     detailCtr.automaticallyAdjustsScrollViewInsets = NO;
     commetnCtr.automaticallyAdjustsScrollViewInsets = NO;
@@ -366,4 +441,16 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     }];
 }
 
+
+#pragma mark - BN_ShopGoodDetailBuyViewControllerDelegate
+- (void)goodDetailBuyCountWith:(int)cout {
+    @weakify(self);
+    [self.stateViewModel addShoppingCartWith:self.simpleShowViewModel.goodsId num:cout success:^{
+        @strongify(self);
+        [self showHudSucess:TEXT(@"加入购物车")];
+    } failure:^(NSString *errorDescription) {
+        @strongify(self);
+        [self showHudError:TEXT(@"加入购物车失败") title:errorDescription];
+    }];
+}
 @end

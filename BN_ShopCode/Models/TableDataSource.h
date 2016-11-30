@@ -11,6 +11,8 @@
 
 @interface TableDataSource : NSObject<UICollectionViewDataSource, UITableViewDataSource>
 
+@property (nonatomic, strong) NSMutableArray *items;
+
 - (id)initWithItems:(NSArray *)anItems
      cellIdentifier:(NSString *)aCellIdentifier
  configureCellBlock:(TableViewCellConfigureBlock)aConfigureCellBlock;

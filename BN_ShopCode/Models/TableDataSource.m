@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, copy) TableViewCellConfigureBlock configureCellBlock;
-@property (nonatomic, strong) NSMutableArray *items;
+
 
 @end
 

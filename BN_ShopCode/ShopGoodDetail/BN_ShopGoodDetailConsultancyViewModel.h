@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "TableDataSource.h"
+#import "BN_ShopGoodDetailConsultancyModel.h"
 
 @interface BN_ShopGoodDetailConsultancyViewModel : NSObject
 @property (nonatomic, strong) TableDataSource *dataSource;
+@property (nonatomic, strong) NSMutableArray<BN_ShopGoodDetailConsultancyModel*> *items;
+@property (nonatomic, assign) long goodsId;//商品ID
+
+- (void)sendConsultingWith:(NSString *)text failure:(void(^)(NSString *errorStr))failure;
+- (void)getAnswersListClearData:(BOOL)clear;
 @end

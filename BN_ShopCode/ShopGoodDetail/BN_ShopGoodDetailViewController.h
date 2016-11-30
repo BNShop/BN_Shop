@@ -9,5 +9,5 @@
 #import "Base_BaseViewController.h"
 
 @interface BN_ShopGoodDetailViewController : Base_BaseViewController
-
+- (instancetype)initWith:(long)goodsId;
 @end

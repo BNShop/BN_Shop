@@ -23,6 +23,7 @@
 
 - (void)updatePlateWith:(UIColor *)color;
 - (void)updateMinusWhioutBorderPlate;
+- (void)updateMinusWhioutBorderPlate:(UIColor *)color;
 @end
 
 

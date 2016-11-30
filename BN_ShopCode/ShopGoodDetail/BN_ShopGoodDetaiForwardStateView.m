@@ -45,7 +45,7 @@
     
     self.stateLabel.textColor = ColorGray;
     self.stateLabel.font = Font10;
-    self.stateLabel.text = TEXT(@"距开枪还剩");
+    self.stateLabel.text = TEXT(@"距开抢还剩");
     [self.stateLabel sizeToFit];
     self.saleNumLabel.textColor = ColorGray;
     self.saleNumLabel.font = Font8;

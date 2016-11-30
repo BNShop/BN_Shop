@@ -14,6 +14,7 @@
 #import "BN_ShopGoodDetailViewController.h"
 #import "BN_ShopSpecialSubjectViewController.h"
 #import "ST_TabBarController.h"
+#import "BN_ShopFlashSaleListViewController.h"
 
 #import "BN_ShopHomeFlashSaleView.h"
 #import "LYFreeTimingPlate.h"
@@ -27,15 +28,13 @@
 #import "UISearchBar+RAC.h"
 #import "PureLayout.h"
 #import "NSString+Attributed.h"
+#import "UIView+BlocksKit.h"
 
 #import "BN_ShopHomeADViewModel.h"
 #import "BN_ShopHomeCategoryViewModel.h"
 #import "BN_ShopHomeFlashSaleViewModel.h"
 #import "BN_ShopHomeSouvenirCellModel.h"
 #import "BN_ShopHomeViewModel.h"
-
-
-#import "TestCartItem.h"
 
 @interface BN_ShopHomeViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -121,7 +120,6 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 
 #pragma mark - viewModel
 - (void)buildViewModel {
-#warning 初始化列表数据等等
     [self buildADModel];
     [self buildCategoryViewModel];
     [self buildFlashSaleViewModel];
@@ -151,7 +149,11 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
             @strongify(self);
             NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
             NSLog(@"首页点击 section = %ld, row = %ld", (long)sectionIndex.row, (long)indexPath.row);
-            BN_ShopGoodDetailViewController *detailCtr = [[BN_ShopGoodDetailViewController alloc] init];
+            
+            BN_ShopHomeSouvenirCellModel *cellModel = [self.viewModel.dataSource itemAtIndex:sectionIndex.row];
+            BN_ShopSouvenirGoodModel *good = [cellModel.dataSource itemAtIndex:indexPath.row];
+            
+            BN_ShopGoodDetailViewController *detailCtr = [[BN_ShopGoodDetailViewController alloc] initWith:good.goods_id];
             [self.navigationController pushViewController:detailCtr animated:YES];
         }];
         [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeClickTitleSignal] subscribeNext:^(id x) {
@@ -281,6 +283,13 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 
 - (void)buildFlashSaleView {
     self.flashSaleView = [BN_ShopHomeFlashSaleView nib];
+    @weakify(self);
+    [self.flashSaleView bk_whenTapped:^{
+        @strongify(self);
+        BN_ShopFlashSaleListViewController *ctr = [[BN_ShopFlashSaleListViewController alloc] init];
+        [self.navigationController pushViewController:ctr animated:YES];
+    }];
+    
 }
 
 - (void)tableHeaderView {
@@ -371,59 +380,4 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     return view;
 }
 
-#pragma mark - data source test
-
-- (void)testObects {
-    
-    NSMutableArray *array = [NSMutableArray array];
-    
-    for (NSInteger index = 0; index < 4; index++) {
-        NSMutableArray *items = [NSMutableArray array];
-        for (NSInteger j = 0; j < index+2; j++) {
-            TestCartItem *item = [[TestCartItem alloc] init];
-            item.front_price = [NSString stringWithFormat:@"%ld", (j+4)*(random()%15)];
-            item.real_price = [NSString stringWithFormat:@"%.2f", ((float)j+6)*(random()%30)];
-            [items addObject:item];
-        }
-        TableDataSource *source = [[TableDataSource alloc] initWithItems:items cellIdentifier:ShopHomeSouvenirCellIdentifier configureCellBlock:^(id cell, TestCartItem *item) {
-            [(BN_ShopGoodCell *)cell typeFace0];
-             [(BN_ShopGoodCell *)cell updateWith:@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg" title:[@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%30] front:item.front_price real:[item.real_price strikethroughAttribute] additional:nil];
-        }];
-        BN_ShopHomeSouvenirCellModel *model = [[BN_ShopHomeSouvenirCellModel alloc] init];
-        model.dataSource = source;
-        [array addObject:model];
-    }
-
-    @weakify(self);
-    self.viewModel.dataSource = [[TableDataSource alloc] initWithItems:array cellIdentifier:ShopHomeCellIdentifier configureCellBlock:^(id cell, id item) {
-        @strongify(self);
-        [[(BN_ShopHomeSouvenirCell *)cell collectionView] registerNib:[BN_ShopGoodCell nib] forCellWithReuseIdentifier:ShopHomeSouvenirCellIdentifier];
-        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeSouvenirCellSignal] subscribeNext:^(id x) {
-            
-            UITableViewCell *cell = [(NSArray *)x firstObject];
-            NSIndexPath *indexPath = [(NSArray *)x lastObject];
-            @strongify(self);
-            NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
-            NSLog(@"首页点击 section = %ld, row = %ld", (long)sectionIndex.row, (long)indexPath.row);
-            BN_ShopGoodDetailViewController *detailCtr = [[BN_ShopGoodDetailViewController alloc] init];
-            [self.navigationController pushViewController:detailCtr animated:YES];
-        }];
-        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeClickTitleSignal] subscribeNext:^(id x) {
-            @strongify(self);
-            NSIndexPath *sectionIndex = [self.tableView indexPathForCell:(UITableViewCell *)x];
-            NSLog(@"首页点击Title section = %ld", (long)sectionIndex.row);
-        }];
-        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeClickThumbnailSignal] subscribeNext:^(id x) {
-            @strongify(self);
-            NSIndexPath *sectionIndex = [self.tableView indexPathForCell:(UITableViewCell *)x];
-            NSLog(@"首页点击缩略图 section = %ld", (long)sectionIndex.row);
-        }];
-        BN_ShopHomeSouvenirCellModel *model = (BN_ShopHomeSouvenirCellModel *)item;
-        [(BN_ShopHomeSouvenirCell *)cell collectionView].dataSource = model.dataSource;
-        [(BN_ShopHomeSouvenirCell *)cell updateWith:model.title thumbnailUrl:model.thumbnailUrl dataSource:model.dataSource];
-        
-    }];
-    
-    self.tableView.dataSource = self.viewModel.dataSource;
-}
 @end

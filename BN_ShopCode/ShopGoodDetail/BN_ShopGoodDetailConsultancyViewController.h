@@ -10,6 +10,8 @@
 
 @interface BN_ShopGoodDetailConsultancyViewController : Base_BaseViewController
 
+- (instancetype)initWith:(long)goodsId;
+
 - (void)setHeadView:(UIView *)view;
 - (CGPoint)contentOffset;
 - (void)setContentOffset:(CGPoint)contentOffset;

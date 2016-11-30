@@ -8,19 +8,29 @@
 
 #import "BN_ShopGoodDetailSimpleShowViewModel.h"
 
-@interface BN_ShopGoodDetailSimpleShowViewModel ()
-
+@implementation BN_ShopGoodDetailPicModel
 
 @end
 
 @implementation BN_ShopGoodDetailSimpleShowViewModel
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.photoList = [[NSMutableArray alloc] initFromNet];
+    }
+    return self;
+}
 
 - (NSArray *)thumbnailUrlList {
-    return @[@"", @"", @""];
+    NSMutableArray *tmpurls = [NSMutableArray array];
+    for (BN_ShopGoodDetailPicModel *model in self.photoList) {
+        [tmpurls addObject:model.image_url];
+    }
+    return tmpurls;
 }
 
 - (NSInteger)thumbnailCount {
-    return 3;
     return [self.photoList count];
 }
 
@@ -31,6 +41,38 @@
         index = 1;
     }
     return [NSString stringWithFormat:@"%ld/%ld", (long)index, (long)[self thumbnailCount]];
+}
+
+#pragma mark - 数据获取
+- (void)getPicsData {
+    NSDictionary *paraDic = @{@"goodsId" : @(self.goodsId)};
+    
+    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsPics",BASEURL];
+    __weak typeof(self) temp = self;
+    self.photoList.loadSupport.loadEvent = NetLoadingEvent;
+    
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        NSLog(@"url = %@", operation.currentRequest);
+        if(codeNumber.intValue == 0)
+        {
+            NSArray *array = [dic objectForKey:@"rows"];
+            NSArray *returnArray = [BN_ShopGoodDetailPicModel mj_objectArrayWithKeyValuesArray:array];
+            [temp.photoList addObjectsFromArray:returnArray];
+            temp.photoList.networkTotal = [dic objectForKey:@"total"];
+        }
+        else
+        {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+        }
+        
+        temp.photoList.loadSupport.loadEvent = codeNumber.intValue;
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+        temp.photoList.loadSupport.loadEvent = NetLoadFailedEvent;
+    }];
+
 }
 
 @end

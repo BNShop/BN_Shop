@@ -7,7 +7,11 @@
 //
 
 #import "Base_BaseViewController.h"
-
+@protocol PurchaseConsultingViewControllerDelegate;
 @interface PurchaseConsultingViewController : Base_BaseViewController
+@property (nonatomic, weak) id<PurchaseConsultingViewControllerDelegate> delegate;
+@end
 
+@protocol PurchaseConsultingViewControllerDelegate <NSObject>
+- (void)purchaseConsultingViewControllerWith:(NSString *)text;
 @end

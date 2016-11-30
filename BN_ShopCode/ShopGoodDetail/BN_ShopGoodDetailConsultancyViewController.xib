@@ -23,6 +23,11 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Bzj-B6-Sp2">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <view key="tableFooterView" contentMode="scaleToFill" id="rl9-bi-AXf">
+                        <rect key="frame" x="0.0" y="587" width="375" height="108"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <connections>
                         <outlet property="delegate" destination="-1" id="UH8-cQ-Qph"/>
                     </connections>
@@ -35,6 +40,7 @@
                 <constraint firstAttribute="trailing" secondItem="Bzj-B6-Sp2" secondAttribute="trailing" id="SGa-YA-dHl"/>
                 <constraint firstItem="Bzj-B6-Sp2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TyJ-ae-ahR"/>
             </constraints>
+            <point key="canvasLocation" x="34.5" y="116.5"/>
         </view>
     </objects>
 </document>

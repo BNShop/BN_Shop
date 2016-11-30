@@ -13,6 +13,7 @@
 
 @interface BN_ShopGoodDetailNewArrivalsView : UIView
 @property (nonatomic, weak) id<BN_ShopGoodDetailNewArrivalsViewDelegate> delegate;
+@property (weak, nonatomic, readonly) IBOutlet UICollectionView *collectionView;
 
 - (void)updateWith:(NSString *)title subTitle:(NSString *)subTitle;
 - (void)updateWith:(NSString *)cellReuseIdentifier registerNib:(UINib *)nib;

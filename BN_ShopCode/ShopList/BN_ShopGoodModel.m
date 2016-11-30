@@ -10,4 +10,11 @@
 
 @implementation BN_ShopGoodModel
 
+- (NSDate *)date {
+    if (self.timeleft <= 0) {
+        return nil;
+    }
+    return [NSDate dateWithTimeIntervalSinceNow:self.timeleft];;
+}
+
 @end

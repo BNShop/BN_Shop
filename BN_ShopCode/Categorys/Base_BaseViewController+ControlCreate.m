@@ -76,4 +76,45 @@
 }
 
 
+/**
+ *  显示信息
+ *
+ *  @param title 信息内容
+ *  @param icon 图标
+ *  @param view 显示的视图
+ */
+- (void)show:(NSString *)title icon:(NSString *)icon view:(UIView *)view
+{
+    if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.label.font = [UIFont systemFontOfSize:11];
+    hud.label.text = title;
+    // 设置图片
+    hud.customView = [[UIImageView alloc] initWithImage:IMAGE(icon)];
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.removeFromSuperViewOnHide = YES;
+    [hud hideAnimated:YES afterDelay:1.0];
+}
+
+- (void)showHudError:(NSString *)str title:(NSString *)title
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MBProgressHUD *noCompletedHud = [[MBProgressHUD alloc]initWithView:self.view];
+        [[UIApplication sharedApplication].keyWindow addSubview:noCompletedHud];
+        noCompletedHud.mode = MBProgressHUDModeText;
+        noCompletedHud.detailsLabel.font = [UIFont systemFontOfSize:11];
+        noCompletedHud.detailsLabel.text = str;
+        noCompletedHud.label.font = [UIFont systemFontOfSize:11];
+        noCompletedHud.label.text = title;
+        [noCompletedHud showAnimated:YES];
+        [noCompletedHud hideAnimated:YES afterDelay:1];
+    });
+}
+
+- (void)showHudSucess:(NSString *)title {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self show:title icon:@"Shop_GoodDetail_Correct" view:self.view];
+    });
+}
+
 @end

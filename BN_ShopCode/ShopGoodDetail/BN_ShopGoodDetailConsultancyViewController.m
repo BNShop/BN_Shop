@@ -17,10 +17,11 @@
 
 #import "UIView+BlocksKit.h"
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "Base_BaseViewController+ControlCreate.h"
 
 #import "TestObjectHeader.h"
 
-@interface BN_ShopGoodDetailConsultancyViewController ()
+@interface BN_ShopGoodDetailConsultancyViewController ()<PurchaseConsultingViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIView *headView;
 @property (strong, nonatomic) BN_ShopGoodDetailConsultancyHeadView *headerView;
@@ -32,6 +33,16 @@
 static NSString * const ShopGoodDetailConsultancyCellIdentifier = @"ShopGoodDetailConsultancyCellIdentifier";
 
 @implementation BN_ShopGoodDetailConsultancyViewController
+
+- (instancetype)initWith:(long)goodsId
+{
+    self = [super init];
+    if (self) {
+        self.viewModel = [[BN_ShopGoodDetailConsultancyViewModel alloc] init];
+        self.viewModel.goodsId = goodsId;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,8 +62,8 @@ static NSString * const ShopGoodDetailConsultancyCellIdentifier = @"ShopGoodDeta
     
     self.headerView = [BN_ShopGoodDetailConsultancyHeadView nib];
     [self.headerView bk_whenTapped:^{
-#warning 去处理咨询页面
         PurchaseConsultingViewController *ctr = [[PurchaseConsultingViewController alloc] init];
+        ctr.delegate = self;
         [self.navigationController pushViewController:ctr animated:YES];
     }];
     
@@ -64,7 +75,6 @@ static NSString * const ShopGoodDetailConsultancyCellIdentifier = @"ShopGoodDeta
     _headView = view;
     self.tableView.tableHeaderView = view;
     [self.tableView endUpdates];
-//    [self.tableView setContentOffset:CGPointMake(0.0, 0.0)];
     
 }
 
@@ -78,9 +88,38 @@ static NSString * const ShopGoodDetailConsultancyCellIdentifier = @"ShopGoodDeta
 
 #pragma mark - viewModel
 - (void)buildViewModel {
-    self.viewModel = [[BN_ShopGoodDetailConsultancyViewModel alloc] init];
-    [self testObects];
-#warning 初始化列表数据等等
+    if (!self.viewModel) {
+        self.viewModel = [[BN_ShopGoodDetailConsultancyViewModel alloc] init];
+    }
+    [self.viewModel.dataSource resetellIdentifier:ShopGoodDetailConsultancyCellIdentifier configureCellBlock:^(id cell, id item) {
+        BN_ShopGoodDetailConsultancyModel *obj = (BN_ShopGoodDetailConsultancyModel *)item;
+        [(BN_ShopGoodDetailConsultancyCell *)cell updateWith:obj.question answer:obj.answers];
+    }];
+    
+    @weakify(self);
+    [self.tableView setHeaderRefreshDatablock:^{
+        @strongify(self);
+        [self.viewModel getAnswersListClearData:YES];
+    } footerRefreshDatablock:^{
+        @strongify(self);
+        [self.viewModel getAnswersListClearData:NO];
+    }];
+    
+    [self.tableView setTableViewData:self.viewModel.items];
+    
+    [self.tableView setBn_data:self.viewModel.items];
+    
+    [self.tableView setRefreshBlock:^{
+        @strongify(self);
+        [self.viewModel getAnswersListClearData:YES];
+    }];
+    [self.viewModel.items.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        [self.tableView reloadData];
+    }];
+    [self.viewModel getAnswersListClearData:YES];
+    
+    self.tableView.dataSource = self.viewModel.dataSource;
     [self.tableView reloadData];
 }
 
@@ -91,45 +130,36 @@ static NSString * const ShopGoodDetailConsultancyCellIdentifier = @"ShopGoodDeta
     CGFloat height = [tableView fd_heightForCellWithIdentifier:ShopGoodDetailConsultancyCellIdentifier configuration:^(id cell) {
         @strongify(self);
         BN_ShopGoodDetailConsultancyModel *model = [self.viewModel.dataSource itemAtIndex:indexPath.row];
-        [(BN_ShopGoodDetailConsultancyCell *)cell updateWith:model.question answer:model.answer];
+        [(BN_ShopGoodDetailConsultancyCell *)cell updateWith:model.question answer:model.answers];
     }];
     return height;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return [self.headerView getViewHeight];
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 100.0f;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 100.0f;
+//}
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return self.headerView;
 }
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return [[UIView alloc] init];
-}
+//- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//    return [[UIView alloc] init];
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 
-#pragma mark - testObject
-- (void)testObects {
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger index = 0; index < 10; index++) {
-        BN_ShopGoodDetailConsultancyModel *model = [[BN_ShopGoodDetailConsultancyModel alloc] init];
-        model.answer = [testStr substringToIndex:random()%220];
-        model.question = [testStr substringToIndex:random()%90];;
-        [array addObject:model];
-    }
-    
-    self.viewModel.dataSource = [[TableDataSource alloc] initWithItems:array cellIdentifier:ShopGoodDetailConsultancyCellIdentifier configureCellBlock:^(id cell, id item) {
-        BN_ShopGoodDetailConsultancyModel *obj = (BN_ShopGoodDetailConsultancyModel *)item;
-        [(BN_ShopGoodDetailConsultancyCell *)cell updateWith:obj.question answer:obj.answer];
+#pragma mark - PurchaseConsultingViewControllerDelegate
+- (void)purchaseConsultingViewControllerWith:(NSString *)text {
+    @weakify(self)
+    [self.viewModel sendConsultingWith:text failure:^(NSString *errorStr) {
+        @strongify(self);
+        [self showHudError:errorStr title:TEXT(@"提交咨询失败")];
     }];
-    self.tableView.dataSource = self.viewModel.dataSource;
 }
-
 @end

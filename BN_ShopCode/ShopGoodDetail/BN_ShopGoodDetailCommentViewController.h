@@ -9,6 +9,9 @@
 #import "Base_BaseViewController.h"
 
 @interface BN_ShopGoodDetailCommentViewController : Base_BaseViewController
+- (instancetype)initWith:(long)goodId type:(int)type;
+- (void)setCommentAvgScore:(int)avg_score;//平均分
+
 - (void)setHeadView:(UIView *)view;
 - (CGPoint)contentOffset;
 - (void)setContentOffset:(CGPoint)contentOffset;

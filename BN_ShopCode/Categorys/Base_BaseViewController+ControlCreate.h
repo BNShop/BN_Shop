@@ -11,4 +11,7 @@
 @interface Base_BaseViewController (ControlCreate)
 - (UISearchBar *)getSearchBarWithFrame:(CGRect)rect withPlaceholder:(NSString *) placeholeder;
 - (UISearchBar *)getSearchBarWithoutIconWithFrame:(CGRect)rect withPlaceholder:(NSString *) placeholeder;
+
+- (void)showHudError:(NSString *)str title:(NSString *)title;
+- (void)showHudSucess:(NSString *)title;
 @end

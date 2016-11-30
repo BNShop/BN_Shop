@@ -54,7 +54,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWI-M2-g7K" userLabel="reail">
-                        <rect key="frame" x="170" y="65" width="42" height="10"/>
+                        <rect key="frame" x="166" y="65" width="42" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="7UA-ty-38G"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="8" id="Oo2-fY-E9F"/>
@@ -70,14 +70,24 @@
                             <constraint firstAttribute="height" constant="0.5" id="Dvp-9k-1yv"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRU-TX-yaO" customClass="BGButton">
+                        <rect key="frame" x="217" y="60" width="75" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="2Fu-IO-LVy"/>
+                            <constraint firstAttribute="width" constant="75" id="Wii-9z-aId"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="syw-qL-2zN" firstAttribute="leading" secondItem="Hcf-Jf-jbP" secondAttribute="trailing" constant="5" id="1gI-Hi-Mg5"/>
                 <constraint firstAttribute="trailing" secondItem="syw-qL-2zN" secondAttribute="trailing" id="3r5-eZ-FM9"/>
+                <constraint firstItem="aRU-TX-yaO" firstAttribute="centerY" secondItem="KPD-7K-r4e" secondAttribute="centerY" id="C0h-zT-UPE"/>
                 <constraint firstItem="okl-QG-cPg" firstAttribute="leading" secondItem="1mq-wS-Ezc" secondAttribute="leading" id="GOG-ij-0eE"/>
                 <constraint firstItem="Hcf-Jf-jbP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="L5R-jU-fDW"/>
                 <constraint firstItem="SWI-M2-g7K" firstAttribute="bottom" secondItem="KPD-7K-r4e" secondAttribute="bottom" id="MDL-E6-Lmd"/>
+                <constraint firstAttribute="trailing" secondItem="aRU-TX-yaO" secondAttribute="trailing" constant="8" id="Ub3-VX-YmE"/>
                 <constraint firstItem="1mq-wS-Ezc" firstAttribute="top" secondItem="Hcf-Jf-jbP" secondAttribute="top" constant="5" id="Xll-su-n3F"/>
                 <constraint firstAttribute="bottom" secondItem="Hcf-Jf-jbP" secondAttribute="bottom" constant="6" id="aKv-uN-NSc"/>
                 <constraint firstItem="1mq-wS-Ezc" firstAttribute="leading" secondItem="Hcf-Jf-jbP" secondAttribute="trailing" constant="10" id="b2O-QZ-zed"/>
@@ -88,13 +98,14 @@
                 <constraint firstItem="KPD-7K-r4e" firstAttribute="bottom" secondItem="okl-QG-cPg" secondAttribute="top" constant="-10" id="r1b-tR-rir"/>
                 <constraint firstItem="okl-QG-cPg" firstAttribute="bottom" secondItem="Hcf-Jf-jbP" secondAttribute="bottom" constant="-17" id="xwe-3Q-GUZ"/>
                 <constraint firstItem="Hcf-Jf-jbP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="yep-Bk-yVg"/>
-                <constraint firstItem="SWI-M2-g7K" firstAttribute="leading" secondItem="KPD-7K-r4e" secondAttribute="trailing" constant="10" id="zUM-yq-uxm"/>
+                <constraint firstItem="SWI-M2-g7K" firstAttribute="leading" secondItem="KPD-7K-r4e" secondAttribute="trailing" constant="6" id="zUM-yq-uxm"/>
             </constraints>
             <size key="customSize" width="320" height="141"/>
             <connections>
                 <outlet property="additionalLabel" destination="okl-QG-cPg" id="JDO-R0-wlh"/>
-                <outlet property="bottomLineView" destination="syw-qL-2zN" id="kSk-Yf-IAY"/>
+                <outlet property="bottomLineView" destination="syw-qL-2zN" id="8PI-69-CUR"/>
                 <outlet property="frontLabel" destination="KPD-7K-r4e" id="Z6O-1e-6lw"/>
+                <outlet property="manageButton" destination="aRU-TX-yaO" id="Za9-L0-Nfz"/>
                 <outlet property="realLabel" destination="SWI-M2-g7K" id="Rc6-Ee-YzW"/>
                 <outlet property="thumbnailImgView" destination="Hcf-Jf-jbP" id="g0M-aO-uvs"/>
                 <outlet property="titleLabel" destination="1mq-wS-Ezc" id="1cX-zo-xMV"/>
