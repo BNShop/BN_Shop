@@ -17,6 +17,38 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+
+        NSDictionary *paraDic = @{
+                                  @"phoneNum":@13489145937,
+                                  @"passwd":@(123456),
+                                  @"deviceSystemType":@(2),
+                                  @"deviceId":@"12354222",
+                                  };
+        
+        NSString *url = [NSString stringWithFormat:@"%@/mime/login",BASEURL];
+        
+        [[BC_ToolRequest sharedManager] POST:url parameters:paraDic
+                                     success:^(NSURLSessionDataTask *operation, id responseObject){
+
+                                         
+                                         NSDictionary *dict = (NSDictionary*)responseObject;
+                                         NSLog(@"responseObject = %@",dict);
+                                         int code = [[dict objectForKey:@"code"] intValue];
+                                         
+                                         if (code == 0) {
+                                             NSDictionary *result = [dict objectForKey:@"result"];
+                                             if (result && [result isKindOfClass:[NSDictionary class]]) {
+                                                 [BC_ToolRequest sharedManager].token = [result objectForKey:@"token"];
+                                             }
+                                             
+                                         }
+                                     } failure:^(NSURLSessionDataTask *operation, NSError *error){
+                                         
+                                         NSLog(@"error = %@",error);
+
+                                     }];
+    
     return YES;
 }
 

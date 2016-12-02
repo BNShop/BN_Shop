@@ -8,6 +8,8 @@
 
 #import "BN_ShopFlashSaleListViewController.h"
 #import "BN_ShopGoodDetailViewController.h"
+#import "Base_BaseViewController+ControlCreate.h"
+#import "BN_ShopGoodDetailViewController.h"
 
 #import "BN_ShopGoodHorizontalCell.h"
 #import "BN_ShopFlashSaleListViewModel.h"
@@ -56,29 +58,53 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
 
 - (void)buildViewModel {
     self.viewModel = [[BN_ShopFlashSaleListViewModel alloc] init];
-    [self.viewModel.dataSource resetellIdentifier:ShopListHorizontalCellIdentifier configureCellBlock:^(id cell, BN_ShopGoodModel *item) {
-        [(BN_ShopGoodHorizontalCell *)cell updateWith:item.pic_url title:item.name front:[item.front_price strikethroughAttribute] real:item.real_price additional:nil];
-        [(BN_ShopGoodHorizontalCell *)cell buildTimePlate];
+    @weakify(self);
+    [self.viewModel.dataSource resetellIdentifier:ShopListHorizontalCellIdentifier configureCellBlock:^(BN_ShopGoodHorizontalCell *cell, BN_ShopGoodModel *item) {
+        @weakify(cell);
+        [cell updateWith:item.pic_url title:item.name front:[item.front_price strikethroughAttribute] real:item.real_price additional:nil];
+        [cell buildTimePlate];
         if (item.buying_state == 1) {
-            [(BN_ShopGoodHorizontalCell *)cell updateAdditionalFrenzied:item.date];
-            [(BN_ShopGoodHorizontalCell *)cell addManageButtonEvent:^(id sender) {
-#warning 去抢购
+            [cell updateAdditionalFrenzied:item.date];
+            [cell addManageButtonEvent:^(id sender) {
+//                @strongify(self);
+//                BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:item.goods_id];
+//                [self.navigationController pushViewController:ctr animated:YES];
             }];
         } else if (item.buying_state == 0) {
-            [(BN_ShopGoodHorizontalCell *)cell updateAdditionalForward:item.date state:(int)item.warn_id];
+            [cell updateAdditionalForward:item.date state:(int)item.warn_id];
             if (item.warn_id == -1) {
-                [(BN_ShopGoodHorizontalCell *)cell addManageButtonEvent:^(id sender) {
-#warning 去定提醒
+                [cell addManageButtonEvent:^(id sender) {
+                    @strongify(self);
+                    
+                    [self.viewModel warnORCancelRes:YES goodsId:item.goods_id success:^(long warn_id) {
+                        item.warn_id = warn_id;
+                        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell_weak_];
+                        if (indexPath) {
+                            [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                        }
+                        
+                    } failure:^(NSString *errorDescription) {
+                        [self showHudError:TEXT(@"设置提醒失败") title:errorDescription];
+                    }];
                 }];
             } else {
-                [(BN_ShopGoodHorizontalCell *)cell addManageButtonEvent:^(id sender) {
-#warning 去取消提醒
+                [cell addManageButtonEvent:^(id sender) {
+                    @strongify(self);
+                    [self.viewModel warnORCancelRes:NO goodsId:item.goods_id success:^(long warn_id) {
+                        item.warn_id = warn_id;
+                        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell_weak_];
+                        if (indexPath) {
+                            [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                        }
+                        
+                    } failure:^(NSString *errorDescription) {
+                        [self showHudError:TEXT(@"取消提醒失败") title:errorDescription];
+                    }];
                 }];
             }
         }
     }];
-    
-    @weakify(self);
+
     [self.collectionView setHeaderRefreshDatablock:^{
         @strongify(self);
         [self.viewModel getLimiteGoodsClearData:YES];

@@ -16,14 +16,13 @@
 {
     self = [super init];
     if (self) {
-        self.comments = [[NSMutableArray alloc] initFromNet];
         self.specials = [[NSMutableArray alloc] initFromNet];
-        self.topics = [[NSMutableArray alloc] initFromNet];
+        self.recommends = [[NSMutableArray alloc] initFromNet];
         self.type = 14;
         
         SectionDataSource *section0 = [self getSectionDataSourceWith:nil items:self.specials cellIdentifier:nil configureCellBlock:nil];
-        SectionDataSource *section1 = [self getSectionDataSourceWith:nil items:self.comments cellIdentifier:nil configureCellBlock:nil];
-        SectionDataSource *section2 = [self getSectionDataSourceWith:nil items:self.topics cellIdentifier:nil configureCellBlock:nil];
+        SectionDataSource *section1 = [self getSectionDataSourceWith:nil items:nil cellIdentifier:nil configureCellBlock:nil];
+        SectionDataSource *section2 = [self getSectionDataSourceWith:nil items:self.recommends cellIdentifier:nil configureCellBlock:nil];
         self.dataSource = [[MultipleSectionTableArraySource alloc] initWithSections:@[section0, section1, section2]];
     }
     return self;
@@ -46,51 +45,11 @@
 }
 
 #pragma mark - 获取评论列表
-- (void)getCommentsClearData:(BOOL)clear
-{
-    int curPage = clear == YES ? 0 : round(self.comments.count/10.0);
-    NSDictionary *paraDic = @{@"objId" : @(self.specialId),
-                              @"type" : @(self.type),
-                              @"curPage" : @(curPage),
-                              @"pageNum" : @1};
-    
-    NSString *url = [NSString stringWithFormat:@"%@/mall/commentLists",BASEURL];
-    __weak typeof(self) temp = self;
-    self.comments.loadSupport.loadEvent = NetLoadingEvent;
-    
-    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSDictionary *dic = responseObject;
-        NSNumber *codeNumber = [dic objectForKey:@"code"];
-        NSLog(@"url = %@", operation.currentRequest);
-        if(codeNumber.intValue == 0)
-        {
-            NSArray *array = [dic objectForKey:@"rows"];
-            NSArray *returnArray = [BN_ShopGoodCommentsModel mj_objectArrayWithKeyValuesArray:array];
-            
-            if (clear) {
-                [temp.comments removeAllObjects];
-            }
-            [temp.comments addObjectsFromArray:returnArray];
-            temp.comments.networkTotal = [dic objectForKey:@"total"];
-        }
-        else
-        {
-            NSString *errorStr = [dic objectForKey:@"remark"];
-        }
-        
-        temp.comments.loadSupport.loadEvent = codeNumber.intValue;
-    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
-        
-        temp.comments.loadSupport.loadEvent = NetLoadFailedEvent;
-    }];
-    
-}
-
 - (void)getSpecialsData
 {
     NSDictionary *paraDic = @{@"specialId" : @(self.specialId)};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsSpecialList",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/special/list",BASEURL];
     __weak typeof(self) temp = self;
     self.specials.loadSupport.loadEvent = NetLoadingEvent;
     
@@ -106,6 +65,8 @@
             [temp.specials removeAllObjects];
             [temp.specials addObjectsFromArray:returnArray];
             temp.specials.networkTotal = [dic objectForKey:@"total"];
+            
+            
         }
         else
         {
@@ -121,7 +82,69 @@
 }
 
 - (void)getTopicsData {
+    NSDictionary *paraDic = @{@"specialId" : @(self.specialId)};
     
+    NSString *url = [NSString stringWithFormat:@"%@/special/list",BASEURL];
+    __weak typeof(self) temp = self;
+    self.recommends.loadSupport.loadEvent = NetLoadingEvent;
+    
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        NSLog(@"url = %@", operation.currentRequest);
+        if(codeNumber.intValue == 0)
+        {
+            NSArray *array = [dic objectForKey:@"rows"];
+            NSArray *returnArray = [BN_ShopSpecialTopicModel mj_objectArrayWithKeyValuesArray:array];
+            
+            [temp.recommends removeAllObjects];
+            [temp.recommends addObjectsFromArray:returnArray];
+            temp.recommends.networkTotal = [dic objectForKey:@"total"];
+        }
+        else
+        {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+        }
+        
+        temp.recommends.loadSupport.loadEvent = codeNumber.intValue;
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+        temp.recommends.loadSupport.loadEvent = NetLoadFailedEvent;
+    }];
+}
+
+- (void)getSpecialDetail {
+    NSMutableDictionary *paraDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(self.specialId), @"id", nil];
+    if ([BC_ToolRequest sharedManager].token) {
+        [paraDic setObject:[BC_ToolRequest sharedManager].token forKey:@"token"];
+    }
+    
+    NSString *url = [NSString stringWithFormat:@"%@/special/detail",BASEURL];
+    __weak typeof(self) temp = self;
+    self.loadSupport.loadEvent = NetLoadingEvent;
+    
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        NSLog(@"url = %@", operation.currentRequest);
+        if(codeNumber.intValue == 0)
+        {
+            temp.specialDetail = [BN_ShopSpecialDetailModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
+            SectionDataSource *secton = [temp.dataSource sectionAtIndex:1];
+            [secton resetItems:temp.specialDetail.commentsRecord];
+            temp.tagDataSource = [[TableDataSource alloc] initWithItems:temp.specialDetail.tags cellIdentifier:nil configureCellBlock:nil];
+            temp.isFollow = temp.specialDetail.isCollected;
+        }
+        else
+        {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+        }
+        
+        temp.loadSupport.loadEvent = codeNumber.intValue;
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+        temp.loadSupport.loadEvent = NetLoadFailedEvent;
+    }];
 }
 
 #pragma mark - 
@@ -136,5 +159,17 @@
 
 - (NSString *)followStrWith:(int)follwNum {
     return [NSString stringWithFormat:@"%d%@", follwNum, TEXT(@"个人喜欢")];
+}
+
+- (NSString *)collectedNumStr {
+    return [NSString stringWithFormat:@"%d%@", self.specialDetail.collecteNum, TEXT(@"位达人已收藏")];
+}
+
+- (NSArray *)collectedImgs {
+    NSMutableArray *array = [NSMutableArray array];
+    for (BN_ShopSpecialCollectedRecordModel *record in self.specialDetail.collectedRecord) {
+        [array addObject:record.userPicUrl];
+    }
+    return array.copy;
 }
 @end

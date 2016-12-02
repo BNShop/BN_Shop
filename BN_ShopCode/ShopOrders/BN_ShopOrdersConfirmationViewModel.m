@@ -10,19 +10,26 @@
 
 @interface BN_ShopOrdersConfirmationViewModel ()
 
-@property (nonatomic, strong) TableDataSource *dataSource;
-
 @end
 
 @implementation BN_ShopOrdersConfirmationViewModel
 
-- (TableDataSource *)getSectionDataSourceWith:(NSArray *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock {
-    self.dataSource = [[TableDataSource alloc] initWithItems:items cellIdentifier:cellIdentifier configureCellBlock:configureCellBlock];
-    return _dataSource;
+- (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray*)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock configureSectionBlock:(TableViewSectionConfigureBlock)configureSectionBlock {
+    
+    SectionDataSource *sectionDataSource = [[SectionDataSource alloc] initWithItems:items title:title];
+    sectionDataSource.cellIdentifier = cellIdentifier;
+    sectionDataSource.configureCellBlock = configureCellBlock;
+    sectionDataSource.configureSectionBlock = configureSectionBlock;
+    sectionDataSource.sectionIdentifier = nil;
+    
+    return sectionDataSource;
 }
 
-- (void)addDataSourceWith:(NSArray *)items {
-    [self.dataSource addItems:items];
+- (void)addDataSourceWith:(SectionDataSource *)sectionDataSource {
+    if (!_dataSource) {
+        _dataSource = [[MultipleSectionTableArraySource alloc] initWithSections:nil];
+    }
+    [_dataSource addSections:[NSArray arrayWithObject:sectionDataSource]];
 }
 
 - (void)setIntegral:(NSString *)integral {

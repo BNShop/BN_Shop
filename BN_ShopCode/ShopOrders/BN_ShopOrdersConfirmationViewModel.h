@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TableDataSource.h"
+#import "MultipleSectionTableArraySource.h"
 @interface BN_ShopOrdersConfirmationViewModel : NSObject
 
-@property (nonatomic, strong, readonly) TableDataSource *dataSource;
+@property (nonatomic, strong)  MultipleSectionTableArraySource *dataSource;
 
 @property (nonatomic, copy) NSString *retailPrice;//商品总额
 @property (nonatomic, copy) NSString *integral;//积分
@@ -19,8 +19,9 @@
 @property (nonatomic, copy) NSString *freight; //运费
 
 
-- (TableDataSource *)getSectionDataSourceWith:(NSArray *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock;
-- (void)addDataSourceWith:(NSArray *)items;
+- (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray*)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock configureSectionBlock:(TableViewSectionConfigureBlock)configureSectionBlock;
+- (void)addDataSourceWith:(SectionDataSource *)sectionDataSource;
+
 
 - (NSString *)realPrice;
 - (NSString *)integralDeductionTips;

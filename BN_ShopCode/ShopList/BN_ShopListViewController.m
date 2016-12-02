@@ -129,8 +129,8 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
          BN_ShopSearchViewController *ctr = [[BN_ShopSearchViewController alloc] init];
         [[ctr rac_searchTextDidEndEditingSignal] subscribeNext:^(id x) {
             @strongify(self);
-            NSLog(@"=== %@, %@", [x class], x);
-#warning 去刷新数据进行数据请求并且对collectiveview刷新
+            self.listViewModel.goodsName = x;
+            [self.listViewModel getGoodsClearData:YES];
         }];
         UINavigationController *navCtr = [[UINavigationController alloc]initWithRootViewController:ctr];
         [navCtr setModalPresentationStyle:UIModalPresentationCustom];
@@ -187,8 +187,9 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-#warning 跳转到商品详情页
-    
+    BN_ShopGoodModel *good = [self.listViewModel.dataSource itemAtIndexPath:indexPath];
+    BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:good.goods_id];
+    [self.navigationController pushViewController:ctr animated:YES];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

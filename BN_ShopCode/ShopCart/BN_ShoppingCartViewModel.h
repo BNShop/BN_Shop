@@ -23,6 +23,7 @@
 @property (nonatomic, copy) NSString *free_shipping_amount;//免单金额
 
 
+
 @end
 
 @interface BN_ShoppingCartViewModel : NSObject

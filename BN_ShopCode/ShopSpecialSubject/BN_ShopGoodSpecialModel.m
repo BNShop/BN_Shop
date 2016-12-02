@@ -7,9 +7,22 @@
 //
 
 #import "BN_ShopGoodSpecialModel.h"
+#import "NSString+Attributed.h"
 
 @implementation BN_ShopGoodSpecialModel
-+ (NSDictionary *)mj_replacedKeyFromPropertyName {
-    return @{@"vice_pic_url":@"实际字段"};
+
+- (NSAttributedString *)contentAttributed {
+    NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc] initWithData:[self.contentDisplay dataUsingEncoding:NSUTF8StringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    return attrStr;
 }
+
+- (NSAttributedString *)priceAttributed {
+    NSString *str = [NSString stringWithFormat:@"¥%@", self.real_price];
+    return [str setFont:Font10 restFont:Font16 range:NSMakeRange(0, 1)];
+}
+
+- (NSString *)followStr {
+    return [NSString stringWithFormat:@"%d%@", self.likeNum, TEXT(@"个人喜欢")];
+}
+
 @end

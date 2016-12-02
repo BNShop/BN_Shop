@@ -12,4 +12,9 @@
 @property (nonatomic, assign) CGFloat radius;
 @property (nonatomic, strong) UIColor *normalColor;
 @property (nonatomic, strong) UIColor *hightedColor;
+
+/**
+ *  用于修改按钮点击区域
+ */
+@property (nonatomic, assign) UIEdgeInsets enlargeInset;
 @end

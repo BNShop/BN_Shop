@@ -10,10 +10,6 @@
 #import "UIView+NIB.h"
 
 @interface BN_ShopOrderBillView : UIView
-
-- (void)addDeductionedPointForSelectedWithTask:(void (^)(BOOL deductioned))task;
-
-- (void)updateWith:(NSString *)availablePoints retailPrice:(NSString *)retailPrice pointDeduction:(NSString *)pointDeduction freight:(NSString *)freight deductioned:(BOOL)deductioned;
 - (CGFloat)getViewHeight;
-
+- (void)updateWith:(NSString *)retailPrice pointDeduction:(NSString *)pointDeduction freight:(NSString *)freight;
 @end

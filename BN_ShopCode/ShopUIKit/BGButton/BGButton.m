@@ -100,4 +100,18 @@
     CGContextDrawPath(context, kCGPathFillStroke);
 }
 
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    CGFloat x = self.bounds.origin.x - self.enlargeInset.left;
+    CGFloat y = self.bounds.origin.y - self.enlargeInset.top;
+    CGFloat width = self.bounds.size.width + self.enlargeInset.right + self.enlargeInset.left;
+    CGFloat height = self.bounds.size.height + self.enlargeInset.bottom + self.enlargeInset.top;
+    CGRect rect = CGRectMake(x, y, width, height);
+    if (CGRectEqualToRect(rect, self.bounds)) {
+        return [super pointInside:point withEvent:event];
+    }
+    BOOL result = CGRectContainsPoint(rect, point) && self.hidden == NO ? YES : NO;
+    return result;
+}
+
 @end

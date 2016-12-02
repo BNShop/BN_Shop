@@ -8,30 +8,32 @@
 
 #import <Foundation/Foundation.h>
 #import "MultipleSectionTableArraySource.h"
-#import "BN_ShopGoodCommentsModel.h"
-#import "BN_ShopGoodSpecialModel.h"
+#import "TableDataSource.h"
+#import "BN_ShopSpecialDetailModel.h"
+#import "BN_ShopSpecialTopicModel.h"
 
 
-@interface BN_ShopSpecialSubjectViewModel : NSObject
+@interface BN_ShopSpecialSubjectViewModel : BN_BaseDataModel
 @property (nonatomic, strong) MultipleSectionTableArraySource *dataSource;
 @property (nonatomic, assign) BOOL isFollow;
-@property (assign, nonatomic) long specialId;//专题主键
-@property (assign, nonatomic) int type;
-
+@property (nonatomic, assign) long specialId;//专题主键
+@property (nonatomic, assign) int type;
 @property (nonatomic, strong) NSMutableArray<BN_ShopGoodSpecialModel*> *specials;
-@property (nonatomic, strong) NSMutableArray<BN_ShopGoodCommentsModel*> *comments;
-@property (nonatomic, strong) NSMutableArray *topics;
+@property (nonatomic, strong) NSMutableArray<BN_ShopSpecialTopicModel*> *recommends;
+@property (nonatomic, strong) BN_ShopSpecialDetailModel *specialDetail;
+@property (nonatomic, strong) TableDataSource *tagDataSource;
 
 
 - (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock;
 - (void)addDataSourceWith:(SectionDataSource *)sectionDataSource;
 
 - (void)getSpecialsData;
-- (void)getCommentsClearData:(BOOL)clear;
 - (void)getTopicsData;
+- (void)getSpecialDetail;
 
 - (NSAttributedString *)realAttributedPrice:(NSString *)realPrice;
 - (NSString *)followStrWith:(int)follwNum;
+- (NSString *)collectedNumStr;
 - (NSAttributedString *)contentAttributed:(NSString *)html;
-
+- (NSArray *)collectedImgs;
 @end

@@ -260,8 +260,8 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     self.SDScrollViw.clickItemOperationBlock = ^(NSInteger currentIndex) {
 #warning 点击广告图的跳转
         @strongify(self);
-        id adObj = [self.adViewModel adItemWithIndex:currentIndex];
-        BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] init];
+        BN_ADModel *adObj = [self.adViewModel adItemWithIndex:currentIndex];
+        BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:adObj.objId];
         [self.navigationController pushViewController:ctr animated:YES];
     };
 }

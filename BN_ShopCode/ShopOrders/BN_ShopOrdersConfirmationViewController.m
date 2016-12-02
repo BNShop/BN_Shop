@@ -50,15 +50,15 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         NSLog(@"下单啦");
     }];
     
-    [self.billView addDeductionedPointForSelectedWithTask:^(BOOL deductioned) {
-        @strongify(self);
-        if (self.confirmationviewModel.deduction != deductioned) {
-            
-            self.confirmationviewModel.deduction = deductioned;
-            [self updateConfirmationView];
-        }
-        
-    }];
+//    [self.billView addDeductionedPointForSelectedWithTask:^(BOOL deductioned) {
+//        @strongify(self);
+//        if (self.confirmationviewModel.deduction != deductioned) {
+//            
+//            self.confirmationviewModel.deduction = deductioned;
+//            [self updateConfirmationView];
+//        }
+//        
+//    }];
     
     [self.userView bk_whenTapped:^{
 #warning 去修改收货地址等等操作啦
@@ -122,7 +122,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 
 #pragma mark - bill and profile view
 - (void)updateConfirmationView {
-    [self.billView updateWith:[self.confirmationviewModel integralDeductionTips] retailPrice:[self.confirmationviewModel retailPriceTips] pointDeduction:[self.confirmationviewModel integralpriceTips] freight:[self.confirmationviewModel freightTips] deductioned:[self.confirmationviewModel isDeduction]];
+//    [self.billView updateWith:[self.confirmationviewModel integralDeductionTips] retailPrice:[self.confirmationviewModel retailPriceTips] pointDeduction:[self.confirmationviewModel integralpriceTips] freight:[self.confirmationviewModel freightTips] deductioned:[self.confirmationviewModel isDeduction]];
     [self.toolBar updateWith:[self.confirmationviewModel realPrice]];
 }
 
@@ -141,9 +141,6 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         item.num = j;
         [array addObject:item];
     }
-    [self.confirmationviewModel getSectionDataSourceWith:array cellIdentifier:ShopOrdersConfirmationTableCellIdentifier configureCellBlock:^(id cell, id<BN_ShoppingCartItemProtocol> item) {
-        [(BN_ShopOrdersItemCell *)cell updateWith:@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg" title:[@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%30] num:[item num] price:[item real_price] specification:@"商品的规格描述，就是这个样。。。"];
-    }];
     
     
     self.tableView.dataSource = self.confirmationviewModel.dataSource;

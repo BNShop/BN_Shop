@@ -322,9 +322,12 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.arribalsView updateWith:ShopGoodDetailNewArrivalsCellIdentifier registerNib:[BN_ShopGoodDetailNewArribalsCell nib]];
     [self.arribalsView updateWith:self.arribalsViewModel.dataSource];
     [self.arribalsView updateWith:self.arribalsViewModel.title subTitle:self.arribalsViewModel.subTitle];
+    @weakify(self);
     [[self.arribalsView rac_collectionViewDidSelectItemSignal] subscribeNext:^(id x) {
-//        x为NSIndexPath
-#warning -----点击新推荐的图片跳转
+        BN_ShopGoodDetailNewArrivalsModel *arrival = [self.arribalsViewModel.dataSource itemAtIndexPath:x];
+        @strongify(self);
+        BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:arrival.goods_id];
+        [self.navigationController pushViewController:ctr animated:YES];
     }];
 }
 
@@ -372,6 +375,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 }
 
 - (void)followAction {
+    
 }
 
 - (void)addToCart {

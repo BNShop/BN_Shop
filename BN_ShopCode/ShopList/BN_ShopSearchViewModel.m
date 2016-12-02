@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopSearchViewModel.h"
+#import "BN_ShopspecialTagModel.h"
 
 @interface BN_ShopSearchViewModel ()
 
@@ -22,7 +23,7 @@ static NSString * const BN_ShopSearchHotCache = @"Hot";
 {
     self = [super init];
     if (self) {
-#warning 获取本地缓存的搜索数据
+        self.tags = [[NSMutableArray alloc] initFromNet];
     }
     return self;
 }
@@ -136,6 +137,36 @@ static NSString * const BN_ShopSearchHotCache = @"Hot";
     return [section itemAtIndexPath:indexPath];
 }
 
+- (void)getHotSearchTagsDataRes {
+    NSString *url = [NSString stringWithFormat:@"%@/homePage/hot/tags",BASEURL];
+    __weak typeof(self) temp = self;
+    self.tags.loadSupport.loadEvent = NetLoadingEvent;
+    
+    [[BC_ToolRequest sharedManager] GET:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        NSLog(@"url = %@", operation.currentRequest);
+        if(codeNumber.intValue == 0)
+        {
+            NSArray *array = [dic objectForKey:@"rows"];
+            NSArray *returnArray = [BN_ShopspecialTagModel mj_objectArrayWithKeyValuesArray:array];
+            [temp.tags removeAllObjects];
+            for (BN_ShopspecialTagModel *tag in returnArray) {
+                [self.tags addObject:tag.tagName];
+            }
+            temp.tags.networkTotal = [dic objectForKey:@"total"];
+        }
+        else
+        {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+        }
+        
+        temp.tags.loadSupport.loadEvent = codeNumber.intValue;
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+        temp.tags.loadSupport.loadEvent = NetLoadFailedEvent;
+    }];
 
+}
 
 @end

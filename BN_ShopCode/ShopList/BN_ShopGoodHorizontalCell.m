@@ -55,6 +55,7 @@
     self.manageButton.titleLabel.textColor = ColorWhite;
     self.manageButton.titleLabel.font = Font12;
     [self.manageButton setTitleColor:ColorWhite forState:UIControlStateNormal];
+    [self.manageButton setEnlargeInset:UIEdgeInsetsMake(10, 10, 10, 10)];
 }
 
 

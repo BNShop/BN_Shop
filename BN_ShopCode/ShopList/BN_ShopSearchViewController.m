@@ -56,10 +56,6 @@ static NSString * const ShopSearchSupplementaryIdentifier = @"ShopSearchSuppleme
     UISearchBar *searchBar = [self getSearchBarWithoutIconWithFrame:CGRectMake(0, 0, WIDTH(self.view), 44) withPlaceholder:TEXT(@"输入关键字搜索")];
     self.navigationItem.titleView = searchBar;
     @weakify(self);
-//    [[searchBar rac_searchBarDidEndEditingSignal] subscribeNext:^(id x) {
-//        @strongify(self);
-//        [self searchTextDidEnd:[(UISearchBar *)x text]];
-//    }];
     [[searchBar rac_searchBarSearchButtonClickedSignal] subscribeNext:^(id x) {
         @strongify(self);
         [self searchTextDidEnd:[(UISearchBar *)x text]];
@@ -94,11 +90,34 @@ static NSString * const ShopSearchSupplementaryIdentifier = @"ShopSearchSuppleme
     NSArray *recentlys = [self.viewModel getRecentlySearchCache];
     NSArray *hots = [self.viewModel getHotSearchCache];
     [self buildViewDataSourceWith:recentlys hots:hots];
-//#warning 去请求热门的搜索并刷新
+    
+    @weakify(self);
+//    [self.collectionView setHeaderRefreshDatablock:^{
+//        @strongify(self);
+//        [self.viewModel getHotSearchTagsDataRes];
+//    } footerRefreshDatablock:nil];
+    
+    [self.collectionView setCollectionViewData:self.viewModel.tags];
+    [self.collectionView setBn_data:self.viewModel.tags];
+    [self.collectionView setRefreshBlock:^{
+        @strongify(self);
+        [self.viewModel getHotSearchTagsDataRes];
+    }];
+    [self.viewModel.tags.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        [self buildViewDataSourceWith:[self.viewModel getRecentlySearchCache] hots:self.viewModel.tags];
+        [self.collectionView reloadData];
+    }];
+    [self.collectionView reloadData];
+    
+    [self.viewModel getHotSearchTagsDataRes];
 }
 
 
 - (void)buildViewDataSourceWith:(NSArray *)recentlys hots:(NSArray *)hots {
+    
+    [self.viewModel.dataSource resetSections:nil];
+    
     NSArray *titles = @[TEXT(@"最近搜索"), TEXT(@"热门搜索")];
     NSArray *images = @[@"Shop_Screen_Brand", @"Shop_Screen_Tag"];
     NSArray *warnings = @[TEXT(@"暂无最近搜索"), TEXT(@"暂无热门搜索")];
@@ -172,7 +191,6 @@ static NSString * const ShopSearchSupplementaryIdentifier = @"ShopSearchSuppleme
     if (search) {
         [self searchTextDidEnd:search];
     } else if (indexPath.section == 1) {
-#warning 立马进行数据加载
     }
     
 }

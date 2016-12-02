@@ -9,21 +9,24 @@
 #import <Foundation/Foundation.h>
 
 @interface BN_ShopGoodSpecialModel : NSObject
-@property (nonatomic, assign) long goods_id;//Long商品主键
-@property (nonatomic, copy) NSString *name;//int商品名称
-@property (nonatomic, copy) NSString *pic_url;//String商品图片地址
-@property (nonatomic, copy) NSString *vice_pic_url;//String副商品图片地址
-@property (nonatomic, copy) NSString *front_price;//String商品显示价格
-@property (nonatomic, copy) NSString *real_price;//String商品售价
-@property (nonatomic, copy) NSString *buying_start_time;//String限时抢购开始时间
-@property (nonatomic, copy) NSString *buying_end_time;//String限时抢购结束时间
-@property (nonatomic, assign) int avail_buying_num;//int可买数量
-@property (nonatomic, assign) int out_buying_num;//int已抢购数量
-@property (nonatomic, assign) long category_id;//long分类id
-@property (nonatomic, copy) NSString *category_name;//String类名
-@property (nonatomic, copy) NSString *title_display;//String显示标题
-@property (nonatomic, copy) NSString *vice_title_display;//String副标题
-@property (nonatomic, copy) NSString *content_display;//String显示内容
-@property (nonatomic, assign) int total_like;//int点赞数
+@property (nonatomic, assign) long relId;//专题与对象关系ID
+@property (nonatomic, assign) int type;//对象类型 1美食 2 民宿 3 景点  4 伴手礼
+@property (nonatomic, assign) long objId;//对应的对象ID 如类型是景点,则本ID为关联的景点id
+@property (nonatomic, copy) NSString *titleDisplay;//显示标题
+@property (nonatomic, copy) NSString *viceTitleDisplay;//副显示标题
+@property (nonatomic, copy) NSString *imageUrl1;//图片1
+@property (nonatomic, copy) NSString *imageUrl2;//图片2
+@property (nonatomic, copy) NSString *contentDisplay;//显示内容 富文本
+@property (nonatomic, assign) int likeNum;//点赞次数
+@property (nonatomic, assign) int commentsNum;//评论条数
+@property (nonatomic, assign) int collecteNum;//收藏次数
+@property (nonatomic, assign) int isCollected;//收藏标志 0未收藏 1：收藏
+@property (nonatomic, assign) int isLiked;//点赞标志 0未点赞 1：点赞
+@property (nonatomic, copy) NSString *real_price;//商品售价
+
+
+- (NSAttributedString *)contentAttributed;
+- (NSAttributedString *)priceAttributed;
+- (NSString *)followStr;
 
 @end

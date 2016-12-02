@@ -43,7 +43,6 @@
     [self.contentLabel sizeToFit];
     
     self.collectionView.delegate = self;
-    NSLog(@"0000-----======");
     
 }
 
@@ -59,7 +58,6 @@
         [self.likeLabel sizeToFit];
         [self.contentLabel sizeToFit];
         self.contentHeight.constant = [self.contentLabel sizeThatFits:CGSizeMake(WIDTH(self)-50, 0)].height;
-        NSLog(@"111111-----====== %f, %f, %@", HEIGHT(self.contentLabel), self.contentHeight.constant, self.contentLabel.text);
     });
     
 }
@@ -73,7 +71,7 @@
     [self.collectionView reloadData];
     if ([dataSource respondsToSelector:@selector(collectionView:numberOfItemsInSection:)]) {
         NSInteger num = ([dataSource collectionView:self.collectionView numberOfItemsInSection:0]+2)/3;
-        self.collectionHeight.constant = num*24.0f+(num-1)*7;
+        self.collectionHeight.constant = MAX(0.1, num*24.0f+(num-1)*7);
     }
 }
 

@@ -29,10 +29,15 @@
 
 #pragma mark - 发送提问请求
 - (void)sendConsultingWith:(NSString *)text failure:(void(^)(NSString *errorStr))failure{
-    NSDictionary *paraDic = @{
+    NSDictionary *paraDic0 = @{
                               @"goodsId":[NSNumber numberWithLong:self.goodsId],
                               @"question":text
                               };
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    if ([BC_ToolRequest sharedManager].token) {
+        [paraDic setObject:[BC_ToolRequest sharedManager].token forKey:@"token"];
+    }
+    [paraDic setValuesForKeysWithDictionary:paraDic0];
     
     NSString *url = [NSString stringWithFormat:@"%@/mall/consulting",BASEURL];
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {

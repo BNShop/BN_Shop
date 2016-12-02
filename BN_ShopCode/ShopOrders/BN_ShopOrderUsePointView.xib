@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BN_ShopOrderUsePointView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsb-9V-Emx">
+                    <rect key="frame" x="0.0" y="39" width="375" height="0.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="2MU-T4-dF3"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="X8a-MQ-s1q"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yA3-ua-gCA">
+                    <rect key="frame" x="327" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="JOS-4w-kB1"/>
+                        <constraint firstAttribute="width" constant="40" id="X57-rd-ryJ"/>
+                    </constraints>
+                    <state key="normal" image="Shop_Order_Unselected"/>
+                    <state key="selected" image="Shop_Order_Selected"/>
+                    <connections>
+                        <action selector="deductionedPoint:" destination="iN0-l3-epB" eventType="touchUpInside" id="gbT-9I-xet"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnT-44-vr4">
+                    <rect key="frame" x="17" y="10" width="310" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="axb-Av-m5A"/>
+                        <constraint firstAttribute="height" constant="20" id="rAT-Xn-ajv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="yA3-ua-gCA" secondAttribute="trailing" constant="8" id="2FA-gR-x7o"/>
+                <constraint firstItem="DnT-44-vr4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="17" id="Ejx-hb-OqS"/>
+                <constraint firstItem="DnT-44-vr4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bE2-yD-MLD"/>
+                <constraint firstAttribute="trailing" secondItem="xsb-9V-Emx" secondAttribute="trailing" id="gTi-Cx-oK1"/>
+                <constraint firstAttribute="trailing" secondItem="DnT-44-vr4" secondAttribute="trailing" constant="48" id="nSf-3K-f51"/>
+                <constraint firstItem="xsb-9V-Emx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oMe-gj-hht"/>
+                <constraint firstItem="yA3-ua-gCA" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wws-3E-Ubc"/>
+                <constraint firstAttribute="bottom" secondItem="xsb-9V-Emx" secondAttribute="bottom" constant="0.5" id="zph-jM-NaS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="availablePointsLabel" destination="DnT-44-vr4" id="IYD-bP-iYj"/>
+                <outlet property="bottomLineView" destination="xsb-9V-Emx" id="8iM-yT-jsI"/>
+                <outlet property="selectedButton" destination="yA3-ua-gCA" id="dxT-cJ-pug"/>
+            </connections>
+            <point key="canvasLocation" x="-29" y="44"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Shop_Order_Selected" width="15" height="15"/>
+        <image name="Shop_Order_Unselected" width="15" height="15"/>
+    </resources>
+</document>
