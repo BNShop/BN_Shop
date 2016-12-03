@@ -60,8 +60,14 @@
 
 - (NSDate *)date {
     if (self.state == GoodDetaiState_Forward) {
+        if (self.simpleDetailModel.buying_start_time.length == 0) {
+            return nil;
+        }
         return [NSDate dateFromString:self.simpleDetailModel.buying_start_time withFormat:self.simpleDetailModel.buying_start_time];
     } else if (self.state == GoodDetaiState_Panic) {
+        if (self.simpleDetailModel.buying_end_time.length == 0) {
+            return nil;
+        }
         return [NSDate dateFromString:self.simpleDetailModel.buying_end_time withFormat:self.simpleDetailModel.buying_end_time];
     }
     return nil;

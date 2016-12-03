@@ -124,8 +124,6 @@
     } else {
 
         url = [NSString stringWithFormat:@"%@/mall/confirmOrder?shoppingCartIds=%@&numbers=%@",BASEURL, self.shoppingCartIds, self.numbers];
-        
-        
         paraDic[@"shoppingCartIds"] = self.shoppingCartIds;
         paraDic[@"numbers"] = self.numbers;
     }
@@ -206,14 +204,15 @@
         paraDic[@"rows"] = [[jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
     } else {
-        NSArray *dictArray = [BN_ShopOrderCartItemModel mj_keyValuesArrayWithObjectArray:self.ordreModel.resultMap.rows];
+        paraDic[@"shoppingCartIds"] = self.shoppingCartIds;
+        paraDic[@"numbers"] = self.numbers;
         
-        
-        NSError *error;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictArray options:NSJSONWritingPrettyPrinted error:&error];
-        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        
-        paraDic[@"rows"] = [[jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//        NSArray *dictArray = [BN_ShopOrderCartItemModel mj_keyValuesArrayWithObjectArray:self.ordreModel.resultMap.rows];
+//        NSError *error;
+//        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictArray options:NSJSONWritingPrettyPrinted error:&error];
+//        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//        
+//        paraDic[@"rows"] = [[jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     }
     NSLog(@"jsonstr = %@", paraDic[@"rows"]);
     NSString *url = [NSString stringWithFormat:@"%@/mall/confirmOrder",BASEURL];
