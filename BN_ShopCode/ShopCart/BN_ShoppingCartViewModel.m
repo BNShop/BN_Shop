@@ -15,8 +15,6 @@
 
 @interface BN_ShoppingCartViewModel ()
 
-@property (nonatomic, strong) MultipleSectionTableArraySource *dataSource;
-
 @end
 
 @implementation BN_ShoppingCartItemModel
@@ -34,7 +32,7 @@
     return self;
 }
 
-- (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray<BN_ShoppingCartItemModel*> *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock configureSectionBlock:(TableViewSectionConfigureBlock)configureSectionBlock {
+- (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock configureSectionBlock:(TableViewSectionConfigureBlock)configureSectionBlock {
     
     SectionDataSource *sectionDataSource = [[SectionDataSource alloc] initWithItems:items title:title];
     sectionDataSource.cellIdentifier = cellIdentifier;
@@ -111,7 +109,7 @@
         SectionDataSource *sectionDataSource = (SectionDataSource *)obj;
         [sectionDataSource.items bk_each:^(BN_ShoppingCartItemModel *obj) {
             if ([obj isSelected]) {
-                price += [obj num] * [[obj real_price] floatValue] - (obj.free_shipping_status?0:obj.free_shipping_amount);
+                price += [obj num] * [[obj real_price] floatValue] + (obj.free_shipping_status?0:[obj.free_shipping_amount floatValue]);
             }
         }];
         
@@ -185,6 +183,9 @@
     NSString *shoppingCartIdsStr = [shoppingCartIds componentsJoinedByString:@","];
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     paraDic[@"shoppingCartIds"] = shoppingCartIdsStr;
+    if ([BC_ToolRequest sharedManager].token) {
+        paraDic[@"token"] = [BC_ToolRequest sharedManager].token;
+    }
     NSString *url = [NSString stringWithFormat:@"%@/mall/deleteShoppingCart",BASEURL];
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;

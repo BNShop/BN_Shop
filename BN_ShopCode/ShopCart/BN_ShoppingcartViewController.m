@@ -16,7 +16,6 @@
 
 #import "PureLayout.h"
 #import "NSObject+BKBlockObservation.h"
-#import "BN_ShoppingCartItemProtocol.h"
 
 #import "NSArray+BlocksKit.h"
 
@@ -94,7 +93,6 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     
     self.viewModel.dataSource = [[MultipleSectionTableArraySource alloc] init];
     
-    @weakify(self);
     [self.tableView setBn_data:self.viewModel.shoppingCartList];
     [self.tableView setHeaderRefreshDatablock:^{
         @strongify(self);
@@ -124,7 +122,7 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
             [self.tableView reloadData];
-        })
+        });
     }];
     [self.viewModel getShoppingCartListData:YES];
 }
@@ -189,7 +187,7 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
 #pragma mark - BN_ShoppingCartCellDelegate
 - (void)selectActionWith:(UITableViewCell *)cell selected:(BOOL)selected {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    id<BN_ShoppingCartItemProtocol> object = [self.viewModel.dataSource itemAtIndexPath:indexPath];
+    id object = [self.viewModel.dataSource itemAtIndexPath:indexPath];
     [object setSelected:selected];
     
     [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
@@ -198,7 +196,7 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
 
 - (void)valueChangedWith:(UITableViewCell *)cell count:(float)count {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    id<BN_ShoppingCartItemProtocol> object = [self.viewModel.dataSource itemAtIndexPath:indexPath];
+    id object = [self.viewModel.dataSource itemAtIndexPath:indexPath];
     [object setNum:count];
     if ([object isSelected]) {
         [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];

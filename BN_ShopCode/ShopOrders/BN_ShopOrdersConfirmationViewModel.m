@@ -8,6 +8,7 @@
 
 #import "BN_ShopOrdersConfirmationViewModel.h"
 #import "NSString+Attributed.h"
+#import "NSError+Description.h"
 
 @implementation BN_ShopConfirmOrderItemModel
 
@@ -48,7 +49,7 @@
 }
 
 - (NSString *)vailableUseStr {
-    return [NSString stringWithFormat:@"%@%@%@¥%@", TEXT(@"可用"), self.totalIntegral, TEXT(@"抵扣"), self.vailableUse];
+    return [NSString stringWithFormat:@"%@%d%@¥%@", TEXT(@"可用"), self.totalIntegral, TEXT(@"抵扣"), self.vailableUse];
 }
 
 @end
@@ -109,7 +110,6 @@
     return @"-¥0.00";
 }
 
-
 #pragma mark - 获取数据
 - (void)getShoppingOrderConfirmationDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
@@ -132,8 +132,54 @@
         NSDictionary *dic = responseObject;
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if (codeNumber.intValue != 0) {
+            
+            if (failure) {
+                NSString *errorStr = [dic objectForKey:@"remark"];
+                failure(errorStr);
+            }
+        } else {
             temp.ordreModel = [BN_ShopConfirmOrderModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
             temp.submenu = temp.ordreModel.resultMap.rows.count > 1;
+            
+            if (success) {
+                success();
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+            failure([error errorDescription]);
+        }
+    }];
+}
+
+//http://xxx.xxx.xxx/mall/confirmOrder（POST）
+- (void)getShoppingOrderDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
+    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    
+    if (self.ordreModel.userAddress.address_id) {
+        paraDic[@"addressId"] = @(self.ordreModel.userAddress.address_id);
+    }
+    paraDic[@"integral"] = @(self.ordreModel.totalIntegral);
+
+    paraDic[@"isUseIntegral"] = @(self.userVailable);
+    paraDic[@"real_need_pay"] = self.ordreModel.resultMap.real_need_pay;
+    
+    // Model array -> JSON array
+    NSArray *dictArray = [BN_ShopOrderCartItemModel mj_keyValuesArrayWithObjectArray:self.ordreModel.resultMap.rows];
+    
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictArray options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    paraDic[@"rows"] = jsonString;
+    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmOrder",BASEURL];
+    [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue != 0) {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            
             if (failure) {
                 failure(errorStr);
             }
@@ -148,4 +194,5 @@
         }
     }];
 }
+
 @end

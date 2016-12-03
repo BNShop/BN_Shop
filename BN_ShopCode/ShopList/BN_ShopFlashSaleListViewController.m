@@ -19,7 +19,7 @@
 #import "NSString+Attributed.h"
 #import "NSArray+BlocksKit.h"
 
-@interface BN_ShopFlashSaleListViewController ()
+@interface BN_ShopFlashSaleListViewController ()<BN_ShopGoodDetailBuyViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) BN_ShopFlashSaleListViewModel *viewModel;
 @end
@@ -69,7 +69,7 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
             [cell updateAdditionalFrenzied:item.date];
             [cell addManageButtonEvent:^(id sender) {
                 @strongify(self);
-                [self addToCart:item.goods_id];
+                [self addToCart:item];
             }];
         } else if (item.buying_state == 0) {
             [cell updateAdditionalForward:item.date state:(int)item.warn_id];
@@ -132,13 +132,13 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
     [self.collectionView reloadData];
 }
 
-- (void)addToCart:(long)goodId {
-    BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:self.stateViewModel.simpleDetailModel.pic_url standards:self.stateViewModel.simpleDetailModel.name price:self.stateViewModel.simpleDetailModel.real_price];
+- (void)addToCart:(BN_ShopGoodModel *)good {
+    BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:good.pic_url standards:good.name price:good.real_price];
     ctr.view.backgroundColor = [ColorBlack colorWithAlphaComponent:0.17];
     [ctr setModalPresentationStyle:UIModalPresentationCustom];
     [ctr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     ctr.delegate = self;
-    ctr.goodId = goodId;
+    ctr.goodId = good.goods_id;
     [self presentViewController:ctr animated:YES completion:nil];
 }
 

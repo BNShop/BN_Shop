@@ -28,10 +28,10 @@
 @interface BN_ShoppingCartViewModel : NSObject
 
 @property (nonatomic, strong) NSMutableArray *shoppingCartList;//购物车列表
-@property (nonatomic, strong, readonly) MultipleSectionTableArraySource *dataSource;
+@property (nonatomic, strong) MultipleSectionTableArraySource *dataSource;
 @property (assign, nonatomic, getter=isEdit) BOOL edit;
 
-- (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray <BN_ShoppingCartItemProtocol>*)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock configureSectionBlock:(TableViewSectionConfigureBlock)configureSectionBlock;
+- (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock configureSectionBlock:(TableViewSectionConfigureBlock)configureSectionBlock;
 
 - (void)addDataSourceWith:(SectionDataSource *)sectionDataSource;
 

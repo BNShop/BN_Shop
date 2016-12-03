@@ -43,9 +43,11 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 - (instancetype)initWith:(NSArray *)shoppingCartIds numbers:(NSArray *)numbers {
     if (self = [super init]) {
         self.confirmationviewModel = [[BN_ShopOrdersConfirmationViewModel alloc] init];
-        self.confirmationviewModel.shoppingCartIds = shoppingCartIds;
-        self.confirmationviewModel.numbers = numbers;
+        
+        self.confirmationviewModel.shoppingCartIds = [shoppingCartIds componentsJoinedByString:@","];
+        self.confirmationviewModel.numbers = [numbers componentsJoinedByString:@","];
     }
+    return self;
 }
 
 - (instancetype)initWithSpecial:(long)goodid num:(int)num {
@@ -54,6 +56,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         self.confirmationviewModel.goodsId = goodid;
         self.confirmationviewModel.num = num;
     }
+    return self;
 }
 
 
@@ -151,14 +154,25 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     freightView.frame = CGRectMake(0, 0, WIDTH(self.tableView), 45.0);
     priceView.frame = CGRectMake(0, 45.0, WIDTH(self.tableView), 45.0);
     view.frame = CGRectMake(0, 0, WIDTH(self.tableView), 90.0f);
+    return view;
 }
 
 - (void)buildToolView {
     self.toolBar = [BN_ShopOrdersToolBar nib];
     [self.view addSubview:self.toolBar];
     self.toolBar.frame = CGRectMake(0, HEIGHT(self.view), WIDTH(self.view), self.toolBar.getViewHeight);
+    @weakify(self);
     [self.toolBar placeAnOrderWith:^(id sender) {
-        
+        @strongify(self);
+        [self showHud:YES];
+        [self.confirmationviewModel getShoppingOrderDetail:^{
+#warning 下单成功跳转
+            [self showHud:NO];
+        } failure:^(NSString *errorDescription) {
+            [self showHud:NO];
+            [self showHudError:errorDescription title:@"下单失败"];
+        }];
+
     }];
     [self.toolBar updateWith:[self.confirmationviewModel realNeedPayStr]];
 }
@@ -166,28 +180,29 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 - (void)buildUserView {
     self.userView = [BN_ShopOrderUserProfileView nib];
     [self.userView updateWith:self.confirmationviewModel.ordreModel.userAddress.name tel:self.confirmationviewModel.ordreModel.userAddress.telNum tagged:NO provinces:[self.confirmationviewModel.ordreModel.userAddress provinceAndCity] street:self.confirmationviewModel.ordreModel.userAddress.address];
+    [self.userView bk_whenTapped:^{
+#warning 跳转去改变地址
+        //        self.confirmationviewModel.ordreModel.userAddress.address_id = 0099;
+    }];
+
 }
 
 - (void)buildBillView {
     self.billView = [BN_ShopOrderBillView nib];
     [self.billView updateWith:[self.confirmationviewModel shopAcountStr] pointDeduction:[self.confirmationviewModel shopVailableStr] freight:[self.confirmationviewModel shopFreightStr]];
+}
+
+- (void)buildPointView {
+    self.pointView = [BN_ShopOrderUsePointView nib];
+    [self.pointView updateWith:[self.confirmationviewModel.ordreModel vailableUseStr] deductioned:NO];
     @weakify(self);
-    [self.billView addDeductionedPointForSelectedWithTask:^(BOOL deductioned) {
+    [self.pointView addDeductionedPointForSelectedWithTask:^(BOOL deductioned) {
         @strongify(self);
         if (self.confirmationviewModel.userVailable != deductioned) {
             
             self.confirmationviewModel.userVailable = deductioned;
             [self.billView updateWith:[self.confirmationviewModel shopAcountStr] pointDeduction:[self.confirmationviewModel shopVailableStr] freight:[self.confirmationviewModel shopFreightStr]];
         }
-        
-    }];
-}
-
-- (void)buildPointView {
-    self.pointView = [BN_ShopOrderUsePointView nib];
-    [self.pointView updateWith:[self.confirmationviewModel.ordreModel vailableUseStr] deductioned:NO];
-    [self.pointView addDeductionedPointForSelectedWithTask:^(BOOL deductioned) {
-        
     }];
 }
 

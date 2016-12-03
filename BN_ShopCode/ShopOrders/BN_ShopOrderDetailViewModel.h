@@ -41,7 +41,6 @@ typedef NS_ENUM(NSUInteger, BN_ShopOrderState) {
 @property (nonatomic, copy) NSString *integral_amount;//积分金额
 @property (nonatomic, copy) NSString *comment_state_name;//评论状态名
 @property (nonatomic, copy) NSString *saleafter_state_name;//售后状态名
-@property (nonatomic, assign) int pay_type;//int 1 微信支付 2 支付宝支付 3 平安银行支付
 
 - (int)orderState;//0 代之父 1代收货 2代评价 3已完成
 - (int)saleafter;//售后状态 0求租 1等待 2 万次

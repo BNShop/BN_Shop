@@ -8,6 +8,7 @@
 
 #import "BN_ShopOrderDetailViewModel.h"
 #import "NSArray+BlocksKit.h"
+#import "NSError+Description.h"
 
 @implementation BN_ShopOrderDetailModel
 
@@ -72,12 +73,13 @@
         NSDictionary *dic = responseObject;
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if (codeNumber.intValue != 0) {
-            temp.detailModel = [BN_ShopOrderDetailModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
-            temp.userProfile = [temp.detailModel getUserAddress];
+            NSString *errorStr = [dic objectForKey:@"remark"];
             if (failure) {
                 failure(errorStr);
             }
         } else {
+            temp.detailModel = [BN_ShopOrderDetailModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
+            temp.userProfile = [temp.detailModel getUserAddress];
             if (success) {
                 success();
             }

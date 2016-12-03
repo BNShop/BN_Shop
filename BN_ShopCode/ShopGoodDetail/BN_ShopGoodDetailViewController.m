@@ -396,8 +396,6 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 #pragma mark - 页面跳转
 - (void)buildTransitionControllers {
     self.controllers = [NSMutableArray array];
-//    NSString *readmePath = [[NSBundle mainBundle] pathForResource:@"Image.html" ofType:nil];
-//    self.stateViewModel.simpleDetailModel.goodDescription = [NSString stringWithContentsOfFile:readmePath encoding:NSUTF8StringEncoding error:NULL];
     BN_ShopGoodSpecificDetailsViewController *detailCtr = [[BN_ShopGoodSpecificDetailsViewController alloc] initWithHtml:self.stateViewModel.simpleDetailModel.goodDescription];
     BN_ShopGoodDetailCommentViewController *commetnCtr = [[BN_ShopGoodDetailCommentViewController alloc] initWith:self.simpleShowViewModel.goodsId type:self.simpleShowViewModel.type];
     BN_ShopGoodDetailConsultancyViewController *consultancCtr = [[BN_ShopGoodDetailConsultancyViewController alloc] initWith:self.simpleShowViewModel.goodsId];

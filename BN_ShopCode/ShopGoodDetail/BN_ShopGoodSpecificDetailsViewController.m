@@ -94,7 +94,9 @@
 }
 
 - (void)buildWebView {
-    _headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.headerHight)];
+    if (!_headView) {
+        _headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.headerHight)];
+    }
     
     self.webss = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.webss.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -155,6 +157,9 @@
 
 
 - (void)setHeadView:(UIView *)headView {
+    if (!_headView) {
+        _headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.headerHight)];
+    }
     if (headView) {
         [_headView addSubview:headView];
     }
