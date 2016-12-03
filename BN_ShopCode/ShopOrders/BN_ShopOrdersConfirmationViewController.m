@@ -48,6 +48,14 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     }
 }
 
+- (instancetype)initWithSpecial:(long)goodid num:(int)num {
+    if (self = [super init]) {
+        self.confirmationviewModel = [[BN_ShopOrdersConfirmationViewModel alloc] init];
+        self.confirmationviewModel.goodsId = goodid;
+        self.confirmationviewModel.num = num;
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

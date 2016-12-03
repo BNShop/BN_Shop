@@ -114,13 +114,20 @@
 - (void)getShoppingOrderConfirmationDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     
-    NSString *shoppingCartIdStr = [self.shoppingCartIds stringByAppendingString:@","];;//	购物车ID，多个，逗号隔开
-    NSString *numberStr = [self.numbers stringByAppendingString:@","];
-    
-    paraDic[@"shoppingCartIds"] = shoppingCartIdStr;
-    paraDic[@"numbers"] = numberStr;
-    __weak typeof(self) temp = self;
     NSString *url = [NSString stringWithFormat:@"%@/mall/confirmOrder",BASEURL];
+    if (self.goodsId > 0 && self.num > 0) {
+        url = [NSString stringWithFormat:@"%@/mall/specialConfirmOrder",BASEURL];
+        paraDic[@"goodsId"] = @(self.goodsId);
+        paraDic[@"num"] = @(self.num);
+    } else {
+        NSString *shoppingCartIdStr = [self.shoppingCartIds stringByAppendingString:@","];;//	购物车ID，多个，逗号隔开
+        NSString *numberStr = [self.numbers stringByAppendingString:@","];
+        
+        paraDic[@"shoppingCartIds"] = shoppingCartIdStr;
+        paraDic[@"numbers"] = numberStr;
+    }
+    __weak typeof(self) temp = self;
+    
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         NSNumber *codeNumber = [dic objectForKey:@"code"];

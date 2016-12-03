@@ -44,6 +44,10 @@
 @property (nonatomic, copy) NSString *shoppingCartIds;//	购物车ID，多个，逗号隔开
 @property (nonatomic, copy) NSString *numbers;
 
+@property (nonatomic, assign) long goodsId;//限时抢购
+@property (nonatomic, assign) int num;
+
+
 @property (nonatomic, strong)  MultipleSectionTableArraySource *dataSource;
 @property (nonatomic, strong) BN_ShopConfirmOrderModel *ordreModel;
 

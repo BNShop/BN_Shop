@@ -44,6 +44,7 @@
 @property (nonatomic, strong) UIView *stateView;
 @property (nonatomic, strong) BN_ShopGoodDetailTransitionToolBar *transitionToolBar;
 @property (nonatomic, strong) UIView *headeView;
+@property (nonatomic, assign) CGFloat headerHight;
 @property (nonatomic, strong) NSArray *subHeadeViews;
 @property (nonatomic, strong) BN_ShopGoodDetailNewArrivalsView *arribalsView;
 
@@ -54,6 +55,8 @@
 @property (nonatomic, strong) NSMutableArray *controllers;
 
 @property (nonatomic, weak) UIViewController *curController;
+
+
 
 @end
 
@@ -131,6 +134,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     for (NSInteger index=0; index<3; index++) {
         [tmpArray addObject:[[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.view), height)]];
     }
+    self.headerHight = height;
     self.subHeadeViews = tmpArray.copy;
 }
 
@@ -411,7 +415,9 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.controllers addObject:consultancCtr];
     [self addChildViewController:consultancCtr];
     
-    
+    CGRect rect = self.headeView.frame;
+    rect.origin.y = 0;
+    self.headeView.frame = rect;
     [detailCtr setHeadView:self.headeView];
     [self.view addSubview:detailCtr.view];
     self.curController = detailCtr;
@@ -447,7 +453,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 
 #pragma mark - BN_ShopGoodDetailBuyViewControllerDelegate
-- (void)goodDetailBuyCountWith:(int)cout {
+- (void)goodDetailBuyCountWith:(int)cout goodId:(long)goodId{
     @weakify(self);
     [self.stateViewModel addShoppingCartWith:self.simpleShowViewModel.goodsId num:cout success:^{
         @strongify(self);

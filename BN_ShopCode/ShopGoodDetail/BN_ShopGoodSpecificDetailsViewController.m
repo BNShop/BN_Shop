@@ -12,7 +12,11 @@
 
 @interface BN_ShopGoodSpecificDetailsViewController ()<DTAttributedTextContentViewDelegate, DTLazyImageViewDelegate>
 @property (nonatomic, strong) DTAttributedTextView *textView;
+
+
+@property (nonatomic, strong) UIWebView *webss;
 @property (nonatomic, strong) UIView *headView;
+@property (nonatomic, strong) UIView *footerView;
 
 @property (nonatomic, copy) NSString *html;
 
@@ -37,32 +41,46 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self addObserverForWebViewContentSize];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self removeObserverForWebViewContentSize];
+}
+
 - (void)buildControls {
     [super buildControls];
     
     // Create text view
-    self.textView = [[DTAttributedTextView alloc] initWithFrame:self.view.bounds];
+//    self.textView = [[DTAttributedTextView alloc] initWithFrame:self.view.bounds];
+//    
+//    // we draw images and links via subviews provided by delegate methods
+//    self.textView.shouldDrawImages = NO;
+//    self.textView.shouldDrawLinks = NO;
+//    self.textView.textDelegate = self; // delegate for custom sub views
+//    
+//    // gesture for testing cursor positions
+//    //	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+//    //	[_textView addGestureRecognizer:tap];
+//    
+//    // set an inset. Since the bottom is below a toolbar inset by 44px
+//    [self.textView setScrollIndicatorInsets:UIEdgeInsetsMake(0, 0, 44, 0)];
+//    self.textView.contentInset = UIEdgeInsetsMake(0, 0, 54, 0);
+//    
+//    self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    [self.view addSubview:self.textView];
+//
+//    
+//    self.textView.attributedString = [self _attributedStringForSnippetUsingiOS6Attributes:NO];
+//    [self performSelector:@selector(setHeadView:) withObject:self.headView afterDelay:0.005f];
     
-    // we draw images and links via subviews provided by delegate methods
-    self.textView.shouldDrawImages = NO;
-    self.textView.shouldDrawLinks = NO;
-    self.textView.textDelegate = self; // delegate for custom sub views
+    [self buildWebView];
     
-    // gesture for testing cursor positions
-    //	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    //	[_textView addGestureRecognizer:tap];
     
-    // set an inset. Since the bottom is below a toolbar inset by 44px
-    [self.textView setScrollIndicatorInsets:UIEdgeInsetsMake(0, 0, 44, 0)];
-    self.textView.contentInset = UIEdgeInsetsMake(0, 0, 54, 0);
-    
-    self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:self.textView];
-
-    
-    self.textView.attributedString = [self _attributedStringForSnippetUsingiOS6Attributes:NO];
-    
-    [self performSelector:@selector(setHeadView:) withObject:self.headView afterDelay:0.005f];
 }
 
 
@@ -247,11 +265,71 @@
     }
 }
 
+#pragma mark - 
+- (void)addObserverForWebViewContentSize
+{
+    [self.webss.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+}
+- (void)removeObserverForWebViewContentSize
+{
+    [self.webss.scrollView removeObserver:self forKeyPath:@"contentSize"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    [self setBuildFooterView];
+}
+
+- (void)buildWebView {
+    
+    self.webss = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    self.webss.scrollView.contentInset = UIEdgeInsetsMake(_headerHight, 0, 0, 0);
+    [self.webss loadHTMLString:_html baseURL:nil];
+    self.webss.backgroundColor = [UIColor whiteColor];
+    self.webss.opaque = NO;
+    
+    [self setBuildWebHead];
+    [self.view addSubview:_webss];
+}
+
+- (void)setBuildWebHead {
+    if (_headView) {
+        CGRect rect = _headView.frame;
+        rect.origin.y = -self.headerHight;
+        [self.webss.scrollView addSubview:_headView];
+    }
+}
+
+//设置footerView，并计算合适位置；
+- (void)setBuildFooterView {
+    //取消监听，因为这里会调整contentSize，避免无限递归
+    [self removeObserverForWebViewContentSize];
+    
+    UIView *viewss = [self.view viewWithTag:99999];
+    [viewss removeFromSuperview];
+    
+    CGSize contentSize = self.webss.scrollView.contentSize;
+    
+    _footerView.userInteractionEnabled = YES;
+    _footerView.tag = 99999;
+    _footerView.frame = CGRectMake(0, contentSize.height, self.view.frame.size.width, self.footerHight);
+    
+    [self.webss.scrollView addSubview:vi];
+    self.webss.scrollView.contentSize = CGSizeMake(contentSize.width, contentSize.height + self.footerHight);
+    
+    //重新监听
+    [self addObserverForWebViewContentSize];
+}
+
 #pragma mark - set headView 
+- (void)setFooterView:(UIView *)footerView {
+    _footerView = view;
+}
+
 - (void)setHeadView:(UIView *)headView {
     _headView = headView;
     self.textView.headerView = headView;
-//    [self.textView setContentOffset:CGPointMake(0.0, 0.0)];
+    [self setBuildWebHead];
 }
 
 - (CGPoint)contentOffset {

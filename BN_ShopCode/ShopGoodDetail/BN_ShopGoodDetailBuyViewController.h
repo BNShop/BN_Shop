@@ -11,12 +11,12 @@
 @interface BN_ShopGoodDetailBuyViewController : Base_BaseViewController
 
 @property (nonatomic, weak) id<BN_ShopGoodDetailBuyViewControllerDelegate> delegate;
-
+@property (assign, nonatomic) long goodId;;
 - (instancetype)initWith:(NSString *)iconUrl standards:(NSString *)standards price:(NSString *)price;
 @end
 
 @protocol BN_ShopGoodDetailBuyViewControllerDelegate <NSObject>
 
-- (void)goodDetailBuyCountWith:(int)cout;
+- (void)goodDetailBuyCountWith:(int)cout goodId:(long)goodId;
 
 @end

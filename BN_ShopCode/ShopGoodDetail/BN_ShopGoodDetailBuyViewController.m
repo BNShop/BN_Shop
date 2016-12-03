@@ -14,6 +14,8 @@
 
 @interface BN_ShopGoodDetailBuyViewController ()
 
+
+
 @property (weak, nonatomic) IBOutlet BGButton *okButton;
 @property (weak, nonatomic) IBOutlet UILabel *numTipLabel;
 @property (weak, nonatomic) IBOutlet PKYStepper *stepper;
@@ -115,8 +117,8 @@
 }
 
 - (IBAction)okAction:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(goodDetailBuyCountWith:)]) {
-        [self.delegate goodDetailBuyCountWith:self.count];
+    if ([self.delegate respondsToSelector:@selector(goodDetailBuyCountWith:goodId:)]) {
+        [self.delegate goodDetailBuyCountWith:self.count goodId:self.goodId];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

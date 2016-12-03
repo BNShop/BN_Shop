@@ -10,4 +10,5 @@
 
 @interface BN_ShopOrdersConfirmationViewController : Base_BaseViewController
 - (instancetype)initWith:(NSArray *)shoppingCartIds numbers:(NSArray *)numbers;
+- (instancetype)initWithSpecial:(long)goodid num:(int)num;
 @end

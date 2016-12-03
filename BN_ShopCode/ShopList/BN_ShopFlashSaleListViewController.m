@@ -10,6 +10,8 @@
 #import "BN_ShopGoodDetailViewController.h"
 #import "Base_BaseViewController+ControlCreate.h"
 #import "BN_ShopGoodDetailViewController.h"
+#import "BN_ShopGoodDetailBuyViewController.h"
+#import "BN_ShopOrdersConfirmationViewController.h"
 
 #import "BN_ShopGoodHorizontalCell.h"
 #import "BN_ShopFlashSaleListViewModel.h"
@@ -66,9 +68,8 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
         if (item.buying_state == 1) {
             [cell updateAdditionalFrenzied:item.date];
             [cell addManageButtonEvent:^(id sender) {
-//                @strongify(self);
-//                BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:item.goods_id];
-//                [self.navigationController pushViewController:ctr animated:YES];
+                @strongify(self);
+                [self addToCart:item.goods_id];
             }];
         } else if (item.buying_state == 0) {
             [cell updateAdditionalForward:item.date state:(int)item.warn_id];
@@ -130,6 +131,27 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
     self.collectionView.dataSource = self.viewModel.dataSource;
     [self.collectionView reloadData];
 }
+
+- (void)addToCart:(long)goodId {
+    BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:self.stateViewModel.simpleDetailModel.pic_url standards:self.stateViewModel.simpleDetailModel.name price:self.stateViewModel.simpleDetailModel.real_price];
+    ctr.view.backgroundColor = [ColorBlack colorWithAlphaComponent:0.17];
+    [ctr setModalPresentationStyle:UIModalPresentationCustom];
+    [ctr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    ctr.delegate = self;
+    ctr.goodId = goodId;
+    [self presentViewController:ctr animated:YES completion:nil];
+}
+
+
+#pragma mark - BN_ShopGoodDetailBuyViewControllerDelegate
+- (void)goodDetailBuyCountWith:(int)cout goodId:(long)goodId{
+    @weakify(self);
+    if (goodId > 0 && cout > 0) {
+        BN_ShopOrdersConfirmationViewController *ctr = [[BN_ShopOrdersConfirmationViewController alloc] initWithSpecial:goodId num:cout];
+        [self.navigationController pushViewController:ctr animated:YES];
+    }
+}
+
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

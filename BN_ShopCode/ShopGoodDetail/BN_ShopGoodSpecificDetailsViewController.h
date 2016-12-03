@@ -9,8 +9,12 @@
 #import "Base_BaseViewController.h"
 
 @interface BN_ShopGoodSpecificDetailsViewController : Base_BaseViewController
+@property (nonatomic, assign) CGFloat headerHight;
+@property (nonatomic, assign) CGFloat footerHight;
+
 - (instancetype)initWithHtml:(NSString *)html;
 - (void)setHeadView:(UIView *)headView;
+- (void)setFooterView:(UIView *)footerView;
 - (CGPoint)contentOffset;
 - (void)setContentOffset:(CGPoint)contentOffset;
 @end
