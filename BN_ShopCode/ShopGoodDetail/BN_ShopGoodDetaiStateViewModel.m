@@ -99,7 +99,10 @@
         NSLog(@"url = %@", operation.currentRequest);
         if(codeNumber.intValue == 0)
         {
-            self.simpleDetailModel = [BN_ShopGoodSimpleDetailModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
+            temp.simpleDetailModel = [BN_ShopGoodSimpleDetailModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
+            if (temp.simpleDetailModel.type == 1) {
+                temp.simpleDetailModel.buying_state = GoodDetaiState_Normal;
+            }
         }
         else
         {

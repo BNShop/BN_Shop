@@ -30,8 +30,7 @@
 - (void)getNewArrivalsClearData:(BOOL)clear goodsId:(long)goodsId
 {
     int curPage = clear == YES ? 0 : round(self.arrivals.count/10.0);
-    NSDictionary *paraDic = @{@"curPage" : @(curPage),
-                              @"pageNum" : @10,
+    NSDictionary *paraDic = @{
                               @"goodsId" : @(goodsId)};
     
     NSString *url = [NSString stringWithFormat:@"%@/mall/goodsRecommendList",BASEURL];

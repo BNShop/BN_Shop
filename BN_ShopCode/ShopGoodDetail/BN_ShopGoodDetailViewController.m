@@ -296,15 +296,15 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     }];
     
     @weakify(self);
-    [self.arribalsView.collectionView setHeaderRefreshDatablock:^{
-        @strongify(self);
-        [self.arribalsViewModel getNewArrivalsClearData:YES goodsId:self.simpleShowViewModel.goodsId];
-    } footerRefreshDatablock:^{
-        @strongify(self);
-        [self.arribalsViewModel getNewArrivalsClearData:NO goodsId:self.simpleShowViewModel.goodsId];
-    }];
+//    [self.arribalsView.collectionView setHeaderRefreshDatablock:^{
+//        @strongify(self);
+//        [self.arribalsViewModel getNewArrivalsClearData:YES goodsId:self.simpleShowViewModel.goodsId];
+//    } footerRefreshDatablock:^{
+//        @strongify(self);
+//        [self.arribalsViewModel getNewArrivalsClearData:NO goodsId:self.simpleShowViewModel.goodsId];
+//    }];
     
-    [self.arribalsView.collectionView setCollectionViewData:self.arribalsViewModel.arrivals];
+//    [self.arribalsView.collectionView setCollectionViewData:self.arribalsViewModel.arrivals];
     [self.arribalsView.collectionView setBn_data:self.arribalsViewModel.arrivals];
     
     [self.arribalsView.collectionView setRefreshBlock:^{
@@ -322,7 +322,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 }
 
 - (void)buildArribalsView {
-    self.arribalsView = [[BN_ShopGoodDetailNewArrivalsView alloc] init];
+    self.arribalsView = [BN_ShopGoodDetailNewArrivalsView nib];
     [self.arribalsView updateWith:ShopGoodDetailNewArrivalsCellIdentifier registerNib:[BN_ShopGoodDetailNewArribalsCell nib]];
     [self.arribalsView updateWith:self.arribalsViewModel.dataSource];
     [self.arribalsView updateWith:self.arribalsViewModel.title subTitle:self.arribalsViewModel.subTitle];
@@ -397,6 +397,10 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 - (void)buildTransitionControllers {
     self.controllers = [NSMutableArray array];
     BN_ShopGoodSpecificDetailsViewController *detailCtr = [[BN_ShopGoodSpecificDetailsViewController alloc] initWithHtml:self.stateViewModel.simpleDetailModel.goodDescription];
+    detailCtr.headerHight = self.headerHight;
+    detailCtr.footerHight = 252;
+    [detailCtr setFooterView:self.arribalsView];
+    [detailCtr setHeadView:self.headeView];
     BN_ShopGoodDetailCommentViewController *commetnCtr = [[BN_ShopGoodDetailCommentViewController alloc] initWith:self.simpleShowViewModel.goodsId type:self.simpleShowViewModel.type];
     BN_ShopGoodDetailConsultancyViewController *consultancCtr = [[BN_ShopGoodDetailConsultancyViewController alloc] initWith:self.simpleShowViewModel.goodsId];
 

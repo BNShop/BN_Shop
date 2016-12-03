@@ -129,7 +129,7 @@
 }
 
 - (void)setBuildWebHead {
-
+    [self.webss.scrollView addSubview:_headView];
 }
 
 //设置footerView，并计算合适位置；
@@ -152,7 +152,19 @@
 
 #pragma mark - set headView
 - (void)setFooterView:(UIView *)footerView {
-    _footerView = footerView;
+    if (!_footerView) {
+        CGSize contentSize = self.webss.scrollView.contentSize;
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, contentSize.height, WIDTH(self.view), self.footerHight)];
+        [self.webss.scrollView addSubview:_footerView];
+        self.webss.scrollView.contentSize = CGSizeMake(contentSize.width, contentSize.height + self.footerHight);
+    }
+    if (footerView) {
+        CGRect rect = CGRectMake(0, 0, WIDTH(_footerView), 192);
+        footerView.frame = rect;
+        [footerView sizeToFit];
+        [_footerView addSubview:footerView];
+        
+    }
 }
 
 
@@ -161,9 +173,12 @@
         _headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.headerHight)];
     }
     if (headView) {
+        CGRect rect = headView.frame;
+        rect.origin.y = 0;
+        rect.size.height = self.headerHight;
+        headView.frame = rect;
         [_headView addSubview:headView];
     }
-    [self setBuildWebHead];
 }
 
 - (CGPoint)contentOffset {
