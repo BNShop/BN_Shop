@@ -1,7 +1,7 @@
 //
 //  BN_ShopOrderNumberView.m
 //  BN_Shop
-//
+// 订单各种小状态
 //  Created by Liya on 2016/12/1.
 //  Copyright © 2016年 GL_RunMan. All rights reserved.
 //
@@ -31,6 +31,15 @@
 - (void)updateWith:(NSString *)title content:(NSString *)content {
     self.titlelabel.text = title;
     self.contentLabel.text = content;
+    [self.titlelabel sizeToFit];
+    [self.contentLabel sizeToFit];
+}
+
+- (void)udatewithContentAttr:(NSAttributedString *)content {
+    self.titlelabel.text = @" ";
+    self.contentLabel.attributedText = content;
+    [self.titlelabel sizeToFit];
+    [self.contentLabel sizeToFit];
 }
 
 - (void)updateWith:(UIFont *)font contentColor:(UIColor *)color {

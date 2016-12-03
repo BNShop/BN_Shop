@@ -18,7 +18,7 @@
 #import "NSObject+BKBlockObservation.h"
 #import "BN_ShoppingCartItemProtocol.h"
 
-#import "TestCartItem.h"
+#import "NSArray+BlocksKit.h"
 
 
 @interface BN_ShoppingcartViewController () <UITableViewDelegate, BN_ShoppingCartEndViewDelegate, BN_ShoppingCartCellDelegate>
@@ -37,16 +37,10 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.viewModel = [[BN_ShoppingCartViewModel alloc] init];
+    [self buildViewModel];
     
-    @weakify(self);
-    [self.viewModel bk_addObserverForKeyPath:@"edit" options:NSKeyValueObservingOptionNew task:^(id obj, NSDictionary *change) {
-        @strongify(self);
-        BOOL isEdit = [[change objectForKey:@"new"] boolValue];
-        self.endView.edit = isEdit;
-        self.navigationItem.rightBarButtonItem.title = isEdit ? TEXT(@"完成") : TEXT(@"编辑");
-    }];
-    [self testObects];
+    
+    
     
     
 }
@@ -86,14 +80,66 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     self.navigationItem.rightBarButtonItem.tintColor = ColorBlack;
 }
 
+#pragma mark - viewModel
+- (void)buildViewModel {
+    self.viewModel = [[BN_ShoppingCartViewModel alloc] init];
+    
+    @weakify(self);
+    [self.viewModel bk_addObserverForKeyPath:@"edit" options:NSKeyValueObservingOptionNew task:^(id obj, NSDictionary *change) {
+        @strongify(self);
+        BOOL isEdit = [[change objectForKey:@"new"] boolValue];
+        self.endView.edit = isEdit;
+        self.navigationItem.rightBarButtonItem.title = isEdit ? TEXT(@"完成") : TEXT(@"编辑");
+    }];
+    
+    self.viewModel.dataSource = [[MultipleSectionTableArraySource alloc] init];
+    
+    @weakify(self);
+    [self.tableView setBn_data:self.viewModel.shoppingCartList];
+    [self.tableView setHeaderRefreshDatablock:^{
+        @strongify(self);
+        [self.viewModel getShoppingCartListData:YES];
+    } footerRefreshDatablock:^{
+        @strongify(self);
+        [self.viewModel getShoppingCartListData:NO];
+    }];
+    [self.tableView setRefreshBlock:^{
+        @strongify(self);
+        [self.viewModel getShoppingCartListData:YES];
+    }];
+    [self.viewModel.shoppingCartList.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        
+        for (BN_ShoppingCartItemModel *item in self.viewModel.shoppingCartList) {
+            SectionDataSource *section =  [self.viewModel getSectionDataSourceWith:nil items:@[item] cellIdentifier:ShoppingCartTableCellIdentifier configureCellBlock:^(id cell, BN_ShoppingCartItemModel *item) {
+                [(BN_ShoppingCartCell *)cell updateWith:[item isSelected] thumbnailUrl:item.pic_url title:item.name num:[item num] price:[item real_price]];
+                [(BN_ShoppingCartCell *)cell setDelegate:self];
+            } configureSectionBlock:^(UIView *view, id sectionDataSource, NSString *kind, NSIndexPath *indexPath) {
+                NSLog(@"section = %ld", (long)indexPath.section);
+            }];
+            
+            [self.viewModel addDataSourceWith:section];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
+            [self.tableView reloadData];
+        })
+    }];
+    [self.viewModel getShoppingCartListData:YES];
+}
+
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    BN_ShoppingCartHeardView *heardView = [BN_ShoppingCartHeardView nib];
     SectionDataSource *sectionDataSource = [self.viewModel.dataSource sectionAtIndex:section];
+    if (!sectionDataSource.Title) {
+        return nil;
+    }
+    BN_ShoppingCartHeardView *heardView = [BN_ShoppingCartHeardView nib];
     [heardView updateWith:sectionDataSource.Title roundUpTitle:sectionDataSource.tagged roundUpBlock:^(id obj) {
 //        NSLog(@"section = %d", section);
     }];
@@ -102,6 +148,10 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    SectionDataSource *sectionDataSource = [self.viewModel.dataSource sectionAtIndex:section];
+    if (!sectionDataSource.Title) {
+        return 0.0;
+    }
     return 36.0f;//通过这个方法设置高度，要不第一个heaerview不现实
 }
 #pragma mark - BN_ShoppingCartEndViewDelegate
@@ -120,9 +170,17 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
 
 - (void)settlementTagger {
     NSArray *array = [self.viewModel settlementSelectedItems];
-    if ([array count] > 0) {
-#warning 跳转到确定订单页面并传值
-        BN_ShopOrdersConfirmationViewController *ctr = [[BN_ShopOrdersConfirmationViewController alloc] init];
+    NSMutableArray *shopIds = [NSMutableArray array];
+    NSMutableArray *nums = [NSMutableArray array];
+    
+    [array bk_each:^(BN_ShoppingCartItemModel *obj) {
+        
+        [shopIds addObject:@(obj.shopping_cart_id)];
+        [nums addObject:@(obj.num)];
+    }];
+    
+    if ([shopIds count] > 0 && [nums count] > 0) {
+        BN_ShopOrdersConfirmationViewController *ctr = [[BN_ShopOrdersConfirmationViewController alloc] initWith:shopIds numbers:nums];
         [self.navigationController pushViewController:ctr animated:YES];
     }
 
@@ -145,33 +203,6 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     if ([object isSelected]) {
         [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
     }
-}
-
-
-#pragma mark - test
-- (void)testObects {
-    for (NSInteger i=0; i<3; i++) {
-        NSMutableArray *array = [NSMutableArray array];
-        for (NSInteger j=0; j<i+3; j++) {
-            TestCartItem *item = [[TestCartItem alloc] init];
-            item.selected = YES;
-            item.front_price = [NSString stringWithFormat:@"%ld", i+j];
-            item.real_price = [NSString stringWithFormat:@"%ld", (long)j];
-            item.num = j;
-            [array addObject:item];
-        }
-        
-        SectionDataSource *section = [self.viewModel getSectionDataSourceWith:[NSString stringWithFormat:@"上海标题:%ld", (long)i] items:array cellIdentifier:ShoppingCartTableCellIdentifier configureCellBlock:^(id cell, id<BN_ShoppingCartItemProtocol> item) {
-            [(BN_ShoppingCartCell *)cell updateWith:[item isSelected] thumbnailUrl:@"http://2f.zol-img.com.cn/product/100/939/ceiLvj7vpOz0Y.jpg" title:[@"全面深化改革走过了三年的历程。三年虽短，但在以习近平同志为核心的党中央领导下,中国大地上却有数不清的改变在发生，亿万人的力量在汇聚，延展为中国现代化进程中精华荟萃的特殊单元" substringToIndex:random()%30] num:[item num] price:[item real_price]];
-            [(BN_ShoppingCartCell *)cell setDelegate:self];
-        } configureSectionBlock:^(UIView *view, id sectionDataSource, NSString *kind, NSIndexPath *indexPath) {
-            NSLog(@"section = %ld", (long)indexPath.section);
-        }];
-        [self.viewModel addDataSourceWith:section];
-    }
-    self.tableView.dataSource = self.viewModel.dataSource;
-    [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
-    [self.tableView reloadData];
 }
 
 @end

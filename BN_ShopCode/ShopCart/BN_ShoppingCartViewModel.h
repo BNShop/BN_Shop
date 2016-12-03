@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "MultipleSectionTableArraySource.h"
-#import "BN_ShoppingCartItemProtocol.h"
 
 @interface BN_ShoppingCartItemModel : NSObject
 
@@ -21,13 +20,14 @@
 @property (nonatomic, copy) NSString *standard;//规格
 @property (nonatomic, assign) int free_shipping_status;//免单状态 1:是 0否
 @property (nonatomic, copy) NSString *free_shipping_amount;//免单金额
-
+@property (assign, nonatomic, getter=isSelected) BOOL selected;
 
 
 @end
 
 @interface BN_ShoppingCartViewModel : NSObject
 
+@property (nonatomic, strong) NSMutableArray *shoppingCartList;//购物车列表
 @property (nonatomic, strong, readonly) MultipleSectionTableArraySource *dataSource;
 @property (assign, nonatomic, getter=isEdit) BOOL edit;
 
@@ -41,4 +41,7 @@
 - (NSAttributedString *)settlementCount;
 - (NSString *)selectedItemPriceShow;
 - (void)selectAll:(BOOL)isSelectedAll;
+
+- (void)getShoppingCartListData:(BOOL)clear;
+- (void)deleteShoppingCart:(NSArray *)shoppingCartIds success:(void(^)())success failure:(void(^)(NSString *errorDescription))failure;
 @end

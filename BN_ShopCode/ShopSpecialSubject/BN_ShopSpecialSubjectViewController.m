@@ -146,7 +146,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     SectionDataSource *tipsSection = [self.viewModel.dataSource sectionAtIndex:2];
     tipsSection.cellIdentifier = ShopSpecialTopicCellIdentifier;
     tipsSection.configureCellBlock = ^(id cell, BN_ShopSpecialTopicModel *item){
-        [(BN_ShopSpecialTopicCell *)cell updateWith:item.imgUrl title:item.title subTitle:item.subTitle tip:item.tip];
+        [(BN_ShopSpecialTopicCell *)cell updateWith:item.cover_img title:item.name subTitle:item.content tip:item.tagName];
     };
     [self.view setBn_data:self.viewModel];
     [self.view setRefreshBlock:^{

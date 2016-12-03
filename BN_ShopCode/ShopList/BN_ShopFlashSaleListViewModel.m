@@ -73,7 +73,7 @@
 }
 
 #pragma mark - 提醒与取消
-- (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long))success failure:(void(^)(NSString *errorDescription))failure {
+- (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long warn_id))success failure:(void(^)(NSString *errorDescription))failure {
     NSDictionary *paraDic0 = @{
                                @"goodsId":[NSNumber numberWithLong:goodsId]
                                };

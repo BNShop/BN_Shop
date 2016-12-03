@@ -45,7 +45,6 @@
 		6A033E991DE1ACD3000446A0 /* BN_ShoppingcartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033DEC1DE1ACD3000446A0 /* BN_ShoppingcartViewController.m */; };
 		6A033E9A1DE1ACD3000446A0 /* BN_ShoppingcartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A033DED1DE1ACD3000446A0 /* BN_ShoppingcartViewController.xib */; };
 		6A033E9B1DE1ACD3000446A0 /* BN_ShoppingCartViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033DEF1DE1ACD3000446A0 /* BN_ShoppingCartViewModel.m */; };
-		6A033E9C1DE1ACD3000446A0 /* TestCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033DF11DE1ACD3000446A0 /* TestCartItem.m */; };
 		6A033E9D1DE1ACD3000446A0 /* BN_ShopSorterContantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033DF41DE1ACD3000446A0 /* BN_ShopSorterContantCell.m */; };
 		6A033E9E1DE1ACD3000446A0 /* BN_ShopSorterContantCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A033DF51DE1ACD3000446A0 /* BN_ShopSorterContantCell.xib */; };
 		6A033E9F1DE1ACD3000446A0 /* BN_ShopSorterTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033DF71DE1ACD3000446A0 /* BN_ShopSorterTitleCell.m */; };
@@ -123,7 +122,6 @@
 		6A033EE71DE1ACD3000446A0 /* BN_ShopOrderUserProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033E6D1DE1ACD3000446A0 /* BN_ShopOrderUserProfileView.m */; };
 		6A033EE81DE1ACD3000446A0 /* BN_ShopOrderUserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A033E6E1DE1ACD3000446A0 /* BN_ShopOrderUserProfileView.xib */; };
 		6A033EE91DE1ACD3000446A0 /* BN_ShopOrderUserProfileViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033E701DE1ACD3000446A0 /* BN_ShopOrderUserProfileViewModel.m */; };
-		6A033EEA1DE1ACD3000446A0 /* TestUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033E731DE1ACD3000446A0 /* TestUserProfile.m */; };
 		6A033EEB1DE1ACD3000446A0 /* BGButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033E771DE1ACD3000446A0 /* BGButton.m */; };
 		6A033EEC1DE1ACD3000446A0 /* LYFreeTimingPlate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033E7A1DE1ACD3000446A0 /* LYFreeTimingPlate.m */; };
 		6A033EED1DE1ACD3000446A0 /* LYFreeTimingPlate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A033E7B1DE1ACD3000446A0 /* LYFreeTimingPlate.xib */; };
@@ -167,6 +165,12 @@
 		6A313BC81DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A313BC71DEAAE9000BC9AF8 /* BN_ShopCategoryModel.m */; };
 		6A313BCB1DEAF37200BC9AF8 /* BN_ShopConditionTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A313BCA1DEAF37200BC9AF8 /* BN_ShopConditionTagModel.m */; };
 		6A313BCE1DEB3A4A00BC9AF8 /* NSError+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A313BCD1DEB3A4A00BC9AF8 /* NSError+Description.m */; };
+		6A61F06C1DF2770100867A69 /* BN_ShopUserAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A61F06B1DF2770100867A69 /* BN_ShopUserAddressModel.m */; };
+		6A61F0761DF27C5100867A69 /* BN_ShopOrderItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A61F0751DF27C5100867A69 /* BN_ShopOrderItemModel.m */; };
+		6A61F0791DF27DB100867A69 /* BN_ShopOrderCartItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A61F0781DF27DB100867A69 /* BN_ShopOrderCartItemModel.m */; };
+		6A61F0811DF280E400867A69 /* BN_ShopOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A61F07F1DF280E400867A69 /* BN_ShopOrderDetailViewController.m */; };
+		6A61F0821DF280E400867A69 /* BN_ShopOrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A61F0801DF280E400867A69 /* BN_ShopOrderDetailViewController.xib */; };
+		6A61F0851DF2811000867A69 /* BN_ShopOrderDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A61F0841DF2811000867A69 /* BN_ShopOrderDetailViewModel.m */; };
 		6A63B43E1DF0845A00F6EF60 /* BN_ShopspecialTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63B43D1DF0845900F6EF60 /* BN_ShopspecialTagModel.m */; };
 		6A80DE6A1DEF008B0098B33D /* BN_ShopSouvenirModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A80DE691DEF008B0098B33D /* BN_ShopSouvenirModel.m */; };
 		6A80DE741DEF25560098B33D /* BN_ShopGoodSpecialCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A80DE731DEF25560098B33D /* BN_ShopGoodSpecialCommentModel.m */; };
@@ -336,14 +340,11 @@
 		6A033DE71DE1ACD3000446A0 /* BN_ShoppingCartHeardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShoppingCartHeardView.h; sourceTree = "<group>"; };
 		6A033DE81DE1ACD3000446A0 /* BN_ShoppingCartHeardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShoppingCartHeardView.m; sourceTree = "<group>"; };
 		6A033DE91DE1ACD3000446A0 /* BN_ShoppingCartHeardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShoppingCartHeardView.xib; sourceTree = "<group>"; };
-		6A033DEA1DE1ACD3000446A0 /* BN_ShoppingCartItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShoppingCartItemProtocol.h; sourceTree = "<group>"; };
 		6A033DEB1DE1ACD3000446A0 /* BN_ShoppingcartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShoppingcartViewController.h; sourceTree = "<group>"; };
 		6A033DEC1DE1ACD3000446A0 /* BN_ShoppingcartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShoppingcartViewController.m; sourceTree = "<group>"; };
 		6A033DED1DE1ACD3000446A0 /* BN_ShoppingcartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShoppingcartViewController.xib; sourceTree = "<group>"; };
 		6A033DEE1DE1ACD3000446A0 /* BN_ShoppingCartViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShoppingCartViewModel.h; sourceTree = "<group>"; };
 		6A033DEF1DE1ACD3000446A0 /* BN_ShoppingCartViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShoppingCartViewModel.m; sourceTree = "<group>"; };
-		6A033DF01DE1ACD3000446A0 /* TestCartItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCartItem.h; sourceTree = "<group>"; };
-		6A033DF11DE1ACD3000446A0 /* TestCartItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCartItem.m; sourceTree = "<group>"; };
 		6A033DF31DE1ACD3000446A0 /* BN_ShopSorterContantCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopSorterContantCell.h; sourceTree = "<group>"; };
 		6A033DF41DE1ACD3000446A0 /* BN_ShopSorterContantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopSorterContantCell.m; sourceTree = "<group>"; };
 		6A033DF51DE1ACD3000446A0 /* BN_ShopSorterContantCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopSorterContantCell.xib; sourceTree = "<group>"; };
@@ -466,9 +467,6 @@
 		6A033E6E1DE1ACD3000446A0 /* BN_ShopOrderUserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopOrderUserProfileView.xib; sourceTree = "<group>"; };
 		6A033E6F1DE1ACD3000446A0 /* BN_ShopOrderUserProfileViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopOrderUserProfileViewModel.h; sourceTree = "<group>"; };
 		6A033E701DE1ACD3000446A0 /* BN_ShopOrderUserProfileViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopOrderUserProfileViewModel.m; sourceTree = "<group>"; };
-		6A033E711DE1ACD3000446A0 /* BN_ShopUserProfileProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopUserProfileProtocol.h; sourceTree = "<group>"; };
-		6A033E721DE1ACD3000446A0 /* TestUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUserProfile.h; sourceTree = "<group>"; };
-		6A033E731DE1ACD3000446A0 /* TestUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUserProfile.m; sourceTree = "<group>"; };
 		6A033E761DE1ACD3000446A0 /* BGButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGButton.h; sourceTree = "<group>"; };
 		6A033E771DE1ACD3000446A0 /* BGButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGButton.m; sourceTree = "<group>"; };
 		6A033E791DE1ACD3000446A0 /* LYFreeTimingPlate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYFreeTimingPlate.h; sourceTree = "<group>"; };
@@ -537,6 +535,18 @@
 		6A313BCC1DEB3A4A00BC9AF8 /* NSError+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Description.h"; sourceTree = "<group>"; };
 		6A313BCD1DEB3A4A00BC9AF8 /* NSError+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Description.m"; sourceTree = "<group>"; };
 		6A4C91A61DE5380500588F43 /* TestObjectHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjectHeader.h; sourceTree = "<group>"; };
+		6A61F06A1DF2770100867A69 /* BN_ShopUserAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopUserAddressModel.h; sourceTree = "<group>"; };
+		6A61F06B1DF2770100867A69 /* BN_ShopUserAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopUserAddressModel.m; sourceTree = "<group>"; };
+		6A61F0741DF27C5100867A69 /* BN_ShopOrderItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopOrderItemModel.h; sourceTree = "<group>"; };
+		6A61F0751DF27C5100867A69 /* BN_ShopOrderItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopOrderItemModel.m; sourceTree = "<group>"; };
+		6A61F0771DF27DB100867A69 /* BN_ShopOrderCartItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopOrderCartItemModel.h; sourceTree = "<group>"; };
+		6A61F0781DF27DB100867A69 /* BN_ShopOrderCartItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopOrderCartItemModel.m; sourceTree = "<group>"; };
+		6A61F07A1DF27E7E00867A69 /* BN_ShopOrderItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopOrderItemProtocol.h; sourceTree = "<group>"; };
+		6A61F07E1DF280E400867A69 /* BN_ShopOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopOrderDetailViewController.h; sourceTree = "<group>"; };
+		6A61F07F1DF280E400867A69 /* BN_ShopOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopOrderDetailViewController.m; sourceTree = "<group>"; };
+		6A61F0801DF280E400867A69 /* BN_ShopOrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopOrderDetailViewController.xib; sourceTree = "<group>"; };
+		6A61F0831DF2811000867A69 /* BN_ShopOrderDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopOrderDetailViewModel.h; sourceTree = "<group>"; };
+		6A61F0841DF2811000867A69 /* BN_ShopOrderDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopOrderDetailViewModel.m; sourceTree = "<group>"; };
 		6A63B43C1DF0845900F6EF60 /* BN_ShopspecialTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopspecialTagModel.h; sourceTree = "<group>"; };
 		6A63B43D1DF0845900F6EF60 /* BN_ShopspecialTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopspecialTagModel.m; sourceTree = "<group>"; };
 		6A80DE681DEF008B0098B33D /* BN_ShopSouvenirModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopSouvenirModel.h; sourceTree = "<group>"; };
@@ -913,9 +923,6 @@
 		6A033EFA1DE1B1CF000446A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6A033DEA1DE1ACD3000446A0 /* BN_ShoppingCartItemProtocol.h */,
-				6A033DF01DE1ACD3000446A0 /* TestCartItem.h */,
-				6A033DF11DE1ACD3000446A0 /* TestCartItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1237,6 +1244,9 @@
 				6A033E611DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewController.h */,
 				6A033E621DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewController.m */,
 				6A033E631DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewController.xib */,
+				6A61F07E1DF280E400867A69 /* BN_ShopOrderDetailViewController.h */,
+				6A61F07F1DF280E400867A69 /* BN_ShopOrderDetailViewController.m */,
+				6A61F0801DF280E400867A69 /* BN_ShopOrderDetailViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1248,6 +1258,8 @@
 				6A033E651DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewModel.m */,
 				6A033E6F1DE1ACD3000446A0 /* BN_ShopOrderUserProfileViewModel.h */,
 				6A033E701DE1ACD3000446A0 /* BN_ShopOrderUserProfileViewModel.m */,
+				6A61F0831DF2811000867A69 /* BN_ShopOrderDetailViewModel.h */,
+				6A61F0841DF2811000867A69 /* BN_ShopOrderDetailViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1255,9 +1267,13 @@
 		6A033F0F1DE1B323000446A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6A033E711DE1ACD3000446A0 /* BN_ShopUserProfileProtocol.h */,
-				6A033E721DE1ACD3000446A0 /* TestUserProfile.h */,
-				6A033E731DE1ACD3000446A0 /* TestUserProfile.m */,
+				6A61F06A1DF2770100867A69 /* BN_ShopUserAddressModel.h */,
+				6A61F06B1DF2770100867A69 /* BN_ShopUserAddressModel.m */,
+				6A61F0741DF27C5100867A69 /* BN_ShopOrderItemModel.h */,
+				6A61F0751DF27C5100867A69 /* BN_ShopOrderItemModel.m */,
+				6A61F0771DF27DB100867A69 /* BN_ShopOrderCartItemModel.h */,
+				6A61F0781DF27DB100867A69 /* BN_ShopOrderCartItemModel.m */,
+				6A61F07A1DF27E7E00867A69 /* BN_ShopOrderItemProtocol.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1565,6 +1581,7 @@
 				6A0261F61DE41CC100BA5AA3 /* BN_ShopSpecialCommentHeadView.xib in Resources */,
 				6A03600C1DE6E89F009617A7 /* BN_ShopGoodDetailTransitionToolBar.xib in Resources */,
 				C96514FB1DD61C86004B5F05 /* Assets.xcassets in Resources */,
+				6A61F0821DF280E400867A69 /* BN_ShopOrderDetailViewController.xib in Resources */,
 				6A033ED81DE1ACD3000446A0 /* BN_ShopScreeningToolBar.xib in Resources */,
 				6A033ECA1DE1ACD3000446A0 /* BN_ShopGoodHorizontalCell.xib in Resources */,
 				6A0B13721DE2AE2600B3715E /* BN_ShopGoodDetailNewArrivalsView.xib in Resources */,
@@ -1692,12 +1709,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A033EEA1DE1ACD3000446A0 /* TestUserProfile.m in Sources */,
 				6AC4F6661DEC8C150092A4B0 /* BN_ShopGoodCommentsModel.m in Sources */,
 				6A033ECF1DE1ACD3000446A0 /* BN_ShopListViewModel.m in Sources */,
 				6A033EA61DE1ACD3000446A0 /* BN_ShopGoodDetailFriendlyWarning.m in Sources */,
 				6ADB5E3D1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.m in Sources */,
 				6A0261DC1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m in Sources */,
+				6A61F0851DF2811000867A69 /* BN_ShopOrderDetailViewModel.m in Sources */,
 				6A033ED71DE1ACD3000446A0 /* BN_ShopScreeningToolBar.m in Sources */,
 				C96514F61DD61C86004B5F05 /* ViewController.m in Sources */,
 				C965152A1DD61EBC004B5F05 /* ST_TabBarController.m in Sources */,
@@ -1748,7 +1765,6 @@
 				6A033ED31DE1ACD3000446A0 /* BN_ShopScreeningResuablePriceCell.m in Sources */,
 				6A033EF31DE1ACD3000446A0 /* QRadioButton.m in Sources */,
 				6A313BCE1DEB3A4A00BC9AF8 /* NSError+Description.m in Sources */,
-				6A033E9C1DE1ACD3000446A0 /* TestCartItem.m in Sources */,
 				6A033EB11DE1ACD3000446A0 /* BN_ShopGoodDetaiNormalStateView.m in Sources */,
 				6A0261F01DE34ADD00BA5AA3 /* BN_ShopSpecialCommentCell.m in Sources */,
 				C96514F31DD61C86004B5F05 /* AppDelegate.m in Sources */,
@@ -1759,6 +1775,7 @@
 				6A033EC91DE1ACD3000446A0 /* BN_ShopGoodHorizontalCell.m in Sources */,
 				6A033E9B1DE1ACD3000446A0 /* BN_ShoppingCartViewModel.m in Sources */,
 				6A033F181DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.m in Sources */,
+				6A61F0761DF27C5100867A69 /* BN_ShopOrderItemModel.m in Sources */,
 				6A033EC11DE1ACD3000446A0 /* BN_ShopHomeSouvenirCellModel.m in Sources */,
 				C96514F01DD61C86004B5F05 /* main.m in Sources */,
 				6A033E9F1DE1ACD3000446A0 /* BN_ShopSorterTitleCell.m in Sources */,
@@ -1777,6 +1794,7 @@
 				6A035C201DE6A3A9009617A7 /* BN_ShopGoodDetailConsultancyViewModel.m in Sources */,
 				6A033F131DE1BC39000446A0 /* BN_ShopGoodDetailCommentViewController.m in Sources */,
 				6A033ECB1DE1ACD3000446A0 /* BN_ShopListSelectionToolBar.m in Sources */,
+				6A61F0791DF27DB100867A69 /* BN_ShopOrderCartItemModel.m in Sources */,
 				6A033ED21DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewModel.m in Sources */,
 				6A80DE7D1DEF2D2F0098B33D /* BN_ShopSpecialTopicModel.m in Sources */,
 				6A81C7A41DEF3AC40015348D /* BN_ShopOrderServiceStateView.m in Sources */,
@@ -1786,6 +1804,7 @@
 				6A033EBE1DE1ACD3000446A0 /* BN_ShopHomeFlashSaleViewModel.m in Sources */,
 				6A033EE51DE1ACD3000446A0 /* BN_ShopOrdersToolBar.m in Sources */,
 				6A033E8D1DE1ACD3000446A0 /* UITableViewCell+NIB.m in Sources */,
+				6A61F0811DF280E400867A69 /* BN_ShopOrderDetailViewController.m in Sources */,
 				6A0261F91DE4238A00BA5AA3 /* BN_ShopSpecialCommentFootView.m in Sources */,
 				6A80DE771DEF26120098B33D /* BN_ShopSpecialCollectedRecordModel.m in Sources */,
 				6A033E921DE1ACD3000446A0 /* TableDataSource.m in Sources */,
@@ -1796,6 +1815,7 @@
 				6A033EEB1DE1ACD3000446A0 /* BGButton.m in Sources */,
 				6A035C1C1DE69D0E009617A7 /* BN_ShopGoodDetailConsultancyCell.m in Sources */,
 				6A03600A1DE6E891009617A7 /* BN_ShopGoodDetailTransitionToolBar.m in Sources */,
+				6A61F06C1DF2770100867A69 /* BN_ShopUserAddressModel.m in Sources */,
 				6A033EC41DE1ACD3000446A0 /* BN_ShopHomeViewModel.m in Sources */,
 				6A033EE31DE1ACD3000446A0 /* BN_ShopOrdersItemCell.m in Sources */,
 				6A033E8F1DE1ACD3000446A0 /* UIView+NIB.m in Sources */,

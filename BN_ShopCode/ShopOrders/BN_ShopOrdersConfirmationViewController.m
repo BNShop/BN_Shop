@@ -7,10 +7,14 @@
 //
 
 #import "BN_ShopOrdersConfirmationViewController.h"
+#import "Base_BaseViewController+ControlCreate.h"
+
 #import "BN_ShopOrderBillView.h"
 #import "BN_ShopOrdersToolBar.h"
 #import "BN_ShopOrderUserProfileView.h"
 #import "BN_ShopOrdersItemCell.h"
+#import "BN_ShopOrderNumberView.h"
+#import "BN_ShopOrderUsePointView.h"
 
 #import "BN_ShopOrderUserProfileViewModel.h"
 #import "BN_ShopOrdersConfirmationViewModel.h"
@@ -18,17 +22,16 @@
 #import "PureLayout.h"
 #import "UIView+BlocksKit.h"
 
-#import "TestCartItem.h"
-#import "TestUserProfile.h"
+#import "BN_ShopOrderItemProtocol.h"
 
 @interface BN_ShopOrdersConfirmationViewController ()
 
-@property (strong, nonatomic) BN_ShopOrderUserProfileViewModel *userViewModel;
 @property (strong, nonatomic) BN_ShopOrdersConfirmationViewModel *confirmationviewModel;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) BN_ShopOrderUserProfileView *userView;
 @property (strong, nonatomic) BN_ShopOrderBillView *billView;
+@property (strong, nonatomic) BN_ShopOrderUsePointView *pointView;
 @property (strong, nonatomic) BN_ShopOrdersToolBar *toolBar;
 
 @end
@@ -37,36 +40,21 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 
 @implementation BN_ShopOrdersConfirmationViewController
 
+- (instancetype)initWith:(NSArray *)shoppingCartIds numbers:(NSArray *)numbers {
+    if (self = [super init]) {
+        self.confirmationviewModel = [[BN_ShopOrdersConfirmationViewModel alloc] init];
+        self.confirmationviewModel.shoppingCartIds = shoppingCartIds;
+        self.confirmationviewModel.numbers = numbers;
+    }
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.userViewModel = [[BN_ShopOrderUserProfileViewModel alloc] init];
-    self.confirmationviewModel = [[BN_ShopOrdersConfirmationViewModel alloc] init];
-    
-    @weakify(self);
-    [self.toolBar placeAnOrderWith:^(id sender) {
-#warning 去下单的详细操作
-        NSLog(@"下单啦");
-    }];
-    
-//    [self.billView addDeductionedPointForSelectedWithTask:^(BOOL deductioned) {
-//        @strongify(self);
-//        if (self.confirmationviewModel.deduction != deductioned) {
-//            
-//            self.confirmationviewModel.deduction = deductioned;
-//            [self updateConfirmationView];
-//        }
-//        
-//    }];
-    
-    [self.userView bk_whenTapped:^{
-#warning 去修改收货地址等等操作啦
-        NSLog(@"去修改收货地址跳转啦");
-    }];
-    
-    [self testObects];
-    [self.tableView reloadData];
+
+    [self buildViewModel];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,20 +69,26 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     [self.tableView registerNib:[BN_ShopOrdersItemCell nib] forCellReuseIdentifier:ShopOrdersConfirmationTableCellIdentifier];
     self.tableView.separatorColor = ColorLine;
     self.tableView.backgroundColor = ColorWhite;
-    
-    self.toolBar = [BN_ShopOrdersToolBar nib];
-    [self.view addSubview:self.toolBar];
-    [self.toolBar autoSetDimension:ALDimensionHeight toSize:[self.toolBar getViewHeight]];
-    [self.toolBar autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
-    [self.toolBar autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
-    [self.toolBar autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.view];
-    
-    
-    
-    self.userView = [BN_ShopOrderUserProfileView nib];
-    [self.userView updateWith:@"王久" tel:@"134567890" tagged:YES provinces:@"中国 福建省 厦门市" street:@"思明区 软件园二期 东门"];
-    self.userView.frame = RECT_CHANGE_size(self.userView, WIDTH(self.tableView), self.userView.getViewHeight);
-    self.billView = [BN_ShopOrderBillView nib];
+}
+
+#pragma mark - buildViewModel
+- (void)buildViewModel {
+    __weak typeof(self) temp = self;
+    [self.confirmationviewModel getShoppingOrderConfirmationDetail:^{
+        for (BN_ShopConfirmOrderItemModel *sectionModel in self.confirmationviewModel.ordreModel.resultMap.rows) {
+            SectionDataSource *section = [temp.confirmationviewModel getSectionDataSourceWith:nil items:sectionModel.shoppingCartList cellIdentifier:ShopOrdersConfirmationTableCellIdentifier configureCellBlock:^(BN_ShopOrdersItemCell *cell, BN_ShopOrderCartItemModel *item) {
+                [cell updateWith:[item pic_url] title:[item goods_name] num:[item goods_num] price:[item real_price] specification:[item standard]];
+            } configureSectionBlock:nil];
+            [temp.confirmationviewModel addDataSourceWith:section];
+        }
+        [temp buildTableFooterView];
+        temp.tableView.dataSource = temp.confirmationviewModel.dataSource;
+        [temp.tableView reloadData];
+        
+    } failure:^(NSString *errorDescription) {
+        [self showHudError:errorDescription title:@"获取订单失败"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 
@@ -104,65 +98,102 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return self.userView;
+    if (section == 0) {
+        return self.userView;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return self.userView.getViewHeight;
+    if (section == 0) {
+        return self.userView.getViewHeight;
+    }
+    return 0.0;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return self.billView;
+    if (self.confirmationviewModel.submenu) {
+        BN_ShopConfirmOrderItemModel *item = [self.confirmationviewModel.dataSource sectionAtIndex:section];
+        return [self getFooterInSectionView:item];
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return self.billView.getViewHeight;
+    if (self.confirmationviewModel.submenu) {
+        return 90;
+    }
+    return 0.0f;
 }
 
 
 #pragma mark - bill and profile view
-- (void)updateConfirmationView {
-//    [self.billView updateWith:[self.confirmationviewModel integralDeductionTips] retailPrice:[self.confirmationviewModel retailPriceTips] pointDeduction:[self.confirmationviewModel integralpriceTips] freight:[self.confirmationviewModel freightTips] deductioned:[self.confirmationviewModel isDeduction]];
-    [self.toolBar updateWith:[self.confirmationviewModel realPrice]];
-}
-
-- (void)updateUserView {
-    [self.userView updateWith:[self.userViewModel.userProfile contactPersonName] tel:[self.userViewModel telNum] tagged:self.userViewModel.isTagged provinces:[self.userViewModel provinceAndCity] street:[self.userViewModel.userProfile detailedAddr]];
-}
-
-#pragma mark - test
-- (void)testObects {
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger j=0; j<3; j++) {
-        TestCartItem *item = [[TestCartItem alloc] init];
-        item.selected = YES;
-        item.front_price = [NSString stringWithFormat:@"%ld", j+1];
-        item.real_price = [NSString stringWithFormat:@"%.2f", ((float)j+3)*(random()%30)];
-        item.num = j;
-        [array addObject:item];
+- (UIView *)getFooterInSectionView:(BN_ShopConfirmOrderItemModel *)item {
+    UIView *view = [[UIView alloc] init];
+    BN_ShopOrderNumberView *freightView = [BN_ShopOrderBillView nib];
+    if (item.freight_price) {
+        [freightView updateWith:@"运费" content:[item freightPriceStr]];
+    } else {
+        [freightView updateWith:@"运费" content:@"免运费"];
     }
-    
-    
-    self.tableView.dataSource = self.confirmationviewModel.dataSource;
-//    [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
-    [self.tableView reloadData];
-    
-    TestUserProfile *profile = [[TestUserProfile alloc] init];
-    profile.city = @"厦门市";
-    profile.province = @"福建省";
-    profile.district = @"思明区";
-    profile.detailedAddr = @"软件园二期何厝路口";
-    profile.contactPersonName = @"王久久";
-    profile.contactPersonPhoneNum = @"1234567890";
-    self.userViewModel.userProfile = profile;
-    [self updateUserView];
-    
-    self.confirmationviewModel.retailPrice = @"68.90";//商品总额
-    self.confirmationviewModel.integral = @"8";//积分
-    self.confirmationviewModel.deduction = NO;//是否抵扣积分
-    self.confirmationviewModel.freight = @"15.00"; //运费
-    [self updateConfirmationView];
+    BN_ShopOrderNumberView *priceView = [BN_ShopOrderBillView nib];
+    [priceView udatewithContentAttr:[item totalPriceAttributed]];
+    [view addSubview:freightView];
+    [view addSubview:priceView];
+    freightView.frame = CGRectMake(0, 0, WIDTH(self.tableView), 45.0);
+    priceView.frame = CGRectMake(0, 45.0, WIDTH(self.tableView), 45.0);
+    view.frame = CGRectMake(0, 0, WIDTH(self.tableView), 90.0f);
 }
 
+- (void)buildToolView {
+    self.toolBar = [BN_ShopOrdersToolBar nib];
+    [self.view addSubview:self.toolBar];
+    self.toolBar.frame = CGRectMake(0, HEIGHT(self.view), WIDTH(self.view), self.toolBar.getViewHeight);
+    [self.toolBar placeAnOrderWith:^(id sender) {
+        
+    }];
+    [self.toolBar updateWith:[self.confirmationviewModel realNeedPayStr]];
+}
+
+- (void)buildUserView {
+    self.userView = [BN_ShopOrderUserProfileView nib];
+    [self.userView updateWith:self.confirmationviewModel.ordreModel.userAddress.name tel:self.confirmationviewModel.ordreModel.userAddress.telNum tagged:NO provinces:[self.confirmationviewModel.ordreModel.userAddress provinceAndCity] street:self.confirmationviewModel.ordreModel.userAddress.address];
+}
+
+- (void)buildBillView {
+    self.billView = [BN_ShopOrderBillView nib];
+    [self.billView updateWith:[self.confirmationviewModel shopAcountStr] pointDeduction:[self.confirmationviewModel shopVailableStr] freight:[self.confirmationviewModel shopFreightStr]];
+    @weakify(self);
+    [self.billView addDeductionedPointForSelectedWithTask:^(BOOL deductioned) {
+        @strongify(self);
+        if (self.confirmationviewModel.userVailable != deductioned) {
+            
+            self.confirmationviewModel.userVailable = deductioned;
+            [self.billView updateWith:[self.confirmationviewModel shopAcountStr] pointDeduction:[self.confirmationviewModel shopVailableStr] freight:[self.confirmationviewModel shopFreightStr]];
+        }
+        
+    }];
+}
+
+- (void)buildPointView {
+    self.pointView = [BN_ShopOrderUsePointView nib];
+    [self.pointView updateWith:[self.confirmationviewModel.ordreModel vailableUseStr] deductioned:NO];
+    [self.pointView addDeductionedPointForSelectedWithTask:^(BOOL deductioned) {
+        
+    }];
+}
+
+
+- (void)buildTableFooterView {
+    [self buildBillView];
+    [self buildPointView];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.tableView), self.billView.getViewHeight+self.pointView.getViewHeight)];
+    [view addSubview:self.billView];
+    [view addSubview:self.pointView];
+    self.billView.frame = CGRectMake(0, 0, WIDTH(self.tableView), self.billView.getViewHeight);
+    self.pointView.frame = CGRectMake(0, self.billView.getViewHeight, WIDTH(self.tableView), self.pointView.getViewHeight);
+    self.tableView.tableFooterView = view;
+    
+}
 
 @end

@@ -39,6 +39,10 @@ typedef NS_ENUM(NSUInteger, GoodDetaiStateType) {
 @property (nonatomic, assign) int free_shipping_status;//0 不包邮1  全场包邮2  满包邮
 @property (nonatomic, assign) int buying_state;//0:未开始1:抢购中2:已结束
 @property (nonatomic, assign) int avg_score;//平均评价
+@property (nonatomic, copy) NSString *given_integral;//赠送积分数
+@property (nonatomic, assign) int type;//1:普通商2:限时商品
+
+
 
 
 @end

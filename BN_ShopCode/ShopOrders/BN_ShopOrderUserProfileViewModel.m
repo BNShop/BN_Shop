@@ -22,21 +22,21 @@
 
 - (NSString *)provinceAndCity {
     NSMutableString *address = [NSMutableString string];
-    if ([_userProfile province]) {
-        [address appendString:[_userProfile province]];
+    if ([_userProfile prov]) {
+        [address appendString:[_userProfile prov]];
         [address appendString:@"  "];
     }
     if ([_userProfile city]) {
         [address appendString:[_userProfile city]];
         [address appendString:@"  "];
     }
-    if ([_userProfile district]) {
-        [address appendString:[_userProfile district]];
+    if ([_userProfile dist]) {
+        [address appendString:[_userProfile dist]];
     }
     return [address copy];
 }
 
 - (NSString *)telNum {
-    return [[_userProfile contactPersonPhoneNum] safeStringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    return [[_userProfile phone] safeStringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
 }
 @end

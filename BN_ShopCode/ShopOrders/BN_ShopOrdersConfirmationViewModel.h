@@ -8,25 +8,60 @@
 
 #import <Foundation/Foundation.h>
 #import "MultipleSectionTableArraySource.h"
+#import "BN_ShopOrderCartItemModel.h"
+#import "BN_ShopUserAddressModel.h"
+
+@interface BN_ShopConfirmOrderItemModel : NSObject
+@property (nonatomic, strong) NSArray<BN_ShopOrderCartItemModel*> *shoppingCartList;
+@property (nonatomic, copy) NSString *freight_price;//yunfei
+@property (nonatomic, copy) NSString *total_price;//这段实际支付
+@property (nonatomic, copy) NSString *boUserId;
+@property (nonatomic, copy) NSString *goods_amount;//商品总金额
+
+- (NSAttributedString *)totalPriceAttributed;
+- (NSString *)freightPriceStr;
+
+@end
+
+@interface BN_ShopConfirmOrderSectionModel : NSObject
+@property (nonatomic, strong) NSMutableArray<BN_ShopConfirmOrderItemModel*> *rows;
+@property (nonatomic, copy) NSString *real_need_pay;//需实际支付
+@end
+
+@interface BN_ShopConfirmOrderModel : NSObject
+
+@property (nonatomic, strong) BN_ShopUserAddressModel *userAddress;
+@property (nonatomic, copy) NSString *vailableUse;//可用积分抵扣的钱
+@property (nonatomic, assign) int totalIntegral;//可用积分
+@property (nonatomic, strong) BN_ShopConfirmOrderSectionModel *resultMap;
+
+- (NSString *)vailableUseStr;
+
+@end
+
 @interface BN_ShopOrdersConfirmationViewModel : NSObject
 
-@property (nonatomic, strong)  MultipleSectionTableArraySource *dataSource;
+@property (nonatomic, copy) NSString *shoppingCartIds;//	购物车ID，多个，逗号隔开
+@property (nonatomic, copy) NSString *numbers;
 
-@property (nonatomic, copy) NSString *retailPrice;//商品总额
-@property (nonatomic, copy) NSString *integral;//积分
-@property (nonatomic, copy) NSString *integralprice;//可用积分抵扣的钱
-@property (nonatomic, assign, getter=isDeduction) BOOL deduction;//是否抵扣积分
-@property (nonatomic, copy) NSString *freight; //运费
+@property (nonatomic, strong)  MultipleSectionTableArraySource *dataSource;
+@property (nonatomic, strong) BN_ShopConfirmOrderModel *ordreModel;
+
+
+@property (nonatomic, assign) BOOL userVailable;//shifou使用积分
+@property (nonatomic, assign) BOOL submenu;//是否分单
+
+- (void)getShoppingOrderConfirmationDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure;
 
 
 - (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray*)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock configureSectionBlock:(TableViewSectionConfigureBlock)configureSectionBlock;
 - (void)addDataSourceWith:(SectionDataSource *)sectionDataSource;
 
-
-- (NSString *)realPrice;
-- (NSString *)integralDeductionTips;
-- (NSString *)retailPriceTips;
-- (NSString *)integralpriceTips;
-- (NSString *)freightTips;
-
+- (NSString *)realNeedPayStr;
+//商品总额
+- (NSString *)shopAcountStr;
+//运费
+- (NSString *)shopFreightStr;
+//积分抵扣
+- (NSString *)shopVailableStr;
 @end

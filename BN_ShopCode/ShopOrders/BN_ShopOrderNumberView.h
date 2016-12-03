@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIView+NIB.h"
 
 @interface BN_ShopOrderNumberView : UIView
 - (void)updateWith:(NSString *)title content:(NSString *)content;
 - (void)updateOrderStateContent;
 - (void)updateOrderPriceContent;
+- (void)udatewithContentAttr:(NSAttributedString *)content;
 - (CGFloat)getViewHeight;
 @end

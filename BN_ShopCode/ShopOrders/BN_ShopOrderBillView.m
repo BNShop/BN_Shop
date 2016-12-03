@@ -56,9 +56,9 @@
 */
 
 - (void)updateWith:(NSString *)retailPrice pointDeduction:(NSString *)pointDeduction freight:(NSString *)freight {
-    self.retailPriceLabel.text = retailPrice;
-    self.pointDeductionLabel.text = pointDeduction;
-    self.freightLabel.text = freight;
+    self.retailPriceLabel.text = [NSString stringWithFormat:@"¥%@", retailPrice];
+    self.pointDeductionLabel.text = [NSString stringWithFormat:@"-¥%@", pointDeduction];;
+    self.freightLabel.text = [NSString stringWithFormat:@"+¥%@", freight];
 }
 
 - (CGFloat)getViewHeight {

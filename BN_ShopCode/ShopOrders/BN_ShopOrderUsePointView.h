@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIView+NIB.h"
 
 @interface BN_ShopOrderUsePointView : UIView
 - (void)addDeductionedPointForSelectedWithTask:(void (^)(BOOL deductioned))task;

@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BN_ShopUserProfileProtocol.h"
+#import "BN_ShopUserAddressModel.h"
+#import "BN_ShopOrderItemProtocol.h"
+#import "BN_ShopOrderItemModel.h"
+#import "BN_ShopOrderCartItemModel.h"
 
 @interface BN_ShopOrderUserProfileViewModel : NSObject
 
-@property (nonatomic, strong) id<BN_ShopUserProfileProtocol> userProfile;
+@property (nonatomic, strong) BN_ShopUserAddressModel *userProfile;
 @property (nonatomic, assign, getter=isTagged) BOOL tagged;
 
 - (NSString *)provinceAndCity;

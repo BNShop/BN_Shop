@@ -60,9 +60,9 @@
 
 - (NSDate *)date {
     if (self.state == GoodDetaiState_Forward) {
-        return [NSDate dateFromString:self.simpleDetailModel.buying_start_time withFormat:@""];
+        return [NSDate dateFromString:self.simpleDetailModel.buying_start_time withFormat:self.simpleDetailModel.buying_start_time];
     } else if (self.state == GoodDetaiState_Panic) {
-        return [NSDate dateFromString:self.simpleDetailModel.buying_end_time withFormat:@""];
+        return [NSDate dateFromString:self.simpleDetailModel.buying_end_time withFormat:self.simpleDetailModel.buying_end_time];
     }
     return nil;
 }
@@ -82,7 +82,7 @@
 }
 
 - (NSString *)pointStr {
-    return TEXT(@"购买可送12积分");
+    return [NSString stringWithFormat:@"购买可送%@积分",self.simpleDetailModel.given_integral];
 }
 
 #pragma mark - 数据

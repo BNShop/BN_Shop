@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface BN_ShopSpecialTopicModel : NSObject
-@property (nonatomic, copy) NSString *imgUrl;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *tip;
-@property (nonatomic, copy) NSString *subTitle;
+@property (nonatomic, assign) long special_id;//商品主键
+@property (nonatomic, copy) NSString *content;//专题内容
+@property (nonatomic, copy) NSString *cover_img;//专题封面图
+@property (nonatomic, copy) NSString *name;//专题名称
+@property (nonatomic, copy) NSString *tagName;//标签名称
+
 @end

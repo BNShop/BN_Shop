@@ -16,6 +16,13 @@
     return text;
 }
 
+- (NSAttributedString *)setColor:(UIColor *)rangeColor restColor:(UIColor *)restColor range:(NSRange)range {
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:self attributes:@{NSForegroundColorAttributeName:restColor}];
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:str];
+    [text addAttribute:NSForegroundColorAttributeName value:rangeColor range:range];
+    return text;
+}
+
 //中划线
 - (NSAttributedString *)strikethroughAttribute{
     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};

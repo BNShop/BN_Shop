@@ -10,6 +10,7 @@
 
 @interface NSString (Attributed)
 - (NSAttributedString *)setFont:(UIFont *)rangeFont restFont:(UIFont *)restFont range:(NSRange)range;
+- (NSAttributedString *)setColor:(UIColor *)rangeColor restColor:(UIColor *)restColor range:(NSRange)range;
 - (NSAttributedString *)strikethroughAttribute;
 - (NSAttributedString *)underlineAttribute;
 @end

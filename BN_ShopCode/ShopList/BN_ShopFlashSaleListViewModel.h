@@ -17,5 +17,5 @@
 
 - (void)getLimiteGoodsClearData:(BOOL)clear;
 - (void)cancelTimer;
-- (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long))success failure:(void(^)(NSString *errorDescription))failure;
+- (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long warn_id))success failure:(void(^)(NSString *errorDescription))failure;
 @end

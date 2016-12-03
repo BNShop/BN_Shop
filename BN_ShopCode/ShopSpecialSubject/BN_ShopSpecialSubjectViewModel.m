@@ -84,7 +84,7 @@
 - (void)getTopicsData {
     NSDictionary *paraDic = @{@"specialId" : @(self.specialId)};
     
-    NSString *url = [NSString stringWithFormat:@"%@/special/list",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsSpecialList",BASEURL];
     __weak typeof(self) temp = self;
     self.recommends.loadSupport.loadEvent = NetLoadingEvent;
     

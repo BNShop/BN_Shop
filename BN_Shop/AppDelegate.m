@@ -20,10 +20,10 @@
     
 
         NSDictionary *paraDic = @{
-                                  @"phoneNum":@13489145937,
-                                  @"passwd":@(123456),
+                                  @"phoneNum":@"18006015791",
+                                  @"passwd":@"123456",
                                   @"deviceSystemType":@(2),
-                                  @"deviceId":@"12354222",
+                                  @"deviceId":@"12354222009090890987"
                                   };
         
         NSString *url = [NSString stringWithFormat:@"%@/mime/login",BASEURL];
