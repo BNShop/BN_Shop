@@ -63,7 +63,7 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     
     
     self.tableView.rowHeight = 135.0f;
-    self.tableView.sectionHeaderHeight = 36.0f;
+//    self.tableView.sectionHeaderHeight = 36.0f;
     [self.tableView registerNib:[BN_ShoppingCartCell nib] forCellReuseIdentifier:ShoppingCartTableCellIdentifier];
     self.tableView.backgroundColor = ColorWhite;
 }
@@ -95,8 +95,8 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     
     [self.tableView setBn_data:self.viewModel.shoppingCartList];
     [self.tableView setHeaderRefreshDatablock:^{
-        @strongify(self);
-        [self.viewModel getShoppingCartListData:YES];
+//        @strongify(self);
+//        [self.viewModel getShoppingCartListData:YES];
     } footerRefreshDatablock:^{
         @strongify(self);
         [self.viewModel getShoppingCartListData:NO];
@@ -112,13 +112,11 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
             SectionDataSource *section =  [self.viewModel getSectionDataSourceWith:nil items:@[item] cellIdentifier:ShoppingCartTableCellIdentifier configureCellBlock:^(id cell, BN_ShoppingCartItemModel *item) {
                 [(BN_ShoppingCartCell *)cell updateWith:[item isSelected] thumbnailUrl:item.pic_url title:item.name num:[item num] price:[item real_price]];
                 [(BN_ShoppingCartCell *)cell setDelegate:self];
-            } configureSectionBlock:^(UIView *view, id sectionDataSource, NSString *kind, NSIndexPath *indexPath) {
-                NSLog(@"section = %ld", (long)indexPath.section);
-            }];
+            } configureSectionBlock:nil];
             
             [self.viewModel addDataSourceWith:section];
         }
-        
+        self.tableView.dataSource = self.viewModel.dataSource;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
             [self.tableView reloadData];
@@ -148,9 +146,13 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
 {
     SectionDataSource *sectionDataSource = [self.viewModel.dataSource sectionAtIndex:section];
     if (!sectionDataSource.Title) {
-        return 0.0;
+        return 0.01;
     }
     return 36.0f;//通过这个方法设置高度，要不第一个heaerview不现实
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 135.0f;
 }
 #pragma mark - BN_ShoppingCartEndViewDelegate
 - (void)selectAll:(BOOL)isSelect {

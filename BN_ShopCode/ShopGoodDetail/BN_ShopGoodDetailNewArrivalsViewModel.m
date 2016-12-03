@@ -29,11 +29,11 @@
 #pragma mark - 获取提问列表
 - (void)getNewArrivalsClearData:(BOOL)clear goodsId:(long)goodsId
 {
-    int curPage = clear == YES ? 0 : round(self.arrivals.count/10.0);
-    NSDictionary *paraDic = @{
-                              @"goodsId" : @(goodsId)};
+//    int curPage = clear == YES ? 0 : round(self.arrivals.count/10.0);
+    NSDictionary *paraDic = nil;//@{
+//                              @"goodsId" : @(goodsId)};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsRecommendList",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsRecommendList?goodsId=%ld",BASEURL, goodsId];
     __weak typeof(self) temp = self;
     self.arrivals.loadSupport.loadEvent = NetLoadingEvent;
     

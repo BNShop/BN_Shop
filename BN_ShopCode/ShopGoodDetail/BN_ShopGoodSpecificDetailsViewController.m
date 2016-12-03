@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopGoodSpecificDetailsViewController.h"
+#import "PureLayout.h"
 
 @interface BN_ShopGoodSpecificDetailsViewController ()
 
@@ -152,6 +153,7 @@
 
 #pragma mark - set headView
 - (void)setFooterView:(UIView *)footerView {
+    self.footerHight += 60;
     if (!_footerView) {
         CGSize contentSize = self.webss.scrollView.contentSize;
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, contentSize.height, WIDTH(self.view), self.footerHight)];
@@ -163,8 +165,8 @@
         footerView.frame = rect;
         [footerView sizeToFit];
         [_footerView addSubview:footerView];
-        
     }
+    
 }
 
 

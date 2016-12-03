@@ -70,8 +70,12 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     __weak typeof(self) temp = self;
     [self.orderViewModel getShoppingOrderDetail:^{
         [temp.orderViewModel.dataSource resetItems:self.orderViewModel.detailModel.goodsList];
+        
+        [temp.tableView beginUpdates];
         [temp buildFooterView];
         [temp buildHeaderView];
+        [temp.tableView endUpdates];
+        
         temp.tableView.dataSource = temp.orderViewModel.dataSource;
         [temp.tableView reloadData];
     } failure:^(NSString *errorDescription) {

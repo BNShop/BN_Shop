@@ -119,15 +119,12 @@
 
 - (void)addShoppingCartWith:(long)goodsId num:(int)num success:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
     num = MAX(1, num);
-    NSDictionary *paraDic0 = @{@"goodsId" : @(goodsId),
-                              @"num" : @(num)};
-    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
-    if ([BC_ToolRequest sharedManager].token) {
-        [paraDic setObject:[BC_ToolRequest sharedManager].token forKey:@"token"];
-    }
-    [paraDic setValuesForKeysWithDictionary:paraDic0];
-    NSString *url = [NSString stringWithFormat:@"%@/mall/shoppingCart",BASEURL];
+    NSDictionary *paraDic = nil;//@{@"goodsId" : @(goodsId),
+                            //  @"num" : @(num)};
+    NSString *url = [NSString stringWithFormat:@"%@/mall/shoppingCart?goodsId=%@&num=%@",BASEURL, @(goodsId), @(num)];
+    
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSLog(@"%@, %@", operation.currentRequest, paraDic);
         NSDictionary *dic = responseObject;
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if (codeNumber.intValue != 0) {
@@ -147,4 +144,6 @@
     }];
     
 }
+
+
 @end

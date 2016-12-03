@@ -115,9 +115,9 @@
 
 - (void)getSpecialDetail {
     NSMutableDictionary *paraDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(self.specialId), @"id", nil];
-    if ([BC_ToolRequest sharedManager].token) {
-        [paraDic setObject:[BC_ToolRequest sharedManager].token forKey:@"token"];
-    }
+//    if ([BC_ToolRequest sharedManager].token) {
+//        [paraDic setObject:[BC_ToolRequest sharedManager].token forKey:@"token"];
+//    }
     
     NSString *url = [NSString stringWithFormat:@"%@/special/detail",BASEURL];
     __weak typeof(self) temp = self;

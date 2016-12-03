@@ -10,6 +10,7 @@
 #import "MultipleSectionTableArraySource.h"
 #import "BN_ShopOrderCartItemModel.h"
 #import "BN_ShopUserAddressModel.h"
+#import "BN_ShopGoodDetaiStateViewModel.h"
 
 @interface BN_ShopConfirmOrderItemModel : NSObject
 @property (nonatomic, strong) NSArray<BN_ShopOrderCartItemModel*> *shoppingCartList;
@@ -17,6 +18,7 @@
 @property (nonatomic, copy) NSString *total_price;//这段实际支付
 @property (nonatomic, copy) NSString *boUserId;
 @property (nonatomic, copy) NSString *goods_amount;//商品总金额
+@property (nonatomic, strong) BN_ShopGoodSimpleDetailModel *goodDetailModel;
 
 - (NSAttributedString *)totalPriceAttributed;
 - (NSString *)freightPriceStr;
@@ -31,7 +33,7 @@
 @interface BN_ShopConfirmOrderModel : NSObject
 
 @property (nonatomic, strong) BN_ShopUserAddressModel *userAddress;
-@property (nonatomic, copy) NSString *vailableUse;//可用积分抵扣的钱
+@property (nonatomic, copy) NSString *availableUse;//可用积分抵扣的钱
 @property (nonatomic, assign) int totalIntegral;//可用积分
 @property (nonatomic, strong) BN_ShopConfirmOrderSectionModel *resultMap;
 

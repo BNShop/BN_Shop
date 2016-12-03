@@ -34,9 +34,9 @@
                               @"question":text
                               };
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
-    if ([BC_ToolRequest sharedManager].token) {
-        [paraDic setObject:[BC_ToolRequest sharedManager].token forKey:@"token"];
-    }
+//    if ([BC_ToolRequest sharedManager].token) {
+//        [paraDic setObject:[BC_ToolRequest sharedManager].token forKey:@"token"];
+//    }
     [paraDic setValuesForKeysWithDictionary:paraDic0];
     
     NSString *url = [NSString stringWithFormat:@"%@/mall/consulting",BASEURL];

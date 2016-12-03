@@ -92,9 +92,13 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
             } configureSectionBlock:nil];
             [temp.confirmationviewModel addDataSourceWith:section];
         }
-        [temp buildTableFooterView];
+        [temp buildUserView];
+        [temp buildToolView];
+        
         temp.tableView.dataSource = temp.confirmationviewModel.dataSource;
         [temp.tableView reloadData];
+        
+        [temp buildTableFooterView];
         
     } failure:^(NSString *errorDescription) {
         [self showHudError:errorDescription title:@"获取订单失败"];
@@ -111,20 +115,24 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return self.userView;
+    } else {
+        UIView *view = [[UIView alloc] init];
+        view.backgroundColor = ColorBackground;
+        return view;
+        
     }
-    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return self.userView.getViewHeight;
     }
-    return 0.0;
+    return 5;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if (self.confirmationviewModel.submenu) {
-        BN_ShopConfirmOrderItemModel *item = [self.confirmationviewModel.dataSource sectionAtIndex:section];
+        BN_ShopConfirmOrderItemModel *item = [self.confirmationviewModel.ordreModel.resultMap.rows objectAtIndex:section];
         return [self getFooterInSectionView:item];
     }
     return nil;
@@ -134,42 +142,44 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     if (self.confirmationviewModel.submenu) {
         return 90;
     }
-    return 0.0f;
+    return 0.01f;
 }
 
 
 #pragma mark - bill and profile view
 - (UIView *)getFooterInSectionView:(BN_ShopConfirmOrderItemModel *)item {
-    UIView *view = [[UIView alloc] init];
-    BN_ShopOrderNumberView *freightView = [BN_ShopOrderBillView nib];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.view), 90.0f)];
+
+    
+    BN_ShopOrderNumberView *freightView = [BN_ShopOrderNumberView nib];
     if (item.freight_price) {
         [freightView updateWith:@"运费" content:[item freightPriceStr]];
     } else {
         [freightView updateWith:@"运费" content:@"免运费"];
     }
-    BN_ShopOrderNumberView *priceView = [BN_ShopOrderBillView nib];
+    freightView.frame = CGRectMake(0, 0, WIDTH(self.tableView), 45.0);
+    
+    BN_ShopOrderNumberView *priceView = [BN_ShopOrderNumberView nib];
     [priceView udatewithContentAttr:[item totalPriceAttributed]];
+    priceView.frame = CGRectMake(0, 45.0, WIDTH(self.tableView), 45.0);
+    
     [view addSubview:freightView];
     [view addSubview:priceView];
-    freightView.frame = CGRectMake(0, 0, WIDTH(self.tableView), 45.0);
-    priceView.frame = CGRectMake(0, 45.0, WIDTH(self.tableView), 45.0);
-    view.frame = CGRectMake(0, 0, WIDTH(self.tableView), 90.0f);
+    
+    
     return view;
 }
 
 - (void)buildToolView {
     self.toolBar = [BN_ShopOrdersToolBar nib];
     [self.view addSubview:self.toolBar];
-    self.toolBar.frame = CGRectMake(0, HEIGHT(self.view), WIDTH(self.view), self.toolBar.getViewHeight);
+    self.toolBar.frame = CGRectMake(0, HEIGHT(self.view)-self.toolBar.getViewHeight, WIDTH(self.view), self.toolBar.getViewHeight);
     @weakify(self);
     [self.toolBar placeAnOrderWith:^(id sender) {
         @strongify(self);
-        [self showHud:YES];
         [self.confirmationviewModel getShoppingOrderDetail:^{
 #warning 下单成功跳转
-            [self showHud:NO];
         } failure:^(NSString *errorDescription) {
-            [self showHud:NO];
             [self showHudError:errorDescription title:@"下单失败"];
         }];
 
@@ -180,6 +190,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 - (void)buildUserView {
     self.userView = [BN_ShopOrderUserProfileView nib];
     [self.userView updateWith:self.confirmationviewModel.ordreModel.userAddress.name tel:self.confirmationviewModel.ordreModel.userAddress.telNum tagged:NO provinces:[self.confirmationviewModel.ordreModel.userAddress provinceAndCity] street:self.confirmationviewModel.ordreModel.userAddress.address];
+    self.userView.frame = CGRectMake(0, 0, WIDTH(self.view), self.userView.getViewHeight);
     [self.userView bk_whenTapped:^{
 #warning 跳转去改变地址
         //        self.confirmationviewModel.ordreModel.userAddress.address_id = 0099;
@@ -202,6 +213,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
             
             self.confirmationviewModel.userVailable = deductioned;
             [self.billView updateWith:[self.confirmationviewModel shopAcountStr] pointDeduction:[self.confirmationviewModel shopVailableStr] freight:[self.confirmationviewModel shopFreightStr]];
+            [self.toolBar updateWith:[self.confirmationviewModel realNeedPayStr]];
         }
     }];
 }
@@ -210,12 +222,17 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 - (void)buildTableFooterView {
     [self buildBillView];
     [self buildPointView];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.tableView), self.billView.getViewHeight+self.pointView.getViewHeight)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.tableView), self.billView.getViewHeight+self.pointView.getViewHeight+5)];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.view), 5)];
+    lineView.backgroundColor = ColorBackground;
+    [view addSubview:lineView];
     [view addSubview:self.billView];
     [view addSubview:self.pointView];
-    self.billView.frame = CGRectMake(0, 0, WIDTH(self.tableView), self.billView.getViewHeight);
-    self.pointView.frame = CGRectMake(0, self.billView.getViewHeight, WIDTH(self.tableView), self.pointView.getViewHeight);
+    self.billView.frame = CGRectMake(0, self.pointView.getViewHeight+5, WIDTH(self.tableView), self.billView.getViewHeight);
+    self.pointView.frame = CGRectMake(0, 5, WIDTH(self.tableView), self.pointView.getViewHeight);
+    [self.tableView beginUpdates];
     self.tableView.tableFooterView = view;
+    [self.tableView endUpdates];
     
 }
 

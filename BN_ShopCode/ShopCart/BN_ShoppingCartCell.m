@@ -35,7 +35,6 @@
     self.priceLabel.font = Font12;
     self.thumbnailImageView.q_BorderColor = ColorLine;
     self.thumbnailImageView.q_BorderWidth = 1.0f;
-    self.thumbnailImageView.backgroundColor = [UIColor yellowColor];
     
     @weakify(self)
     self.stepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {

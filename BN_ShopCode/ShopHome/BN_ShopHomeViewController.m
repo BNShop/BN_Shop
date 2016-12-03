@@ -36,7 +36,7 @@
 #import "BN_ShopHomeSouvenirCellModel.h"
 #import "BN_ShopHomeViewModel.h"
 
-@interface BN_ShopHomeViewController ()
+@interface BN_ShopHomeViewController ()<BN_ShopHomeSouvenirCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *scrollToTopButton;
 
@@ -141,33 +141,8 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     @weakify(self);
     self.viewModel.dataSource = [[TableDataSource alloc] initWithItems:array cellIdentifier:ShopHomeCellIdentifier configureCellBlock:^(id cell, id item) {
         @strongify(self);
+        [(BN_ShopHomeSouvenirCell *)cell setDelegate:self];
         [[(BN_ShopHomeSouvenirCell *)cell collectionView] registerNib:[BN_ShopGoodCell nib] forCellWithReuseIdentifier:ShopHomeSouvenirCellIdentifier];
-        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeSouvenirCellSignal]subscribeNext:^(id x) {
-            
-            UITableViewCell *cell = [(NSArray *)x firstObject];
-            NSIndexPath *indexPath = [(NSArray *)x lastObject];
-            @strongify(self);
-            NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
-            NSLog(@"首页点击 section = %ld, row = %ld", (long)sectionIndex.row, (long)indexPath.row);
-            
-            BN_ShopHomeSouvenirCellModel *cellModel = [self.viewModel.dataSource itemAtIndex:sectionIndex.row];
-            BN_ShopSouvenirGoodModel *good = [cellModel.dataSource itemAtIndex:indexPath.row];
-            
-            BN_ShopGoodDetailViewController *detailCtr = [[BN_ShopGoodDetailViewController alloc] initWith:good.goods_id];
-            [self.navigationController pushViewController:detailCtr animated:YES];
-        }];
-        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeClickTitleSignal] subscribeNext:^(id x) {
-            @strongify(self);
-            NSIndexPath *sectionIndex = [self.tableView indexPathForCell:(UITableViewCell *)x];
-            BN_ShopSouvenirModel *categoryM = [self.viewModel.souvenirs objectAtIndex:sectionIndex.row];
-            BN_ShopSorterViewController *ctr = [[BN_ShopSorterViewController alloc] initWith:categoryM.category_id];
-            [self.navigationController pushViewController:ctr animated:YES];
-        }];
-        [[(BN_ShopHomeSouvenirCell *)cell rac_shopHomeClickThumbnailSignal] subscribeNext:^(id x) {
-            @strongify(self);
-            NSIndexPath *sectionIndex = [self.tableView indexPathForCell:(UITableViewCell *)x];
-            NSLog(@"首页点击缩略图 section = %ld", (long)sectionIndex.row);
-        }];
         BN_ShopHomeSouvenirCellModel *model = (BN_ShopHomeSouvenirCellModel *)item;
         [(BN_ShopHomeSouvenirCell *)cell collectionView].dataSource = model.dataSource;
         [(BN_ShopHomeSouvenirCell *)cell updateWith:model.title thumbnailUrl:model.thumbnailUrl dataSource:model.dataSource];
@@ -261,8 +236,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 #warning 点击广告图的跳转
         @strongify(self);
         BN_ADModel *adObj = [self.adViewModel adItemWithIndex:currentIndex];
-        BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:adObj.objId];
-        [self.navigationController pushViewController:ctr animated:YES];
+        
     };
 }
 
@@ -344,6 +318,34 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 
 - (void) updateCategoryView {
     [self.categoryView updateWith:self.categoryViewModel.categoryTitles];
+}
+
+#pragma mark - BN_ShopHomeSouvenirCellDelegate
+- (void)tableViewWith:(UITableViewCell *)cell collectionViewDidSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
+    NSLog(@"首页点击 section = %ld, row = %ld", (long)sectionIndex.row, (long)indexPath.row);
+    
+    BN_ShopHomeSouvenirCellModel *cellModel = [self.viewModel.dataSource itemAtIndex:sectionIndex.row];
+    BN_ShopSouvenirGoodModel *good = [cellModel.dataSource itemAtIndex:indexPath.row];
+    
+    BN_ShopGoodDetailViewController *detailCtr = [[BN_ShopGoodDetailViewController alloc] initWith:good.goods_id];
+    [self.navigationController pushViewController:detailCtr animated:YES];
+
+}
+
+- (void)clickTitleWith:(UITableViewCell *)cell {
+    NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
+    BN_ShopSouvenirModel *categoryM = [self.viewModel.souvenirs objectAtIndex:sectionIndex.row];
+    BN_ShopSorterViewController *ctr = [[BN_ShopSorterViewController alloc] initWith:categoryM.category_id];
+    [self.navigationController pushViewController:ctr animated:YES];
+}
+
+- (void)clickThumbnailWith:(UITableViewCell *)cell{
+    NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
+    BN_ShopSouvenirModel *model = [self.viewModel.souvenirs objectAtIndex:sectionIndex.section];
+    NSLog(@"首页点击缩略图 section = %ld", (long)sectionIndex.row);
+    BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:model.obj_id];
+    [self.navigationController pushViewController:ctr animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate

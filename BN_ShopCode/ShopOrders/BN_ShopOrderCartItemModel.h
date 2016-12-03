@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface BN_ShopOrderCartItemModel : NSObject
-@property (nonatomic, assign) int goodsId;
+@property (nonatomic, assign) long goodsId;
 @property (nonatomic, assign) int fk_t_bo_user_id;
 @property (nonatomic, assign) int free_shipping_status;
 @property (nonatomic, assign) int free_shipping_amount;

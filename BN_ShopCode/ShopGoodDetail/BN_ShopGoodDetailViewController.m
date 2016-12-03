@@ -242,6 +242,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
             [self.sellersView updateWith:self.stateViewModel.simpleDetailModel.shop_name iconUrl:self.stateViewModel.simpleDetailModel.shop_logo];
             [self.transitionToolBar updateWith:self.stateViewModel.commentNumStr];
             [self.friendlyWarningView updateWith:self.stateViewModel.freeShippingStatus point:self.stateViewModel.pointStr deliver:@"第三方发货"];
+            
         });
        
     }];
@@ -303,7 +304,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 //        @strongify(self);
 //        [self.arribalsViewModel getNewArrivalsClearData:NO goodsId:self.simpleShowViewModel.goodsId];
 //    }];
-    
+//    
 //    [self.arribalsView.collectionView setCollectionViewData:self.arribalsViewModel.arrivals];
     [self.arribalsView.collectionView setBn_data:self.arribalsViewModel.arrivals];
     
@@ -314,6 +315,8 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.arribalsViewModel.arrivals.loadSupport setDataRefreshblock:^{
         @strongify(self);
         [self.arribalsView.collectionView reloadData];
+        [self.arribalsView updateWith:self.arribalsViewModel.dataSource];
+        [self.arribalsView updateWith:self.arribalsViewModel.title subTitle:self.arribalsViewModel.subTitle];
     }];
     [self.arribalsViewModel getNewArrivalsClearData:YES goodsId:self.simpleShowViewModel.goodsId];
     
@@ -323,6 +326,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 - (void)buildArribalsView {
     self.arribalsView = [BN_ShopGoodDetailNewArrivalsView nib];
+    self.arribalsView.frame = CGRectMake(0, 0, WIDTH(self.view), 192.0);
     [self.arribalsView updateWith:ShopGoodDetailNewArrivalsCellIdentifier registerNib:[BN_ShopGoodDetailNewArribalsCell nib]];
     [self.arribalsView updateWith:self.arribalsViewModel.dataSource];
     [self.arribalsView updateWith:self.arribalsViewModel.title subTitle:self.arribalsViewModel.subTitle];
@@ -462,7 +466,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         [self showHudSucess:TEXT(@"加入购物车")];
     } failure:^(NSString *errorDescription) {
         @strongify(self);
-        [self showHudError:TEXT(@"加入购物车失败") title:errorDescription];
+        [self showHudError:errorDescription title:TEXT(@"加入购物车失败")];
     }];
 }
 @end

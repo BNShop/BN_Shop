@@ -9,6 +9,8 @@
 #import "BN_ShopOrdersConfirmationViewModel.h"
 #import "NSString+Attributed.h"
 #import "NSError+Description.h"
+#import "BN_ShopGoodModel.h"
+
 
 @implementation BN_ShopConfirmOrderItemModel
 
@@ -22,7 +24,7 @@
     
     NSString *total = [NSString stringWithFormat:@"%@%@", num, price];
     NSRange range = [total rangeOfString:price];
-    return [total setColor:nil restColor:nil range:range];
+    return [total setColor:ColorRed restColor:ColorLightGray range:range];
 }
 
 - (NSString *)freightPriceStr {
@@ -49,7 +51,7 @@
 }
 
 - (NSString *)vailableUseStr {
-    return [NSString stringWithFormat:@"%@%d%@¥%@", TEXT(@"可用"), self.totalIntegral, TEXT(@"抵扣"), self.vailableUse];
+    return [NSString stringWithFormat:@"%@%d%@¥%@", TEXT(@"可用"), self.totalIntegral, TEXT(@"抵扣"), self.availableUse];
 }
 
 @end
@@ -79,7 +81,7 @@
     
     if (self.userVailable) {
         float pay = [self.ordreModel.resultMap.real_need_pay floatValue];
-        float vailable = [self.ordreModel.vailableUse floatValue];
+        float vailable = [self.ordreModel.availableUse floatValue];
         
         return [NSString stringWithFormat:@"¥%.2f", (pay-vailable)];
     }
@@ -105,30 +107,31 @@
 //积分抵扣
 - (NSString *)shopVailableStr {
     if (self.userVailable) {
-        return [NSString stringWithFormat:@"-¥%@", self.ordreModel.vailableUse];
+        return [NSString stringWithFormat:@"-¥%@", self.ordreModel.availableUse];
     }
     return @"-¥0.00";
 }
 
 #pragma mark - 获取数据
 - (void)getShoppingOrderConfirmationDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
-    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    NSMutableDictionary *paraDic = nil;//[NSMutableDictionary dictionary];
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmOrder",BASEURL];
+    NSString *url = nil;// [NSString stringWithFormat:@"%@/mall/confirmOrder",BASEURL];
     if (self.goodsId > 0 && self.num > 0) {
-        url = [NSString stringWithFormat:@"%@/mall/specialConfirmOrder",BASEURL];
+        url = [NSString stringWithFormat:@"%@/mall/specialConfirmOrder?goodsId=%ld&num=%d",BASEURL, self.goodsId, self.num];
         paraDic[@"goodsId"] = @(self.goodsId);
         paraDic[@"num"] = @(self.num);
     } else {
-        NSString *shoppingCartIdStr = [self.shoppingCartIds stringByAppendingString:@","];;//	购物车ID，多个，逗号隔开
-        NSString *numberStr = [self.numbers stringByAppendingString:@","];
+
+        url = [NSString stringWithFormat:@"%@/mall/confirmOrder?shoppingCartIds=%@&numbers=%@",BASEURL, self.shoppingCartIds, self.numbers];
         
-        paraDic[@"shoppingCartIds"] = shoppingCartIdStr;
-        paraDic[@"numbers"] = numberStr;
+        
+        paraDic[@"shoppingCartIds"] = self.shoppingCartIds;
+        paraDic[@"numbers"] = self.numbers;
     }
     __weak typeof(self) temp = self;
     
-    [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if (codeNumber.intValue != 0) {
@@ -140,6 +143,28 @@
         } else {
             temp.ordreModel = [BN_ShopConfirmOrderModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
             temp.submenu = temp.ordreModel.resultMap.rows.count > 1;
+            NSDictionary *resultMap = [[dic objectForKey:@"result"] objectForKey:@"resultMap"];
+            NSDictionary *resultMap0 = [resultMap objectForKey:@"resultMap"];
+            NSDictionary *goodsDetail = [resultMap0 objectForKey:@"goodsDetail"];
+            if (temp.goodsId > 0) {
+                temp.ordreModel.resultMap.rows = [NSMutableArray array];
+                BN_ShopConfirmOrderItemModel *itemModel = [BN_ShopConfirmOrderItemModel mj_objectWithKeyValues:resultMap0];
+                [temp.ordreModel.resultMap.rows addObject:itemModel];
+                
+                itemModel.goodDetailModel = [BN_ShopGoodSimpleDetailModel mj_objectWithKeyValues:goodsDetail];
+                
+                NSMutableArray *tmplist = [NSMutableArray array];
+                BN_ShopOrderCartItemModel *cartItemModel = [[BN_ShopOrderCartItemModel alloc] init];
+                [tmplist addObject:cartItemModel];
+                cartItemModel.goodsId = temp.goodsId;
+                cartItemModel.fk_t_bo_user_id = [itemModel.boUserId intValue];
+                cartItemModel.real_price = itemModel.goodDetailModel.real_price;
+                cartItemModel.name = itemModel.goodDetailModel.name;
+                cartItemModel.pic_url = itemModel.goodDetailModel.pic_url;
+                cartItemModel.num = temp.num;
+                cartItemModel.standard = itemModel.goodDetailModel.standard;
+                itemModel.shoppingCartList = tmplist;
+            }
             
             if (success) {
                 success();
@@ -159,20 +184,38 @@
     if (self.ordreModel.userAddress.address_id) {
         paraDic[@"addressId"] = @(self.ordreModel.userAddress.address_id);
     }
-    paraDic[@"integral"] = @(self.ordreModel.totalIntegral);
+    paraDic[@"integral"] = self.ordreModel.availableUse;
 
-    paraDic[@"isUseIntegral"] = @(self.userVailable);
+    if (self.userVailable) {
+        paraDic[@"isUseIntegral"] = @(1);
+    } else {
+        paraDic[@"isUseIntegral"] = @(0);
+    }
+    
     paraDic[@"real_need_pay"] = self.ordreModel.resultMap.real_need_pay;
     
     // Model array -> JSON array
-    NSArray *dictArray = [BN_ShopOrderCartItemModel mj_keyValuesArrayWithObjectArray:self.ordreModel.resultMap.rows];
-    
-    
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictArray options:NSJSONWritingPrettyPrinted error:&error];
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
-    paraDic[@"rows"] = jsonString;
+    if (self.goodsId > 0 && self.num > 0) {
+        BN_ShopConfirmOrderItemModel *item = (BN_ShopConfirmOrderItemModel *)self.ordreModel.resultMap.rows.firstObject;
+        NSDictionary *goodDic = @{@"num":@(self.num), @"goodsId":@(self.goodsId)};
+        NSDictionary *rowItemDic = @{@"goods":@[goodDic], @"boUserId":item.boUserId, @"freight_price":item.freight_price, @"total_price":item.total_price};
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:@[rowItemDic] options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        paraDic[@"rows"] = [[jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
+    } else {
+        NSArray *dictArray = [BN_ShopOrderCartItemModel mj_keyValuesArrayWithObjectArray:self.ordreModel.resultMap.rows];
+        
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictArray options:NSJSONWritingPrettyPrinted error:&error];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        paraDic[@"rows"] = [[jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    }
+    NSLog(@"jsonstr = %@", paraDic[@"rows"]);
     NSString *url = [NSString stringWithFormat:@"%@/mall/confirmOrder",BASEURL];
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
