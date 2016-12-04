@@ -181,8 +181,10 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         [self.confirmationviewModel getShoppingOrderDetail:^(NSArray *orderIds) {
             //下单成功的处理
             long orderid = [[orderIds firstObject] longValue];
+            UINavigationController *nav = self.navigationController;
+            [self.navigationController popViewControllerAnimated:NO];
             BN_ShopOrderDetailViewController *ctr = [[BN_ShopOrderDetailViewController alloc] initWith:[NSString stringWithFormat:@"%ld", orderid]];
-            [self.navigationController pushViewController:ctr animated:YES];
+            [nav pushViewController:ctr animated:YES];
             
         } failure:^(NSString *errorDescription) {
             [self showHudError:errorDescription title:@"下单失败"];

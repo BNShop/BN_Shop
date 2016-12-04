@@ -89,6 +89,9 @@
     }
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if (codeNumber.intValue != 0) {
             NSString *errorStr = [dic objectForKey:@"remark"];
