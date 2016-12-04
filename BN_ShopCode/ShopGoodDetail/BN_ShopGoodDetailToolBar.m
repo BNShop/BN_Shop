@@ -56,6 +56,10 @@
     self.followButton.selected = select;
 }
 
+- (void)updateWithAoppositeSelect {
+    self.followButton.selected = !self.followButton.selected;
+}
+
 - (CGFloat)getViewHeight {
     return 50.0f;
 }

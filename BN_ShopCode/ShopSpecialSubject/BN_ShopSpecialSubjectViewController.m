@@ -8,6 +8,9 @@
 
 #import "BN_ShopSpecialSubjectViewController.h"
 #import "UIBarButtonItem+BlocksKit.h"
+#import "BN_ShopGoodDetailBuyViewController.h"
+#import "BN_ShopGoodDetailViewController.h"
+#import "BN_ShopOrdersConfirmationViewController.h"
 
 #import "BN_ShopSpecialSubjectViewModel.h"
 
@@ -25,9 +28,11 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "NSString+Attributed.h"
 
+#import "BN_ShopToolRequest.h"
 
 
-@interface BN_ShopSpecialSubjectViewController () <UITableViewDelegate>
+
+@interface BN_ShopSpecialSubjectViewController () <UITableViewDelegate, BN_ShopGoodDetailBuyViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) BN_ShopSpecialSubjectViewModel *viewModel;
@@ -76,7 +81,11 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
 #warning 分享操作
     }];
     UIBarButtonItem *item1 = [[UIBarButtonItem alloc] bk_initWithImage:IMAGE(@"Shop_SpecialSubject_UnFollow") style:UIBarButtonItemStylePlain handler:^(id sender) {
-#warning 收藏操作
+        [[BN_ShopToolRequest sharedInstance] collecteWith:self.viewModel.specialId allSpotsType:14 success:^(int collecteState, NSString *collecteMessage) {
+            item1.image = collecteState ? IMAGE(@"Shop_SpecialSubject_UnFollow") : IMAGE(@"Shop_SpecialSubject_Follow");
+        } failure:^(NSString *errorDescription) {
+            [self showHudPrompt:errorDescription];
+        }];
     }];
     item0.tintColor = ColorBlack;
     item1.tintColor = ColorBlack;
@@ -119,7 +128,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     SectionDataSource *commentSection = [self.viewModel.dataSource sectionAtIndex:1];
     commentSection.cellIdentifier = ShopSpecialCommentCellIdentifier;
     commentSection.configureCellBlock = ^(id cell, BN_ShopGoodSpecialCommentModel *item){
-        [(BN_ShopSpecialCommentCell *)cell updateWith:nil comentNum:[NSString stringWithFormat:@"%d",item.commentsNum] follow:NO];
+        [(BN_ShopSpecialCommentCell *)cell updateWith:[NSString stringWithFormat:@"%d", item.likeNum] comentNum:[NSString stringWithFormat:@"%d",item.commentsNum] follow:NO];
         [(BN_ShopSpecialCommentCell *)cell updateWith:item.userPicUrl name:item.userName content:item.remark date:item.commentDate];
         [(BN_ShopSpecialCommentCell *)cell updateWith:item.pics];
     };
@@ -128,7 +137,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     specialsSection.cellIdentifier = ShopSpecialSubjectCellIdentifier;
     specialsSection.configureCellBlock = ^(id cell, BN_ShopGoodSpecialModel *item){
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.titleDisplay subTitle:item.viceTitleDisplay content:[self.viewModel contentAttributed:item.contentDisplay] follow:[NSString stringWithFormat:@"%d",item.likeNum] price:[self.viewModel realAttributedPrice:item.real_price]];
+        [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
         [(BN_ShopSpecialSubjectCell *)cell updateWith:item.imageUrl1 subImgUrl:item.imageUrl2 completed:^(id cell) {
             @strongify(self);
             NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
@@ -137,9 +146,8 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
             }
         }];
         [(BN_ShopSpecialSubjectCell *)cell  clickedAction:^(id sender) {
-#warning 点击购买做什么呢
             @strongify(self);
-            
+            [self addToCart:item];
         }];
     };
     
@@ -148,6 +156,10 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     tipsSection.configureCellBlock = ^(id cell, BN_ShopSpecialTopicModel *item){
         [(BN_ShopSpecialTopicCell *)cell updateWith:item.cover_img title:item.name subTitle:item.content tip:item.tagName];
     };
+    [self.viewModel.tagDataSource resetellIdentifier:ShopSpecialSubjectTipCellIdentifier configureCellBlock:^(id cell, BN_ShopspecialTagModel *item) {
+        [(BN_ShopSpecialSubjectTipCell *)cell updateWith:item.tagName];
+    }];
+    
     [self.view setBn_data:self.viewModel];
     [self.view setRefreshBlock:^{
         @strongify(self);
@@ -155,31 +167,19 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     }];
     [self.viewModel.loadSupport setDataRefreshblock:^{
         @strongify(self);
-        [self.viewModel.tagDataSource resetellIdentifier:ShopSpecialSubjectTipCellIdentifier configureCellBlock:^(id cell, BN_ShopspecialTagModel *item) {
-            [(BN_ShopSpecialSubjectTipCell *)cell updateWith:item.tagName];
-        }];
+        SectionDataSource *commentSection = [self.viewModel.dataSource sectionAtIndex:1];
+        SectionDataSource *specialsSection = [self.viewModel.dataSource sectionAtIndex:0];
+        [specialsSection resetItems:self.viewModel.specials];
+        [commentSection resetItems:self.viewModel.commentsRecord];
+        [self.viewModel.tagDataSource resetItems:self.viewModel.tags];
+        
+        self.tableView.dataSource = self.viewModel.dataSource;
         [self buildSubjectHeadView];
         [self buildCommentHeadView];
         [self.tableView reloadData];
-        [self buildSpecialsData];
-    }];
-    [self.viewModel getSpecialDetail];
-    
-}
-
-- (void)buildSpecialsData {
-    @weakify(self);
-    [self.subjectHeadView setBn_data:self.viewModel.specials];
-    [self.subjectHeadView setRefreshBlock:^{
-        @strongify(self);
-        [self.viewModel getSpecialsData];
-    }];
-    [self.viewModel.specials.loadSupport setDataRefreshblock:^{
-        @strongify(self);
-        [self.tableView reloadData];
         [self buildTopicsData];
     }];
-    [self.viewModel getSpecialsData];
+    [self.viewModel getSpecialDetail];
     
 }
 
@@ -209,7 +209,8 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
         [self.subjectHeadView collectionViewRegisterNib:[BN_ShopSpecialSubjectTipCell nib] forCellWithReuseIdentifier:ShopSpecialSubjectTipCellIdentifier];
     }
     
-    [self.subjectHeadView updateWith:self.viewModel.specialDetail.coverImagesUrl comment:[NSString stringWithFormat:@"%d", self.viewModel.specialDetail.commentsNum] follow:[NSString stringWithFormat:@"%d", self.viewModel.specialDetail.collecteNum] like:[NSString stringWithFormat:@"%d", self.viewModel.specialDetail.likeNum] content:self.viewModel.specialDetail.content];
+    [self.subjectHeadView updateWith:self.viewModel.specialDetail.cover_img comment:[NSString stringWithFormat:@"%d", self.viewModel.specialDetail.total_comment] follow:[NSString stringWithFormat:@"%d", self.viewModel.specialDetail.total_collected] like:[NSString stringWithFormat:@"%d", self.viewModel.specialDetail.total_like] content:self.viewModel.specialDetail.content_display];
+    
     [self.subjectHeadView updateWith:self.viewModel.dataSource];
 
 }
@@ -225,7 +226,12 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     [self.commentHeadView updateWith:[self.viewModel collectedNumStr] follow:self.viewModel.isFollow];
     [self.commentHeadView updateWith:self.viewModel.collectedImgs];
     [self.commentHeadView clickedFollowAction:^(id sender) {
-#warning  点击收藏的+号处理
+        [[BN_ShopToolRequest sharedInstance] collecteWith:self.viewModel.specialId allSpotsType:14 success:^(int collecteState, NSString *collecteMessage) {
+            UIBarButtonItem *item1 = [self.navigationItem.rightBarButtonItems lastObject];
+            item1.image = collecteState ? IMAGE(@"Shop_SpecialSubject_UnFollow") : IMAGE(@"Shop_SpecialSubject_Follow");
+        } failure:^(NSString *errorDescription) {
+            [self showHudPrompt:errorDescription];
+        }];
     }];
 }
 
@@ -243,7 +249,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
         @weakify(self);
         CGFloat height = [tableView fd_heightForCellWithIdentifier:ShopSpecialSubjectCellIdentifier configuration:^(id cell) {
             BN_ShopGoodSpecialModel *item = [self.viewModel.dataSource itemAtIndexPath:indexPath];
-            [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.titleDisplay subTitle:item.viceTitleDisplay content:[self.viewModel contentAttributed:item.contentDisplay] follow:[NSString stringWithFormat:@"%d",item.likeNum] price:[self.viewModel realAttributedPrice:item.real_price]];
+            [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
             [(BN_ShopSpecialSubjectCell *)cell updateWith:item.imageUrl1 subImgUrl:item.imageUrl2 completed:^(id cell) {
                 @strongify(self);
                 NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
@@ -308,8 +314,38 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if (indexPath.section == 0) {
+        BN_ShopGoodSpecialModel *good = [self.viewModel.dataSource itemAtIndexPath:indexPath];
+        [self showGoodDetail:good.obj_id];
+    }
+    
 }
 
-#pragma mark -
+#pragma mark - 进行购买跟跳转
+- (void)showGoodDetail:(long)goods_id {
+    if (goods_id) {
+        BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:goods_id];
+        [self.navigationController pushViewController:ctr animated:YES];
+    }
+}
+
+- (void)addToCart:(BN_ShopGoodSpecialModel *)good {
+    BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:good.pic_url standards:good.vice_title_display price:good.real_price];
+    ctr.view.backgroundColor = [ColorBlack colorWithAlphaComponent:0.17];
+    [ctr setModalPresentationStyle:UIModalPresentationCustom];
+    [ctr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    ctr.delegate = self;
+    ctr.goodId = good.obj_id;
+    [self presentViewController:ctr animated:YES completion:nil];
+}
+
+#pragma mark - BN_ShopGoodDetailBuyViewControllerDelegate
+- (void)goodDetailBuyCountWith:(int)cout goodId:(long)goodId{
+    if (goodId > 0 && cout > 0) {
+        BN_ShopOrdersConfirmationViewController *ctr = [[BN_ShopOrdersConfirmationViewController alloc] initWithSpecial:goodId num:cout];
+        [self.navigationController pushViewController:ctr animated:YES];
+    }
+}
 
 @end

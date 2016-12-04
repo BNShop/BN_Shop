@@ -1311,6 +1311,13 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		6A848D3C1DF47307004C9070 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
 		A23566919BA0368F43E13E56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1392,6 +1399,7 @@
 		C96515221DD61E2E004B5F05 /* BN_ShopCode */ = {
 			isa = PBXGroup;
 			children = (
+				6A848D3C1DF47307004C9070 /* Payment */,
 				6A848D351DF4429D004C9070 /* API */,
 				C96515281DD61EBC004B5F05 /* ST_TabBarController.h */,
 				C96515291DD61EBC004B5F05 /* ST_TabBarController.m */,

@@ -236,12 +236,12 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 #warning 点击广告图的跳转
         @strongify(self);
         BN_ADModel *adObj = [self.adViewModel adItemWithIndex:currentIndex];
-        if (adObj.type == 4 && adObj.classes == 3) {
+        if (adObj.type == 14) {
             //去专题页面
             BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:adObj.objId];
             [self.navigationController pushViewController:ctr animated:YES];
             
-        } else if (adObj.type == 4 && adObj.classes == 2) {
+        } else if (adObj.type == 4) {
             
             BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:adObj.objId];
             [self.navigationController pushViewController:ctr animated:YES];

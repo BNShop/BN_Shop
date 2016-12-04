@@ -14,6 +14,7 @@
 
 @property (nonatomic, weak) id<BN_ShopGoodDetailToolBarDelegate> delegte;
 - (void)updateWithSelect:(BOOL)select;
+- (void)updateWithAoppositeSelect;
 - (CGFloat)getViewHeight;
 @end
 

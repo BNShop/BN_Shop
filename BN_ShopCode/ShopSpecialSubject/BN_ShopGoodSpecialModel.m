@@ -12,7 +12,7 @@
 @implementation BN_ShopGoodSpecialModel
 
 - (NSAttributedString *)contentAttributed {
-    NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc] initWithData:[self.contentDisplay dataUsingEncoding:NSUTF8StringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc] initWithData:[self.content_display dataUsingEncoding:NSUTF8StringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     return attrStr;
 }
 
@@ -22,7 +22,7 @@
 }
 
 - (NSString *)followStr {
-    return [NSString stringWithFormat:@"%d%@", self.likeNum, TEXT(@"个人喜欢")];
+    return [NSString stringWithFormat:@"%d%@", self.total_like, TEXT(@"个人喜欢")];
 }
 
 @end

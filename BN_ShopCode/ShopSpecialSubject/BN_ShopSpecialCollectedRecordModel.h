@@ -10,7 +10,7 @@
 
 @interface BN_ShopSpecialCollectedRecordModel : NSObject
 
-@property (nonatomic, assign) long userId;//主键
+@property (nonatomic, assign) long userId;//用户ID
 @property (nonatomic, copy) NSString *userName;//收藏用户名称
 @property (nonatomic, copy) NSString *userPicUrl;//收藏头像URL
 

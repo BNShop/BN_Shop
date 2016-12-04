@@ -9,5 +9,8 @@
 #import "BN_ShopSpecialTopicModel.h"
 
 @implementation BN_ShopSpecialTopicModel
-
+- (void)setTags:(NSArray<BN_ShopspecialTagModel *> *)tags {
+    _tags = [BN_ShopspecialTagModel mj_objectArrayWithKeyValuesArray:tags];
+    self.tagName = _tags.firstObject.tagName;
+}
 @end

@@ -17,16 +17,15 @@
 @property (nonatomic, assign) long specialId;//专题ID
 @property (nonatomic, copy) NSString *name;//名称
 @property (nonatomic, copy) NSString *content;//专题描述
-@property (nonatomic, copy) NSString *coverImagesUrl;//封面图片
-@property (nonatomic, copy) NSString *shareUrl;//分享URL
-@property (nonatomic, copy) NSString *shareTitle;//分享标题
-@property (nonatomic, copy) NSString *shareContent;//分享内容
-@property (nonatomic, assign) int isCollected;//收藏标志 0未收藏 1：收藏
-@property (nonatomic, assign) int collecteNum;//收藏次数
-@property (nonatomic, assign) int likeNum;//点赞次数
-@property (nonatomic, assign) int commentsNum;//评论条数
-@property (nonatomic, strong) NSArray<BN_ShopspecialTagModel*> *tags;//标签列表
-@property (nonatomic, strong) NSArray<BN_ShopSpecialCollectedRecordModel*> *collectedRecord;//收藏记录（具体几个后台控制）
-@property (nonatomic, strong) NSArray<BN_ShopGoodSpecialCommentModel*> *commentsRecord;//评论记录（具体几个后台控制）
+@property (nonatomic, copy) NSString *cover_img;//封面图片
+@property (nonatomic, assign) int total_collected;//收藏次数
+@property (nonatomic, assign) int total_like;//喜欢次数
+@property (nonatomic, assign) int total_comment;//评论次数
+@property (nonatomic, assign) int is_recommend;//是否是推荐
+@property (nonatomic, copy) NSString *remarkd;//
+@property (nonatomic, assign) int isAlreadyCollect;//是否已经收藏 1：是 0：否
+@property (nonatomic, copy) NSString *title_display;//显示标题
+@property (nonatomic, copy) NSString *vice_title_display;//显示富标题
+@property (nonatomic, copy) NSString *content_display;//显示内容
 
 @end

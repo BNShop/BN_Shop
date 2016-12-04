@@ -16,4 +16,6 @@ LY_SINGLETON_FOR_CLASS_HEADER(BN_ShopToolRequest)
 - (void)collecteWith:(long)allSpotsId allSpotsType:(int)allSpotsType  success:(void(^)(int collecteState, NSString *collecteMessage))success failure:(void(^)(NSString *errorDescription))failure;
 //点赞
 - (void)likeWith:(long)allSpotsId allSpotsType:(int)allSpotsType  success:(void(^)(int likedState, NSString *likedMessage))success failure:(void(^)(NSString *errorDescription))failure;
+
+
 @end

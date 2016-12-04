@@ -145,7 +145,6 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
 
 #pragma mark - BN_ShopGoodDetailBuyViewControllerDelegate
 - (void)goodDetailBuyCountWith:(int)cout goodId:(long)goodId{
-    @weakify(self);
     if (goodId > 0 && cout > 0) {
         BN_ShopOrdersConfirmationViewController *ctr = [[BN_ShopOrdersConfirmationViewController alloc] initWithSpecial:goodId num:cout];
         [self.navigationController pushViewController:ctr animated:YES];

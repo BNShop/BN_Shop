@@ -17,9 +17,13 @@
 @property (nonatomic, strong) MultipleSectionTableArraySource *dataSource;
 @property (nonatomic, assign) BOOL isFollow;
 @property (nonatomic, assign) long specialId;//专题主键
-@property (nonatomic, assign) int type;
-@property (nonatomic, strong) NSMutableArray<BN_ShopGoodSpecialModel*> *specials;
-@property (nonatomic, strong) NSMutableArray<BN_ShopSpecialTopicModel*> *recommends;
+@property (nonatomic, strong) NSMutableArray<BN_ShopGoodSpecialModel*> *specials;//商品的列表
+@property (nonatomic, strong) NSArray<BN_ShopSpecialTopicModel*> *recommends;//推荐列表
+@property (nonatomic, strong) NSArray<BN_ShopspecialTagModel*> *tags;//标签列表
+@property (nonatomic, strong) NSArray<BN_ShopSpecialCollectedRecordModel*> *collectedRecord;//收藏记录（具体几个后台控制）
+@property (nonatomic, strong) NSArray<BN_ShopGoodSpecialCommentModel*> *commentsRecord;//评论记录（具体几个后台控制）
+
+
 @property (nonatomic, strong) BN_ShopSpecialDetailModel *specialDetail;
 @property (nonatomic, strong) TableDataSource *tagDataSource;
 
@@ -27,7 +31,6 @@
 - (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray *)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock;
 - (void)addDataSourceWith:(SectionDataSource *)sectionDataSource;
 
-- (void)getSpecialsData;
 - (void)getTopicsData;
 - (void)getSpecialDetail;
 

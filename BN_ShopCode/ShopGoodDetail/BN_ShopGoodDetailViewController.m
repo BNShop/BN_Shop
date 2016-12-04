@@ -386,13 +386,14 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 - (void)followAction {
     @weakify(self);
-    [[BN_ShopToolRequest sharedInstance] collecteWith:self.stateViewModel.simpleDetailModel.goosd_id allSpotsType:self.stateViewModel.simpleDetailModel.type success:^(int collecteState, NSString *collecteMessage) {
+    [[BN_ShopToolRequest sharedInstance] collecteWith:self.simpleShowViewModel.goodsId allSpotsType:self.stateViewModel.simpleDetailModel.type success:^(int collecteState, NSString *collecteMessage) {
         @strongify(self);
         self.stateViewModel.simpleDetailModel.is_collect = collecteState;
         [self.toolBar updateWithSelect:collecteState];
     } failure:^(NSString *errorDescription) {
         @strongify(self);
         [self showHudError:errorDescription title:TEXT(@"操作失败")];
+        [self.toolBar updateWithAoppositeSelect];
     }];
 }
 
