@@ -73,7 +73,7 @@
         self.detailModel.use_integral = random()%2;
         self.detailModel.contact_person_name = @"方法尽快改";//联系人
         self.detailModel.pay_amount = @"80.0";//实付金额
-        self.detailModel.order_state_name = @"待支付";//订单状态名
+        self.detailModel.order_state_name = @"待收货";//订单状态名
         self.detailModel.contact_person_phone_num = @"13599904508";//联系电话
         self.detailModel.freight_amount = @"12.00";//运费
         self.detailModel.courier_no = @"kduiajfi9089";//快递单号

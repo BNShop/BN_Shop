@@ -14,6 +14,7 @@
 #import "BN_ShopOrderServiceStateView.h"
 #import "BN_ShopOrderNumberView.h"
 #import "BN_ShopOrderProcessingView.h"
+#import "BN_ShopOrderNumberProcessingView.h"
 #import "Base_BaseViewController+ControlCreate.h"
 
 #import "BN_ShopOrderUserProfileViewModel.h"
@@ -84,17 +85,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         [temp.tableView reloadData];
     } failure:^(NSString *errorDescription) {
         [temp showHudError:errorDescription title:@"获取订单失败"];
-//        [temp.navigationController popViewControllerAnimated:YES];
-        
-        [temp.orderViewModel.dataSource resetItems:self.orderViewModel.detailModel.goodsList];
-        
-        [temp.tableView beginUpdates];
-        [temp buildFooterView];
-        [temp buildHeaderView];
-        [temp.tableView endUpdates];
-        
-        temp.tableView.dataSource = temp.orderViewModel.dataSource;
-        [temp.tableView reloadData];
+        [temp.navigationController popViewControllerAnimated:YES];
     }];
     
 }
@@ -107,18 +98,25 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     CGFloat footerHeight = 0;
     CGFloat footerWidth = WIDTH(self.tableView);
     
+    if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Take) {
+        BN_ShopOrderNumberProcessingView *processView = [BN_ShopOrderNumberProcessingView nib];
+        [processView updateWith:@"" content:@""];
+        [processView updateWith:ColorWhite q_color:ColorBtnYellow titleColor:ColorBtnYellow title:TEXT(@"退款")];
+        [processView addEventHandler:^(id sender) {
+#warning 退款操作
+        }];
+        [self.footerView addSubview:processView];
+        [processView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.footerView];
+        [processView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+        [processView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+        [processView autoSetDimension:ALDimensionHeight toSize:processView.getViewHeight];
+        footerHeight += processView.getViewHeight;
+    }
+    
     BN_ShopOrderBillView *billView = [BN_ShopOrderBillView nib];
     [billView updateWith:[self.orderViewModel shopAcountStr] pointDeduction:[self.orderViewModel shopVailableStr] freight:[self.orderViewModel shopFreightStr]];
     [self.footerView addSubview:billView];
-//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, footerHeight, footerWidth, 1)];
-//    lineView.backgroundColor = ColorLine;
-//    [billView addSubview:lineView];
-//    [lineView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:billView];
-//    [lineView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
-//    [lineView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
-//    [lineView autoSetDimension:ALDimensionHeight toSize:1];
-    
-    [billView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.footerView];
+    [billView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.footerView withOffset:footerHeight];
     [billView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
     [billView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
     [billView autoSetDimension:ALDimensionHeight toSize:billView.getViewHeight];
@@ -187,10 +185,17 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     [orderTimeView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
     [orderTimeView autoSetDimension:ALDimensionHeight toSize:orderTimeView.getViewHeight];
     footerHeight += orderTimeView.getViewHeight;
-    
+    @weakify(self);
     if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Take) {
-        BN_ShopOrderNumberView *orderPayView = [BN_ShopOrderNumberView nib];
+        BN_ShopOrderNumberProcessingView *orderPayView = [BN_ShopOrderNumberProcessingView nib];
         [orderPayView updateWith:@"快递单号" content:self.orderViewModel.detailModel.courier_no];
+        [orderPayView updateWith:ColorBtnYellow q_color:nil titleColor:ColorWhite title:TEXT(@"复制")];
+        [orderPayView addEventHandler:^(id sender) {
+            @strongify(self);
+            UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
+            pasteboard.string = self.orderViewModel.detailModel.courier_no;
+            [self showHudSucess:@"复制到剪贴板了"];
+        }];
         [self.footerView addSubview:orderPayView];
         [orderPayView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:orderTimeView];
         [orderPayView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
