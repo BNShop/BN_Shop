@@ -62,7 +62,7 @@
 }
 
 - (CGFloat)getViewHeight {
-    return 134.0f;
+    return 112.0f;
 }
 
 

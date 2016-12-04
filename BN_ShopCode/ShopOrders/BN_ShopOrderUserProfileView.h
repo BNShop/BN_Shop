@@ -12,6 +12,7 @@
 @interface BN_ShopOrderUserProfileView : UIView
 
 - (void)updateWith:(NSString *)name tel:(NSString *)tel tagged:(BOOL)tagged provinces:(NSString *)provinces street:(NSString *)street;
+- (void)hidenArrowRView;
 - (CGFloat)getViewHeight;
 
 @end

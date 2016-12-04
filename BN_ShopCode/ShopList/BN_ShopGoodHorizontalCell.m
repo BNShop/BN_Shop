@@ -115,6 +115,7 @@
 
 - (void)addManageButtonEvent:(void (^)(id sender))handler {
     self.manageButton.hidden = NO;
+    [self.manageButton bk_removeEventHandlersForControlEvents:UIControlEventTouchUpInside];
     [self.manageButton bk_addEventHandler:handler forControlEvents:UIControlEventTouchUpInside];
 }
 

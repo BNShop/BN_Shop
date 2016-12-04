@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldb-Wp-Rbz">
-                    <rect key="frame" x="16" y="13" width="30" height="16"/>
+                    <rect key="frame" x="16" y="12" width="0.0" height="16"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="I06-Gm-lw3"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="PGT-SE-Oog"/>
@@ -26,7 +26,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEy-gA-Hai">
-                    <rect key="frame" x="71" y="13" width="50" height="16"/>
+                    <rect key="frame" x="33" y="12" width="0.0" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="156" id="sAD-fi-ZFF"/>
                     </constraints>
@@ -35,7 +35,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICA-rX-9bx">
-                    <rect key="frame" x="131" y="13" width="24" height="16"/>
+                    <rect key="frame" x="43" y="12" width="42" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="H2J-lh-ILO"/>
                     </constraints>
@@ -50,7 +50,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7n-S2-pTi">
-                    <rect key="frame" x="16" y="59" width="323" height="16"/>
+                    <rect key="frame" x="16" y="60" width="323" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -96,6 +96,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="arrowRView" destination="xrK-Dc-uNm" id="phK-Av-Dr7"/>
                 <outlet property="bottomLineView" destination="Qq6-YN-qhr" id="MXr-tq-1UH"/>
                 <outlet property="orderUserNameLabel" destination="ldb-Wp-Rbz" id="BWu-pQ-BoE"/>
                 <outlet property="orderUserTelLabel" destination="JEy-gA-Hai" id="2H7-c0-Ql5"/>

@@ -60,7 +60,11 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 }
 
 - (void)buildControls {
-    
+    [super buildControls];
+    self.tableView.rowHeight = 112.0f;
+    [self.tableView registerNib:[BN_ShopOrdersItemCell nib] forCellReuseIdentifier:ShopOrdersConfirmationTableCellIdentifier];
+    self.tableView.separatorColor = ColorLine;
+    self.tableView.backgroundColor = ColorWhite;
 }
 
 - (void)buildViewModel {
@@ -79,8 +83,18 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         temp.tableView.dataSource = temp.orderViewModel.dataSource;
         [temp.tableView reloadData];
     } failure:^(NSString *errorDescription) {
-        [self showHudError:errorDescription title:@"获取订单失败"];
-        [self.navigationController popViewControllerAnimated:YES];
+        [temp showHudError:errorDescription title:@"获取订单失败"];
+//        [temp.navigationController popViewControllerAnimated:YES];
+        
+        [temp.orderViewModel.dataSource resetItems:self.orderViewModel.detailModel.goodsList];
+        
+        [temp.tableView beginUpdates];
+        [temp buildFooterView];
+        [temp buildHeaderView];
+        [temp.tableView endUpdates];
+        
+        temp.tableView.dataSource = temp.orderViewModel.dataSource;
+        [temp.tableView reloadData];
     }];
     
 }
@@ -94,20 +108,40 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     CGFloat footerWidth = WIDTH(self.tableView);
     
     BN_ShopOrderBillView *billView = [BN_ShopOrderBillView nib];
-    [billView updateWith:self.orderViewModel.detailModel.goods_amount pointDeduction:self.orderViewModel.detailModel.integral_amount freight:self.orderViewModel.detailModel.freight_amount];
+    [billView updateWith:[self.orderViewModel shopAcountStr] pointDeduction:[self.orderViewModel shopVailableStr] freight:[self.orderViewModel shopFreightStr]];
     [self.footerView addSubview:billView];
-    [billView setFrame:CGRectMake(0, 0, footerWidth, billView.getViewHeight)];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, footerHeight, footerWidth, 1)];
+    lineView.backgroundColor = ColorLine;
+    [billView addSubview:lineView];
+    [lineView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:billView];
+    [lineView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+    [lineView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+    [lineView autoSetDimension:ALDimensionHeight toSize:1];
+    
+    [billView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.footerView];
+    [billView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+    [billView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+    [billView autoSetDimension:ALDimensionHeight toSize:billView.getViewHeight];
     footerHeight += billView.getViewHeight;
     
     BN_ShopOrderNumberView *orderPayView = [BN_ShopOrderNumberView nib];
     [orderPayView updateOrderPriceContent];
-    [orderPayView updateWith:@"订单总价" content:self.orderViewModel.detailModel.pay_amount];
+    [orderPayView updateWith:@"订单总价" content:[self.orderViewModel realNeedPayStr]];
     [self.footerView addSubview:orderPayView];
-    [orderPayView setFrame:CGRectMake(0, footerHeight, footerWidth, orderPayView.getViewHeight)];
+//    [orderPayView setFrame:CGRectMake(0, footerHeight, footerWidth, orderPayView.getViewHeight)];
+    [orderPayView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:billView];
+    [orderPayView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+    [orderPayView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+    [orderPayView autoSetDimension:ALDimensionHeight toSize:orderPayView.getViewHeight];
     footerHeight += orderPayView.getViewHeight;
     
     UIView *lineView0 = [[UIView alloc] initWithFrame:CGRectMake(0, footerHeight, footerWidth, 5)];
+    lineView0.backgroundColor = ColorBackground;
     [self.footerView addSubview:lineView0];
+    [lineView0 autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:orderPayView];
+    [lineView0 autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+    [lineView0 autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+    [lineView0 autoSetDimension:ALDimensionHeight toSize:5];
     footerHeight += 5;
     
     BN_ShopOrderServiceStateView *serviceView = [BN_ShopOrderServiceStateView nib];
@@ -117,32 +151,52 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         [serviceView updateServerHelp];
     }
     [self.footerView addSubview:serviceView];
-    [serviceView setFrame:CGRectMake(0, footerHeight, footerWidth, serviceView.getViewHeight)];
+    [serviceView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:lineView0];
+    [serviceView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+    [serviceView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+    [serviceView autoSetDimension:ALDimensionHeight toSize:serviceView.getViewHeight];
     footerHeight += serviceView.getViewHeight;
     
     UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, footerHeight, footerWidth, 5)];
+    lineView1.backgroundColor = ColorBackground;
     [self.footerView addSubview:lineView1];
+    [lineView1 autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:serviceView];
+    [lineView1 autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+    [lineView1 autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+    [lineView1 autoSetDimension:ALDimensionHeight toSize:5];
     footerHeight += 5;
     
     if ([self.orderViewModel.detailModel orderState] != BN_ShopOrderState_Pay) {
         BN_ShopOrderNumberView *orderPayView = [BN_ShopOrderNumberView nib];
         [orderPayView updateWith:@"支付方式" content:self.orderViewModel.detailModel.pay_typeName];
         [self.footerView addSubview:orderPayView];
-        [orderPayView setFrame:CGRectMake(0, footerHeight, footerWidth, orderPayView.getViewHeight)];
+//        [orderPayView setFrame:CGRectMake(0, footerHeight, footerWidth, orderPayView.getViewHeight)];
+        [orderPayView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:lineView1];
+        [orderPayView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+        [orderPayView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+        [orderPayView autoSetDimension:ALDimensionHeight toSize:orderPayView.getViewHeight];
         footerHeight += orderPayView.getViewHeight;
     }
     
     BN_ShopOrderNumberView *orderTimeView = [BN_ShopOrderNumberView nib];
     [orderTimeView updateWith:@"订单时间" content:self.orderViewModel.detailModel.create_time];
     [self.footerView addSubview:orderTimeView];
-    [orderTimeView setFrame:CGRectMake(0, footerHeight, footerWidth, orderPayView.getViewHeight)];
+//    [orderTimeView setFrame:CGRectMake(0, footerHeight, footerWidth, orderPayView.getViewHeight)];
+    [orderTimeView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.footerView withOffset:footerHeight];
+    [orderTimeView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+    [orderTimeView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+    [orderTimeView autoSetDimension:ALDimensionHeight toSize:orderTimeView.getViewHeight];
     footerHeight += orderTimeView.getViewHeight;
     
-    if ([self.orderViewModel.detailModel orderState] != BN_ShopOrderState_Take) {
+    if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Take) {
         BN_ShopOrderNumberView *orderPayView = [BN_ShopOrderNumberView nib];
         [orderPayView updateWith:@"快递单号" content:self.orderViewModel.detailModel.courier_no];
         [self.footerView addSubview:orderPayView];
-        [orderPayView setFrame:CGRectMake(0, footerHeight, footerWidth, orderPayView.getViewHeight)];
+        [orderPayView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:orderTimeView];
+        [orderPayView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+        [orderPayView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+        [orderPayView autoSetDimension:ALDimensionHeight toSize:orderPayView.getViewHeight];
+//        [orderPayView setFrame:CGRectMake(0, footerHeight, footerWidth, orderPayView.getViewHeight)];
         footerHeight += orderPayView.getViewHeight;
     }
     
@@ -177,9 +231,12 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         }];
     }
     [self.footerView addSubview:processView];
-    processView.frame = CGRectMake(0, footerHeight, footerWidth, processView.getViewHeight);
+    [processView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.footerView];
+    [processView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+    [processView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+    [processView autoSetDimension:ALDimensionHeight toSize:processView.getViewHeight];
+//    processView.frame = CGRectMake(0, footerHeight, footerWidth, processView.getViewHeight);
     footerHeight += processView.getViewHeight;
-    
     self.footerView.frame = CGRectMake(0, 0, footerWidth, footerHeight);
     
     self.tableView.tableFooterView = self.footerView;
@@ -188,9 +245,12 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 - (void)buildHeaderView {
     BN_ShopOrderNumberView *orderIdView = [BN_ShopOrderNumberView nib];
     [orderIdView updateOrderStateContent];
-    [orderIdView updateWith:self.orderViewModel.order_id content:self.orderViewModel.detailModel.order_state_name];
+    [orderIdView updateWith:[NSString stringWithFormat:@"订单编号 %@", self.orderViewModel.order_id] content:self.orderViewModel.detailModel.order_state_name];
+    
     BN_ShopOrderUserProfileView *userView = [BN_ShopOrderUserProfileView nib];
     [userView updateWith:self.orderViewModel.userProfile.name tel:self.orderViewModel.userProfile.telNum tagged:NO provinces:[self.orderViewModel.userProfile provinceAndCity] street:self.orderViewModel.userProfile.address];
+    [userView hidenArrowRView];
+    
     
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.tableView), orderIdView.getViewHeight+userView.getViewHeight)];
     [self.headerView addSubview:orderIdView];

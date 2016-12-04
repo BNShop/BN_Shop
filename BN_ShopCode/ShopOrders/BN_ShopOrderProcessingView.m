@@ -24,7 +24,7 @@
     [super awakeFromNib];
     [self.leftButton setTitleColor:ColorWhite forState:UIControlStateNormal];
     [self.leftButton.titleLabel setFont:Font12];
-    self.leftButton.normalColor = ColorBackground;
+    self.leftButton.normalColor = ColorLightGray;
     [self.rightButton setTitleColor:ColorWhite forState:UIControlStateNormal];
     [self.rightButton.titleLabel setFont:Font12];
     self.rightButton.normalColor = ColorBtnYellow;
@@ -36,8 +36,10 @@
 }
 
 - (void)addLeftEventHandler:(void (^)(id sender))handler {
-    [self.leftButton bk_addEventHandler:handler forControlEvents:UIControlEventTouchUpInside];
+    [self.leftButton bk_removeEventHandlersForControlEvents:UIControlEventTouchUpInside];
+    
     if (handler) {
+        [self.leftButton bk_addEventHandler:handler forControlEvents:UIControlEventTouchUpInside];
         self.leftButton.hidden = NO;
     } else {
         self.leftButton.hidden = YES;
@@ -45,7 +47,10 @@
 }
 
 - (void)addRightEventHandler:(void (^)(id sender))handler {
-    [self.rightButton bk_addEventHandler:handler forControlEvents:UIControlEventTouchUpInside];
+    [self.rightButton bk_removeEventHandlersForControlEvents:UIControlEventTouchUpInside];
+    if (handler) {
+        [self.rightButton bk_addEventHandler:handler forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 - (void)updateWith:(NSString *)left rightTitle:(NSString *)right {

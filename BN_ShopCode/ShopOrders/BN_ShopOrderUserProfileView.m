@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *provincesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *streetLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomLineView;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowRView;
 
 
 @end
@@ -58,6 +59,10 @@
     self.taggedLabel.hidden = !tagged;
     self.provincesLabel.text = provinces;
     self.streetLabel.text = street;
+}
+
+- (void)hidenArrowRView {
+    self.arrowRView.hidden = YES;
 }
 
 - (CGFloat)getViewHeight {

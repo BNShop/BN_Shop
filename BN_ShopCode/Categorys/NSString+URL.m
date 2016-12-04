@@ -20,7 +20,7 @@
     if ([urlPath hasPrefix:@"/"]) {
         return [NSURL fileURLWithPath:urlPath];
     }
-    return [NSURL URLWithString:[urlPath URLEncode]];
+    return [NSURL URLWithString:urlPath];
 }
 
 @end
