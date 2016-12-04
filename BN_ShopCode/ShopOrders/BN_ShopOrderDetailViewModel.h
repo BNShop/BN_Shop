@@ -57,6 +57,15 @@ typedef NS_ENUM(NSUInteger, BN_ShopOrderState) {
 @property (nonatomic, strong) TableDataSource *dataSource;
 
 - (void)getShoppingOrderDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure;
+//确定收货
+- (void)confirmReceiptOrderId:(void(^)())success failure:(void(^)(NSString *errorDescription))failure;
+//取消订单
+- (void)cancelOrderId:(void(^)())success failure:(void(^)(NSString *errorDescription))failure;
+//确定完成
+- (void)confirmCompleteOrderId:(void(^)())success failure:(void(^)(NSString *errorDescription))failure;
+
+
+
 - (NSString *)realNeedPayStr;
 //商品总额
 - (NSString *)shopAcountStr;

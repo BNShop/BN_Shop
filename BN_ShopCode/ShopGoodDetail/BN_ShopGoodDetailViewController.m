@@ -28,12 +28,12 @@
 #import "UIBarButtonItem+BlocksKit.h"
 #import "UIView+BlocksKit.h"
 #import "PureLayout.h"
+#import "BN_ShopToolRequest.h"
 
 #import "BN_ShopGoodDetailSimpleShowViewModel.h"
 #import "BN_ShopGoodDetaiStateViewModel.h"
 #import "BN_ShopGoodDetailNewArrivalsViewModel.h"
 
-#import "TestObjectHeader.h"
 
 @interface BN_ShopGoodDetailViewController ()<BN_ShopGoodDetailBuyViewControllerDelegate>
 
@@ -140,11 +140,12 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 - (void)buildToolBar {
     self.toolBar = [BN_ShopGoodDetailToolBar nib];
+    [self.toolBar updateWithSelect:self.stateViewModel.simpleDetailModel.is_collect];
     @weakify(self);
     [[self.toolBar rac_shopGoodDetailToolBarClickSignal] subscribeNext:^(id x) {
         //,0:跳到购物车 1：客服 2:收藏 3:加入购物车
         @strongify(self);
-        NSInteger tag = [x integerValue];
+        NSInteger tag = [(UIButton *)x tag];
         if (tag == 0) [self gotoShopCart];
         else if (tag == 1) [self airLine];
         else if (tag == 2) [self followAction];
@@ -198,7 +199,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.sellersView autoSetDimension:ALDimensionHeight toSize:[self.sellersView getViewHeight]];
     
     [self.sellersView bk_whenTapped:^{
-#warning 跳转到哪里了呢
+#warning 跳转商户的店面到哪里了呢
     }];
 }
 
@@ -242,6 +243,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
             [self.sellersView updateWith:self.stateViewModel.simpleDetailModel.shop_name iconUrl:self.stateViewModel.simpleDetailModel.shop_logo];
             [self.transitionToolBar updateWith:self.stateViewModel.commentNumStr];
             [self.friendlyWarningView updateWith:self.stateViewModel.freeShippingStatus point:self.stateViewModel.pointStr deliver:@"第三方发货"];
+            [self.toolBar updateWithSelect:self.stateViewModel.simpleDetailModel.is_collect];
             
         });
        
@@ -383,12 +385,18 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 }
 
 - (void)followAction {
-    
+    @weakify(self);
+    [[BN_ShopToolRequest sharedInstance] collecteWith:self.stateViewModel.simpleDetailModel.goosd_id allSpotsType:self.stateViewModel.simpleDetailModel.type success:^(int collecteState, NSString *collecteMessage) {
+        @strongify(self);
+        self.stateViewModel.simpleDetailModel.is_collect = collecteState;
+        [self.toolBar updateWithSelect:collecteState];
+    } failure:^(NSString *errorDescription) {
+        @strongify(self);
+        [self showHudError:errorDescription title:TEXT(@"操作失败")];
+    }];
 }
 
 - (void)addToCart {
-    
-    
     BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:self.stateViewModel.simpleDetailModel.pic_url standards:self.stateViewModel.simpleDetailModel.name price:self.stateViewModel.simpleDetailModel.real_price];
     ctr.view.backgroundColor = [ColorBlack colorWithAlphaComponent:0.17];
     [ctr setModalPresentationStyle:UIModalPresentationCustom];

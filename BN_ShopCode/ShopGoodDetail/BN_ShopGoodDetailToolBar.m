@@ -29,27 +29,31 @@
 
 - (IBAction)showShopCatr:(id)sender {
     if ([self.delegte respondsToSelector:@selector(goodDetailToolBarClickedWith:)]) {
-        [self.delegte goodDetailToolBarClickedWith:0];
+        [self.delegte goodDetailToolBarClickedWith:sender];
     }
 }
 
 - (IBAction)airLine:(id)sender {
     if ([self.delegte respondsToSelector:@selector(goodDetailToolBarClickedWith:)]) {
-        [self.delegte goodDetailToolBarClickedWith:1];
+        [self.delegte goodDetailToolBarClickedWith:sender];
     }
 }
 
 - (IBAction)followAction:(id)sender {
     self.followButton.selected = !self.followButton.selected;
     if ([self.delegte respondsToSelector:@selector(goodDetailToolBarClickedWith:)]) {
-        [self.delegte goodDetailToolBarClickedWith:2];
+        [self.delegte goodDetailToolBarClickedWith:sender];
     }
 }
 
 - (IBAction)addToCart:(id)sender {
     if ([self.delegte respondsToSelector:@selector(goodDetailToolBarClickedWith:)]) {
-        [self.delegte goodDetailToolBarClickedWith:3];
+        [self.delegte goodDetailToolBarClickedWith:sender];
     }
+}
+
+- (void)updateWithSelect:(BOOL)select {
+    self.followButton.selected = select;
 }
 
 - (CGFloat)getViewHeight {

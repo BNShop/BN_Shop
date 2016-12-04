@@ -13,13 +13,13 @@
 @interface BN_ShopGoodDetailToolBar : UIView
 
 @property (nonatomic, weak) id<BN_ShopGoodDetailToolBarDelegate> delegte;
-
+- (void)updateWithSelect:(BOOL)select;
 - (CGFloat)getViewHeight;
 @end
 
 @protocol BN_ShopGoodDetailToolBarDelegate <NSObject>
 
-- (void)goodDetailToolBarClickedWith:(NSInteger)tag;
+- (void)goodDetailToolBarClickedWith:(UIButton *)sender;
 
 @end
 

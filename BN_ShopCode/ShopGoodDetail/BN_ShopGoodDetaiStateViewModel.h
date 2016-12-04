@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, GoodDetaiStateType) {
 @property (nonatomic, assign) int avg_score;//平均评价
 @property (nonatomic, copy) NSString *given_integral;//赠送积分数
 @property (nonatomic, assign) int type;//1:普通商2:限时商品
-
+@property (nonatomic, assign) int is_collect;//是否收藏了
 
 
 

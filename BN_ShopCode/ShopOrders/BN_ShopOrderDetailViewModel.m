@@ -138,6 +138,7 @@
     NSString *url = [NSString stringWithFormat:@"%@/mall/orderDetail?orderId=%@",BASEURL, self.order_id];
     [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
+        NSLog(@"dic = %@", dic);
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if (codeNumber.intValue != 0) {
             NSString *errorStr = [dic objectForKey:@"remark"];
@@ -156,6 +157,88 @@
             failure([error errorDescription]);
         }
     }];
+}
+
+#pragma mark - 详情页的其他处理
+//取消订单
+- (void)cancelOrderId:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
+    NSString *url = [NSString stringWithFormat:@"%@/mall/cancelOrder?orderId=%@",BASEURL, self.order_id];
+    [[BC_ToolRequest sharedManager] POST:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue != 0) {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            if (failure) {
+                failure(errorStr);
+            }
+        } else {
+            if (success) {
+                success();
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+            failure([error errorDescription]);
+        }
+    }];
+
+}
+
+//确定收货
+- (void)confirmReceiptOrderId:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
+    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",BASEURL, self.order_id];
+    [[BC_ToolRequest sharedManager] POST:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue != 0) {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            if (failure) {
+                failure(errorStr);
+            }
+        } else {
+            if (success) {
+                success();
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+            failure([error errorDescription]);
+        }
+    }];
+    
+}
+
+//确定完成
+- (void)confirmCompleteOrderId:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
+    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",BASEURL, self.order_id];
+    [[BC_ToolRequest sharedManager] POST:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue != 0) {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            if (failure) {
+                failure(errorStr);
+            }
+        } else {
+            if (success) {
+                success();
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+            failure([error errorDescription]);
+        }
+    }];
+    
 }
 
 @end

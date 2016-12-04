@@ -19,8 +19,6 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "Base_BaseViewController+ControlCreate.h"
 
-#import "TestObjectHeader.h"
-
 @interface BN_ShopGoodDetailConsultancyViewController ()<PurchaseConsultingViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIView *headView;

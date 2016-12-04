@@ -114,12 +114,9 @@
 }
 
 - (void)getSpecialDetail {
-    NSMutableDictionary *paraDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(self.specialId), @"id", nil];
-//    if ([BC_ToolRequest sharedManager].token) {
-//        [paraDic setObject:[BC_ToolRequest sharedManager].token forKey:@"token"];
-//    }
+    NSMutableDictionary *paraDic = nil;
     
-    NSString *url = [NSString stringWithFormat:@"%@/special/detail",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/specialDetail?specialId=%ld",BASEURL, self.specialId];
     __weak typeof(self) temp = self;
     self.loadSupport.loadEvent = NetLoadingEvent;
     

@@ -26,14 +26,14 @@
                         <action selector="showShopCatr:" destination="iN0-l3-epB" eventType="touchUpInside" id="gMe-te-W2s"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAl-9G-7DV">
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAl-9G-7DV">
                     <rect key="frame" x="61" y="0.0" width="60" height="50"/>
                     <state key="normal" image="Shop_GoodDetail_Airlines"/>
                     <connections>
                         <action selector="airLine:" destination="iN0-l3-epB" eventType="touchUpInside" id="ojJ-Or-rOS"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPH-Gm-bSs">
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPH-Gm-bSs">
                     <rect key="frame" x="122" y="0.0" width="60" height="50"/>
                     <state key="normal" image="Shop_GoodDetail_UnFollow"/>
                     <state key="selected" image="Shop_GoodDetail_FollowD"/>
@@ -41,7 +41,7 @@
                         <action selector="followAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="RXU-nc-nPH"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Klw-Mg-jp6" customClass="BGButton">
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Klw-Mg-jp6" customClass="BGButton">
                     <rect key="frame" x="183" y="0.0" width="137" height="50"/>
                     <connections>
                         <action selector="addToCart:" destination="iN0-l3-epB" eventType="touchUpInside" id="ASJ-eu-IJ3"/>

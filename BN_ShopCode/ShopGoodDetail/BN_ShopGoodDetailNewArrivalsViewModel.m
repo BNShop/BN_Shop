@@ -32,8 +32,9 @@
 //    int curPage = clear == YES ? 0 : round(self.arrivals.count/10.0);
     NSDictionary *paraDic = nil;//@{
 //                              @"goodsId" : @(goodsId)};
+//    http://112.74.31.159:26088/lbb-app/mall/goodsRecommendList?curPage=0&pageNum=10&goodsId=16
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsRecommendList?goodsId=%ld",BASEURL, goodsId];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsRecommendList?curPage=0&pageNum=10&goodsId=%ld&",BASEURL, goodsId];
     __weak typeof(self) temp = self;
     self.arrivals.loadSupport.loadEvent = NetLoadingEvent;
     

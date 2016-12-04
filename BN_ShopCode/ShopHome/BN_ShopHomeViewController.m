@@ -236,7 +236,19 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 #warning 点击广告图的跳转
         @strongify(self);
         BN_ADModel *adObj = [self.adViewModel adItemWithIndex:currentIndex];
-        
+        if (adObj.type == 4 && adObj.classes == 3) {
+            //去专题页面
+            BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:adObj.objId];
+            [self.navigationController pushViewController:ctr animated:YES];
+            
+        } else if (adObj.type == 4 && adObj.classes == 2) {
+            
+            BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:adObj.objId];
+            [self.navigationController pushViewController:ctr animated:YES];
+            
+        } else if (adObj.hrefUrl) {
+            //外部链接
+        }
     };
 }
 
@@ -342,9 +354,9 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 
 - (void)clickThumbnailWith:(UITableViewCell *)cell{
     NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
-    BN_ShopSouvenirModel *model = [self.viewModel.souvenirs objectAtIndex:sectionIndex.section];
     NSLog(@"首页点击缩略图 section = %ld", (long)sectionIndex.row);
-    BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:model.obj_id];
+    BN_ShopSouvenirModel *model = [self.viewModel.souvenirs objectAtIndex:sectionIndex.section];
+    BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:model.obj_id];
     [self.navigationController pushViewController:ctr animated:YES];
 }
 
