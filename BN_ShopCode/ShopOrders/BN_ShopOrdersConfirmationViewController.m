@@ -8,6 +8,7 @@
 
 #import "BN_ShopOrdersConfirmationViewController.h"
 #import "Base_BaseViewController+ControlCreate.h"
+#import "BN_ShopOrderDetailViewController.h"
 
 #import "BN_ShopOrderBillView.h"
 #import "BN_ShopOrdersToolBar.h"
@@ -177,8 +178,12 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     @weakify(self);
     [self.toolBar placeAnOrderWith:^(id sender) {
         @strongify(self);
-        [self.confirmationviewModel getShoppingOrderDetail:^{
-#warning 下单成功跳转
+        [self.confirmationviewModel getShoppingOrderDetail:^(NSArray *orderIds) {
+            //下单成功的处理
+            long orderid = [[orderIds firstObject] longValue];
+            BN_ShopOrderDetailViewController *ctr = [[BN_ShopOrderDetailViewController alloc] initWith:[NSString stringWithFormat:@"%ld", orderid]];
+            [self.navigationController pushViewController:ctr animated:YES];
+            
         } failure:^(NSString *errorDescription) {
             [self showHudError:errorDescription title:@"下单失败"];
         }];

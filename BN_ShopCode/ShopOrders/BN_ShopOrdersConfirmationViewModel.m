@@ -176,7 +176,7 @@
 }
 
 //http://xxx.xxx.xxx/mall/confirmOrder（POST）
-- (void)getShoppingOrderDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
+- (void)getShoppingOrderDetail:(void(^)(NSArray *orderIds))success failure:(void(^)(NSString *errorDescription))failure {
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
     
     if (self.ordreModel.userAddress.address_id) {
@@ -196,38 +196,49 @@
     if (self.goodsId > 0 && self.num > 0) {
         BN_ShopConfirmOrderItemModel *item = (BN_ShopConfirmOrderItemModel *)self.ordreModel.resultMap.rows.firstObject;
         NSDictionary *goodDic = @{@"num":@(self.num), @"goodsId":@(self.goodsId)};
-        NSDictionary *rowItemDic = @{@"goods":@[goodDic], @"boUserId":item.boUserId, @"freight_price":item.freight_price, @"total_price":item.total_price};
+        NSDictionary *rowItemDic = @{@"goods":@[goodDic], @"boUserId":@([item.boUserId integerValue]), @"freight_price":item.freight_price, @"total_price":item.goods_amount};
         
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:@[rowItemDic] options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        
-        paraDic[@"rows"] = [[jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        
+        paraDic[@"rows"] = @[rowItemDic];
     } else {
         paraDic[@"shoppingCartIds"] = self.shoppingCartIds;
         paraDic[@"numbers"] = self.numbers;
         
-//        NSArray *dictArray = [BN_ShopOrderCartItemModel mj_keyValuesArrayWithObjectArray:self.ordreModel.resultMap.rows];
-//        NSError *error;
-//        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictArray options:NSJSONWritingPrettyPrinted error:&error];
-//        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//        
-//        paraDic[@"rows"] = [[jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSMutableArray *rowDicS = [NSMutableArray array];
+        for (BN_ShopConfirmOrderItemModel *itemModel in self.ordreModel.resultMap.rows) {
+            NSMutableDictionary *itemDic = [NSMutableDictionary dictionary];
+            itemDic[@"total_price"] = itemModel.goods_amount;
+            itemDic[@"boUserId"] = @([itemModel.boUserId integerValue]);
+            itemDic[@"freight_price"] = itemModel.freight_price;
+            
+            NSMutableArray *goods = [NSMutableArray array];
+            for (BN_ShopOrderCartItemModel *cartItem in itemModel.shoppingCartList) {
+                NSMutableDictionary *cartDic = [NSMutableDictionary dictionary];
+                cartDic[@"goodsId"] = @(cartItem.goodsId);
+                cartDic[@"num"] = @(cartItem.num);
+                [goods addObject:cartDic];
+            }
+            itemDic[@"goods"] = goods;
+            [rowDicS addObject:itemDic];
+        }
+        
+        paraDic[@"rows"] = rowDicS;
     }
     NSLog(@"jsonstr = %@", paraDic[@"rows"]);
     NSString *url = [NSString stringWithFormat:@"%@/mall/confirmOrder",BASEURL];
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if (codeNumber.intValue != 0) {
             NSString *errorStr = [dic objectForKey:@"remark"];
-            
             if (failure) {
                 failure(errorStr);
             }
         } else {
             if (success) {
-                success();
+                success([dic objectForKey:@"result"]);
             }
         }
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {

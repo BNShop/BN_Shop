@@ -33,16 +33,20 @@
 
                                          
                                          NSDictionary *dict = (NSDictionary*)responseObject;
-                                         NSLog(@"responseObject = %@",dict);
-                                         int code = [[dict objectForKey:@"code"] intValue];
                                          
-                                         if (code == 0) {
-                                             NSDictionary *result = [dict objectForKey:@"result"];
-                                             if (result && [result isKindOfClass:[NSDictionary class]]) {
-                                                 [BC_ToolRequest sharedManager].token = [result objectForKey:@"token"];
-                                             }
+                                         NSLog(@"responseObject = %@",dict);
+                                         if ([dict isKindOfClass:[NSDictionary class]]) {
+                                             int code = [[dict objectForKey:@"code"] intValue];
                                              
+                                             if (code == 0) {
+                                                 NSDictionary *result = [dict objectForKey:@"result"];
+                                                 if (result && [result isKindOfClass:[NSDictionary class]]) {
+                                                     [BC_ToolRequest sharedManager].token = [result objectForKey:@"token"];
+                                                 }
+                                                 
+                                             }
                                          }
+                                         
                                      } failure:^(NSURLSessionDataTask *operation, NSError *error){
                                          
                                          NSLog(@"error = %@",error);

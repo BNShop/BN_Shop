@@ -58,7 +58,7 @@
 @property (nonatomic, assign) BOOL submenu;//是否分单
 
 - (void)getShoppingOrderConfirmationDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure;
-- (void)getShoppingOrderDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure;
+- (void)getShoppingOrderDetail:(void(^)(NSArray *orderIds))success failure:(void(^)(NSString *errorDescription))failure;
 
 
 - (SectionDataSource *)getSectionDataSourceWith:(NSString *)title items:(NSArray*)items cellIdentifier:(NSString *)cellIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock configureSectionBlock:(TableViewSectionConfigureBlock)configureSectionBlock;
