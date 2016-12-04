@@ -110,13 +110,13 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     BN_ShopOrderBillView *billView = [BN_ShopOrderBillView nib];
     [billView updateWith:[self.orderViewModel shopAcountStr] pointDeduction:[self.orderViewModel shopVailableStr] freight:[self.orderViewModel shopFreightStr]];
     [self.footerView addSubview:billView];
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, footerHeight, footerWidth, 1)];
-    lineView.backgroundColor = ColorLine;
-    [billView addSubview:lineView];
-    [lineView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:billView];
-    [lineView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
-    [lineView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
-    [lineView autoSetDimension:ALDimensionHeight toSize:1];
+//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, footerHeight, footerWidth, 1)];
+//    lineView.backgroundColor = ColorLine;
+//    [billView addSubview:lineView];
+//    [lineView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:billView];
+//    [lineView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+//    [lineView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+//    [lineView autoSetDimension:ALDimensionHeight toSize:1];
     
     [billView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.footerView];
     [billView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];

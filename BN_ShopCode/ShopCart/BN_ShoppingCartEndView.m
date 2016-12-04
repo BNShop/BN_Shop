@@ -39,7 +39,7 @@
     NSString *price = [NSString stringWithFormat:@"%@(0.00)", TEXT(@"结算")];
     [self.SettlementButton setAttributedTitle:[price setFont:Font15 restFont:(UIFont *)Font10 range:[price rangeOfString:TEXT(@"结算")]] forState:UIControlStateNormal];
     self.bottomLineView.backgroundColor = ColorLine;
-
+    self.RadioButton.selected = YES;
     
     
     [self setEdit:NO];

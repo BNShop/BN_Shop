@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *pointDeductionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *freightLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomLineView;
+@property (weak, nonatomic) IBOutlet UIView *topLineView;
 
 @end
 
@@ -24,6 +25,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.topLineView.backgroundColor = ColorLine;
     self.bottomLineView.backgroundColor = ColorLine;
     self.retailPriceTitleLabel.font = Font12;
     self.retailPriceTitleLabel.textColor = ColorGray;

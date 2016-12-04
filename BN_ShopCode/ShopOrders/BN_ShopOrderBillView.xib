@@ -55,6 +55,13 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Fd-FY-Wob">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="WmP-IP-C4n"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYL-gW-UxQ">
                     <rect key="frame" x="0.0" y="111" width="375" height="0.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,11 +90,14 @@
                 <constraint firstAttribute="trailing" secondItem="qIi-bp-VaF" secondAttribute="trailing" constant="20" id="XAC-Tb-pfV"/>
                 <constraint firstItem="yrw-OU-uAw" firstAttribute="leading" secondItem="8rO-IL-eGy" secondAttribute="leading" id="Xpx-fy-c0X"/>
                 <constraint firstItem="qDI-tF-cC1" firstAttribute="top" secondItem="yrw-OU-uAw" secondAttribute="top" id="awk-8I-Rwt"/>
+                <constraint firstItem="6Fd-FY-Wob" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="foV-GX-PrN"/>
                 <constraint firstAttribute="trailing" secondItem="MYL-gW-UxQ" secondAttribute="trailing" id="iNJ-Hf-vSi"/>
                 <constraint firstItem="yrw-OU-uAw" firstAttribute="width" secondItem="8rO-IL-eGy" secondAttribute="width" id="iY7-Qy-Lic"/>
                 <constraint firstItem="qDI-tF-cC1" firstAttribute="height" secondItem="qIi-bp-VaF" secondAttribute="height" id="ixR-dK-G2a"/>
                 <constraint firstItem="jGX-w7-9oj" firstAttribute="height" secondItem="qDI-tF-cC1" secondAttribute="height" id="l3k-Gw-YnV"/>
                 <constraint firstItem="8rO-IL-eGy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="mDE-oH-ci9"/>
+                <constraint firstAttribute="trailing" secondItem="6Fd-FY-Wob" secondAttribute="trailing" id="oob-q7-nJA"/>
+                <constraint firstItem="6Fd-FY-Wob" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="r5K-wG-N2i"/>
                 <constraint firstItem="zZ9-be-wKT" firstAttribute="width" secondItem="yrw-OU-uAw" secondAttribute="width" id="ryw-g9-GjL"/>
                 <constraint firstItem="zZ9-be-wKT" firstAttribute="height" secondItem="yrw-OU-uAw" secondAttribute="height" id="zF4-MB-sYU"/>
             </constraints>
@@ -100,6 +110,7 @@
                 <outlet property="pointDeductionTitleLabel" destination="yrw-OU-uAw" id="h2s-IF-17X"/>
                 <outlet property="retailPriceLabel" destination="qIi-bp-VaF" id="jbi-yX-SiG"/>
                 <outlet property="retailPriceTitleLabel" destination="8rO-IL-eGy" id="9ll-i6-H1W"/>
+                <outlet property="topLineView" destination="6Fd-FY-Wob" id="1oF-Ct-aa9"/>
             </connections>
             <point key="canvasLocation" x="37.5" y="99"/>
         </view>
