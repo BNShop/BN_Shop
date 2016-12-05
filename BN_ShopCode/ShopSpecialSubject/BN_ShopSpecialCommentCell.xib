@@ -99,7 +99,7 @@
                         <rect key="frame" x="269" y="171" width="31" height="30"/>
                         <state key="normal" image="Shop_SpecialSubject_Comment"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjD-qd-x0C">
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjD-qd-x0C">
                         <rect key="frame" x="236" y="179" width="18" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="5AB-Ig-YZm"/>
@@ -109,7 +109,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZC-1l-45y">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZC-1l-45y">
                         <rect key="frame" x="226" y="171" width="28" height="29"/>
                         <state key="normal" image="Shop_SpecialSubject_Like"/>
                         <state key="selected" image="Shop_SpecialSubject_Liked"/>

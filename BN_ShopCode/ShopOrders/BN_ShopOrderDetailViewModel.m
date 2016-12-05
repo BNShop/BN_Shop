@@ -43,10 +43,7 @@
 }
 
 - (int)saleafter {
-    if (self.saleafter_state_name.length > 0) {
-        return 1;
-    }
-    return 0;
+    return self.saleafter_state;
 }
 
 - (NSString *)pay_typeName

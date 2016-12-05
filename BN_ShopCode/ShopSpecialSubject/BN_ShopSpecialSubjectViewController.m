@@ -138,7 +138,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     specialsSection.configureCellBlock = ^(id cell, BN_ShopGoodSpecialModel *item){
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
-        [(BN_ShopSpecialSubjectCell *)cell updateWith:item.imageUrl1 subImgUrl:item.imageUrl2 completed:^(id cell) {
+        [(BN_ShopSpecialSubjectCell *)cell updateWith:item.image_url1 subImgUrl:item.image_url2 completed:^(id cell) {
             @strongify(self);
             NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
             if (indexpath) {
@@ -250,7 +250,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
         CGFloat height = [tableView fd_heightForCellWithIdentifier:ShopSpecialSubjectCellIdentifier configuration:^(id cell) {
             BN_ShopGoodSpecialModel *item = [self.viewModel.dataSource itemAtIndexPath:indexPath];
             [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
-            [(BN_ShopSpecialSubjectCell *)cell updateWith:item.imageUrl1 subImgUrl:item.imageUrl2 completed:^(id cell) {
+            [(BN_ShopSpecialSubjectCell *)cell updateWith:item.image_url1 subImgUrl:item.image_url2 completed:^(id cell) {
                 @strongify(self);
                 NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
                 if (indexpath) {

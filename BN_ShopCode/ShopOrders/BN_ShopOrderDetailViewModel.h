@@ -18,7 +18,11 @@ typedef NS_ENUM(NSUInteger, BN_ShopOrderState) {
     BN_ShopOrderState_Finish = 3
 };
 
-
+typedef NS_ENUM(int, BN_ShopOrderSaleafterState) {
+    BN_ShopOrderSaleafterState_Normal = 1,
+    BN_ShopOrderSaleafterState_Ing = 2,
+    BN_ShopOrderSaleafterState_Finish = 3
+};
 
 @interface BN_ShopOrderDetailModel : NSObject
 
@@ -41,6 +45,7 @@ typedef NS_ENUM(NSUInteger, BN_ShopOrderState) {
 @property (nonatomic, copy) NSString *integral_amount;//积分金额
 @property (nonatomic, copy) NSString *comment_state_name;//评论状态名
 @property (nonatomic, copy) NSString *saleafter_state_name;//售后状态名
+@property (nonatomic, assign) int saleafter_state;//订单售后状态 
 
 - (int)orderState;//0 代之父 1代收货 2代评价 3已完成
 - (int)saleafter;//售后状态 0求租 1等待 2 万次

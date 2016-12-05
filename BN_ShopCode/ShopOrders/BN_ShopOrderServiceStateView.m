@@ -29,9 +29,16 @@
     self.serverStateLabel.textColor = ColorGray;
 }
 
-- (void)updateServerState:(int)state {
+- (void)updateServerStateFinish {
     self.serverStateLabel.hidden = NO;
-    self.serverStateLabel.text = (state == 1)?TEXT(@"您的售后申请正在处理中，如有任何疑问请联系客服"):TEXT(@"您的售后申请已处理完成，欢迎您下次继续购物");
+    self.serverStateLabel.text = TEXT(@"您的售后申请已处理完成，欢迎您下次继续购物");
+    self.serverLabel.hidden = YES;
+    self.tagImg.hidden = YES;
+}
+
+- (void)updateServerStateIng {
+    self.serverStateLabel.hidden = NO;
+    self.serverStateLabel.text = TEXT(@"您的售后申请正在处理中，如有任何疑问请联系客服");
     self.serverLabel.hidden = YES;
     self.tagImg.hidden = YES;
 }

@@ -238,7 +238,7 @@
             }
         } else {
             if (success) {
-                success([dic objectForKey:@"rows"]);
+                success((dic[@"result"])[@"orderIds"]);
             }
         }
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {

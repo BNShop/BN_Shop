@@ -22,6 +22,7 @@
 
 #import "PureLayout.h"
 #import "UIView+BlocksKit.h"
+#import "UIActionSheet+BlocksKit.h"
 
 #import "BN_ShopOrderItemProtocol.h"
 
@@ -147,8 +148,10 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     footerHeight += 5;
     
     BN_ShopOrderServiceStateView *serviceView = [BN_ShopOrderServiceStateView nib];
-    if (self.orderViewModel.detailModel.saleafter > 0) {
-        [serviceView updateServerState:self.orderViewModel.detailModel.saleafter];
+    if (self.orderViewModel.detailModel.saleafter_state == BN_ShopOrderSaleafterState_Ing) {
+        [serviceView updateServerStateIng];
+    } else if (self.orderViewModel.detailModel.saleafter_state == BN_ShopOrderSaleafterState_Finish) {
+        [serviceView updateServerStateFinish];
     } else {
         [serviceView updateServerHelp];
     }
@@ -176,6 +179,19 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         [orderPayView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
         [orderPayView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
         [orderPayView autoSetDimension:ALDimensionHeight toSize:orderPayView.getViewHeight];
+        [orderPayView bk_whenTapped:^{
+            @strongify(self);
+            UIAlertAction *acton0 = [UIAlertAction actionWithTitle:TEXT(@"微信支付") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                self.orderViewModel.detailModel.pay_type = 1;
+            }];
+            UIAlertAction *acton1 = [UIAlertAction actionWithTitle:TEXT(@"支付宝") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                self.orderViewModel.detailModel.pay_type = 2;
+            }];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"支付方式" message:nil preferredStyle: UIAlertControllerStyleActionSheet];
+            [alertController addAction:acton0];
+            [alertController addAction:acton1];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }];
         footerHeight += orderPayView.getViewHeight;
     }
     
@@ -241,11 +257,14 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 #warning 立即评价
         }];
     } else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Finish) {
-        [processView updateWith:nil rightTitle:@"确认完成"];
+//        [processView updateWith:nil rightTitle:@"确认完成"];
+//        [processView addLeftEventHandler:nil];
+//        [processView addRightEventHandler:^(id sender) {
+//#warning 确认完成
+//        }];
+        [processView updateWith:nil rightTitle:nil];
         [processView addLeftEventHandler:nil];
-        [processView addRightEventHandler:^(id sender) {
-#warning 确认完成
-        }];
+        [processView addRightEventHandler:nil];
     }
     [self.footerView addSubview:processView];
     [processView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.footerView];

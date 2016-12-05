@@ -11,6 +11,7 @@
 
 @interface BN_ShopOrderServiceStateView : UIView
 - (void)updateServerHelp;
-- (void)updateServerState:(int)state;//0处理中，1已完成
+- (void)updateServerStateFinish;//0处理中，1已完成
+- (void)updateServerStateIng;//0处理中，1已完成
 - (CGFloat)getViewHeight;
 @end
