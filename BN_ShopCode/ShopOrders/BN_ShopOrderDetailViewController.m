@@ -16,6 +16,7 @@
 #import "BN_ShopOrderProcessingView.h"
 #import "BN_ShopOrderNumberProcessingView.h"
 #import "Base_BaseViewController+ControlCreate.h"
+#import "BN_ShopPaymentViewController.h"
 
 #import "BN_ShopOrderUserProfileViewModel.h"
 #import "BN_ShopOrderDetailViewModel.h"
@@ -154,6 +155,10 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         [serviceView updateServerStateFinish];
     } else {
         [serviceView updateServerHelp];
+        [serviceView bk_whenTapped:^{
+#warning 联系客服的操作
+            
+        }];
     }
     [self.footerView addSubview:serviceView];
     [serviceView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:lineView0];
@@ -179,19 +184,6 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         [orderPayView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
         [orderPayView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
         [orderPayView autoSetDimension:ALDimensionHeight toSize:orderPayView.getViewHeight];
-        [orderPayView bk_whenTapped:^{
-            @strongify(self);
-            UIAlertAction *acton0 = [UIAlertAction actionWithTitle:TEXT(@"微信支付") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                self.orderViewModel.detailModel.pay_type = 1;
-            }];
-            UIAlertAction *acton1 = [UIAlertAction actionWithTitle:TEXT(@"支付宝") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                self.orderViewModel.detailModel.pay_type = 2;
-            }];
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"支付方式" message:nil preferredStyle: UIAlertControllerStyleActionSheet];
-            [alertController addAction:acton0];
-            [alertController addAction:acton1];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }];
         footerHeight += orderPayView.getViewHeight;
     }
     
@@ -234,7 +226,8 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
             }];
         }];
         [processView addRightEventHandler:^(id sender) {
-#warning 立即支付处理
+            @strongify(self);
+            [self payment];
         }];
     } else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Take) {
         [processView updateWith:nil rightTitle:@"确认收货"];
@@ -296,6 +289,13 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     
     self.tableView.tableHeaderView = self.headerView;
     
+}
+
+#pragma mark - 支付处理
+- (void)payment {
+    BN_ShopPaymentViewModel *viewModel = [BN_ShopPaymentViewModel paymentViewModelWith:@[self.orderViewModel.detailModel.order_id] type:self.orderViewModel.detailModel.pay_type needPay:self.orderViewModel.detailModel.goods_amount];
+    BN_ShopPaymentViewController *ctr = [[BN_ShopPaymentViewController alloc] init:viewModel];
+    [self.navigationController pushViewController:ctr animated:YES];
 }
 
 #pragma mark - UITableViewDelegate

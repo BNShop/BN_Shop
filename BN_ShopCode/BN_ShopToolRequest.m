@@ -70,4 +70,81 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
     }];
 }
 
+//微信支付
+- (void)webchatPrePayWith:(NSArray *)orderIDs success:(void(^)(PayReq *payReq))success failure:(void(^)(NSString *errorDescription))failure {
+    if (orderIDs.count == 0) {
+        if (failure) {
+            failure(TEXT(@"选择支付选项"));
+        }
+        return;
+    }
+    NSMutableDictionary *paraDic = nil;
+    NSString *url = [NSString stringWithFormat:@"%@/wxpay/webchatPrePay?orderId=%@",BASEURL, [orderIDs componentsJoinedByString:@","]];
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue != 0) {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            if (failure) {
+                failure(errorStr);
+            }
+        } else {
+            dic = dic[@"result"];
+            PayReq *payReq = [PayReq new];
+            payReq = [[PayReq alloc] init];
+            payReq.partnerId = dic[@"partnerid"];
+            payReq.prepayId = dic[@"prepayid"];
+            payReq.package = dic[@"prepayid"];
+            payReq.nonceStr = dic[@"noncestr"];
+            payReq.timeStamp = [dic[@"timestamp"] intValue];
+            payReq.sign = dic[@"sign"];
+            if (success) {
+                success(payReq);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+            failure([error errorDescription]);
+        }
+    }];
+
+}
+
+//支付宝支付
+- (void)alipayPrePayWith:(NSArray *)orderIDs success:(void(^)(NSString *orderInfo))success failure:(void(^)(NSString *errorDescription))failure {
+    if (orderIDs.count == 0) {
+        if (failure) {
+            failure(TEXT(@"选择支付选项"));
+        }
+        return;
+    }
+    NSMutableDictionary *paraDic = nil;
+    NSString *url = [NSString stringWithFormat:@"%@/alipay/getOrderInfo?orderId=%@",BASEURL, [orderIDs componentsJoinedByString:@","]];
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue != 0) {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            if (failure) {
+                failure(errorStr);
+            }
+        } else {
+            if (success) {
+                success(dic[@"orderInfo"]);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+            failure([error errorDescription]);
+        }
+    }];
+    
+}
+
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LYSingleton.h"
+#import "WXApi.h"
 
 @interface BN_ShopToolRequest : NSObject
 LY_SINGLETON_FOR_CLASS_HEADER(BN_ShopToolRequest)
@@ -17,5 +18,9 @@ LY_SINGLETON_FOR_CLASS_HEADER(BN_ShopToolRequest)
 //点赞
 - (void)likeWith:(long)allSpotsId allSpotsType:(int)allSpotsType  success:(void(^)(int likedState, NSString *likedMessage))success failure:(void(^)(NSString *errorDescription))failure;
 
+//微信支付
+- (void)webchatPrePayWith:(NSArray *)orderIDs success:(void(^)(PayReq *payReq))success failure:(void(^)(NSString *errorDescription))failure;
 
+//支付宝支付
+- (void)alipayPrePayWith:(NSArray *)orderIDs success:(void(^)(NSString *orderInfo))success failure:(void(^)(NSString *errorDescription))failure;
 @end

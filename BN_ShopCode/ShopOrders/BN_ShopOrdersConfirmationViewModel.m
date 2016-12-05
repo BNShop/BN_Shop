@@ -78,14 +78,14 @@
 
 
 - (NSString *)realNeedPayStr {
-    
+    float pay = [self.ordreModel.resultMap.real_need_pay floatValue];
     if (self.userVailable) {
-        float pay = [self.ordreModel.resultMap.real_need_pay floatValue];
+        
         float vailable = [self.ordreModel.availableUse floatValue];
         
         return [NSString stringWithFormat:@"¥%.2f", (pay-vailable)];
     }
-    return [NSString stringWithFormat:@"¥%@", self.ordreModel.resultMap.real_need_pay];
+    return [NSString stringWithFormat:@"¥%.2f", pay];
     
 }
 //商品总额

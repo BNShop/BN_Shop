@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "BN_ShopPayment.h"
+
 
 @interface AppDelegate ()
 
@@ -18,6 +20,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
+
+    [[BN_ShopPayment sharedInstance] wxRegisterApp];
 
         NSDictionary *paraDic = @{
                                   @"phoneNum":@"18006015791",
@@ -83,5 +88,12 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return  [WXApi handleOpenURL:url delegate:[BN_ShopPayment sharedInstance]];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [WXApi handleOpenURL:url delegate:[BN_ShopPayment sharedInstance]];
+}
 
 @end
