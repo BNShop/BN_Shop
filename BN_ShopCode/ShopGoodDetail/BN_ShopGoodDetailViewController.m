@@ -13,6 +13,7 @@
 #import "BN_ShopGoodDetailCommentViewController.h"
 #import "Base_BaseViewController+ControlCreate.h"
 #import "BN_ShopGoodDetailBuyViewController.h"
+#import "BN_ShopOrdersConfirmationViewController.h"
 
 #import "BN_ShopGoodDetailToolBar.h"
 #import "BN_ShopGoodDetailSimpleShowView.h"
@@ -129,13 +130,16 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     
     CGFloat stateHeight = 54.0f;
     CGFloat height = [self.simpleShowView getViewHeight] + stateHeight + [self.friendlyWarningView getViewHeight] + [self.sellersView getViewHeight] + [self.transitionToolBar getViewHeight];
-    self.headeView.frame = CGRectMake(0, 0, WIDTH(self.view), height);
+    self.headeView.frame = CGRectMake(0, 0, 320, height);
     NSMutableArray *tmpArray = [NSMutableArray array];
     for (NSInteger index=0; index<3; index++) {
-        [tmpArray addObject:[[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.view), height)]];
+        UIView *view = [[UIView alloc] initWithFrame:self.headeView.frame];
+        view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [tmpArray addObject:view];
     }
     self.headerHight = height;
     self.subHeadeViews = tmpArray.copy;
+    self.headeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 }
 
 - (void)buildToolBar {
@@ -149,7 +153,13 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         if (tag == 0) [self gotoShopCart];
         else if (tag == 1) [self airLine];
         else if (tag == 2) [self followAction];
-        else if (tag == 3) [self addToCart];
+        else if (tag == 3) {
+            if (self.stateViewModel.state == GoodDetaiState_Forward) {
+                [self addRemind];
+            } else if (self.stateViewModel.state != GoodDetaiState_End) {
+                [self addToCart];
+            }
+        }
     }];
     [self.view addSubview:self.toolBar];
     [self.toolBar autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
@@ -199,7 +209,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.sellersView autoSetDimension:ALDimensionHeight toSize:[self.sellersView getViewHeight]];
     
     [self.sellersView bk_whenTapped:^{
-#warning 跳转商户的店面到哪里了呢
+//#warning 商品详情页的店家跳转
     }];
 }
 
@@ -223,6 +233,10 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         });
     }];
     [self.simpleShowViewModel getPicsData];
+    [self.simpleShowViewModel getCartNum:^{
+        @strongify(self);
+        [self.toolBar updateWith:[NSString stringWithFormat:@"%d", self.simpleShowViewModel.cartNum]];
+    }];
 }
 
 - (void)bulidStateViewModel {
@@ -244,6 +258,17 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
             [self.transitionToolBar updateWith:self.stateViewModel.commentNumStr];
             [self.friendlyWarningView updateWith:self.stateViewModel.freeShippingStatus point:self.stateViewModel.pointStr deliver:@"第三方发货"];
             [self.toolBar updateWithSelect:self.stateViewModel.simpleDetailModel.is_collect];
+            if (self.stateViewModel.state == GoodDetaiState_End) {
+                [self.toolBar updateAddToCartWithFinish];
+            } else if (self.stateViewModel.state == GoodDetaiState_Forward) {
+                if (self.stateViewModel.simpleDetailModel.warn_id <= 0) {
+                    [self.toolBar updateAddToCartWithTip];
+                } else {
+                    [self.toolBar updateAddToCartWithTipN];
+                }
+            } else if (self.stateViewModel.state == GoodDetaiState_Panic) {
+                [self.toolBar updateAddToCartWithBuyNow];
+            }
             
         });
        
@@ -299,15 +324,6 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     }];
     
     @weakify(self);
-//    [self.arribalsView.collectionView setHeaderRefreshDatablock:^{
-//        @strongify(self);
-//        [self.arribalsViewModel getNewArrivalsClearData:YES goodsId:self.simpleShowViewModel.goodsId];
-//    } footerRefreshDatablock:^{
-//        @strongify(self);
-//        [self.arribalsViewModel getNewArrivalsClearData:NO goodsId:self.simpleShowViewModel.goodsId];
-//    }];
-//    
-//    [self.arribalsView.collectionView setCollectionViewData:self.arribalsViewModel.arrivals];
     [self.arribalsView.collectionView setBn_data:self.arribalsViewModel.arrivals];
     
     [self.arribalsView.collectionView setRefreshBlock:^{
@@ -353,6 +369,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         if (newController != self.curController) {
             if ([self.curController respondsToSelector:@selector(setHeadView:)]) {
                 [self.curController performSelectorOnMainThread:@selector(setHeadView:) withObject:[self.subHeadeViews objectAtIndex:selectedIndex] waitUntilDone:NO];
+//                [self.curController performSelectorOnMainThread:@selector(setHeadView:) withObject:nil waitUntilDone:NO];
             }
             if ([newController respondsToSelector:@selector(setHeadView:)]) {
                 [newController performSelectorOnMainThread:@selector(setHeadView:) withObject:self.headeView waitUntilDone:NO];
@@ -370,7 +387,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 #pragma mark - action's for nav
 - (void)shareForGood {
-#warning 导航栏的点击处理-分享
+#warning 商品详情页的分享处理
 }
 
 #pragma mark - ToolBar
@@ -379,9 +396,9 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.navigationController pushViewController:cartctr animated:YES];
 }
 
-#warning 工具栏的点击处理
+
 - (void)airLine {
-    
+#warning 商品详情页的客服服务
 }
 
 - (void)followAction {
@@ -399,11 +416,27 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 - (void)addToCart {
     BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:self.stateViewModel.simpleDetailModel.pic_url standards:self.stateViewModel.simpleDetailModel.name price:self.stateViewModel.simpleDetailModel.real_price];
+    ctr.goodId = self.simpleShowViewModel.goodsId;
     ctr.view.backgroundColor = [ColorBlack colorWithAlphaComponent:0.17];
     [ctr setModalPresentationStyle:UIModalPresentationCustom];
     [ctr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     ctr.delegate = self;
     [self presentViewController:ctr animated:YES completion:nil];
+}
+
+- (void)addRemind {
+    
+    [[BN_ShopToolRequest sharedInstance] warnORCancelRes:(self.stateViewModel.simpleDetailModel.warn_id <= 0) goodsId:(self.stateViewModel.simpleDetailModel.warn_id>0 ? self.stateViewModel.simpleDetailModel.warn_id : self.simpleShowViewModel.goodsId) success:^(long warn_id) {
+        self.stateViewModel.simpleDetailModel.warn_id = warn_id;
+        if (warn_id <= 0) {
+            [self.toolBar updateAddToCartWithTip];
+        } else {
+            [self.toolBar updateAddToCartWithTipN];
+        }
+        
+    } failure:^(NSString *errorDescription) {
+        [self showHudError:nil title:errorDescription];
+    }];
 }
 
 #pragma mark - 页面跳转
@@ -433,8 +466,15 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     CGRect rect = self.headeView.frame;
     rect.origin.y = 0;
     self.headeView.frame = rect;
+    self.headeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [detailCtr setHeadView:self.headeView];
     [self.view addSubview:detailCtr.view];
+    
+    [detailCtr.view autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.view];
+    [detailCtr.view autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
+    [detailCtr.view autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
+    [detailCtr.view autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.view withOffset:60.0f];
+    
     self.curController = detailCtr;
     
     [self.view bringSubviewToFront:self.toolBar];
@@ -458,7 +498,15 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
             [newController didMoveToParentViewController:self];
             self.curController = newController;
             
+            [self.view addSubview:newController.view];
             [self.view bringSubviewToFront:self.toolBar];
+            
+            
+            [newController.view autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.view];
+            [newController.view autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
+            [newController.view autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
+            [newController.view autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.view withOffset:60.0f];
+            
         }else{
             self.curController = oldController;
         }
@@ -470,12 +518,23 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 #pragma mark - BN_ShopGoodDetailBuyViewControllerDelegate
 - (void)goodDetailBuyCountWith:(int)cout goodId:(long)goodId{
     @weakify(self);
-    [self.stateViewModel addShoppingCartWith:self.simpleShowViewModel.goodsId num:cout success:^{
-        @strongify(self);
-        [self showHudSucess:TEXT(@"加入购物车")];
-    } failure:^(NSString *errorDescription) {
-        @strongify(self);
-        [self showHudError:errorDescription title:TEXT(@"加入购物车失败")];
-    }];
+    if (self.stateViewModel.state == GoodDetaiState_Panic) {
+        if (goodId > 0 && cout > 0) {
+            BN_ShopOrdersConfirmationViewController *ctr = [[BN_ShopOrdersConfirmationViewController alloc] initWithSpecial:self.simpleShowViewModel.goodsId num:cout];
+            [self.navigationController pushViewController:ctr animated:YES];
+        }
+    } else {
+        [self.stateViewModel addShoppingCartWith:self.simpleShowViewModel.goodsId num:cout success:^{
+            @strongify(self);
+            [self showHudSucess:TEXT(@"加入购物车")];
+            [self.simpleShowViewModel getCartNum:^{
+                @strongify(self);
+                [self.toolBar updateWith:[NSString stringWithFormat:@"%d", self.simpleShowViewModel.cartNum]];
+            }];
+        } failure:^(NSString *errorDescription) {
+            @strongify(self);
+            [self showHudError:errorDescription title:TEXT(@"加入购物车失败")];
+        }];
+    }
 }
 @end

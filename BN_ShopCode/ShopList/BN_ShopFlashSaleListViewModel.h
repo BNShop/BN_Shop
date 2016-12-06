@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TableDataSource.h"
 #import "BN_ShopGoodModel.h"
+#import "BN_GoodStateHeader.h"
 
 @interface BN_ShopFlashSaleListViewModel : NSObject
 
@@ -17,5 +18,4 @@
 
 - (void)getLimiteGoodsClearData:(BOOL)clear;
 - (void)cancelTimer;
-- (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long warn_id))success failure:(void(^)(NSString *errorDescription))failure;
 @end

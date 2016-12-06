@@ -26,8 +26,8 @@
     // Initialization code
     self.titleLabel.textColor = ColorGray;
     self.titleLabel.font = Font10;
-    self.contentIconView.q_BorderColor = ColorLine;
-    self.contentIconView.q_BorderWidth = 1.0f;
+//    self.contentIconView.q_BorderColor = ColorLine;
+//    self.contentIconView.q_BorderWidth = 1.0f;
     
 }
 

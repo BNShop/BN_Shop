@@ -48,6 +48,9 @@
         {
             NSArray *array = [dic objectForKey:@"rows"];
             NSArray *returnArray = [BN_ShopGoodModel mj_objectArrayWithKeyValuesArray:array];
+            [returnArray bk_each:^(BN_ShopGoodModel *obj) {
+                [obj checkeGoodState];
+            }];
             
             if (clear == YES)
             {
@@ -70,49 +73,6 @@
         temp.goods.loadSupport.loadEvent = NetLoadFailedEvent;
     }];
     
-}
-
-#pragma mark - 提醒与取消
-- (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long warn_id))success failure:(void(^)(NSString *errorDescription))failure {
-    NSDictionary *paraDic0 = @{
-                               @"goodsId":[NSNumber numberWithLong:goodsId]
-                               };
-    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
-//    if ([BC_ToolRequest sharedManager].token) {
-//        [paraDic setObject:[BC_ToolRequest sharedManager].token forKey:@"token"];
-//    }
-    [paraDic setValuesForKeysWithDictionary:paraDic0];
-    
-    NSString *url = [NSString stringWithFormat:@"%@/mall/warn", BASEURL];
-    if (!isWarn) {
-        url = [NSString stringWithFormat:@"%@/mall/cancelWarn", BASEURL];
-    }
-    [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSDictionary *dic = responseObject;
-        if ([responseObject isKindOfClass:[NSData class]]) {
-            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-        }
-        NSNumber *codeNumber = [dic objectForKey:@"code"];
-        if (codeNumber.intValue != 0) {
-            NSString *errorStr = [dic objectForKey:@"remark"];
-            if (failure) {
-                failure(errorStr);
-            }
-        } else {
-            if (success) {
-                if (isWarn) {
-                    success([[dic objectForKey:@"warn_Id"] longValue]);
-                } else {
-                    success(-1);
-                }
-            }
-        }
-    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
-        if (failure) {
-            failure([error errorDescription]);
-        }
-    }];
-
 }
 
 #pragma mark - timer

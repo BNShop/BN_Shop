@@ -39,7 +39,11 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     [self buildViewModel];
     
     
-    
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"BN_ShopOrdersConfirmation" object:nil] subscribeNext:^(id x) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self deleteTagger];
+        });
+    }];
     
     
 }
@@ -95,8 +99,8 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     
     [self.tableView setBn_data:self.viewModel.shoppingCartList];
     [self.tableView setHeaderRefreshDatablock:^{
-//        @strongify(self);
-//        [self.viewModel getShoppingCartListData:YES];
+        @strongify(self);
+        [self.viewModel getShoppingCartListData:YES];
     } footerRefreshDatablock:^{
         @strongify(self);
         [self.viewModel getShoppingCartListData:NO];

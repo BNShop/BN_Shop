@@ -77,12 +77,18 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
 
 - (void)loadCustomNavigationButton {
     [super loadCustomNavigationButton];
+    @weakify(self);
     UIBarButtonItem *item0 = [[UIBarButtonItem alloc] bk_initWithImage:IMAGE(@"Shop_SpecialSubject_NavShare") style:UIBarButtonItemStylePlain handler:^(id sender) {
 #warning 分享操作
     }];
     UIBarButtonItem *item1 = [[UIBarButtonItem alloc] bk_initWithImage:IMAGE(@"Shop_SpecialSubject_UnFollow") style:UIBarButtonItemStylePlain handler:^(id sender) {
         [[BN_ShopToolRequest sharedInstance] collecteWith:self.viewModel.specialId allSpotsType:14 success:^(int collecteState, NSString *collecteMessage) {
-            item1.image = collecteState ? IMAGE(@"Shop_SpecialSubject_UnFollow") : IMAGE(@"Shop_SpecialSubject_Follow");
+            @strongify(self);
+            self.viewModel.specialDetail.isAlreadyCollect = collecteState;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self updateFollowBarItem];
+            });
+            
         } failure:^(NSString *errorDescription) {
             [self showHudPrompt:errorDescription];
         }];
@@ -109,7 +115,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
 
 #pragma mark - NAV's UI
 - (void)updateFollowBarItem {
-    if (self.viewModel.isFollow) {
+    if (self.viewModel.specialDetail.isAlreadyCollect) {
         [self.followBarItem setImage:IMAGE(@"Shop_SpecialSubject_Follow")];
         self.followBarItem.tintColor = ColorRed;
     } else {
@@ -169,15 +175,18 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
         @strongify(self);
         SectionDataSource *commentSection = [self.viewModel.dataSource sectionAtIndex:1];
         SectionDataSource *specialsSection = [self.viewModel.dataSource sectionAtIndex:0];
-        [specialsSection resetItems:self.viewModel.specials];
-        [commentSection resetItems:self.viewModel.commentsRecord];
-        [self.viewModel.tagDataSource resetItems:self.viewModel.tags];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [specialsSection resetItems:self.viewModel.specials];
+            [commentSection resetItems:self.viewModel.commentsRecord];
+            [self.viewModel.tagDataSource resetItems:self.viewModel.tags];
+            [self updateFollowBarItem];
+            self.tableView.dataSource = self.viewModel.dataSource;
+            [self buildSubjectHeadView];
+            [self buildCommentHeadView];
+            [self.tableView reloadData];
+            [self buildTopicsData];
+        });
         
-        self.tableView.dataSource = self.viewModel.dataSource;
-        [self buildSubjectHeadView];
-        [self buildCommentHeadView];
-        [self.tableView reloadData];
-        [self buildTopicsData];
     }];
     [self.viewModel getSpecialDetail];
     
@@ -223,7 +232,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     if (!self.commentHeadView) {
         self.commentHeadView = [BN_ShopSpecialCommentHeadView nib];
     }
-    [self.commentHeadView updateWith:[self.viewModel collectedNumStr] follow:self.viewModel.isFollow];
+    [self.commentHeadView updateWith:[self.viewModel collectedNumStr] follow:self.viewModel.specialDetail.isAlreadyCollect];
     [self.commentHeadView updateWith:self.viewModel.collectedImgs];
     [self.commentHeadView clickedFollowAction:^(id sender) {
         [[BN_ShopToolRequest sharedInstance] collecteWith:self.viewModel.specialId allSpotsType:14 success:^(int collecteState, NSString *collecteMessage) {

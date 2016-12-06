@@ -126,7 +126,7 @@ static NSString * const ShopSorterCollectCellIdentifier = @"ShopSorterCollectCel
         [self buildSecondDataSource:categoryM];
         
     }];
-    [self.titleTableView setTableViewData:self.viewModel.categories];
+//    [self.titleTableView setTableViewData:self.viewModel.categories];
     [self.titleTableView setBn_data:self.viewModel.categories];
     
     [self.titleTableView setRefreshBlock:^{

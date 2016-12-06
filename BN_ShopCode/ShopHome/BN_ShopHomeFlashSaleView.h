@@ -15,6 +15,7 @@
 
 - (void)updateWith:(NSString *)thumbnailUrl title:(NSString *)title instruction:(NSString *)instruction price:(NSAttributedString *)price;
 - (void)updateWith:(NSDate *)countDownDate title:(NSString *)title countdownToLastSeconds:(NSInteger)countdownToLastSeconds timeColor:(UIColor *)timeColor;
+- (void)tappedThumbnailImg:(void (^)(void))block ;
 - (CGFloat)getViewHeight;
 @end
 

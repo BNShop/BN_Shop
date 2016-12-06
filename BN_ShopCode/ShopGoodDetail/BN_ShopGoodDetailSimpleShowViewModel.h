@@ -16,11 +16,13 @@
 @interface BN_ShopGoodDetailSimpleShowViewModel : NSObject
 @property (nonatomic, assign) long goodsId;//商品ID
 @property (nonatomic, assign) int type;
+@property (nonatomic, assign) int cartNum;
 
 @property (nonatomic, strong) NSMutableArray<BN_ShopGoodDetailPicModel*> *photoList;
 @property (nonatomic, copy) NSString *shortDescription;
 
 - (void)getPicsData;
+- (void)getCartNum:(void(^)(void))success;
 
 - (NSArray *)thumbnailUrlList;
 - (NSInteger)thumbnailCount;

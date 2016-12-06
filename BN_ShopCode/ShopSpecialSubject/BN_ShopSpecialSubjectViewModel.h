@@ -15,7 +15,6 @@
 
 @interface BN_ShopSpecialSubjectViewModel : BN_BaseDataModel
 @property (nonatomic, strong) MultipleSectionTableArraySource *dataSource;
-@property (nonatomic, assign) BOOL isFollow;
 @property (nonatomic, assign) long specialId;//专题主键
 @property (nonatomic, strong) NSMutableArray<BN_ShopGoodSpecialModel*> *specials;//商品的列表
 @property (nonatomic, strong) NSArray<BN_ShopSpecialTopicModel*> *recommends;//推荐列表

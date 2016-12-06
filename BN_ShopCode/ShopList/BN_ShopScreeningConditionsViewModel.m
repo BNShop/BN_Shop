@@ -131,8 +131,6 @@
     return [self curTagIndexWith:BN_ShopConditionTag_Price tagId:self.priceTagId];
 }
 
-
-#warning 获取当前的赌赢配置
 - (void)curBankTagIdWith:(NSIndexPath *)indexPath {
     
     BN_ShopConditionModel *condition = [self.conditions bk_match:^BOOL(BN_ShopConditionModel *obj) {

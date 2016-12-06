@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "NSString+URL.h"
 #import "PureLayout.h"
+#import "UIView+BlocksKit.h"
 
 
 @interface BN_ShopHomeFlashSaleView () <LYFreeTimingPlateDelegate>
@@ -41,7 +42,7 @@
     
     LYFreeTimingPlate *plate = [LYFreeTimingPlate nib];
     plate.countdownToLastSeconds = 0;
-//    [plate updatePlateWith:ColorRed];
+    [plate updatePlateWith:ColorWhite];
     [self addSubview:plate];
     [plate autoSetDimension:ALDimensionHeight toSize:40];
     [plate autoSetDimension:ALDimensionWidth toSize:100];
@@ -70,9 +71,19 @@
 
 - (void)updateWith:(NSDate *)countDownDate title:(NSString *)title countdownToLastSeconds:(NSInteger)countdownToLastSeconds timeColor:(UIColor *)timeColor {
     self.timingPlate.date = countDownDate;
-    self.timingPlate.countdownToLastSeconds = countdownToLastSeconds;
     self.timingPlate.titleStr = title;
     [self.timingPlate updatePlateWith:timeColor];
+    self.timingPlate.countdownToLastSeconds = countdownToLastSeconds;
+    
+}
+
+- (void)tappedThumbnailImg:(void (^)(void))block {
+    if (block) {
+        self.thumbnailImg.userInteractionEnabled = YES;
+    } else {
+        self.thumbnailImg.userInteractionEnabled = NO;
+    }
+    [self.thumbnailImg bk_whenTapped:block];
 }
 
 - (CGFloat)getViewHeight {

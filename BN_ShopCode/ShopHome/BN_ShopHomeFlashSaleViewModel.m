@@ -8,6 +8,7 @@
 
 #import "BN_ShopHomeFlashSaleViewModel.h"
 #import "NSString+Attributed.h"
+#import "BN_GoodStateHeader.h"
 
 
 @implementation BN_ShopFlashSaleModel
@@ -38,6 +39,7 @@
         if(codeNumber.intValue == 0)
         {
             [temp.flashSaleModel mj_setKeyValues:[dic objectForKey:@"result"]];
+            [temp checkeBuyingState];
         }
         else
         {
@@ -51,29 +53,63 @@
     }];
 }
 
+- (void)checkeBuyingState {
+    NSDate *startdate = nil;
+    if (self.flashSaleModel.buying_start_time) {
+        startdate = [NSDate dateFromString:self.flashSaleModel.buying_start_time withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    NSDate *endDate = nil;
+    if (self.flashSaleModel.buying_end_time) {
+        endDate = [NSDate dateFromString:self.flashSaleModel.buying_end_time withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    NSDate *nowDate = [NSDate date];
+    if ((startdate && [nowDate isEarlierThanDate:startdate])
+        || (self.flashSaleModel.timeleft > 0 && self.flashSaleModel.buying_state == GoodDetaiState_Forward)) {
+        self.flashSaleModel.buying_state = GoodDetaiState_Forward;
+    } else if ((endDate && [nowDate isEarlierThanDate:endDate])
+               || (self.flashSaleModel.timeleft > 0 && self.flashSaleModel.buying_state == GoodDetaiState_Panic)) {
+        self.flashSaleModel.buying_state = GoodDetaiState_Panic;
+    } else {
+        self.flashSaleModel.buying_state = GoodDetaiState_End;
+    }
+}
+
 - (NSAttributedString *)priceAttri {
     return [[NSString stringWithFormat:@"¥%@", self.flashSaleModel.real_price] setFont:Font12 restFont:Font15 range:NSMakeRange(0, 1)];
 }
 
 - (NSDate *)date {
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:self.flashSaleModel.timeleft];
-    return date;
+    
+    if (self.flashSaleModel.timeleft > 0) {
+        return [NSDate dateWithTimeIntervalSinceNow:self.flashSaleModel.timeleft];;
+    }
+    
+    if (self.flashSaleModel.buying_state == GoodDetaiState_Forward) {
+        return [NSDate dateFromString:self.flashSaleModel.buying_start_time withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    if (self.flashSaleModel.buying_state == GoodDetaiState_Panic) {
+        return [NSDate dateFromString:self.flashSaleModel.buying_end_time withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    
+    
+    
+    return nil;
 }
 
 - (NSString *)timeTitle {
-    if (self.flashSaleModel.buying_state == 0) {
-        return nil;
-    } else if (self.flashSaleModel.buying_state == 1) {
+    if (self.flashSaleModel.buying_state == GoodDetaiState_Forward) {
+        return TEXT(@"");
+    } else if (self.flashSaleModel.buying_state == GoodDetaiState_Panic) {
         return TEXT(@"距离结束时间");
     } else {
-        return TEXT(@"已结束");
+        return TEXT(@"抢购已结束");
     }
 }
 
 - (UIColor *)timeColor {
-    if (self.flashSaleModel.buying_state == 0) {
+    if (self.flashSaleModel.buying_state == GoodDetaiState_Forward) {
         return ColorBtnYellow;
-    } else if (self.flashSaleModel.buying_state == 1) {
+    } else if (self.flashSaleModel.buying_state == GoodDetaiState_Panic) {
         return ColorRed;
     } else {
         return ColorLightGray;

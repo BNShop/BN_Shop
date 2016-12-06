@@ -7,14 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(NSUInteger, GoodDetaiStateType) {
-    GoodDetaiState_Forward,//未开始
-     GoodDetaiState_Panic,//抢购中
-    GoodDetaiState_End,//已结束
-    GoodDetaiState_Normal,//普通不参与抢购
-    
-};
+#import "BN_GoodStateHeader.h"
 
 @interface BN_ShopGoodSimpleDetailModel : NSObject
 
@@ -42,6 +35,7 @@ typedef NS_ENUM(NSUInteger, GoodDetaiStateType) {
 @property (nonatomic, copy) NSString *given_integral;//赠送积分数
 @property (nonatomic, assign) int type;//1:普通商2:限时商品
 @property (nonatomic, assign) int is_collect;//是否收藏了
+@property (nonatomic, assign) int warn_id;//是否设置提醒的id
 
 
 

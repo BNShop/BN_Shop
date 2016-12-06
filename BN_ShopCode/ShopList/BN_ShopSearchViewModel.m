@@ -9,6 +9,7 @@
 #import "BN_ShopSearchViewModel.h"
 #import "BN_ShopspecialTagModel.h"
 
+
 @interface BN_ShopSearchViewModel ()
 
 @end
@@ -24,6 +25,7 @@ static NSString * const BN_ShopSearchHotCache = @"Hot";
     self = [super init];
     if (self) {
         self.tags = [[NSMutableArray alloc] initFromNet];
+        
     }
     return self;
 }
@@ -168,5 +170,56 @@ static NSString * const BN_ShopSearchHotCache = @"Hot";
     }];
 
 }
+
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    
+    NSString *search = [self validSearch:indexPath];
+    if (self.collectionSelectBlock && search) {
+        self.collectionSelectBlock (search);
+    }
+    
+}
+
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    SectionDataSource *section = [self.dataSource sectionAtIndex:indexPath.section];
+    if (section.tagged && [section getItemsCount] == 1) {
+        CGFloat width = (WIDTH(collectionView) - 14*2);
+        return CGSizeMake(width, 40);
+        
+    } else {
+        CGFloat width = (WIDTH(collectionView) - 5*2 - 14*2) / 3.0;
+        return CGSizeMake(width, 26);
+    }
+    
+}
+
+//cell的最小行间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 6.0;
+}
+
+//cell的最小列间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 5.0;
+}
+
+//内馅
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(6, 14, 6, 14);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeMake(WIDTH(collectionView), 36.0f);
+}
+
 
 @end

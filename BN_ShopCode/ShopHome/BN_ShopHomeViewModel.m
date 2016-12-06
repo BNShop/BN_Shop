@@ -25,9 +25,9 @@
 
 - (void)getSouvenirsData
 {
-    NSDictionary *paraDic = @{@"type":@1};
+    NSDictionary *paraDic = nil;// @{@"type":@1};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/categoryListForIndex",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/categoryListForIndex?type=1",BASEURL];
     __weak typeof(self) temp = self;
     self.souvenirs.loadSupport.loadEvent = NetLoadingEvent;
     

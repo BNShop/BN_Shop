@@ -18,6 +18,7 @@
 
 #import "NSString+Attributed.h"
 #import "NSArray+BlocksKit.h"
+#import "BN_ShopToolRequest.h"
 
 @interface BN_ShopFlashSaleListViewController ()<BN_ShopGoodDetailBuyViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -73,36 +74,22 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
             }];
         } else if (item.buying_state == 0) {
             [cell updateAdditionalForward:item.date state:(int)item.warn_id];
-            if (item.warn_id == -1) {
-                [cell addManageButtonEvent:^(id sender) {
-                    @strongify(self);
+            [cell addManageButtonEvent:^(id sender) {
+                @strongify(self);
+                
+                [[BN_ShopToolRequest sharedInstance] warnORCancelRes:(item.warn_id <= 0) goodsId:(item.warn_id>0 ? item.warn_id : item.goods_id) success:^(long warn_id) {
+                    item.warn_id = warn_id;
+                    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell_weak_];
+                    if (indexPath) {
+                        [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                    }
                     
-                    [self.viewModel warnORCancelRes:YES goodsId:item.goods_id success:^(long warn_id) {
-                        item.warn_id = warn_id;
-                        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell_weak_];
-                        if (indexPath) {
-                            [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
-                        }
-                        
-                    } failure:^(NSString *errorDescription) {
-                        [self showHudError:TEXT(@"设置提醒失败") title:errorDescription];
-                    }];
+                } failure:^(NSString *errorDescription) {
+                    [self showHudError:nil title:errorDescription];
                 }];
-            } else {
-                [cell addManageButtonEvent:^(id sender) {
-                    @strongify(self);
-                    [self.viewModel warnORCancelRes:NO goodsId:item.goods_id success:^(long warn_id) {
-                        item.warn_id = warn_id;
-                        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell_weak_];
-                        if (indexPath) {
-                            [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
-                        }
-                        
-                    } failure:^(NSString *errorDescription) {
-                        [self showHudError:TEXT(@"取消提醒失败") title:errorDescription];
-                    }];
-                }];
-            }
+            }];
+        } else {
+            [cell updateAdditionalFinish];
         }
     }];
 

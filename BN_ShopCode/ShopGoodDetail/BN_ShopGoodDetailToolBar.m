@@ -13,6 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet BGButton *addToCartButton;
+@property (weak, nonatomic) IBOutlet UILabel *numLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *numWidth;
 
 
 @end
@@ -25,6 +27,10 @@
     [self.addToCartButton setTitle:TEXT(@"加入购物车") forState:UIControlStateNormal];
     [self.addToCartButton setTitleColor:ColorWhite forState:UIControlStateNormal];
     self.addToCartButton.titleLabel.font = Font12;
+    self.numLabel.backgroundColor = ColorBtnYellow;
+    self.numLabel.font = Font12;
+    self.numLabel.text = @"0";
+    self.numLabel.textColor = ColorWhite;
 }
 
 - (IBAction)showShopCatr:(id)sender {
@@ -60,9 +66,49 @@
     self.followButton.selected = !self.followButton.selected;
 }
 
+- (void)updateAddToCartWithBuyNow {
+    self.addToCartButton.normalColor = ColorBtnYellow;
+    [self.addToCartButton setNeedsDisplay];
+    [self.addToCartButton setTitle:TEXT(@"立即抢购") forState:UIControlStateNormal];
+    [self.addToCartButton setTitleColor:ColorWhite forState:UIControlStateNormal];
+}
+
+- (void)updateAddToCartWithTip {
+    self.addToCartButton.normalColor = ColorRed;
+    [self.addToCartButton setNeedsDisplay];
+    [self.addToCartButton setTitle:TEXT(@"设置提醒") forState:UIControlStateNormal];
+    [self.addToCartButton setTitleColor:ColorWhite forState:UIControlStateNormal];
+}
+
+- (void)updateAddToCartWithTipN {
+    self.addToCartButton.normalColor = ColorRed;
+    [self.addToCartButton setNeedsDisplay];
+    [self.addToCartButton setTitle:TEXT(@"取消提醒") forState:UIControlStateNormal];
+    [self.addToCartButton setTitleColor:ColorWhite forState:UIControlStateNormal];
+}
+
+- (void)updateAddToCartWithFinish {
+    self.addToCartButton.normalColor = ColorLightGray;
+    [self.addToCartButton setNeedsDisplay];
+    [self.addToCartButton setTitle:TEXT(@"抢购结束") forState:UIControlStateNormal];
+    [self.addToCartButton setTitleColor:ColorWhite forState:UIControlStateNormal];
+}
+
+- (void)updateWith:(NSString *)num {
+    self.numLabel.text = num;
+    [self.numLabel sizeToFit];
+    if ([num intValue] < 10) {
+        self.numWidth.constant = 18.0;
+    } else {
+        self.numWidth.constant = 38.0;
+    }
+    [self.numLabel setNeedsLayout];
+}
+
 - (CGFloat)getViewHeight {
     return 50.0f;
 }
+
 
 @end
 

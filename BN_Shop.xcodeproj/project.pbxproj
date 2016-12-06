@@ -149,8 +149,6 @@
 		6A035C231DE6A648009617A7 /* BN_ShopGoodDetailConsultancyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A035C221DE6A648009617A7 /* BN_ShopGoodDetailConsultancyModel.m */; };
 		6A035C251DE6AE29009617A7 /* BN_ShopGoodDetailConsultancyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A035C241DE6AE29009617A7 /* BN_ShopGoodDetailConsultancyViewController.xib */; };
 		6A035C271DE6AE4A009617A7 /* BN_ShopGoodDetailCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A035C261DE6AE4A009617A7 /* BN_ShopGoodDetailCommentViewController.xib */; };
-		6A0360051DE6E66B009617A7 /* DTCoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A035FEC1DE6E1C5009617A7 /* DTCoreText.framework */; };
-		6A0360071DE6E66B009617A7 /* DTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0360061DE6E66B009617A7 /* DTFoundation.framework */; };
 		6A03600A1DE6E891009617A7 /* BN_ShopGoodDetailTransitionToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0360091DE6E891009617A7 /* BN_ShopGoodDetailTransitionToolBar.m */; };
 		6A03600C1DE6E89F009617A7 /* BN_ShopGoodDetailTransitionToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A03600B1DE6E89F009617A7 /* BN_ShopGoodDetailTransitionToolBar.xib */; };
 		6A06E4291DE442340036EEF3 /* BN_ShopSpecialSubjectTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A06E4271DE442340036EEF3 /* BN_ShopSpecialSubjectTipCell.m */; };
@@ -195,8 +193,24 @@
 		6AA26FFB1DF56116003688C4 /* BN_ShopPaymentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA26FF91DF56116003688C4 /* BN_ShopPaymentCell.m */; };
 		6AA26FFC1DF56116003688C4 /* BN_ShopPaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA26FFA1DF56116003688C4 /* BN_ShopPaymentCell.xib */; };
 		6AA270001DF568E1003688C4 /* BN_ShopPaymentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA26FFF1DF568E1003688C4 /* BN_ShopPaymentViewModel.m */; };
+		6AA270041DF57823003688C4 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6AA270021DF57823003688C4 /* AlipaySDK.bundle */; };
+		6AA270051DF57823003688C4 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA270031DF57823003688C4 /* AlipaySDK.framework */; };
+		6AA270071DF5786C003688C4 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA270061DF5786C003688C4 /* libc++.tbd */; };
+		6AA270091DF5787B003688C4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA270081DF5787B003688C4 /* libz.tbd */; };
+		6AA2700B1DF57883003688C4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA2700A1DF57883003688C4 /* SystemConfiguration.framework */; };
+		6AA2700D1DF5788E003688C4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA2700C1DF5788E003688C4 /* CoreTelephony.framework */; };
+		6AA2700F1DF57898003688C4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA2700E1DF57898003688C4 /* QuartzCore.framework */; };
+		6AA270111DF578A1003688C4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA270101DF578A1003688C4 /* CoreText.framework */; };
+		6AA270131DF578B1003688C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA270121DF578B1003688C4 /* CoreGraphics.framework */; };
+		6AA270151DF578BC003688C4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA270141DF578BC003688C4 /* CFNetwork.framework */; };
+		6AA270171DF578C2003688C4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA270161DF578C2003688C4 /* UIKit.framework */; };
+		6AA270191DF578C8003688C4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA270181DF578C8003688C4 /* AVFoundation.framework */; };
+		6AA2701B1DF578D6003688C4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA2701A1DF578D6003688C4 /* CoreMotion.framework */; };
 		6AAEC6991DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AAEC6971DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.m */; };
 		6AAEC69A1DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AAEC6981DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.xib */; };
+		6ABFC6E41DF6D8F50079C597 /* ShopSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC6E21DF6D8F50079C597 /* ShopSearchResultCell.m */; };
+		6ABFC6E51DF6D8F50079C597 /* ShopSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABFC6E31DF6D8F50079C597 /* ShopSearchResultCell.xib */; };
+		6ABFC6E81DF6E82F0079C597 /* BN_ShopSearchResultViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC6E71DF6E82F0079C597 /* BN_ShopSearchResultViewModel.m */; };
 		6AC4F6661DEC8C150092A4B0 /* BN_ShopGoodCommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC4F6651DEC8C150092A4B0 /* BN_ShopGoodCommentsModel.m */; };
 		6AC4F6691DEC909B0092A4B0 /* BN_ShopGoodSpecialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC4F6681DEC909B0092A4B0 /* BN_ShopGoodSpecialModel.m */; };
 		6ADB5E3D1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB5E3B1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.m */; };
@@ -217,62 +231,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6A035FE11DE6E1C5009617A7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A70F11DE148632CD009202BF;
-			remoteInfo = "Static Library";
-		};
-		6A035FE31DE6E1C5009617A7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A788CA681486456100E1AFD9;
-			remoteInfo = UnitTest;
-		};
-		6A035FE51DE6E1C5009617A7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A78D9F781965B7DD00C80986;
-			remoteInfo = MacUnitTest;
-		};
-		6A035FE71DE6E1C5009617A7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A7F7EFCD1573603100F5A4D0;
-			remoteInfo = "Static Library (no DTFoundation)";
-		};
-		6A035FE91DE6E1C5009617A7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E2262DC61638331500BFDAD7;
-			remoteInfo = "DTCoreText (Mac)";
-		};
-		6A035FEB1DE6E1C5009617A7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A79BA6201B46A1FB0086C2F6;
-			remoteInfo = "DTCoreText (iOS)";
-		};
-		6A035FED1DE6E1C5009617A7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 94D24B961D4AFE7800C7F33C;
-			remoteInfo = "DTCoreText (tvOS)";
-		};
-		6A0360031DE6E660009617A7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A79BA61F1B46A1FB0086C2F6;
-			remoteInfo = "DTCoreText (iOS)";
-		};
 		C96515051DD61C86004B5F05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C96514E31DD61C86004B5F05 /* Project object */;
@@ -517,7 +475,6 @@
 		6A035C221DE6A648009617A7 /* BN_ShopGoodDetailConsultancyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodDetailConsultancyModel.m; sourceTree = "<group>"; };
 		6A035C241DE6AE29009617A7 /* BN_ShopGoodDetailConsultancyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopGoodDetailConsultancyViewController.xib; sourceTree = "<group>"; };
 		6A035C261DE6AE4A009617A7 /* BN_ShopGoodDetailCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopGoodDetailCommentViewController.xib; sourceTree = "<group>"; };
-		6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTCoreText.xcodeproj; path = DTCoreText/DTCoreText.xcodeproj; sourceTree = "<group>"; };
 		6A0360061DE6E66B009617A7 /* DTFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTFoundation.framework; path = "DTCoreText/Externals/DTFoundation/build/Debug-iphoneos/DTFoundation.framework"; sourceTree = "<group>"; };
 		6A0360081DE6E891009617A7 /* BN_ShopGoodDetailTransitionToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodDetailTransitionToolBar.h; sourceTree = "<group>"; };
 		6A0360091DE6E891009617A7 /* BN_ShopGoodDetailTransitionToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodDetailTransitionToolBar.m; sourceTree = "<group>"; };
@@ -598,9 +555,28 @@
 		6AA26FFA1DF56116003688C4 /* BN_ShopPaymentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopPaymentCell.xib; sourceTree = "<group>"; };
 		6AA26FFE1DF568E1003688C4 /* BN_ShopPaymentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopPaymentViewModel.h; sourceTree = "<group>"; };
 		6AA26FFF1DF568E1003688C4 /* BN_ShopPaymentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopPaymentViewModel.m; sourceTree = "<group>"; };
+		6AA270021DF57823003688C4 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AlipaySDK.bundle; path = AlipaySDK/AlipaySDK.bundle; sourceTree = "<group>"; };
+		6AA270031DF57823003688C4 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = AlipaySDK/AlipaySDK.framework; sourceTree = "<group>"; };
+		6AA270061DF5786C003688C4 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		6AA270081DF5787B003688C4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		6AA2700A1DF57883003688C4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6AA2700C1DF5788E003688C4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6AA2700E1DF57898003688C4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6AA270101DF578A1003688C4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		6AA270121DF578B1003688C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6AA270141DF578BC003688C4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6AA270161DF578C2003688C4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6AA270181DF578C8003688C4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6AA2701A1DF578D6003688C4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		6AA2701C1DF5BFBF003688C4 /* BN_GoodStateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_GoodStateHeader.h; sourceTree = "<group>"; };
 		6AAEC6961DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodDetailBuyViewController.h; sourceTree = "<group>"; };
 		6AAEC6971DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodDetailBuyViewController.m; sourceTree = "<group>"; };
 		6AAEC6981DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopGoodDetailBuyViewController.xib; sourceTree = "<group>"; };
+		6ABFC6E11DF6D8F50079C597 /* ShopSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopSearchResultCell.h; sourceTree = "<group>"; };
+		6ABFC6E21DF6D8F50079C597 /* ShopSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopSearchResultCell.m; sourceTree = "<group>"; };
+		6ABFC6E31DF6D8F50079C597 /* ShopSearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopSearchResultCell.xib; sourceTree = "<group>"; };
+		6ABFC6E61DF6E82F0079C597 /* BN_ShopSearchResultViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopSearchResultViewModel.h; sourceTree = "<group>"; };
+		6ABFC6E71DF6E82F0079C597 /* BN_ShopSearchResultViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopSearchResultViewModel.m; sourceTree = "<group>"; };
 		6AC4F6641DEC8C150092A4B0 /* BN_ShopGoodCommentsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodCommentsModel.h; sourceTree = "<group>"; };
 		6AC4F6651DEC8C150092A4B0 /* BN_ShopGoodCommentsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodCommentsModel.m; sourceTree = "<group>"; };
 		6AC4F6671DEC909B0092A4B0 /* BN_ShopGoodSpecialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodSpecialModel.h; sourceTree = "<group>"; };
@@ -642,9 +618,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A0360071DE6E66B009617A7 /* DTFoundation.framework in Frameworks */,
-				6A0360051DE6E66B009617A7 /* DTCoreText.framework in Frameworks */,
+				6AA2701B1DF578D6003688C4 /* CoreMotion.framework in Frameworks */,
+				6AA270191DF578C8003688C4 /* AVFoundation.framework in Frameworks */,
+				6AA270171DF578C2003688C4 /* UIKit.framework in Frameworks */,
+				6AA270151DF578BC003688C4 /* CFNetwork.framework in Frameworks */,
+				6AA270131DF578B1003688C4 /* CoreGraphics.framework in Frameworks */,
+				6AA270111DF578A1003688C4 /* CoreText.framework in Frameworks */,
+				6AA2700F1DF57898003688C4 /* QuartzCore.framework in Frameworks */,
+				6AA2700D1DF5788E003688C4 /* CoreTelephony.framework in Frameworks */,
+				6AA2700B1DF57883003688C4 /* SystemConfiguration.framework in Frameworks */,
+				6AA270091DF5787B003688C4 /* libz.tbd in Frameworks */,
+				6AA270071DF5786C003688C4 /* libc++.tbd in Frameworks */,
 				5422AC1B5A8523AF2C1AD95C /* libPods-BN_Shop.a in Frameworks */,
+				6AA270051DF57823003688C4 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,6 +806,7 @@
 		6A033DFE1DE1ACD3000446A0 /* ShopGoodDetail */ = {
 			isa = PBXGroup;
 			children = (
+				6AA2701C1DF5BFBF003688C4 /* BN_GoodStateHeader.h */,
 				6A033F031DE1B24E000446A0 /* Model */,
 				6A033F021DE1B247000446A0 /* ViewModel */,
 				6A033F011DE1B23E000446A0 /* ViewController */,
@@ -902,6 +889,7 @@
 		6A033E7F1DE1ACD3000446A0 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				6AA270011DF57814003688C4 /* AlipaySDK15.2.0 */,
 				6A033E801DE1ACD3000446A0 /* QRadioButton */,
 			);
 			path = Vendors;
@@ -1182,6 +1170,9 @@
 				6A033E551DE1ACD3000446A0 /* BN_ShopSearchCollectionReusableView.h */,
 				6A033E561DE1ACD3000446A0 /* BN_ShopSearchCollectionReusableView.m */,
 				6A033E571DE1ACD3000446A0 /* BN_ShopSearchCollectionReusableView.xib */,
+				6ABFC6E11DF6D8F50079C597 /* ShopSearchResultCell.h */,
+				6ABFC6E21DF6D8F50079C597 /* ShopSearchResultCell.m */,
+				6ABFC6E31DF6D8F50079C597 /* ShopSearchResultCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1216,6 +1207,8 @@
 				6A033E5C1DE1ACD3000446A0 /* BN_ShopSearchViewModel.m */,
 				6ADB5E461DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.h */,
 				6ADB5E471DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.m */,
+				6ABFC6E61DF6E82F0079C597 /* BN_ShopSearchResultViewModel.h */,
+				6ABFC6E71DF6E82F0079C597 /* BN_ShopSearchResultViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1307,20 +1300,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		6A035FD61DE6E1C4009617A7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6A035FE21DE6E1C5009617A7 /* libDTCoreText.a */,
-				6A035FE41DE6E1C5009617A7 /* UnitTest.xctest */,
-				6A035FE61DE6E1C5009617A7 /* MacUnitTest.xctest */,
-				6A035FE81DE6E1C5009617A7 /* libDTCoreText_no_DTFoundation.a */,
-				6A035FEA1DE6E1C5009617A7 /* DTCoreText.framework */,
-				6A035FEC1DE6E1C5009617A7 /* DTCoreText.framework */,
-				6A035FEE1DE6E1C5009617A7 /* DTCoreText.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		6A848D351DF4429D004C9070 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -1383,9 +1362,29 @@
 			name = ViewModel;
 			sourceTree = "<group>";
 		};
+		6AA270011DF57814003688C4 /* AlipaySDK15.2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				6AA270021DF57823003688C4 /* AlipaySDK.bundle */,
+				6AA270031DF57823003688C4 /* AlipaySDK.framework */,
+			);
+			name = AlipaySDK15.2.0;
+			sourceTree = "<group>";
+		};
 		A23566919BA0368F43E13E56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6AA2701A1DF578D6003688C4 /* CoreMotion.framework */,
+				6AA270181DF578C8003688C4 /* AVFoundation.framework */,
+				6AA270161DF578C2003688C4 /* UIKit.framework */,
+				6AA270141DF578BC003688C4 /* CFNetwork.framework */,
+				6AA270121DF578B1003688C4 /* CoreGraphics.framework */,
+				6AA270101DF578A1003688C4 /* CoreText.framework */,
+				6AA2700E1DF57898003688C4 /* QuartzCore.framework */,
+				6AA2700C1DF5788E003688C4 /* CoreTelephony.framework */,
+				6AA2700A1DF57883003688C4 /* SystemConfiguration.framework */,
+				6AA270081DF5787B003688C4 /* libz.tbd */,
+				6AA270061DF5786C003688C4 /* libc++.tbd */,
 				6A0360061DE6E66B009617A7 /* DTFoundation.framework */,
 				C225C78BECD951B8E84D1A45 /* libPods-BN_Shop.a */,
 			);
@@ -1397,7 +1396,6 @@
 			children = (
 				C965152B1DD621A0004B5F05 /* ST_Home.xcassets */,
 				6A033EF61DE1B123000446A0 /* ST_Shop.xcassets */,
-				6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */,
 				C96515221DD61E2E004B5F05 /* BN_ShopCode */,
 				C96514ED1DD61C86004B5F05 /* BN_Shop */,
 				C96515071DD61C86004B5F05 /* BN_ShopTests */,
@@ -1503,7 +1501,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6A0360041DE6E660009617A7 /* PBXTargetDependency */,
 			);
 			name = BN_Shop;
 			productName = BN_Shop;
@@ -1582,12 +1579,6 @@
 			mainGroup = C96514E21DD61C86004B5F05;
 			productRefGroup = C96514EC1DD61C86004B5F05 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 6A035FD61DE6E1C4009617A7 /* Products */;
-					ProjectRef = 6A035FD51DE6E1C4009617A7 /* DTCoreText.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				C96514EA1DD61C86004B5F05 /* BN_Shop */,
@@ -1596,58 +1587,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		6A035FE21DE6E1C5009617A7 /* libDTCoreText.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libDTCoreText.a;
-			remoteRef = 6A035FE11DE6E1C5009617A7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6A035FE41DE6E1C5009617A7 /* UnitTest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UnitTest.xctest;
-			remoteRef = 6A035FE31DE6E1C5009617A7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6A035FE61DE6E1C5009617A7 /* MacUnitTest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = MacUnitTest.xctest;
-			remoteRef = 6A035FE51DE6E1C5009617A7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6A035FE81DE6E1C5009617A7 /* libDTCoreText_no_DTFoundation.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libDTCoreText_no_DTFoundation.a;
-			remoteRef = 6A035FE71DE6E1C5009617A7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6A035FEA1DE6E1C5009617A7 /* DTCoreText.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DTCoreText.framework;
-			remoteRef = 6A035FE91DE6E1C5009617A7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6A035FEC1DE6E1C5009617A7 /* DTCoreText.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DTCoreText.framework;
-			remoteRef = 6A035FEB1DE6E1C5009617A7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6A035FEE1DE6E1C5009617A7 /* DTCoreText.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DTCoreText.framework;
-			remoteRef = 6A035FED1DE6E1C5009617A7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C96514E91DD61C86004B5F05 /* Resources */ = {
@@ -1677,6 +1616,7 @@
 				6A033ECA1DE1ACD3000446A0 /* BN_ShopGoodHorizontalCell.xib in Resources */,
 				6A0B13721DE2AE2600B3715E /* BN_ShopGoodDetailNewArrivalsView.xib in Resources */,
 				6A033ECE1DE1ACD3000446A0 /* BN_ShopListViewController.xib in Resources */,
+				6AA270041DF57823003688C4 /* AlipaySDK.bundle in Resources */,
 				6A033EF11DE1ACD3000446A0 /* icon_unfocus@2x.png in Resources */,
 				6A033EF01DE1ACD3000446A0 /* icon_focus@3x.png in Resources */,
 				6A033EE11DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewController.xib in Resources */,
@@ -1715,6 +1655,7 @@
 				6AA26FFC1DF56116003688C4 /* BN_ShopPaymentCell.xib in Resources */,
 				C96514F91DD61C86004B5F05 /* Main.storyboard in Resources */,
 				6A0261DD1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.xib in Resources */,
+				6ABFC6E51DF6D8F50079C597 /* ShopSearchResultCell.xib in Resources */,
 				6A0261F11DE34ADD00BA5AA3 /* BN_ShopSpecialCommentCell.xib in Resources */,
 				6A033E9E1DE1ACD3000446A0 /* BN_ShopSorterContantCell.xib in Resources */,
 				6A033F191DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.xib in Resources */,
@@ -1837,6 +1778,7 @@
 				6A06E4381DE446A80036EEF3 /* BN_ShopSpecialSubjectViewModel.m in Sources */,
 				6A80DE7A1DEF26780098B33D /* BN_ShopSpecialDetailModel.m in Sources */,
 				6A033EEC1DE1ACD3000446A0 /* LYFreeTimingPlate.m in Sources */,
+				6ABFC6E81DF6E82F0079C597 /* BN_ShopSearchResultViewModel.m in Sources */,
 				6A033EB51DE1ACD3000446A0 /* BN_ShopGoodDetaiStateViewModel.m in Sources */,
 				6A033EAA1DE1ACD3000446A0 /* BN_ShopGoodDetailSimpleShowView.m in Sources */,
 				6A033EC51DE1ACD3000446A0 /* BN_ShopBannerCell.m in Sources */,
@@ -1901,6 +1843,7 @@
 				6A033EA41DE1ACD3000446A0 /* BN_ShopGoodDetaiForwardStateView.m in Sources */,
 				6A033E901DE1ACD3000446A0 /* MultipleSectionTableArraySource.m in Sources */,
 				6A033EBE1DE1ACD3000446A0 /* BN_ShopHomeFlashSaleViewModel.m in Sources */,
+				6ABFC6E41DF6D8F50079C597 /* ShopSearchResultCell.m in Sources */,
 				6A033EE51DE1ACD3000446A0 /* BN_ShopOrdersToolBar.m in Sources */,
 				6A033E8D1DE1ACD3000446A0 /* UITableViewCell+NIB.m in Sources */,
 				6A61F0811DF280E400867A69 /* BN_ShopOrderDetailViewController.m in Sources */,
@@ -1950,11 +1893,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6A0360041DE6E660009617A7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "DTCoreText (iOS)";
-			targetProxy = 6A0360031DE6E660009617A7 /* PBXContainerItemProxy */;
-		};
 		C96515061DD61C86004B5F05 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C96514EA1DD61C86004B5F05 /* BN_Shop */;
@@ -2084,11 +2022,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DTCoreText/Externals/DTFoundation/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/BN_ShopCode/Vendors/AlipaySDK",
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT)/PrefixHeader.pch";
 				INFOPLIST_FILE = BN_Shop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "yuan..BN-Shop";
+				PRODUCT_BUNDLE_IDENTIFIER = com.waco.CityLifeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2102,11 +2041,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DTCoreText/Externals/DTFoundation/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/BN_ShopCode/Vendors/AlipaySDK",
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT)/PrefixHeader.pch";
 				INFOPLIST_FILE = BN_Shop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "yuan..BN-Shop";
+				PRODUCT_BUNDLE_IDENTIFIER = com.waco.CityLifeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

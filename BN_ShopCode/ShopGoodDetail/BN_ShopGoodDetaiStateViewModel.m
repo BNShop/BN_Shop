@@ -52,23 +52,37 @@
 }
 
 - (GoodDetaiStateType)state {
-//    if (self.simpleDetailModel.buying_end_time.length == 0 && self.simpleDetailModel.buying_start_time.length == 0) {
-//        return GoodDetaiState_Normal;
-//    }
     return self.simpleDetailModel.buying_state;
+}
+
+- (void)checkeBuyingState {
+    if (self.simpleDetailModel.type != 2) {
+        self.simpleDetailModel.buying_state = GoodDetaiState_Normal;
+        return;
+    }
+    NSDate *startdate = nil;
+    if (self.simpleDetailModel.buying_start_time) {
+        startdate = [NSDate dateFromString:self.simpleDetailModel.buying_start_time withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    NSDate *endDate = nil;
+    if (self.simpleDetailModel.buying_end_time) {
+        endDate = [NSDate dateFromString:self.simpleDetailModel.buying_end_time withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    NSDate *nowDate = [NSDate date];
+    if (startdate && [nowDate isEarlierThanDate:startdate]) {
+        self.simpleDetailModel.buying_state = GoodDetaiState_Forward;
+    } else if (endDate && [nowDate isEarlierThanDate:endDate]) {
+        self.simpleDetailModel.buying_state = GoodDetaiState_Panic;
+    } else {
+        self.simpleDetailModel.buying_state = GoodDetaiState_End;
+    }
 }
 
 - (NSDate *)date {
     if (self.state == GoodDetaiState_Forward) {
-        if (self.simpleDetailModel.buying_start_time.length == 0) {
-            return nil;
-        }
-        return [NSDate dateFromString:self.simpleDetailModel.buying_start_time withFormat:self.simpleDetailModel.buying_start_time];
+        return [NSDate dateFromString:self.simpleDetailModel.buying_end_time withFormat:@"yyyy-MM-dd HH:mm:ss"];;
     } else if (self.state == GoodDetaiState_Panic) {
-        if (self.simpleDetailModel.buying_end_time.length == 0) {
-            return nil;
-        }
-        return [NSDate dateFromString:self.simpleDetailModel.buying_end_time withFormat:self.simpleDetailModel.buying_end_time];
+        return [NSDate dateFromString:self.simpleDetailModel.buying_end_time withFormat:@"yyyy-MM-dd HH:mm:ss"];
     }
     return nil;
 }
@@ -108,6 +122,8 @@
             temp.simpleDetailModel = [BN_ShopGoodSimpleDetailModel mj_objectWithKeyValues:[dic objectForKey:@"result"]];
             if (temp.simpleDetailModel.type == 1) {
                 temp.simpleDetailModel.buying_state = GoodDetaiState_Normal;
+            } else {
+                [temp checkeBuyingState];
             }
         }
         else

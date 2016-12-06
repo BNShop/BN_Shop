@@ -50,6 +50,9 @@
     [self.rightButton bk_removeEventHandlersForControlEvents:UIControlEventTouchUpInside];
     if (handler) {
         [self.rightButton bk_addEventHandler:handler forControlEvents:UIControlEventTouchUpInside];
+        self.rightButton.hidden = NO;
+    } else {
+        self.rightButton.hidden = YES;
     }
 }
 

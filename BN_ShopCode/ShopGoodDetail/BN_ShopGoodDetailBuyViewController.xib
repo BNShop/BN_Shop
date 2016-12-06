@@ -66,7 +66,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品规格" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCP-AS-sB5">
-                            <rect key="frame" x="15" y="154.5" width="89" height="14"/>
+                            <rect key="frame" x="15" y="144.5" width="89" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="89" id="9WS-Iw-R1y"/>
                                 <constraint firstAttribute="height" constant="14" id="IRM-F1-rXX"/>
@@ -76,7 +76,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfw-mc-5xV">
-                            <rect key="frame" x="109" y="154.5" width="245" height="14"/>
+                            <rect key="frame" x="109" y="144.5" width="245" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="SE3-Qp-3s4"/>
                             </constraints>

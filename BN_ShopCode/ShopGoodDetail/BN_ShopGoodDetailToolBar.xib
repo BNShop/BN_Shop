@@ -47,9 +47,25 @@
                         <action selector="addToCart:" destination="iN0-l3-epB" eventType="touchUpInside" id="ASJ-eu-IJ3"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aQ-hU-P0F">
+                    <rect key="frame" x="23" y="18" width="14" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="I5x-AJ-oI0"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="14" id="sGC-ac-ghF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="q_CornerRadius">
+                            <integer key="value" value="7"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="4aQ-hU-P0F" firstAttribute="centerX" secondItem="54M-mq-tl1" secondAttribute="centerX" constant="10" id="1Mi-DT-OSR"/>
                 <constraint firstItem="MAl-9G-7DV" firstAttribute="top" secondItem="54M-mq-tl1" secondAttribute="top" id="4uH-q9-vEn"/>
                 <constraint firstItem="54M-mq-tl1" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="3:16" id="8Yd-mH-rPu"/>
                 <constraint firstItem="MAl-9G-7DV" firstAttribute="leading" secondItem="54M-mq-tl1" secondAttribute="trailing" constant="1" id="9Eb-LO-S2G"/>
@@ -57,6 +73,7 @@
                 <constraint firstItem="MAl-9G-7DV" firstAttribute="width" secondItem="54M-mq-tl1" secondAttribute="width" id="LrS-ML-dJk"/>
                 <constraint firstItem="vPH-Gm-bSs" firstAttribute="width" secondItem="MAl-9G-7DV" secondAttribute="width" id="NGV-po-6ig"/>
                 <constraint firstItem="MAl-9G-7DV" firstAttribute="height" secondItem="54M-mq-tl1" secondAttribute="height" id="O0V-0l-Xj2"/>
+                <constraint firstItem="4aQ-hU-P0F" firstAttribute="centerY" secondItem="54M-mq-tl1" secondAttribute="centerY" constant="-10" id="Um3-S2-gsW"/>
                 <constraint firstItem="Klw-Mg-jp6" firstAttribute="leading" secondItem="vPH-Gm-bSs" secondAttribute="trailing" constant="1" id="b2C-u7-d4Z"/>
                 <constraint firstItem="54M-mq-tl1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gMm-ab-fM1"/>
                 <constraint firstItem="vPH-Gm-bSs" firstAttribute="leading" secondItem="MAl-9G-7DV" secondAttribute="trailing" constant="1" id="hE7-Qo-qZF"/>
@@ -70,6 +87,8 @@
             <connections>
                 <outlet property="addToCartButton" destination="Klw-Mg-jp6" id="QEj-aX-LOi"/>
                 <outlet property="followButton" destination="vPH-Gm-bSs" id="lFA-eH-DQq"/>
+                <outlet property="numLabel" destination="4aQ-hU-P0F" id="6A9-N9-9ST"/>
+                <outlet property="numWidth" destination="sGC-ac-ghF" id="xBH-CH-zXo"/>
             </connections>
         </view>
     </objects>

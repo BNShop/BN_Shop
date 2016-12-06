@@ -52,6 +52,7 @@
     self.bottomLineView.backgroundColor = ColorLine;
     
     self.manageButton.hidden = YES;
+    self.manageButton.normalColor = [UIColor clearColor];
     self.manageButton.titleLabel.textColor = ColorWhite;
     self.manageButton.titleLabel.font = Font12;
     [self.manageButton setTitleColor:ColorWhite forState:UIControlStateNormal];
@@ -87,14 +88,29 @@
         self.additionalLabel.font = Font12;
         self.manageButton.normalColor = ColorBtnYellow;
         if (state == -1) {
-            [self.manageButton setTitle:TEXT(@"取消提醒") forState:UIControlStateNormal];
+            [self.manageButton setTitle:TEXT(@"设置提醒") forState:UIControlStateNormal];
         } else {
-            [self.manageButton setTitle:TEXT(@"提醒我") forState:UIControlStateNormal];
+            [self.manageButton setTitle:TEXT(@"取消提醒") forState:UIControlStateNormal];
         }
         [self.manageButton setNeedsDisplay];
         self.additionalLabel.text = TEXT(@"距离开始时间");
         [self.timingPlate updateMinusWhioutBorderPlate:ColorBtnYellow];
+        
         self.timingPlate.date = date;
+    });
+    
+}
+
+- (void)updateAdditionalFinish {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.additionalLabel.textColor = ColorLightGray;
+        self.additionalLabel.font = Font12;
+        self.manageButton.normalColor = ColorLightGray;
+        [self.manageButton setTitle:TEXT(@"已结束") forState:UIControlStateNormal];
+        [self.manageButton setNeedsDisplay];
+        self.additionalLabel.text = TEXT(@"抢购已结束");
+        [self.timingPlate updateMinusWhioutBorderPlate:ColorLightGray];
+        self.timingPlate.date = nil;
     });
     
 }
@@ -105,8 +121,8 @@
         self.additionalLabel.textColor = ColorRed;
         self.additionalLabel.font = Font12;
         self.manageButton.normalColor = ColorRed;
-        [self.manageButton setNeedsDisplay];
         [self.manageButton setTitle:TEXT(@"立即抢购") forState:UIControlStateNormal];
+        [self.manageButton setNeedsDisplay];
         self.additionalLabel.text = TEXT(@"距离结束时间");
         [self.timingPlate updateMinusWhioutBorderPlate:ColorRed];
         self.timingPlate.date = date;

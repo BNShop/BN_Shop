@@ -14,8 +14,8 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
 
 //收藏
 - (void)collecteWith:(long)allSpotsId allSpotsType:(int)allSpotsType  success:(void(^)(int collecteState,  NSString *collecteMessage))success failure:(void(^)(NSString *errorDescription))failure {
-    NSMutableDictionary *paraDic = nil;//http://xxx.xxx.xxx/homePage/scienicSpots/collecte（POST ）
-    NSString *url = [NSString stringWithFormat:@"%@/homePage/scienicSpots/collecte?allSpotsId=%ld&allSpotsType=%d",BASEURL, allSpotsId, allSpotsType];
+    NSDictionary *paraDic = @{@"allSpotsId":@(allSpotsId), @"allSpotsType":@(allSpotsType)};
+    NSString *url = [NSString stringWithFormat:@"%@/homePage/scienicSpots/collecte",BASEURL];//[NSString stringWithFormat:@"%@/homePage/scienicSpots/collecte?allSpotsId=%ld&allSpotsType=%d",BASEURL, allSpotsId, allSpotsType];
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -28,6 +28,7 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
                 failure(errorStr);
             }
         } else {
+            dic = dic[@"result"];
             int collecteState = [[dic objectForKey:@"collecteState"] intValue];
             NSString *collecteMessage = dic[@"collecteMessage"];
             if (success) {
@@ -97,13 +98,14 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
             payReq = [[PayReq alloc] init];
             payReq.partnerId = dic[@"partnerid"];
             payReq.prepayId = dic[@"prepayid"];
-            payReq.package = dic[@"prepayid"];
+            payReq.package = dic[@"packageType"];
             payReq.nonceStr = dic[@"noncestr"];
             payReq.timeStamp = [dic[@"timestamp"] intValue];
             payReq.sign = dic[@"sign"];
             if (success) {
                 success(payReq);
             }
+            NSLog(@"payReq = %@", dic);
         }
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         if (failure) {
@@ -136,7 +138,7 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
             }
         } else {
             if (success) {
-                success(dic[@"orderInfo"]);
+                success((dic[@"result"])[@"orderInfo"]);
             }
         }
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
@@ -146,5 +148,73 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
     }];
     
 }
+
+//设置提醒已否
+- (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long warn_id))success failure:(void(^)(NSString *errorDescription))failure {
+    NSDictionary *paraDic = nil;
+    
+    NSString *url = [NSString stringWithFormat:@"%@/mall/warn?goodsId=%ld", BASEURL, goodsId];
+    if (!isWarn) {
+        url = [NSString stringWithFormat:@"%@/mall/cancelWarn?warnId=%ld", BASEURL, goodsId];
+    }
+    [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue != 0) {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            if (failure) {
+                failure(errorStr);
+            }
+        } else {
+            NSLog(@"dic = %@", dic);
+            dic = dic[@"result"];
+            if (success) {
+                if (isWarn) {
+                    long warn_id = [dic[@"warnId"] longValue];
+                    success(warn_id);
+                } else {
+                    success(-1);
+                }
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+            failure([error errorDescription]);
+        }
+    }];
+    
+}
+
+//购物车数量
+- (void)getShoppingCartNumRes:(void(^)(long num))success failure:(void(^)(NSString *errorDescription))failure {
+    NSString *url = [NSString stringWithFormat:@"%@/mall/shoppingCartNum", BASEURL];
+    [[BC_ToolRequest sharedManager] GET:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue != 0) {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            if (failure) {
+                failure(errorStr);
+            }
+        } else {
+            NSLog(@"dic = %@", dic);
+            if (success) {
+                success([dic[@"result"] longValue]);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+            failure([error errorDescription]);
+        }
+    }];
+
+}
+
 
 @end

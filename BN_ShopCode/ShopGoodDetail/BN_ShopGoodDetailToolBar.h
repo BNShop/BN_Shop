@@ -15,6 +15,11 @@
 @property (nonatomic, weak) id<BN_ShopGoodDetailToolBarDelegate> delegte;
 - (void)updateWithSelect:(BOOL)select;
 - (void)updateWithAoppositeSelect;
+- (void)updateAddToCartWithBuyNow;
+- (void)updateAddToCartWithTip;
+- (void)updateAddToCartWithTipN;
+- (void)updateAddToCartWithFinish;
+- (void)updateWith:(NSString *)num;
 - (CGFloat)getViewHeight;
 @end
 

@@ -10,7 +10,29 @@
 
 @implementation BN_ShopGoodModel
 
+- (void)checkeGoodState {
+    NSDate *startdate = nil;
+    if (self.buying_start_time) {
+        startdate = [NSDate dateFromString:self.buying_start_time withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    NSDate *endDate = nil;
+    if (self.buying_end_time) {
+        endDate = [NSDate dateFromString:self.buying_end_time withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    NSDate *nowDate = [NSDate date];
+    if (startdate && [nowDate isEarlierThanDate:startdate]) {
+        self.buying_state = GoodDetaiState_Forward;
+    } else if (endDate && [nowDate isEarlierThanDate:endDate]) {
+        self.buying_state = GoodDetaiState_Panic;
+    } else {
+        self.buying_state = GoodDetaiState_End;
+    }
+}
+
 - (NSDate *)date {
+    if (self.buying_state >= 2) {
+        return nil;
+    }
     if (self.timeleft <= 0) {
         return nil;
     }

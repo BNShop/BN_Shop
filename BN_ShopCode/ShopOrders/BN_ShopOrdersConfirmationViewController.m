@@ -183,6 +183,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
             long orderid = [[orderIds firstObject] longValue];
             UINavigationController *nav = self.navigationController;
             [self.navigationController popViewControllerAnimated:NO];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"BN_ShopOrdersConfirmation" object:nil];
             BN_ShopOrderDetailViewController *ctr = [[BN_ShopOrderDetailViewController alloc] initWith:[NSString stringWithFormat:@"%ld", orderid]];
             [nav pushViewController:ctr animated:YES];
             
@@ -200,7 +201,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     self.userView.frame = CGRectMake(0, 0, WIDTH(self.view), self.userView.getViewHeight);
     [self.userView bk_whenTapped:^{
 #warning 跳转去改变地址
-        //        self.confirmationviewModel.ordreModel.userAddress.address_id = 0099;
+//        把地址ID给self.confirmationviewModel.ordreModel.userAddress.address_id （long）
     }];
 
 }

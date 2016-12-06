@@ -109,13 +109,13 @@
         SectionDataSource *sectionDataSource = (SectionDataSource *)obj;
         [sectionDataSource.items bk_each:^(BN_ShoppingCartItemModel *obj) {
             if ([obj isSelected]) {
-                price += [obj num] * [[obj real_price] floatValue] - (obj.free_shipping_status*[obj.free_shipping_amount floatValue]);
+                price += [obj num] * [[obj real_price] floatValue] - ((1-obj.free_shipping_status)*[obj.free_shipping_amount floatValue]);
             }
         }];
         
     }];
     
-    return [NSString stringWithFormat:@"%.2f", price];
+    return [NSString stringWithFormat:@"%.2f", MAX(0.00, price)];
 }
 
 - (NSString *)selectedItemPriceShow {

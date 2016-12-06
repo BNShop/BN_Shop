@@ -119,8 +119,6 @@
             SectionDataSource *secton = [temp.dataSource sectionAtIndex:1];
             [secton resetItems:temp.commentsRecord];
             temp.tagDataSource = [[TableDataSource alloc] initWithItems:temp.tags cellIdentifier:nil configureCellBlock:nil];
-            
-            temp.isFollow = temp.specialDetail.isAlreadyCollect;
         }
         else
         {

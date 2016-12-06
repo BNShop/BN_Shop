@@ -89,11 +89,31 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return  [WXApi handleOpenURL:url delegate:[BN_ShopPayment sharedInstance]];
+    if ([url.host isEqualToString:@"pay"]) {
+        return [WXApi handleOpenURL:url delegate:[BN_ShopPayment sharedInstance]];
+    } else if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            [[BN_ShopPayment sharedInstance] alipayCallBackWith:resultDic];
+        }];
+        return YES;
+    }
+    return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [WXApi handleOpenURL:url delegate:[BN_ShopPayment sharedInstance]];
+    NSLog(@"url host = %@", url.host);
+    if ([url.host isEqualToString:@"pay"]) {
+        return [WXApi handleOpenURL:url delegate:[BN_ShopPayment sharedInstance]];
+    } else if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            [[BN_ShopPayment sharedInstance] alipayCallBackWith:resultDic];
+        }];
+        return YES;
+    }
+    return YES;
+    
 }
 
 @end

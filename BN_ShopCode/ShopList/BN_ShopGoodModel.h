@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BN_GoodStateHeader.h"
 
 @interface BN_ShopGoodModel : NSObject
 @property (nonatomic, assign) long goods_id;//商品主键
@@ -24,8 +25,9 @@
 
 @property (nonatomic, assign) long warn_id;//有值：已设置提醒，-1：没设置提醒
 @property (nonatomic, copy) NSString *warntime;//提醒时间
-@property (nonatomic, assign) int buying_state;//抢购状态0:未开始1:抢购中2:已结束
+@property (nonatomic, assign) int buying_state;//抢购状态 0:未开始1:抢购中2:已结束
 @property (nonatomic, assign) int timeleft;//剩余时间
 - (NSDate *)date;//抢购时间点
+- (void)checkeGoodState;
 
 @end

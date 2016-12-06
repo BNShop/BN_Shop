@@ -162,6 +162,14 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
         [self.tableView reloadData];
     }];
     [self.tableView setBn_data:self.viewModel.souvenirs];
+    [self.tableView setTableViewData:self.viewModel.souvenirs];
+    [self.tableView setHeaderRefreshDatablock:^{
+        @strongify(self);
+        [self.adViewModel getADArray];
+        [self.viewModel getSouvenirsData];
+        [self.flashSaleViewModel getFlashSaleData];
+        [self.categoryViewModel getCategoryArray];
+    } footerRefreshDatablock:^{}];
     [self.viewModel getSouvenirsData];
     [self.tableView setRefreshBlock:^{
         @strongify(self);
@@ -233,7 +241,6 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     self.SDScrollViw.currentPageDotImage = IMAGE(@"Shop_Home_CurrentDot");
     @weakify(self);
     self.SDScrollViw.clickItemOperationBlock = ^(NSInteger currentIndex) {
-#warning 点击广告图的跳转
         @strongify(self);
         BN_ADModel *adObj = [self.adViewModel adItemWithIndex:currentIndex];
         if (adObj.type == 14) {
@@ -247,7 +254,8 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
             [self.navigationController pushViewController:ctr animated:YES];
             
         } else if (adObj.hrefUrl) {
-            //外部链接
+#warning 点击广告图的跳转 外部链接
+            
         }
     };
 }
@@ -270,9 +278,15 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 - (void)buildFlashSaleView {
     self.flashSaleView = [BN_ShopHomeFlashSaleView nib];
     @weakify(self);
+    
     [self.flashSaleView bk_whenTapped:^{
         @strongify(self);
         BN_ShopFlashSaleListViewController *ctr = [[BN_ShopFlashSaleListViewController alloc] init];
+        [self.navigationController pushViewController:ctr animated:YES];
+    }];
+    [self.flashSaleView tappedThumbnailImg:^{
+        @strongify(self);
+        BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:self.flashSaleViewModel.flashSaleModel.goodsId];
         [self.navigationController pushViewController:ctr animated:YES];
     }];
     

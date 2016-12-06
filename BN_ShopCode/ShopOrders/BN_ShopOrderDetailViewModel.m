@@ -32,14 +32,7 @@
 
 - (int)orderState {
 //    0 代之父 1代收货 2代评价 3已完成
-    if ([_order_state_name isEqualToString:@"待评价"]) {
-        return BN_ShopOrderState_Recommend;
-    } else if ([_order_state_name isEqualToString:@"已完成"]) {
-        return BN_ShopOrderState_Finish;
-    } else if ([_order_state_name isEqualToString:@"待收货"]) {
-        return BN_ShopOrderState_Take;
-    }
-    return BN_ShopOrderState_Pay;
+    return self.order_state;
 }
 
 - (int)saleafter {

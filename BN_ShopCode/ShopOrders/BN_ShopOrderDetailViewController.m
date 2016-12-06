@@ -27,7 +27,7 @@
 
 #import "BN_ShopOrderItemProtocol.h"
 
-@interface BN_ShopOrderDetailViewController ()
+@interface BN_ShopOrderDetailViewController ()<BN_ShopPaymentViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIView *headerView;
@@ -83,13 +83,15 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     [self.orderViewModel getShoppingOrderDetail:^{
         [temp.orderViewModel.dataSource resetItems:self.orderViewModel.detailModel.goodsList];
         
-        [temp.tableView beginUpdates];
-        [temp buildFooterView];
-        [temp buildHeaderView];
-        [temp.tableView endUpdates];
-        
-        temp.tableView.dataSource = temp.orderViewModel.dataSource;
-        [temp.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [temp.tableView beginUpdates];
+            [temp buildFooterView];
+            [temp buildHeaderView];
+            [temp.tableView endUpdates];
+            
+            temp.tableView.dataSource = temp.orderViewModel.dataSource;
+            [temp.tableView reloadData];
+        });
     } failure:^(NSString *errorDescription) {
         [temp showHudError:errorDescription title:@"获取订单失败"];
         [temp.navigationController popViewControllerAnimated:YES];
@@ -105,20 +107,20 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     CGFloat footerWidth = WIDTH(self.tableView);
     
     @weakify(self);
-    if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Take) {
-        BN_ShopOrderNumberProcessingView *processView = [BN_ShopOrderNumberProcessingView nib];
-        [processView updateWith:@"" content:@""];
-        [processView updateWith:ColorWhite q_color:ColorBtnYellow titleColor:ColorBtnYellow title:TEXT(@"退款")];
-        [processView addEventHandler:^(id sender) {
-#warning 退款跳转
-        }];
-        [self.footerView addSubview:processView];
-        [processView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.footerView];
-        [processView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
-        [processView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
-        [processView autoSetDimension:ALDimensionHeight toSize:processView.getViewHeight];
-        footerHeight += processView.getViewHeight;
-    }
+//    if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Take) {
+//        BN_ShopOrderNumberProcessingView *processView = [BN_ShopOrderNumberProcessingView nib];
+//        [processView updateWith:@"" content:@""];
+//        [processView updateWith:ColorWhite q_color:ColorBtnYellow titleColor:ColorBtnYellow title:TEXT(@"退款")];
+//        [processView addEventHandler:^(id sender) {
+//#warning 退款跳转
+//        }];
+//        [self.footerView addSubview:processView];
+//        [processView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.footerView];
+//        [processView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
+//        [processView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.footerView];
+//        [processView autoSetDimension:ALDimensionHeight toSize:processView.getViewHeight];
+//        footerHeight += processView.getViewHeight;
+//    }
     
     BN_ShopOrderBillView *billView = [BN_ShopOrderBillView nib];
     [billView updateWith:[self.orderViewModel shopAcountStr] pointDeduction:[self.orderViewModel shopVailableStr] freight:[self.orderViewModel shopFreightStr]];
@@ -156,7 +158,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     } else {
         [serviceView updateServerHelp];
         [serviceView bk_whenTapped:^{
-#warning 联系客服的操作
+#warning 订单详情页的联系客服的操作
             
         }];
     }
@@ -244,10 +246,10 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     } else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Recommend) {
         [processView updateWith:@"申请售后" rightTitle:@"立即评价"];
         [processView addLeftEventHandler:^(id sender) {
-#warning 申请售后
+#warning 订单详情页的申请售后
         }];
         [processView addRightEventHandler:^(id sender) {
-#warning 立即评价
+#warning 订单详情页的立即评价
         }];
     } else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Finish) {
 //        [processView updateWith:nil rightTitle:@"确认完成"];
@@ -295,7 +297,13 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 - (void)payment {
     BN_ShopPaymentViewModel *viewModel = [BN_ShopPaymentViewModel paymentViewModelWith:@[self.orderViewModel.detailModel.order_id] type:self.orderViewModel.detailModel.pay_type needPay:self.orderViewModel.detailModel.goods_amount];
     BN_ShopPaymentViewController *ctr = [[BN_ShopPaymentViewController alloc] init:viewModel];
+    ctr.delegate = self;
     [self.navigationController pushViewController:ctr animated:YES];
+}
+
+#pragma mark - BN_ShopPaymentViewControllerDelegate
+- (void)paymentViewControllerWithSucess:(NSArray *)orderIds type:(BN_ShopPaymentType)type payAccount:(NSString *)payAccount {
+    [self buildViewModelRes];
 }
 
 #pragma mark - UITableViewDelegate

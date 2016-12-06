@@ -71,7 +71,7 @@ static NSString * const ShopPaymentCellIdentifier = @"ShopPaymentCellIdentifier"
         @strongify(self);
         [BN_ShopPayment sharedInstance].wxPaymentHandler =  ^(NSString *returnKey, int errCode) {
             if (errCode == 0) { //成功
-                if ([self.delegate respondsToSelector:@selector(paymentViewModelWith:type:needPay:)]) {
+                if ([self.delegate respondsToSelector:@selector(paymentViewControllerWithSucess:type:payAccount:)]) {
                     [self.delegate paymentViewControllerWithSucess:self.viewModel.orderIds type:self.viewModel.paymentType payAccount:self.viewModel.needPay];
                 }
                 [self.navigationController popViewControllerAnimated:YES];
@@ -87,9 +87,25 @@ static NSString * const ShopPaymentCellIdentifier = @"ShopPaymentCellIdentifier"
 }
 
 #pragma mark - 支付宝
-#warning 进行支付
 - (void)alipay {
-    
+    @weakify(self);
+    [[BN_ShopToolRequest sharedInstance] alipayPrePayWith:self.viewModel.orderIds success:^(NSString *orderInfo) {
+        @strongify(self);
+        [BN_ShopPayment sharedInstance].alipayPaymentHandler = ^(NSString *aliCheckRecepitData, int resultStatus, NSString *memo) {
+            if (resultStatus == 9000) {
+                if ([self.delegate respondsToSelector:@selector(paymentViewControllerWithSucess:type:payAccount:)]) {
+                    [self.delegate paymentViewControllerWithSucess:self.viewModel.orderIds type:self.viewModel.paymentType payAccount:self.viewModel.needPay];
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [self showHudPrompt:memo];
+            }
+        };
+        [[BN_ShopPayment sharedInstance] sendAlipay:orderInfo];
+    } failure:^(NSString *errorDescription) {
+        @strongify(self);
+        [self showHudPrompt:errorDescription];
+    }];
 }
 
 

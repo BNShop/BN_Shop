@@ -17,5 +17,6 @@
 - (void)addManageButtonEvent:(void (^)(id sender))handler;
 - (void)updateAdditionalFrenzied:(NSDate *)date;
 - (void)updateAdditionalForward:(NSDate *)date state:(int)state;
+- (void)updateAdditionalFinish;
 - (void)cancelTimer;
 @end

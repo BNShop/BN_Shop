@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopGoodDetailSimpleShowViewModel.h"
+#import "BN_ShopToolRequest.h"
 
 @implementation BN_ShopGoodDetailPicModel
 
@@ -73,6 +74,18 @@
         temp.photoList.loadSupport.loadEvent = NetLoadFailedEvent;
     }];
 
+}
+
+#pragma mark - num
+- (void)getCartNum:(void(^)(void))success {
+    [[BN_ShopToolRequest sharedInstance] getShoppingCartNumRes:^(long num) {
+        self.cartNum = num;
+        if (success) {
+            success();
+        }
+    } failure:^(NSString *errorDescription) {
+        
+    }];
 }
 
 @end

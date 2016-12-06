@@ -31,6 +31,7 @@ typedef NS_ENUM(int, BN_ShopOrderSaleafterState) {
 @property (nonatomic, copy) NSString *contact_person_name;//联系人
 @property (nonatomic, copy) NSString *pay_amount;//实付金额
 @property (nonatomic, copy) NSString *order_state_name;//订单状态名
+@property (nonatomic, assign) int order_state;
 @property (nonatomic, copy) NSString *contact_person_phone_num;//联系电话
 @property (nonatomic, copy) NSString *freight_amount;//运费
 @property (nonatomic, copy) NSString *courier_no;//快递单号

@@ -15,6 +15,7 @@ LY_SINGLETON_FOR_CLASS_HEADER(BN_ShopToolRequest)
 
 //收藏
 - (void)collecteWith:(long)allSpotsId allSpotsType:(int)allSpotsType  success:(void(^)(int collecteState, NSString *collecteMessage))success failure:(void(^)(NSString *errorDescription))failure;
+
 //点赞
 - (void)likeWith:(long)allSpotsId allSpotsType:(int)allSpotsType  success:(void(^)(int likedState, NSString *likedMessage))success failure:(void(^)(NSString *errorDescription))failure;
 
@@ -23,4 +24,10 @@ LY_SINGLETON_FOR_CLASS_HEADER(BN_ShopToolRequest)
 
 //支付宝支付
 - (void)alipayPrePayWith:(NSArray *)orderIDs success:(void(^)(NSString *orderInfo))success failure:(void(^)(NSString *errorDescription))failure;
+
+//设置提醒已否
+- (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long warn_id))success failure:(void(^)(NSString *errorDescription))failure;
+
+//购物车数量
+- (void)getShoppingCartNumRes:(void(^)(long num))success failure:(void(^)(NSString *errorDescription))failure;
 @end

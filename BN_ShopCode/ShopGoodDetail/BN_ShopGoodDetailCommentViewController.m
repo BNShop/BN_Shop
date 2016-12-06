@@ -96,7 +96,7 @@ static NSString * const ShopGoodDetailCommentCellIdentifier = @"ShopGoodDetailCo
     
     @weakify(self);
     [self.tableView setHeaderRefreshDatablock:^{
-        
+        [self.viewModel getCommentsClearData:YES];
     } footerRefreshDatablock:^{
         @strongify(self);
         [self.viewModel getCommentsClearData:NO];

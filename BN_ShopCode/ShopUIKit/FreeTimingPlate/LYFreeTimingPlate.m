@@ -33,8 +33,7 @@
     self.labelMax.font = Font12;
     self.labelExtend.font = Font8;
     self.labelTitle.font = Font10;
-    
-    [self updatePlateWith:ColorBtnYellow];
+    [self updateMinusWhioutBorderPlate:[UIColor clearColor]];
 }
 
 - (void)dealloc
@@ -87,6 +86,11 @@
 }
 
 #pragma mark - ui
+- (void)setTitleStr:(NSString *)titleStr {
+    _titleStr = titleStr;
+    self.labelTitle.text = titleStr;
+}
+
 - (void)updatePlateWith:(UIColor *)color {
     self.labelMin.q_BorderWidth = 1.0f;
     self.labelMid.q_BorderWidth = 1.0f;
