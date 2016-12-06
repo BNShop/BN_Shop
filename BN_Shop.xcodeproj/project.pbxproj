@@ -2027,7 +2027,7 @@
 				GCC_PREFIX_HEADER = "$(PROJECT)/PrefixHeader.pch";
 				INFOPLIST_FILE = BN_Shop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.waco.CityLifeChat;
+				PRODUCT_BUNDLE_IDENTIFIER = "com..BN-Shop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2046,7 +2046,7 @@
 				GCC_PREFIX_HEADER = "$(PROJECT)/PrefixHeader.pch";
 				INFOPLIST_FILE = BN_Shop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.waco.CityLifeChat;
+				PRODUCT_BUNDLE_IDENTIFIER = "com..BN-Shop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
