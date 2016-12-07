@@ -24,7 +24,7 @@
 - (void)getSearchResultDataRes:(BOOL)clear keyword:(NSString *)keyword {
     int curPage = clear == YES ? 0 : round(self.resultDataSource.getItemsCount/10.0);
     NSMutableDictionary *paraDic = nil;
-    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsKeyWord?curPage=%d&pageNum=10&word=%@",BASEURL,curPage, keyword];
+    NSString *url = [[NSString stringWithFormat:@"%@/mall/goodsKeyWord?curPage=%d&pageNum=10&word=%@",BASEURL,curPage, keyword] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     __weak typeof(self) temp = self;
     self.resultDataSource.items.loadSupport.loadEvent = NetLoadingEvent;
     

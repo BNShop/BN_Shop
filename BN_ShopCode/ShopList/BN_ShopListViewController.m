@@ -49,6 +49,16 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
     return self;
 }
 
+- (instancetype)initWithGoodName:(NSString *)goodName
+{
+    self = [super init];
+    if (self) {
+        self.listViewModel = [[BN_ShopListViewModel alloc] init];
+        self.listViewModel.goodsName = goodName;;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

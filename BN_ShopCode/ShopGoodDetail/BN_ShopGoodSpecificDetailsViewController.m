@@ -104,7 +104,9 @@
     [self.webss loadHTMLString:[self htmls] baseURL:nil];
     self.webss.backgroundColor = [UIColor whiteColor];
     self.webss.opaque = NO;
-    self.webss.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    self.webss.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+    self.webss.scrollView.minimumZoomScale = 1.0f;
+    self.webss.scrollView.maximumZoomScale = 1.0f;
     self.webss.scalesPageToFit = YES;
     if ([self.webss.subviews count] > 0)
     {

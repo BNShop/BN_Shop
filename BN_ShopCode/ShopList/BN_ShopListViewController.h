@@ -10,4 +10,5 @@
 
 @interface BN_ShopListViewController : Base_BaseViewController
 - (instancetype)initWithCategoryId:(long)categoryId;
+- (instancetype)initWithGoodName:(NSString *)goodName;
 @end

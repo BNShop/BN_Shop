@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,6 +21,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cCb-Ne-b1t">
                         <rect key="frame" x="19" y="30" width="76" height="76"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="cCb-Ne-b1t" secondAttribute="height" multiplier="1:1" id="hWl-LR-rmL"/>
                             <constraint firstAttribute="width" constant="76" id="ppe-C1-XlG"/>
@@ -47,8 +48,9 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="Kfo-81-P0J" firstAttribute="leading" secondItem="cCb-Ne-b1t" secondAttribute="leading" id="1PE-vd-XeJ"/>
                 <constraint firstItem="cCb-Ne-b1t" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="19" id="No6-Ec-5Hb"/>
-                <constraint firstItem="Kfo-81-P0J" firstAttribute="centerX" secondItem="cCb-Ne-b1t" secondAttribute="centerX" id="YTe-DS-fou"/>
+                <constraint firstItem="Kfo-81-P0J" firstAttribute="trailing" secondItem="cCb-Ne-b1t" secondAttribute="trailing" id="ZYp-PC-nLN"/>
                 <constraint firstItem="cCb-Ne-b1t" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="30" id="e0f-YO-Qh5"/>
                 <constraint firstItem="Kfo-81-P0J" firstAttribute="top" secondItem="cCb-Ne-b1t" secondAttribute="bottom" id="ijg-2c-DYJ"/>
             </constraints>
@@ -60,7 +62,7 @@
                 <outlet property="iconWidthConstraints" destination="ppe-C1-XlG" id="Fyq-lb-13e"/>
                 <outlet property="titleLabel" destination="Kfo-81-P0J" id="P10-w2-FkQ"/>
             </connections>
-            <point key="canvasLocation" x="32" y="81.5"/>
+            <point key="canvasLocation" x="-150" y="1"/>
         </collectionViewCell>
     </objects>
 </document>

@@ -295,7 +295,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 
 #pragma mark - 支付处理
 - (void)payment {
-    BN_ShopPaymentViewModel *viewModel = [BN_ShopPaymentViewModel paymentViewModelWith:@[self.orderViewModel.detailModel.order_id] type:self.orderViewModel.detailModel.pay_type needPay:self.orderViewModel.detailModel.goods_amount];
+    BN_ShopPaymentViewModel *viewModel = [BN_ShopPaymentViewModel paymentViewModelWith:@[self.orderViewModel.detailModel.order_id] type:self.orderViewModel.detailModel.pay_type needPay:self.orderViewModel.detailModel.pay_amount];
     BN_ShopPaymentViewController *ctr = [[BN_ShopPaymentViewController alloc] init:viewModel];
     ctr.delegate = self;
     [self.navigationController pushViewController:ctr animated:YES];

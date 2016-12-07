@@ -130,7 +130,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     
     CGFloat stateHeight = 54.0f;
     CGFloat height = [self.simpleShowView getViewHeight] + stateHeight + [self.friendlyWarningView getViewHeight] + [self.sellersView getViewHeight] + [self.transitionToolBar getViewHeight];
-    self.headeView.frame = CGRectMake(0, 0, 320, height);
+    self.headeView.frame = CGRectMake(0, 0, WIDTH(self.view), height);
     NSMutableArray *tmpArray = [NSMutableArray array];
     for (NSInteger index=0; index<3; index++) {
         UIView *view = [[UIView alloc] initWithFrame:self.headeView.frame];

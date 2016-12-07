@@ -96,13 +96,13 @@
 
 - (void)updateWith:(NSString *)num {
     self.numLabel.text = num;
-    [self.numLabel sizeToFit];
+//    [self.numLabel sizeToFit];
     if ([num intValue] < 10) {
-        self.numWidth.constant = 18.0;
+        self.numWidth.constant = 15.0;
     } else {
         self.numWidth.constant = 38.0;
     }
-    [self.numLabel setNeedsLayout];
+    [self.numLabel updateConstraints];
 }
 
 - (CGFloat)getViewHeight {

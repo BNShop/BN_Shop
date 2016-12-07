@@ -102,8 +102,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
         BN_ShopSearchViewController *ctr = [[BN_ShopSearchViewController alloc] init];
         [[ctr rac_searchTextDidEndEditingSignal] subscribeNext:^(id x) {
             @strongify(self);
-            NSLog(@"=== %@, %@", [x class], x);
-            BN_ShopListViewController *listCtr = [[BN_ShopListViewController alloc] init];
+            BN_ShopListViewController *listCtr = [[BN_ShopListViewController alloc] initWithGoodName:x];
             [self.navigationController pushViewController:listCtr animated:YES];
 
         }];
