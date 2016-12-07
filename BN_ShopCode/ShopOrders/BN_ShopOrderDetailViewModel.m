@@ -31,7 +31,7 @@
 }
 
 - (int)orderState {
-//    0 代之父 1代收货 2代评价 3已完成
+//    0 代之父 1代收货 3已完成
     return self.order_state;
 }
 

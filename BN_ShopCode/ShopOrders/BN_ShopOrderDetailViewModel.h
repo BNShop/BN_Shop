@@ -14,8 +14,9 @@
 typedef NS_ENUM(NSUInteger, BN_ShopOrderState) {
     BN_ShopOrderState_Pay = 0,
     BN_ShopOrderState_Take = 1,
-    BN_ShopOrderState_Recommend = 2,
-    BN_ShopOrderState_Finish = 3
+    BN_ShopOrderState_Finish = 2,
+    BN_ShopOrderState_Recommend = 3
+    
 };
 
 typedef NS_ENUM(int, BN_ShopOrderSaleafterState) {
