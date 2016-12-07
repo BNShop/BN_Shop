@@ -9,6 +9,8 @@
 #import "BN_ShopOrdersConfirmationViewController.h"
 #import "Base_BaseViewController+ControlCreate.h"
 #import "BN_ShopOrderDetailViewController.h"
+#import "LBB_OrderViewController.h"
+#import "LBB_OrderModuleViewController.h"
 
 #import "BN_ShopOrderBillView.h"
 #import "BN_ShopOrdersToolBar.h"
@@ -180,12 +182,20 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         @strongify(self);
         [self.confirmationviewModel getShoppingOrderDetail:^(NSArray *orderIds) {
             //下单成功的处理
-            long orderid = [[orderIds firstObject] longValue];
             UINavigationController *nav = self.navigationController;
             [self.navigationController popViewControllerAnimated:NO];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"BN_ShopOrdersConfirmation" object:nil];
-            BN_ShopOrderDetailViewController *ctr = [[BN_ShopOrderDetailViewController alloc] initWith:[NSString stringWithFormat:@"%ld", orderid]];
-            [nav pushViewController:ctr animated:YES];
+            if (orderIds.count > 1) {
+//                LBB_OrderViewController *ctr = [[LBB_OrderViewController alloc] initWithNibName:@"LBB_OrderViewController" bundle:nil];
+//                ctr.baseViewType  = eOrderType_WaitPay;
+                LBB_OrderModuleViewController *ctr = [[LBB_OrderModuleViewController alloc] init];
+                [nav pushViewController:ctr animated:YES];
+            } else {
+                long orderid = [[orderIds firstObject] longValue];
+                BN_ShopOrderDetailViewController *ctr = [[BN_ShopOrderDetailViewController alloc] initWith:[NSString stringWithFormat:@"%ld", orderid]];
+                [nav pushViewController:ctr animated:YES];
+            }
+            
             
         } failure:^(NSString *errorDescription) {
             [self showHudError:errorDescription title:@"下单失败"];

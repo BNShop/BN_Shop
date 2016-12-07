@@ -19,6 +19,7 @@
 #import "BN_ShopSearchCollectionReusableView.h"
 #import "ShopSearchResultCell.h"
 #import "UIScrollView+MJRefresh.h"
+#import "UIView+LoadCategory.h"
 
 @interface BN_ShopSearchViewController () <BN_ShopSearchViewControllerDelegate>
 
@@ -120,6 +121,7 @@ static NSString * const ShopSearchResultCellIdentifier = @"ShopSearchResultCellI
         @strongify(self);
         [self.viewModel getHotSearchTagsDataRes];
     }];
+    [self.collectionView loadData:nil];
     [self.viewModel.tags.loadSupport setDataRefreshblock:^{
         @strongify(self);
         [self buildViewDataSourceWith:[self.viewModel getRecentlySearchCache] hots:self.viewModel.tags];
@@ -147,6 +149,11 @@ static NSString * const ShopSearchResultCellIdentifier = @"ShopSearchResultCellI
     };
     self.viewModel.collectionScrollBlock = ^{
         @strongify(self);
+        [self.collectionView.noDataView removeFromSuperview];
+        [self.collectionView.netLoadView removeFromSuperview];
+        if (self.collectionView.dataSource != self.viewModel.dataSource) {
+            [self changeDelegateToSearch];
+        }
         [self.searchBar resignFirstResponder];
     };
     [self changeDelegateToSearch];
@@ -170,6 +177,7 @@ static NSString * const ShopSearchResultCellIdentifier = @"ShopSearchResultCellI
         @strongify(self);
         [self.resultViewModel getSearchResultDataRes:YES keyword:self.resultViewModel.keyWord];
     }];
+    [self.collectionView loadData:self.resultViewModel.resultDataSource.items];
     [self.resultViewModel.resultDataSource.items.loadSupport setDataRefreshblock:^{
         @strongify(self);
         if (self.collectionView.dataSource == self.resultViewModel.resultDataSource) {
@@ -200,7 +208,9 @@ static NSString * const ShopSearchResultCellIdentifier = @"ShopSearchResultCellI
         @strongify(self);
         [self.searchBar resignFirstResponder];
         if (self.resultViewModel.resultDataSource.getItemsCount == 0) {
-            [self changeDelegateToSearch];
+            if (self.collectionView.dataSource != self.viewModel.dataSource) {
+                [self changeDelegateToSearch];
+            }
         }
     };
 }

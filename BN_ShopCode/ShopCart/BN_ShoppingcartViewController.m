@@ -98,6 +98,7 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     self.viewModel.dataSource = [[MultipleSectionTableArraySource alloc] init];
     
     [self.tableView setBn_data:self.viewModel.shoppingCartList];
+    [self.tableView loadData:self.viewModel.shoppingCartList];
     [self.tableView setHeaderRefreshDatablock:^{
         @strongify(self);
         [self.viewModel getShoppingCartListData:YES];
@@ -168,10 +169,28 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
 }
 
 - (void)deleteTagger {
+    NSArray *ids = [[self.viewModel settlementSelectedItems] bk_map:^id(BN_ShoppingCartItemModel *obj) {
+        return @(obj.shopping_cart_id);
+    }];
+    if (ids.count == 0) {
+        return;
+    }
+//    @weakify(self);
+//    [self.viewModel deleteShoppingCart:ids success:^{
+//        @strongify(self);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.viewModel.edit = NO;
+//            [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
+//            [self.tableView reloadData];
+//        });
+//    } failure:^(NSString *errorDescription) {
+//        [self showHudPrompt:errorDescription];
+//    }];
     [self.viewModel clearSelectedItems];
     self.viewModel.edit = NO;
     [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
     [self.tableView reloadData];
+    
 }
 
 - (void)settlementTagger {

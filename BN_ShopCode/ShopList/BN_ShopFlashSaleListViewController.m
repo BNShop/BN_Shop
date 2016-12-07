@@ -102,7 +102,7 @@ static NSString * const ShopListHorizontalCellIdentifier = @"ShopListHorizontalC
     }];
     
     [self.collectionView setCollectionViewData:self.viewModel.goods];
-    
+    [self.collectionView loadData:self.viewModel.goods];
     [self.collectionView setBn_data:self.viewModel.goods];
     
     [self.collectionView setRefreshBlock:^{

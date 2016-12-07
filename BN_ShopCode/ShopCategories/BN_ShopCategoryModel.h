@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BN_ShopSecondCategoryModel : NSObject
+@interface BN_ShopSecondCategoryModel : BN_BaseDataModel
 @property (nonatomic, assign) long category_id;//分类主键
 @property (nonatomic, copy) NSString *name;//分类名称
 @property (nonatomic, copy) NSString *pic_horizontal_url;//图片
 
 @end
 
-@interface BN_ShopCategoryModel : NSObject
+@interface BN_ShopCategoryModel : BN_BaseDataModel
 
 @property (nonatomic, assign) long category_id;//分类主键
 @property (nonatomic, copy) NSString *name;//分类名称

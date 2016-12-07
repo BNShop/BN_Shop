@@ -66,6 +66,7 @@
         }
     }];
     [self.dataSource.sections removeObjectsInArray:matchs];
+    [matchs removeAllObjects];
 }
 
 - (NSArray *)settlementSelectedItems {
@@ -178,13 +179,12 @@
 
 - (void)deleteShoppingCart:(NSArray *)shoppingCartIds success:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
     NSString *shoppingCartIdsStr = [shoppingCartIds componentsJoinedByString:@","];
-    NSMutableDictionary *paraDic = [NSMutableDictionary dictionary];
+    NSMutableDictionary *paraDic = nil;//[NSMutableDictionary dictionary];
     paraDic[@"shoppingCartIds"] = shoppingCartIdsStr;
-//    if ([BC_ToolRequest sharedManager].token) {
-//        paraDic[@"token"] = [BC_ToolRequest sharedManager].token;
-//    }
-    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteShoppingCart",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteShoppingCart?shoppingCartIds=%@",BASEURL, shoppingCartIdsStr];
+    @weakify(self);
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        @strongify(self);
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {
             dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
@@ -196,10 +196,14 @@
                 failure(errorStr);
             }
         } else {
+            [self clearSelectedItems];
+            [self.shoppingCartList removeObjectsInArray:[self settlementSelectedItems]];
             if (success) {
                 success();
             }
         }
+        
+        self.shoppingCartList.loadSupport.loadEvent = NetLoadSuccessfulEvent;
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         if (failure) {
             failure([error errorDescription]);

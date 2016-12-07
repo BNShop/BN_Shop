@@ -126,9 +126,9 @@ static NSString * const ShopSorterCollectCellIdentifier = @"ShopSorterCollectCel
         [self buildSecondDataSource:categoryM];
         
     }];
-//    [self.titleTableView setTableViewData:self.viewModel.categories];
+    [self.titleTableView setTableViewData:self.viewModel.categories];
     [self.titleTableView setBn_data:self.viewModel.categories];
-    
+    [self.titleTableView loadData:self.viewModel.categories];
     [self.titleTableView setRefreshBlock:^{
         @strongify(self);
         [self.viewModel getCategories];
@@ -153,8 +153,9 @@ static NSString * const ShopSorterCollectCellIdentifier = @"ShopSorterCollectCel
             [self.contentCollectionView reloadData];
         }
     }];
-    [self.contentCollectionView setBn_data:self.viewModel.categories];
-    
+    [self.contentCollectionView setBn_data:model.secondCategories];
+    [self.contentCollectionView setCollectionViewData:model.secondCategories];
+    [self.contentCollectionView loadData:model.secondCategories];
     [self.contentCollectionView setRefreshBlock:^{
         @strongify(self);
         [self.viewModel getSecondCategories:model];
