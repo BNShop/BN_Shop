@@ -84,6 +84,15 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self bulidStateViewModel];
     [self buildArribalsViewModel];
     
+    @weakify(self);
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"BN_ShopOrdersConfirmation" object:nil] subscribeNext:^(id x) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.simpleShowViewModel getCartNum:^{
+                @strongify(self);
+                [self.toolBar updateWith:[NSString stringWithFormat:@"%d", self.simpleShowViewModel.cartNum]];
+            }];
+        });
+    }];
     
     
 }

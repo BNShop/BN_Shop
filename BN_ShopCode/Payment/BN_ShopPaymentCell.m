@@ -20,9 +20,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.iconImgView.q_BorderColor = ColorLine;
-    self.iconImgView.q_BorderWidth = 1.0f;
-    self.iconImgView.q_CornerRadius = 2.0f;
+//    self.iconImgView.q_BorderColor = ColorLine;
+//    self.iconImgView.q_BorderWidth = 1.0f;
+//    self.iconImgView.q_CornerRadius = 2.0f;
     
     self.titleLabel.textColor = ColorBlack;
     self.titleLabel.font = Font12;

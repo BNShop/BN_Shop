@@ -32,12 +32,12 @@
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="q_MasksToBounds" value="YES"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="q_BorderWidth">
-                                <integer key="value" value="38"/>
+                                <integer key="value" value="0"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfo-81-P0J">
-                        <rect key="frame" x="44" y="106" width="26.5" height="16"/>
+                        <rect key="frame" x="19" y="106" width="76" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="flm-Qd-TcT"/>
                         </constraints>

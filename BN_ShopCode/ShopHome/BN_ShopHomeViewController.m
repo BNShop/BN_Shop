@@ -285,8 +285,10 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     }];
     [self.flashSaleView tappedThumbnailImg:^{
         @strongify(self);
-        BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:self.flashSaleViewModel.flashSaleModel.goodsId];
-        [self.navigationController pushViewController:ctr animated:YES];
+        if (self.flashSaleViewModel.flashSaleModel.goodsId) {
+            BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:self.flashSaleViewModel.flashSaleModel.goodsId];
+            [self.navigationController pushViewController:ctr animated:YES];
+        }
     }];
     
 }

@@ -161,8 +161,10 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
 #pragma mark - BN_ShoppingCartEndViewDelegate
 - (void)selectAll:(BOOL)isSelect {
     [self.viewModel selectAll:!isSelect];
-    [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
-    [self.tableView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
+        [self.tableView reloadData];
+    });
 }
 
 - (void)deleteTagger {

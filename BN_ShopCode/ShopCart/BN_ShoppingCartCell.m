@@ -36,12 +36,7 @@
     self.thumbnailImageView.q_BorderColor = ColorLine;
     self.thumbnailImageView.q_BorderWidth = 1.0f;
     
-    @weakify(self)
-    self.stepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
-        stepper.countLabel.text = [NSString stringWithFormat:@"%@", @(count)];
-        @strongify(self);
-        [self valueChanged:count];
-    };
+    
     [self.stepper setLabelTextColor:[UIColor blackColor]];
     [self.stepper setLabelFont:Font10];
     [self.stepper setButtonWidth:21.0f];
@@ -61,11 +56,18 @@
 
 
 - (void)updateWith:(BOOL)isSelect thumbnailUrl:(NSString *)thumbnailUrl title:(NSString *)title num:(NSInteger)num price:(NSString *)price {
+    self.stepper.valueChangedCallback = nil;
     self.radioButton.selected = isSelect;
     [self.thumbnailImageView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:nil];
     self.titleLabel.text = title;
     self.stepper.value = num;
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@", price];
+    @weakify(self)
+    self.stepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
+        stepper.countLabel.text = [NSString stringWithFormat:@"%@", @(count)];
+        @strongify(self);
+        [self valueChanged:count];
+    };
 }
 
 - (IBAction)selectAction:(id)sender {

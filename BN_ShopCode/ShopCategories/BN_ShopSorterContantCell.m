@@ -26,7 +26,6 @@
     // Initialization code
     self.titleLabel.textColor = ColorGray;
     self.titleLabel.font = Font10;
-    self.contentIconView.backgroundColor = [UIColor redColor];
     self.contentIconView.contentMode = UIViewContentModeScaleAspectFill;
     self.contentIconView.clipsToBounds = YES;
 }

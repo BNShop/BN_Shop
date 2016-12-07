@@ -100,9 +100,11 @@
     if ([num intValue] < 10) {
         self.numWidth.constant = 15.0;
     } else {
-        self.numWidth.constant = 38.0;
+        [self.numLabel sizeToFit];
+        self.numWidth.constant = WIDTH(self.numLabel)+8;
     }
     [self.numLabel updateConstraints];
+    [self.numLabel setNeedsDisplay];
 }
 
 - (CGFloat)getViewHeight {
