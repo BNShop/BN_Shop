@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LBB_OrderCommentPicturViewCell" id="gTV-IL-0wX" userLabel="LBB_OrderCommentPicturViewCell" customClass="LBB_OrderCommentPicturViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="196" height="73"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="196" height="73"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="19.pic.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="04x-cF-lxM"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LJv-9Z-abD">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="W8Q-S3-6cd"/>
+                            <constraint firstAttribute="height" constant="20" id="rGz-H7-eCh"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="04x-cF-lxM" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="BuX-QF-ZkH"/>
+                <constraint firstItem="LJv-9Z-abD" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="GyG-yY-Nay"/>
+                <constraint firstItem="04x-cF-lxM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="MEr-Yt-5qK"/>
+                <constraint firstItem="04x-cF-lxM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Rv9-BU-Kp9"/>
+                <constraint firstItem="04x-cF-lxM" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="d3X-jI-wST"/>
+                <constraint firstAttribute="trailing" secondItem="04x-cF-lxM" secondAttribute="trailing" constant="5" id="g2N-gI-V2E"/>
+                <constraint firstAttribute="bottom" secondItem="04x-cF-lxM" secondAttribute="bottom" constant="5" id="qSM-OR-lVG"/>
+                <constraint firstItem="LJv-9Z-abD" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="usj-yB-qJ5"/>
+            </constraints>
+            <size key="customSize" width="196" height="73"/>
+            <connections>
+                <outlet property="defaultImgView" destination="LJv-9Z-abD" id="xag-GP-v1Q"/>
+                <outlet property="iconImgView" destination="04x-cF-lxM" id="B9E-kg-E19"/>
+            </connections>
+            <point key="canvasLocation" x="-41" y="-202.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="19.pic.jpg" width="200" height="200"/>
+    </resources>
+</document>

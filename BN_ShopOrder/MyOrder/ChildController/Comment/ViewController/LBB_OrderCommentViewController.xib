@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LBB_OrderCommentViewController">
+            <connections>
+                <outlet property="collectionView" destination="IHw-kJ-rJ9" id="4Tv-zi-UVu"/>
+                <outlet property="commentBtn" destination="xDE-0W-eGo" id="FD6-pD-AYI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IHw-kJ-rJ9">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RpM-fe-bqp">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="FoU-oQ-ubS"/>
+                        <outlet property="delegate" destination="-1" id="5Ck-Aw-JrS"/>
+                    </connections>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDE-0W-eGo">
+                    <color key="backgroundColor" red="0.79941998110000001" green="0.59218091920000004" blue="0.2881092871" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="alD-tf-jos"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <state key="normal" title="立 即 评 论">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="commentBtnClickAction:" destination="-1" eventType="touchUpInside" id="M4N-EJ-7am"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="IHw-kJ-rJ9" secondAttribute="trailing" id="ALr-Wq-xrK"/>
+                <constraint firstAttribute="bottom" secondItem="xDE-0W-eGo" secondAttribute="bottom" id="DRE-lm-cK9"/>
+                <constraint firstAttribute="trailing" secondItem="xDE-0W-eGo" secondAttribute="trailing" id="KrG-xm-fwg"/>
+                <constraint firstItem="xDE-0W-eGo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aay-zh-RtZ"/>
+                <constraint firstItem="IHw-kJ-rJ9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hQ3-Ur-1uB"/>
+                <constraint firstItem="IHw-kJ-rJ9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ujc-kn-G3W"/>
+                <constraint firstItem="xDE-0W-eGo" firstAttribute="top" secondItem="IHw-kJ-rJ9" secondAttribute="bottom" id="yHU-os-sQh"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
