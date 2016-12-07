@@ -216,6 +216,27 @@
 		6ADB5E3D1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB5E3B1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.m */; };
 		6ADB5E3E1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ADB5E3C1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.xib */; };
 		6ADB5E481DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB5E471DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.m */; };
+		84A022F11DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022C81DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m */; };
+		84A022F21DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022C91DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib */; };
+		84A022F31DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022CB1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m */; };
+		84A022F41DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022CC1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib */; };
+		84A022F51DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022CE1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m */; };
+		84A022F61DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022CF1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib */; };
+		84A022F71DF82F8B00DC0023 /* LBB_OrderCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022D21DF82F8B00DC0023 /* LBB_OrderCommentViewController.m */; };
+		84A022F81DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022D31DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib */; };
+		84A022F91DF82F8B00DC0023 /* LBB_OrderBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022D61DF82F8B00DC0023 /* LBB_OrderBaseViewController.m */; };
+		84A022FA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022DA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m */; };
+		84A022FB1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022DC1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m */; };
+		84A022FC1DF82F8B00DC0023 /* LBB_OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022DF1DF82F8B00DC0023 /* LBB_OrderModel.m */; };
+		84A022FD1DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022E31DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m */; };
+		84A022FE1DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022E41DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib */; };
+		84A022FF1DF82F8B00DC0023 /* LBB_OrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022E61DF82F8B00DC0023 /* LBB_OrderFooterView.m */; };
+		84A023001DF82F8B00DC0023 /* LBB_OrderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022E71DF82F8B00DC0023 /* LBB_OrderFooterView.xib */; };
+		84A023011DF82F8B00DC0023 /* LBB_OrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022E91DF82F8B00DC0023 /* LBB_OrderHeaderView.m */; };
+		84A023021DF82F8B00DC0023 /* LBB_OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022EA1DF82F8B00DC0023 /* LBB_OrderHeaderView.xib */; };
+		84A023031DF82F8B00DC0023 /* LBB_OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022EC1DF82F8B00DC0023 /* LBB_OrderViewController.m */; };
+		84A023041DF82F8B00DC0023 /* LBB_OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022ED1DF82F8B00DC0023 /* LBB_OrderViewController.xib */; };
+		84A023051DF82F8B00DC0023 /* LBB_OrderModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022F01DF82F8B00DC0023 /* LBB_OrderModuleViewController.m */; };
 		C96514F01DD61C86004B5F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514EF1DD61C86004B5F05 /* main.m */; };
 		C96514F31DD61C86004B5F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514F21DD61C86004B5F05 /* AppDelegate.m */; };
 		C96514F61DD61C86004B5F05 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514F51DD61C86004B5F05 /* ViewController.m */; };
@@ -586,6 +607,41 @@
 		6ADB5E3C1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopFlashSaleListViewController.xib; sourceTree = "<group>"; };
 		6ADB5E461DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopFlashSaleListViewModel.h; sourceTree = "<group>"; };
 		6ADB5E471DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopFlashSaleListViewModel.m; sourceTree = "<group>"; };
+		84A022C71DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentPicturViewCell.h; sourceTree = "<group>"; };
+		84A022C81DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentPicturViewCell.m; sourceTree = "<group>"; };
+		84A022C91DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentPicturViewCell.xib; sourceTree = "<group>"; };
+		84A022CA1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentSectionView.h; sourceTree = "<group>"; };
+		84A022CB1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentSectionView.m; sourceTree = "<group>"; };
+		84A022CC1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentSectionView.xib; sourceTree = "<group>"; };
+		84A022CD1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentTagViewCell.h; sourceTree = "<group>"; };
+		84A022CE1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentTagViewCell.m; sourceTree = "<group>"; };
+		84A022CF1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentTagViewCell.xib; sourceTree = "<group>"; };
+		84A022D11DF82F8B00DC0023 /* LBB_OrderCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentViewController.h; sourceTree = "<group>"; };
+		84A022D21DF82F8B00DC0023 /* LBB_OrderCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentViewController.m; sourceTree = "<group>"; };
+		84A022D31DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentViewController.xib; sourceTree = "<group>"; };
+		84A022D51DF82F8B00DC0023 /* LBB_OrderBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderBaseViewController.h; sourceTree = "<group>"; };
+		84A022D61DF82F8B00DC0023 /* LBB_OrderBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderBaseViewController.m; sourceTree = "<group>"; };
+		84A022D71DF82F8B00DC0023 /* LBB_OrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderHeader.h; sourceTree = "<group>"; };
+		84A022D91DF82F8B00DC0023 /* LBB_OrderCommonFun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommonFun.h; sourceTree = "<group>"; };
+		84A022DA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommonFun.m; sourceTree = "<group>"; };
+		84A022DB1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderImagePickerViewController.h; sourceTree = "<group>"; };
+		84A022DC1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderImagePickerViewController.m; sourceTree = "<group>"; };
+		84A022DE1DF82F8B00DC0023 /* LBB_OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderModel.h; sourceTree = "<group>"; };
+		84A022DF1DF82F8B00DC0023 /* LBB_OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderModel.m; sourceTree = "<group>"; };
+		84A022E21DF82F8B00DC0023 /* LBB_OrderDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderDetailViewCell.h; sourceTree = "<group>"; };
+		84A022E31DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderDetailViewCell.m; sourceTree = "<group>"; };
+		84A022E41DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderDetailViewCell.xib; sourceTree = "<group>"; };
+		84A022E51DF82F8B00DC0023 /* LBB_OrderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderFooterView.h; sourceTree = "<group>"; };
+		84A022E61DF82F8B00DC0023 /* LBB_OrderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderFooterView.m; sourceTree = "<group>"; };
+		84A022E71DF82F8B00DC0023 /* LBB_OrderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderFooterView.xib; sourceTree = "<group>"; };
+		84A022E81DF82F8B00DC0023 /* LBB_OrderHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderHeaderView.h; sourceTree = "<group>"; };
+		84A022E91DF82F8B00DC0023 /* LBB_OrderHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderHeaderView.m; sourceTree = "<group>"; };
+		84A022EA1DF82F8B00DC0023 /* LBB_OrderHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderHeaderView.xib; sourceTree = "<group>"; };
+		84A022EB1DF82F8B00DC0023 /* LBB_OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderViewController.h; sourceTree = "<group>"; };
+		84A022EC1DF82F8B00DC0023 /* LBB_OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderViewController.m; sourceTree = "<group>"; };
+		84A022ED1DF82F8B00DC0023 /* LBB_OrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderViewController.xib; sourceTree = "<group>"; };
+		84A022EF1DF82F8B00DC0023 /* LBB_OrderModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderModuleViewController.h; sourceTree = "<group>"; };
+		84A022F01DF82F8B00DC0023 /* LBB_OrderModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderModuleViewController.m; sourceTree = "<group>"; };
 		B76E7E4AA8C0860864F08677 /* Pods-BN_Shop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BN_Shop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BN_Shop/Pods-BN_Shop.debug.xcconfig"; sourceTree = "<group>"; };
 		C225C78BECD951B8E84D1A45 /* libPods-BN_Shop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BN_Shop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96514EB1DD61C86004B5F05 /* BN_Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BN_Shop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1371,6 +1427,144 @@
 			name = AlipaySDK15.2.0;
 			sourceTree = "<group>";
 		};
+		84A022C11DF82F8B00DC0023 /* BN_ShopOrder */ = {
+			isa = PBXGroup;
+			children = (
+				84A022C21DF82F8B00DC0023 /* MyOrder */,
+			);
+			path = BN_ShopOrder;
+			sourceTree = "<group>";
+		};
+		84A022C21DF82F8B00DC0023 /* MyOrder */ = {
+			isa = PBXGroup;
+			children = (
+				84A022C31DF82F8B00DC0023 /* ChildController */,
+				84A022D41DF82F8B00DC0023 /* Common */,
+				84A022DD1DF82F8B00DC0023 /* Model */,
+				84A022E01DF82F8B00DC0023 /* View */,
+				84A022EE1DF82F8B00DC0023 /* ViewController */,
+			);
+			path = MyOrder;
+			sourceTree = "<group>";
+		};
+		84A022C31DF82F8B00DC0023 /* ChildController */ = {
+			isa = PBXGroup;
+			children = (
+				84A022C41DF82F8B00DC0023 /* Comment */,
+			);
+			path = ChildController;
+			sourceTree = "<group>";
+		};
+		84A022C41DF82F8B00DC0023 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				84A022C51DF82F8B00DC0023 /* Model */,
+				84A022C61DF82F8B00DC0023 /* View */,
+				84A022D01DF82F8B00DC0023 /* ViewController */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		84A022C51DF82F8B00DC0023 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		84A022C61DF82F8B00DC0023 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84A022C71DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.h */,
+				84A022C81DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m */,
+				84A022C91DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib */,
+				84A022CA1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.h */,
+				84A022CB1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m */,
+				84A022CC1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib */,
+				84A022CD1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.h */,
+				84A022CE1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m */,
+				84A022CF1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84A022D01DF82F8B00DC0023 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				84A022D11DF82F8B00DC0023 /* LBB_OrderCommentViewController.h */,
+				84A022D21DF82F8B00DC0023 /* LBB_OrderCommentViewController.m */,
+				84A022D31DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		84A022D41DF82F8B00DC0023 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				84A022D51DF82F8B00DC0023 /* LBB_OrderBaseViewController.h */,
+				84A022D61DF82F8B00DC0023 /* LBB_OrderBaseViewController.m */,
+				84A022D71DF82F8B00DC0023 /* LBB_OrderHeader.h */,
+				84A022D81DF82F8B00DC0023 /* Utils */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		84A022D81DF82F8B00DC0023 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				84A022D91DF82F8B00DC0023 /* LBB_OrderCommonFun.h */,
+				84A022DA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m */,
+				84A022DB1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.h */,
+				84A022DC1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		84A022DD1DF82F8B00DC0023 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84A022DE1DF82F8B00DC0023 /* LBB_OrderModel.h */,
+				84A022DF1DF82F8B00DC0023 /* LBB_OrderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		84A022E01DF82F8B00DC0023 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84A022E11DF82F8B00DC0023 /* BaseView */,
+				84A022EB1DF82F8B00DC0023 /* LBB_OrderViewController.h */,
+				84A022EC1DF82F8B00DC0023 /* LBB_OrderViewController.m */,
+				84A022ED1DF82F8B00DC0023 /* LBB_OrderViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84A022E11DF82F8B00DC0023 /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				84A022E21DF82F8B00DC0023 /* LBB_OrderDetailViewCell.h */,
+				84A022E31DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m */,
+				84A022E41DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib */,
+				84A022E51DF82F8B00DC0023 /* LBB_OrderFooterView.h */,
+				84A022E61DF82F8B00DC0023 /* LBB_OrderFooterView.m */,
+				84A022E71DF82F8B00DC0023 /* LBB_OrderFooterView.xib */,
+				84A022E81DF82F8B00DC0023 /* LBB_OrderHeaderView.h */,
+				84A022E91DF82F8B00DC0023 /* LBB_OrderHeaderView.m */,
+				84A022EA1DF82F8B00DC0023 /* LBB_OrderHeaderView.xib */,
+			);
+			path = BaseView;
+			sourceTree = "<group>";
+		};
+		84A022EE1DF82F8B00DC0023 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				84A022EF1DF82F8B00DC0023 /* LBB_OrderModuleViewController.h */,
+				84A022F01DF82F8B00DC0023 /* LBB_OrderModuleViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		A23566919BA0368F43E13E56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1394,6 +1588,7 @@
 		C96514E21DD61C86004B5F05 = {
 			isa = PBXGroup;
 			children = (
+				84A022C11DF82F8B00DC0023 /* BN_ShopOrder */,
 				C965152B1DD621A0004B5F05 /* ST_Home.xcassets */,
 				6A033EF61DE1B123000446A0 /* ST_Shop.xcassets */,
 				C96515221DD61E2E004B5F05 /* BN_ShopCode */,
@@ -1619,6 +1814,7 @@
 				6A033ECE1DE1ACD3000446A0 /* BN_ShopListViewController.xib in Resources */,
 				6AA270041DF57823003688C4 /* AlipaySDK.bundle in Resources */,
 				6A033EF11DE1ACD3000446A0 /* icon_unfocus@2x.png in Resources */,
+				84A023021DF82F8B00DC0023 /* LBB_OrderHeaderView.xib in Resources */,
 				6A033EF01DE1ACD3000446A0 /* icon_focus@3x.png in Resources */,
 				6A033EE11DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewController.xib in Resources */,
 				6A0262001DE4254900BA5AA3 /* BN_ShopSpecialTopicHeadView.xib in Resources */,
@@ -1640,6 +1836,8 @@
 				6A033EC01DE1ACD3000446A0 /* BN_ShopHomeSouvenirCell.xib in Resources */,
 				6A06E4351DE4468F0036EEF3 /* BN_ShopSpecialSubjectViewController.xib in Resources */,
 				6A033EEF1DE1ACD3000446A0 /* icon_focus@2x.png in Resources */,
+				84A022F81DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib in Resources */,
+				84A022F41DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib in Resources */,
 				6A848D341DF3CF31004C9070 /* BN_ShopOrderNumberProcessingView.xib in Resources */,
 				6A033EB71DE1ACD3000446A0 /* PurchaseConsultingViewController.xib in Resources */,
 				6A033EBD1DE1ACD3000446A0 /* BN_ShopHomeFlashSaleView.xib in Resources */,
@@ -1649,18 +1847,23 @@
 				6A06E42A1DE442340036EEF3 /* BN_ShopSpecialSubjectTipCell.xib in Resources */,
 				6A033EA21DE1ACD3000446A0 /* BN_ShopSorterViewController.xib in Resources */,
 				6A033EC81DE1ACD3000446A0 /* BN_ShopGoodCell.xib in Resources */,
+				84A023041DF82F8B00DC0023 /* LBB_OrderViewController.xib in Resources */,
 				6A033EF71DE1B123000446A0 /* ST_Shop.xcassets in Resources */,
 				6A033EE61DE1ACD3000446A0 /* BN_ShopOrdersToolBar.xib in Resources */,
 				6A033E9A1DE1ACD3000446A0 /* BN_ShoppingcartViewController.xib in Resources */,
 				6A033F281DE1CA08000446A0 /* BN_ShopGoodDetailCommentHeaderView.xib in Resources */,
 				6AA26FFC1DF56116003688C4 /* BN_ShopPaymentCell.xib in Resources */,
 				C96514F91DD61C86004B5F05 /* Main.storyboard in Resources */,
+				84A022F61DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib in Resources */,
 				6A0261DD1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.xib in Resources */,
+				84A023001DF82F8B00DC0023 /* LBB_OrderFooterView.xib in Resources */,
 				6ABFC6E51DF6D8F50079C597 /* ShopSearchResultCell.xib in Resources */,
 				6A0261F11DE34ADD00BA5AA3 /* BN_ShopSpecialCommentCell.xib in Resources */,
+				84A022FE1DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib in Resources */,
 				6A033E9E1DE1ACD3000446A0 /* BN_ShopSorterContantCell.xib in Resources */,
 				6A033F191DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.xib in Resources */,
 				6A033EA91DE1ACD3000446A0 /* BN_ShopGoodDetailSellersView.xib in Resources */,
+				84A022F21DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib in Resources */,
 				6A81C7A61DEF3B280015348D /* BN_ShopOrderServiceStateView.xib in Resources */,
 				6A033F231DE1C994000446A0 /* BN_ShopGoodDetailCommentsCell.xib in Resources */,
 				6A033EC31DE1ACD3000446A0 /* BN_ShopHomeViewController.xib in Resources */,
@@ -1734,7 +1937,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1748,6 +1951,7 @@
 				6A033ECF1DE1ACD3000446A0 /* BN_ShopListViewModel.m in Sources */,
 				6A033EA61DE1ACD3000446A0 /* BN_ShopGoodDetailFriendlyWarning.m in Sources */,
 				6ADB5E3D1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.m in Sources */,
+				84A023011DF82F8B00DC0023 /* LBB_OrderHeaderView.m in Sources */,
 				6A0261DC1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m in Sources */,
 				6A61F0851DF2811000867A69 /* BN_ShopOrderDetailViewModel.m in Sources */,
 				6A033ED71DE1ACD3000446A0 /* BN_ShopScreeningToolBar.m in Sources */,
@@ -1768,6 +1972,7 @@
 				6A033EBF1DE1ACD3000446A0 /* BN_ShopHomeSouvenirCell.m in Sources */,
 				6A033E9D1DE1ACD3000446A0 /* BN_ShopSorterContantCell.m in Sources */,
 				6A033EAD1DE1ACD3000446A0 /* BN_ShopGoodDetailToolBar.m in Sources */,
+				84A022F71DF82F8B00DC0023 /* LBB_OrderCommentViewController.m in Sources */,
 				6A033EE01DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewController.m in Sources */,
 				6A033EA31DE1ACD3000446A0 /* BN_ShopSorterViewModel.m in Sources */,
 				6A033F311DE1FC2A000446A0 /* BN_ShopGoodDetailCommentViewModel.m in Sources */,
@@ -1775,10 +1980,13 @@
 				6A033EE71DE1ACD3000446A0 /* BN_ShopOrderUserProfileView.m in Sources */,
 				6A033EA81DE1ACD3000446A0 /* BN_ShopGoodDetailSellersView.m in Sources */,
 				6A0B13701DE2AE1B00B3715E /* BN_ShopGoodDetailNewArrivalsView.m in Sources */,
+				84A022FA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m in Sources */,
 				6A81C7981DEF374E0015348D /* BN_ShopOrderNumberView.m in Sources */,
 				6A06E4381DE446A80036EEF3 /* BN_ShopSpecialSubjectViewModel.m in Sources */,
 				6A80DE7A1DEF26780098B33D /* BN_ShopSpecialDetailModel.m in Sources */,
 				6A033EEC1DE1ACD3000446A0 /* LYFreeTimingPlate.m in Sources */,
+				84A022F51DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m in Sources */,
+				84A022F11DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m in Sources */,
 				6ABFC6E81DF6E82F0079C597 /* BN_ShopSearchResultViewModel.m in Sources */,
 				6A033EB51DE1ACD3000446A0 /* BN_ShopGoodDetaiStateViewModel.m in Sources */,
 				6A033EAA1DE1ACD3000446A0 /* BN_ShopGoodDetailSimpleShowView.m in Sources */,
@@ -1789,6 +1997,7 @@
 				6A033F221DE1C994000446A0 /* BN_ShopGoodDetailCommentsCell.m in Sources */,
 				6A033EA11DE1ACD3000446A0 /* BN_ShopSorterViewController.m in Sources */,
 				6A033ED91DE1ACD3000446A0 /* BN_ShopSearchCollectionReusableView.m in Sources */,
+				84A023031DF82F8B00DC0023 /* LBB_OrderViewController.m in Sources */,
 				6A033EB91DE1ACD3000446A0 /* BN_ShopHomeCategoryView.m in Sources */,
 				6A033EBB1DE1ACD3000446A0 /* BN_ShopHomeCategoryViewModel.m in Sources */,
 				6A0261E61DE31AE700BA5AA3 /* BN_ShopSpecialSubjectCell.m in Sources */,
@@ -1797,6 +2006,7 @@
 				6A80DE6A1DEF008B0098B33D /* BN_ShopSouvenirModel.m in Sources */,
 				6A033EB31DE1ACD3000446A0 /* BN_ShopGoodDetaiPanicStateView.m in Sources */,
 				6A033EBC1DE1ACD3000446A0 /* BN_ShopHomeFlashSaleView.m in Sources */,
+				84A022FB1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m in Sources */,
 				6A033E931DE1ACD3000446A0 /* BN_ShoppingCartCell.m in Sources */,
 				6A80DE741DEF25560098B33D /* BN_ShopGoodSpecialCommentModel.m in Sources */,
 				6AA26FFB1DF56116003688C4 /* BN_ShopPaymentCell.m in Sources */,
@@ -1818,6 +2028,7 @@
 				6AA26FF01DF55F57003688C4 /* BN_ShopPaymentViewController.m in Sources */,
 				6A61F0761DF27C5100867A69 /* BN_ShopOrderItemModel.m in Sources */,
 				6A033EC11DE1ACD3000446A0 /* BN_ShopHomeSouvenirCellModel.m in Sources */,
+				84A022FC1DF82F8B00DC0023 /* LBB_OrderModel.m in Sources */,
 				C96514F01DD61C86004B5F05 /* main.m in Sources */,
 				6A033E9F1DE1ACD3000446A0 /* BN_ShopSorterTitleCell.m in Sources */,
 				6A033ED01DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewController.m in Sources */,
@@ -1827,17 +2038,22 @@
 				6A63B43E1DF0845A00F6EF60 /* BN_ShopspecialTagModel.m in Sources */,
 				6A033EE21DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewModel.m in Sources */,
 				6A06E4341DE4468F0036EEF3 /* BN_ShopSpecialSubjectViewController.m in Sources */,
+				84A023051DF82F8B00DC0023 /* LBB_OrderModuleViewController.m in Sources */,
 				6A80DE801DEF319D0098B33D /* BN_ShopOrderUsePointView.m in Sources */,
 				6A033EE91DE1ACD3000446A0 /* BN_ShopOrderUserProfileViewModel.m in Sources */,
 				6A0261EB1DE3399E00BA5AA3 /* BN_ShopSpecialTopicCell.m in Sources */,
 				6A033ED51DE1ACD3000446A0 /* BN_ShopScreeningReusableView.m in Sources */,
+				84A022FD1DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m in Sources */,
+				84A022F31DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m in Sources */,
 				6AC4F6691DEC909B0092A4B0 /* BN_ShopGoodSpecialModel.m in Sources */,
 				6A035C201DE6A3A9009617A7 /* BN_ShopGoodDetailConsultancyViewModel.m in Sources */,
 				6A033F131DE1BC39000446A0 /* BN_ShopGoodDetailCommentViewController.m in Sources */,
 				6A033ECB1DE1ACD3000446A0 /* BN_ShopListSelectionToolBar.m in Sources */,
+				84A022FF1DF82F8B00DC0023 /* LBB_OrderFooterView.m in Sources */,
 				6AA26FF41DF5604F003688C4 /* BN_ShopPayMentChannelModel.m in Sources */,
 				6A61F0791DF27DB100867A69 /* BN_ShopOrderCartItemModel.m in Sources */,
 				6A033ED21DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewModel.m in Sources */,
+				84A022F91DF82F8B00DC0023 /* LBB_OrderBaseViewController.m in Sources */,
 				6A80DE7D1DEF2D2F0098B33D /* BN_ShopSpecialTopicModel.m in Sources */,
 				6A81C7A41DEF3AC40015348D /* BN_ShopOrderServiceStateView.m in Sources */,
 				6A033EC71DE1ACD3000446A0 /* BN_ShopGoodCell.m in Sources */,

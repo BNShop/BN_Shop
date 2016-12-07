@@ -8,6 +8,7 @@
 
 #import "BN_ShopViewController.h"
 #import "ST_TabBarController.h"
+#import "LBB_OrderModuleViewController.h"
 
 @interface BN_ShopViewController ()
 
@@ -26,12 +27,26 @@
     [self setNavigationBarHidden:YES];
     [(ST_TabBarController*)self.tabBarController setTabBarHidden:NO animated:YES];
     
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 100, 100, 50)];
+    [btn setTitle:@"我的订单" forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor blueColor]];
+    [btn addTarget:self action:@selector(btnCLickAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+}
+
+- (void)btnCLickAction:(id)sender
+{
+    LBB_OrderModuleViewController *vc = [[LBB_OrderModuleViewController alloc] init];
+    vc.baseViewType = eOrderType;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation
