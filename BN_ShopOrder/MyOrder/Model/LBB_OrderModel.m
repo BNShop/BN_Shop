@@ -37,7 +37,7 @@
 
 - (void)addSaleafter:(NSString*)saleafterDesc saleafterType:(int)saleafterType saleafterPics:(NSArray*)saleafterPics
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/addSaleafter?orderId=%@",BASEURL,@(self.order_id)];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/addSaleafter?orderId=%@",BASEURL,self.order_id];
     
     NSDictionary *parames = nil;
     
@@ -68,7 +68,7 @@
  */
 - (void)cancelOrder
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/cancelOrder?orderId=%@",BASEURL,@(self.order_id)];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/cancelOrder?orderId=%@",BASEURL,self.order_id];
     
     NSDictionary *parames = nil;
     
@@ -100,7 +100,7 @@
  */
 - (void)deleteOrder
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteOrder?orderId=%@",BASEURL,@(self.order_id)];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteOrder?orderId=%@",BASEURL,self.order_id];
     NSDictionary *parames = nil;
     
     __weak typeof(self) weakSelf = self;
@@ -129,7 +129,7 @@
  */
 - (void)confirmReceipt
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",BASEURL,@(self.order_id)];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",BASEURL,self.order_id];
     NSDictionary *parames = nil;
     
     __weak typeof(self) weakSelf = self;
@@ -162,7 +162,7 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@/mall/addComment",BASEURL];
     NSDictionary *parames = @{
-                              @"orderId":@(self.order_id),
+                              @"orderId":self.order_id,
                               @"comments" : @{@"测试字段":@"测试字段"}
                               };
     
@@ -228,11 +228,11 @@
             for (NSDictionary *tmpDict in array) {
                 LBB_OrderModelData *modelData = [[LBB_OrderModelData alloc] init];
                 modelData.goods_num = [[tmpDict objectForKey:@"goods_num"] intValue];
-                modelData.integral_amount = [tmpDict objectForKey:@"integral_amount"];
-                modelData.goods_amount = [tmpDict objectForKey:@"goods_amount"];
-                modelData.freight_amount = [tmpDict objectForKey:@"freight_amount"];
+                modelData.integral_amount = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"integral_amount"]];
+                modelData.goods_amount = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"goods_amount"]];
+                modelData.freight_amount = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"freight_amount"]];
                 modelData.pay_type = [[tmpDict objectForKey:@"pay_type"] intValue];
-                modelData.order_id = [[tmpDict objectForKey:@"order_id"] longValue];
+                modelData.order_id = [NSString stringWithFormat:@"%@",[tmpDict objectForKey:@"order_id"]];
                 modelData.order_state = [[tmpDict objectForKey:@"order_state"] intValue];
                 modelData.order_no = [tmpDict objectForKey:@"order_no"];
                 modelData.comments_state  = [[tmpDict objectForKey:@"comments_state"] intValue];
@@ -244,15 +244,15 @@
                 NSMutableArray *goodArray = [NSMutableArray arrayWithCapacity:0];
                 for (NSDictionary *detailDict in goodsList) {
                     LBB_OrderModelDetail *detail = [[LBB_OrderModelDetail alloc] init];
-                    detail.front_price = [detailDict objectForKey:@"front_price"];
-                    detail.goods_id = [detailDict objectForKey:@"goods_id"];
+                    detail.front_price = [NSString stringWithFormat:@"%@",[detailDict objectForKey:@"front_price"]];
+                    detail.goods_id = [NSString stringWithFormat:@"%@",[detailDict objectForKey:@"goods_id"]];
                     detail.goods_name = [detailDict objectForKey:@"goods_name"];
                     detail.goods_num = [[detailDict objectForKey:@"goods_num"] intValue];
-                    detail.order_id = [[detailDict objectForKey:@"order_id"] longValue];
-                    detail.order_no = [detailDict objectForKey:@"order_no"];
+                    detail.order_id = [NSString stringWithFormat:@"%@",[detailDict objectForKey:@"order_id"]];
+                    detail.order_no = [NSString stringWithFormat:@"%@",[detailDict objectForKey:@"order_no"]];
                     detail.order_state_name = [detailDict objectForKey:@"order_state_name"];
                     detail.pic_url = [detailDict objectForKey:@"pic_url"];
-                    detail.real_price = [detailDict objectForKey:@"real_price"];
+                    detail.real_price = [NSString stringWithFormat:@"%@",[detailDict objectForKey:@"real_price"]];
                     detail.standard = [detailDict objectForKey:@"standard"];
                     [goodArray addObject:detail];
                 }

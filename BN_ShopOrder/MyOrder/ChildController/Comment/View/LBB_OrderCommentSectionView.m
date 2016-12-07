@@ -12,6 +12,7 @@
 #import "LBB_OrderCommentViewController.h"
 #import "LBB_OrderImagePickerViewController.h"
 #import "LBB_OrderImagePickerViewController.h"
+#import "LBB_OrderHeader.h"
 
 @interface LBB_OrderCommentSectionView()<
 UICollectionViewDelegate,
@@ -60,6 +61,7 @@ UITextViewDelegate
             starBtn.exclusiveTouch = YES;
         }
     }
+    self.iconImgView.backgroundColor = ColorLine;
 }
 
 - (void)setCellInfo:(NSMutableDictionary *)cellInfo
@@ -72,6 +74,13 @@ UITextViewDelegate
     }];
     
     _cellInfo = cellInfo;
+    NSString *ticketImageURL = [_cellInfo objectForKey:TikcetImageKey];
+    if ([ticketImageURL length]) {
+        [self.iconImgView sd_setImageWithURL:[NSURL URLWithString:ticketImageURL] placeholderImage:nil];
+    }else{
+        self.iconImgView.image = nil;
+    }
+     
     self.iconImgView.image = IMAGE([_cellInfo objectForKey:TikcetImageKey]);
     self.nameLabel.text = [_cellInfo objectForKey:TikcetNameKey];
     NSInteger starNum = [[_cellInfo objectForKey:StarNumKey] integerValue];
@@ -162,7 +171,8 @@ UITextViewDelegate
                                               
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-                                                  
+    //隐藏键盘
+   [self endEditing:YES];
     if (indexPath.section == 0) {
         NSArray *tagArray = [self.cellInfo objectForKey:TagContentArrayKey];
         NSDictionary *tagDictInfo = [tagArray objectAtIndex:indexPath.row];

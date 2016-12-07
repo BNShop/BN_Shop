@@ -233,6 +233,10 @@ LBB_OrderFooterViewDelegate>
 - (void)cellBtnClickDelegate:(LBB_OrderModelData*)cellInfo
              TicketClickType:(OrderClickType)clickType
 {
+    LBB_OrderCommentViewController *vc = [[LBB_OrderCommentViewController alloc] initWithNibName:@"LBB_OrderCommentViewController" bundle:nil];
+    vc.viewModel = cellInfo;
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
     __weak typeof (self) weakSelf = self;
     [cellInfo.loadSupport setDataRefreshblock:^{
         [weakSelf.tableView reloadData];
@@ -275,6 +279,7 @@ LBB_OrderFooterViewDelegate>
         case eCommentOrder:
         {
             LBB_OrderCommentViewController *vc = [[LBB_OrderCommentViewController alloc] initWithNibName:@"LBB_OrderCommentViewController" bundle:nil];
+            vc.viewModel = cellInfo;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

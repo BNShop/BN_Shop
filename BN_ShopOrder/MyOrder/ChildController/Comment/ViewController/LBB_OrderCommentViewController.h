@@ -7,10 +7,11 @@
 //
 
 #import "LBB_OrderBaseViewController.h"
+#import "LBB_OrderModel.h"
 
 @interface LBB_OrderCommentViewController : LBB_OrderBaseViewController
 
-@property(nonatomic,strong) NSDictionary *ticketInfo;
+@property(nonatomic,strong) LBB_OrderModelData *viewModel;
 
 - (void)resetDataSourceWithInfo:(NSDictionary*)info IsNeedReload:(BOOL)needReload;
 

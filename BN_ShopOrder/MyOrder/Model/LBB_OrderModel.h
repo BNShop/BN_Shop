@@ -14,7 +14,7 @@
 @property(nonatomic,copy) NSString *goods_id;
 @property(nonatomic,copy) NSString *goods_name;
 @property(nonatomic,assign) int goods_num;
-@property(nonatomic,assign) long  order_id;
+@property(nonatomic,copy) NSString*  order_id;
 @property(nonatomic,copy) NSString* order_no;
 @property(nonatomic,copy) NSString *order_state_name;//订单状态（如待支付）
 @property(nonatomic,copy) NSString *pic_url;
@@ -31,7 +31,7 @@
 @property(nonatomic,copy) NSString*   goods_amount;//商品总价
 @property(nonatomic,copy) NSString*   freight_amount;//运费
 @property(nonatomic,assign) int      pay_type;//1 微信支付 支付2 支付宝支付3 平安银行支付
-@property(nonatomic,assign) long     order_id;
+@property(nonatomic,copy) NSString*     order_id;
 @property(nonatomic,assign) int      order_state;//订单状态 0待付款1已付款2待收货3已完成10已取消
 @property(nonatomic,copy) NSString *order_no;
 @property(nonatomic,assign) int  comments_state;// 0 未评价1已评价

@@ -1749,7 +1749,7 @@
 				TargetAttributes = {
 					C96514EA1DD61C86004B5F05 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 6UG5BHKE72;
+						DevelopmentTeam = 2V3T4T4V4S;
 						ProvisioningStyle = Automatic;
 					};
 					C96515031DD61C86004B5F05 = {
@@ -2235,7 +2235,7 @@
 			baseConfigurationReference = B76E7E4AA8C0860864F08677 /* Pods-BN_Shop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6UG5BHKE72;
+				DEVELOPMENT_TEAM = 2V3T4T4V4S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DTCoreText/Externals/DTFoundation/build/Debug-iphoneos",
@@ -2243,6 +2243,7 @@
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT)/PrefixHeader.pch";
 				INFOPLIST_FILE = BN_Shop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.waco.Test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2254,7 +2255,7 @@
 			baseConfigurationReference = 40BCCF527020ACB10F3CB6A9 /* Pods-BN_Shop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6UG5BHKE72;
+				DEVELOPMENT_TEAM = 2V3T4T4V4S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DTCoreText/Externals/DTFoundation/build/Debug-iphoneos",
@@ -2262,6 +2263,7 @@
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT)/PrefixHeader.pch";
 				INFOPLIST_FILE = BN_Shop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.waco.Test;
 				PRODUCT_NAME = "$(TARGET_NAME)";

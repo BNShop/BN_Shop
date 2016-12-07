@@ -59,6 +59,7 @@
 - (void)setStateTypeWithCellInfo:(LBB_OrderModelData*)cellInfo
 {
 //    0待付款1已付款2待收货3已完成10已取消
+    _cellInfo = cellInfo;
     if (cellInfo.order_state == 0) {
         self.leftBtnClickType = eCancelOrder;
         self.rightBtnClickType = ePayOrder;

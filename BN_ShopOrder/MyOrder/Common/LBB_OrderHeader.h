@@ -10,6 +10,7 @@
 #define LBB_OrderHeader_h
 
 #import "LBB_OrderCommonFun.h"
+#import "UIImageView+WebCache.h"
 
 #define MaxTagNum  6
 #define MaxPicture 8

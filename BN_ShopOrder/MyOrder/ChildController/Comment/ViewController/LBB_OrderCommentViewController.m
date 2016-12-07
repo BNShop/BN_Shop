@@ -19,6 +19,7 @@ UICollectionViewDataSource
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong,nonatomic) NSMutableArray *dataSourceArray;
 @property (weak, nonatomic) IBOutlet UIButton *commentBtn;
+@property(nonatomic,strong) NSMutableDictionary *ticketInfo;
 
 @end
 
@@ -38,29 +39,40 @@ UICollectionViewDataSource
 }
 
 - (void)buildControls
-{
-    self.ticketInfo = @{
-                        @"ID" : @"1233",
-                        @"TicketArray" : @[
-                                @{
-                                    TikcetIDKey : @"55wee",
-                                    TikcetNameKey : @"鼓浪屿",
-                                    TikcetImageKey : @"19.pic.jpg"
-                                 },
-                                @{
-                                    TikcetIDKey : @"66wee",
-                                    TikcetNameKey : @"中山街",
-                                    TikcetImageKey : @"19.pic.jpg"
-                                    },
-                                ]
-                        };
-    [self initDataSourceArray];
-    
+{   
     UINib *nib2 = [UINib nibWithNibName:@"LBB_OrderCommentSectionView" bundle:nil];
     [self.collectionView registerNib:nib2
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                  withReuseIdentifier:@"LBB_OrderCommentSectionView"];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellIdentifier"];
+}
+
+- (void)setViewModel:(LBB_OrderModelData *)viewModel
+{
+    _viewModel = viewModel;
+    if (!self.ticketInfo) {
+        self.ticketInfo = [[NSMutableDictionary alloc] initWithCapacity:0];
+    }
+    [self.ticketInfo removeAllObjects];
+    if (viewModel.order_id) {
+        [self.ticketInfo setObject:viewModel.order_id forKey:@"ID"];
+    }
+    NSMutableArray *goodList = [[NSMutableArray alloc] init];
+    for (LBB_OrderModelDetail *detail in _viewModel.goodsList) {
+        NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
+        if (detail.goods_id) {
+            [tmpDict setObject:detail.goods_id forKey:TikcetIDKey];
+            if ([detail.goods_name length]) {
+                 [tmpDict setObject:detail.goods_name forKey:TikcetNameKey];
+            }
+            if ([detail.pic_url length]) {
+                 [tmpDict setObject:detail.pic_url forKey:TikcetImageKey];
+            }
+            [goodList addObject:tmpDict];
+        }
+    }
+    [self.ticketInfo setObject:goodList forKey:@"TicketArray"];
+    [self initDataSourceArray];
 }
 
 - (void)initDataSourceArray
@@ -79,10 +91,6 @@ UICollectionViewDataSource
         [tmpDict setObject:@"此处是评论内容" forKey:CommentDescKey];
         if (i == 0) {
             [tmpDict setObject:@[
-                                 @{
-                                     DefaultKey : [NSNumber numberWithBool:NO],
-                                     TicketTagDescKey:@"小萝莉"
-                                     },
                                  @{
                                      DefaultKey : [NSNumber numberWithBool:YES],
                                      TicketTagDescKey:@"添加标签"
@@ -107,6 +115,7 @@ UICollectionViewDataSource
         [self.dataSourceArray addObject:tmpDict];
     }
     
+    [self.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
