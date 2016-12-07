@@ -221,5 +221,10 @@ static NSString * const BN_ShopSearchHotCache = @"Hot";
     return CGSizeMake(WIDTH(collectionView), 36.0f);
 }
 
-
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.collectionScrollBlock) {
+        self.collectionScrollBlock ();
+    }
+}
 @end

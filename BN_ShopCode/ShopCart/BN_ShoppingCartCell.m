@@ -61,6 +61,7 @@
     [self.thumbnailImageView sd_setImageWithURL:[thumbnailUrl URL] placeholderImage:nil];
     self.titleLabel.text = title;
     self.stepper.value = num;
+    self.stepper.countLabel.text = [NSString stringWithFormat:@"%@", @(num)];
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@", price];
     @weakify(self)
     self.stepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {

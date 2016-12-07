@@ -9,6 +9,10 @@
 #import "BN_ShopSearchResultViewModel.h"
 #import "NSArray+BlocksKit.h"
 
+@interface BN_ShopSearchResultViewModel ()<UIScrollViewDelegate>
+
+@end
+
 @implementation BN_ShopSearchResultViewModel
 
 - (instancetype)init
@@ -100,6 +104,11 @@
     return UIEdgeInsetsMake(6, 14, 6, 14);
 }
 
-
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.collectionScrollBlock) {
+        self.collectionScrollBlock ();
+    }
+}
 
 @end

@@ -22,6 +22,7 @@
 
 @interface BN_ShopSearchViewController () <BN_ShopSearchViewControllerDelegate>
 
+@property (strong, nonatomic) UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) BN_ShopSearchViewModel *viewModel;
 @property (strong, nonatomic) BN_ShopSearchResultViewModel *resultViewModel;
@@ -86,6 +87,7 @@ static NSString * const ShopSearchResultCellIdentifier = @"ShopSearchResultCellI
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }];
     [searchBar becomeFirstResponder];
+    self.searchBar = searchBar;
 }
 
 - (void)setControlsFrame {
@@ -140,7 +142,12 @@ static NSString * const ShopSearchResultCellIdentifier = @"ShopSearchResultCellI
     @weakify(self);
     self.viewModel.collectionSelectBlock = ^(NSString *search){
         @strongify(self);
+        self.searchBar.text = search;
         [self searchTextDidEnd:search];
+    };
+    self.viewModel.collectionScrollBlock = ^{
+        @strongify(self);
+        [self.searchBar resignFirstResponder];
     };
     [self changeDelegateToSearch];
     
@@ -188,6 +195,13 @@ static NSString * const ShopSearchResultCellIdentifier = @"ShopSearchResultCellI
             [self.delegate searchTextDidEndEditing:result];
         }
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    };
+    self.resultViewModel.collectionScrollBlock = ^{
+        @strongify(self);
+        [self.searchBar resignFirstResponder];
+        if (self.resultViewModel.resultDataSource.getItemsCount == 0) {
+            [self changeDelegateToSearch];
+        }
     };
 }
 

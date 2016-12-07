@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong, readonly) MultipleSectionTableArraySource *dataSource;
 @property (nonatomic, copy) void(^collectionSelectBlock)(id obj);
-
+@property (nonatomic, copy) void(^collectionScrollBlock)();
 
 //search bar
 - (SectionDataSource *)getSectionDataSourceWith:(NSString *)title tagged:(id)tagged items:(NSArray *)items cellIdentifier:(NSString *)cellIdentifier sectionIdentifier:(NSString *)sectionIdentifier configureCellBlock:(TableViewCellConfigureBlock)configureCellBlock configureSectionBlock:(TableViewSectionConfigureBlock)configureSectionBlock;

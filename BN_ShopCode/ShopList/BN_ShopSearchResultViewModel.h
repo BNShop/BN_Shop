@@ -14,6 +14,7 @@
 @property (nonatomic, copy) NSString *keyWord;
 @property (nonatomic, strong) TableDataSource *resultDataSource;
 @property (nonatomic, copy) void(^collectionSelectBlock)(id obj);
+@property (nonatomic, copy) void(^collectionScrollBlock)();
 
 - (void)getSearchResultDataRes:(BOOL)clear keyword:(NSString *)keyword;
 @end

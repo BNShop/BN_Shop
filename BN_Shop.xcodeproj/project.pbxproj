@@ -1203,12 +1203,12 @@
 				6A033E461DE1ACD3000446A0 /* BN_ShopListViewModel.m */,
 				6A033E4A1DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewModel.h */,
 				6A033E4B1DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewModel.m */,
-				6A033E5B1DE1ACD3000446A0 /* BN_ShopSearchViewModel.h */,
-				6A033E5C1DE1ACD3000446A0 /* BN_ShopSearchViewModel.m */,
 				6ADB5E461DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.h */,
 				6ADB5E471DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.m */,
 				6ABFC6E61DF6E82F0079C597 /* BN_ShopSearchResultViewModel.h */,
 				6ABFC6E71DF6E82F0079C597 /* BN_ShopSearchResultViewModel.m */,
+				6A033E5B1DE1ACD3000446A0 /* BN_ShopSearchViewModel.h */,
+				6A033E5C1DE1ACD3000446A0 /* BN_ShopSearchViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
