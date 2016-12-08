@@ -33,6 +33,7 @@
     [super prepareForReuse];
     self.iconImgView.image = nil;
     self.defaultImgView.image = nil;
+    self.cellInfo = nil;
 }
 
 - (void)setCellInfo:(NSDictionary *)cellInfo

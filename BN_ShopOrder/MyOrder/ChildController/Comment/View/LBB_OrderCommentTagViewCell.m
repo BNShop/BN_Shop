@@ -46,6 +46,7 @@ CGFloat orderCommentTagCellWith(NSString* content,BOOL close)
     [super prepareForReuse];
     self.tagNameLabel.text = nil;
     self.bottomLabel.text = nil;
+    self.cellInfo = nil;
 }
 
 - (void)setCellInfo:(NSDictionary *)cellInfo

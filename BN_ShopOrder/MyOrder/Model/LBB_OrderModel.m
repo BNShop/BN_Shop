@@ -37,7 +37,7 @@
 
 - (void)addSaleafter:(NSString*)saleafterDesc saleafterType:(int)saleafterType saleafterPics:(NSArray*)saleafterPics
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/addSaleafter?orderId=%@",BASEURL,self.order_id];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/addSaleafter?orderId=%@",BASEURL,@([self.order_id intValue])];
     
     NSDictionary *parames = nil;
     
@@ -49,8 +49,12 @@
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if(codeNumber.intValue == 0)
         {
-            weakSelf.order_state = 10;//已取消
-            weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            weakSelf.saleafter_state = 1;//
+            [weakSelf getShoppingOrderDetail:^{
+                weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            } failure:^(NSString* errorTips){
+                weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            }];
         }
         else
         {
@@ -68,7 +72,7 @@
  */
 - (void)cancelOrder
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/cancelOrder?orderId=%@",BASEURL,self.order_id];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/cancelOrder?orderId=%@",BASEURL,@([self.order_id intValue])];
     
     NSDictionary *parames = nil;
     
@@ -81,7 +85,11 @@
         if(codeNumber.intValue == 0)
         {
             weakSelf.order_state = 10;//已取消
-            weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            [weakSelf getShoppingOrderDetail:^{
+                weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            } failure:^(NSString* errorTips){
+                weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            }];
         }
         else
         {
@@ -100,7 +108,7 @@
  */
 - (void)deleteOrder
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteOrder?orderId=%@",BASEURL,self.order_id];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteOrder?orderId=%@",BASEURL,@([self.order_id intValue])];
     NSDictionary *parames = nil;
     
     __weak typeof(self) weakSelf = self;
@@ -129,7 +137,7 @@
  */
 - (void)confirmReceipt
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",BASEURL,self.order_id];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",BASEURL,@([self.order_id intValue])];
     NSDictionary *parames = nil;
     
     __weak typeof(self) weakSelf = self;
@@ -141,6 +149,11 @@
         if(codeNumber.intValue == 0)
         {
             weakSelf.order_state = 3;//已完成
+            [weakSelf getShoppingOrderDetail:^{
+                weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            } failure:^(NSString* errorTips){
+                weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            }];
             weakSelf.loadSupport.loadEvent = codeNumber.intValue;
         }
         else
@@ -155,16 +168,64 @@
 }
 
 /**
- *3.6.10 评价
+ *3.6.10 评价(先上传图片到 7牛）
  @comments @{goodsId:123 ,mind:评论, score:1 pics:图片（多张逗号隔开）}
  */
-- (void)addComment:(NSDictionary*)comments
+- (void)addComment:(NSArray*)comments
+{
+    if ([self.order_id length] == 0) {
+        return;
+    }
+    __block NSMutableArray *commentsArray  = [NSMutableArray arrayWithCapacity:0];
+    for (NSDictionary *tmpDict in comments) {
+       __block NSMutableDictionary *comentsDict = [[NSMutableDictionary alloc] initWithObjects:[tmpDict allValues] forKeys:[tmpDict allKeys]];
+        
+        NSArray *imagesArray = [comentsDict objectForKey:@"pics"];
+        if (imagesArray.count) {
+            [[BC_ToolRequest sharedManager] uploadfile:imagesArray block:^(NSArray *files, NSError *error){
+                if (!error && [files count]) {
+                    NSString *fileNames = nil;
+                    for (int i = 0; i < files.count; i++) {
+                        if (i == 0) {
+                            fileNames = files[i];
+                        }else {
+                            fileNames = [NSString stringWithFormat:@"%@,%@",fileNames,files[i]];
+                        }
+                    }
+                    if ([fileNames length]) {
+                        [comentsDict setObject:fileNames forKey:@"pics"];
+                    }
+                }
+                [commentsArray addObject:comentsDict];
+                //已经全部上传完图片
+                if ([commentsArray count] == [comments count]) {
+                    [self postCommentContent:commentsArray];
+                }
+            }];
+        }else {
+            [commentsArray addObject:comentsDict];
+            //已经全部上传完图片
+            if ([commentsArray count] == [comments count]) {
+                [self postCommentContent:commentsArray];
+            }
+        }
+    }
+}
+/**
+ *3.6.10 评价(把7牛的图片地址返回上传到后台）
+ @comments @{goodsId:123 ,mind:评论, score:1 pics:图片（多张逗号隔开）}
+ */
+- (void)postCommentContent:(NSArray*)comments
 {
     NSString *url = [NSString stringWithFormat:@"%@/mall/addComment",BASEURL];
-    NSDictionary *parames = @{
-                              @"orderId":self.order_id,
-                              @"comments" : @{@"测试字段":@"测试字段"}
-                              };
+    NSMutableDictionary *parames = [NSMutableDictionary dictionary];
+    if ([self.order_id length] == 0) {
+        return;
+    }
+    [parames setObject:@([self.order_id intValue]) forKey:@"orderId"];
+    if ([comments count]) {
+       [parames setObject:comments forKey:@"comments"];
+    }
     
     __weak typeof(self) weakSelf = self;
     self.loadSupport.loadEvent = NetLoadingEvent;
@@ -174,17 +235,56 @@
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if(codeNumber.intValue == 0)
         {
-            weakSelf.order_state = 3;//已完成
-            weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            weakSelf.comments_state = 1;//已评价
+            [weakSelf getShoppingOrderDetail:^{
+                 weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            } failure:^(NSString* errorTips){
+                weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+            }];
         }
         else
         {
             NSString *errorStr = [dic objectForKey:@"remark"];
             NSLog(@"失败  %@",errorStr);
+            weakSelf.loadSupport.netRemark = errorStr;
+            weakSelf.loadSupport.loadFailEvent = codeNumber.intValue;
         }
-        weakSelf.loadSupport.loadEvent = codeNumber.intValue;
+        
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         weakSelf.loadSupport.loadFailEvent = NetLoadFailedEvent;
+    }];
+    
+}
+
+#pragma mark - 获取订单详情
+- (void)getShoppingOrderDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
+    
+    NSString *url = [NSString stringWithFormat:@"%@/mall/orderDetail?orderId=%@",BASEURL,@([self.order_id intValue])];
+    [[BC_ToolRequest sharedManager] GET:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSLog(@"dic = %@", dic);
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue == 0) {
+            NSDictionary* tmpDict = [dic objectForKey:@"result"];
+            LBB_OrderModelData *modelData = self;
+            modelData.order_state = [[tmpDict objectForKey:@"order_state"] intValue];
+            modelData.order_state_name = [tmpDict objectForKey:@"order_state_name"];
+            modelData.comment_state_name = [tmpDict objectForKey:@"comment_state_name"];
+            modelData.saleafter_state_name = [tmpDict objectForKey:@"saleafter_state_name"];
+            modelData.saleafter_state = [[tmpDict objectForKey:@"saleafter_state"] intValue];
+            if (success) {
+                success();
+            }
+        }else{
+            NSString *remark = [dic objectForKey:@"remark"];
+            if (failure) {
+                failure(remark);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+             failure([[error userInfo] objectForKey:NSLocalizedDescriptionKey]);
+        }
     }];
 }
 
@@ -202,6 +302,10 @@
     return self;
 }
 
+/**
+ *3.6.1 订单列表
+ *@parames orderSearchType 订单状态 1.全部2.待付款3.待收货4.待评价5.售后
+ */
 - (void)getDataArray:(int)orderSearchType IsClear:(BOOL)isClear
 {
     NSString *url = [NSString stringWithFormat:@"%@/mall/orderList",BASEURL];
@@ -280,55 +384,3 @@
 
 @end
 
-
-
-@implementation LBB_SaleafterTypeModel
-
-
-@end
-
-
-@implementation LBB_SaleafterTypeViewModel
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        self.dataArray = [[NSMutableArray alloc] initFromNet];
-    }
-    return self;
-}
-
-/**
- *3.6.6 售后原因列表
- */
-- (void)getSaleafterType
-{
-    NSString *url = [NSString stringWithFormat:@"%@/mall/dictList?classes=saleafter_type",BASEURL];
-
-    __weak typeof(self) weakSelf = self;
-    self.dataArray.loadSupport.loadEvent = NetLoadingEvent;
-    
-    [[BC_ToolRequest sharedManager] GET:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSDictionary *dic = responseObject;
-        NSNumber *codeNumber = [dic objectForKey:@"code"];
-        if(codeNumber.intValue == 0)
-        {
-            NSArray *array = [dic objectForKey:@"rows"];
-            NSArray *returnArray = [LBB_SaleafterTypeModel mj_objectArrayWithKeyValuesArray:array];
-            [weakSelf.dataArray removeAllObjects];
-            [weakSelf.dataArray addObjectsFromArray:returnArray];
-        }
-        else
-        {
-            NSString *errorStr = [dic objectForKey:@"remark"];
-            NSLog(@"失败  %@",errorStr);
-        }
-        weakSelf.dataArray.networkTotal = [dic objectForKey:@"total"];
-        weakSelf.dataArray.loadSupport.loadEvent = codeNumber.intValue;
-    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
-        weakSelf.dataArray.loadSupport.loadEvent = NetLoadFailedEvent;
-    }];
-}
-
-@end

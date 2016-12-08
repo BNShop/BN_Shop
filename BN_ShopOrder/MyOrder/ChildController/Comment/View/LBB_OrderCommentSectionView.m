@@ -39,6 +39,7 @@ UITextViewDelegate
     [super awakeFromNib];
     // Initialization code
     self.exclusiveTouch = YES;
+    self.textView.delegate = self;
     //进行CollectionView和Cell的绑定
     self.nameLabel.adjustsFontSizeToFitWidth = YES;
     self.backgroundColor = ColorWhite;
@@ -62,8 +63,15 @@ UITextViewDelegate
         }
     }
     self.iconImgView.backgroundColor = ColorLine;
+    self.textView.placeholder =@"请输入评论内容";
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    _cellInfo = nil;
+    [self.collectionView reloadData];
+}
 - (void)setCellInfo:(NSMutableDictionary *)cellInfo
 {
     @weakify(self);
@@ -81,13 +89,15 @@ UITextViewDelegate
         self.iconImgView.image = nil;
     }
      
-    self.iconImgView.image = IMAGE([_cellInfo objectForKey:TikcetImageKey]);
     self.nameLabel.text = [_cellInfo objectForKey:TikcetNameKey];
     NSInteger starNum = [[_cellInfo objectForKey:StarNumKey] integerValue];
     //好评星星数量
     UIButton *starBtn = [self.starBgView viewWithTag:starNum];
-    starBtn.selected = NO;
-    [self starBtnClickAction:starBtn];
+    if (starNum) {
+        starBtn.selected = NO;
+        [self starBtnClickAction:starBtn];
+    }
+ 
     //评论内容
     NSString *textContent = [_cellInfo objectForKey:CommentDescKey];
     self.textView.text = textContent;
@@ -151,7 +161,7 @@ UITextViewDelegate
     UICollectionViewCell *cell = nil;
     
     if (indexPath.section == 0) {
-        LBB_OrderCommentTagViewCell *tagCells =  (LBB_OrderCommentTagViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier1 forIndexPath:indexPath];
+        LBB_OrderCommentTagViewCell *tagCells =  (LBB_OrderCommentTagViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier1 forIndexPath:indexPath]; 
         cell = tagCells;
         NSArray *tagArray = [self.cellInfo objectForKey:TagContentArrayKey];
         NSDictionary *tagDictInfo = [tagArray objectAtIndex:indexPath.row];
@@ -189,7 +199,7 @@ UITextViewDelegate
             [self showImagePickerMenu];
         }else {
             [self removePictureAlert:indexPath.row];
-        } 
+        }
     }
 }
 
@@ -450,6 +460,15 @@ UITextViewDelegate
         return newStr;
     }
     return nil;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.textCotent = [self.textCotent Trim];
+    if ([self.textCotent length]) {
+        [self.cellInfo setObject:self.textCotent forKey:CommentDescKey];
+        [self resetParentVCDataSource:NO];
+    }
 }
 
 @end

@@ -16,11 +16,13 @@
 #import "LBB_OrderCommentViewController.h"
 #import "LBB_OrderModel.h"
 #import "BN_ShopOrderDetailViewController.h"
+#import "LBB_ApplyAalesViewController.h"
 
 @interface LBB_OrderViewController ()
 <UITableViewDataSource,
 UITableViewDelegate,
-LBB_OrderFooterViewDelegate>
+LBB_OrderFooterViewDelegate,
+LBB_OrderCommentDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) LBB_OrderViewModel *viewModel;
@@ -198,7 +200,7 @@ LBB_OrderFooterViewDelegate>
 
 - (void)showTicketDetailView:(LBB_OrderModelData*)ticketInfo
 {
-    BN_ShopOrderDetailViewController *ctr = [[BN_ShopOrderDetailViewController alloc] initWith:[NSString stringWithFormat:@"%ld", ticketInfo.order_id]];
+    BN_ShopOrderDetailViewController *ctr = [[BN_ShopOrderDetailViewController alloc] initWith:[NSString stringWithFormat:@"%@",ticketInfo.order_id]];
     [self.navigationController pushViewController:ctr animated:YES];
      
 }
@@ -233,16 +235,14 @@ LBB_OrderFooterViewDelegate>
 - (void)cellBtnClickDelegate:(LBB_OrderModelData*)cellInfo
              TicketClickType:(OrderClickType)clickType
 {
-    LBB_OrderCommentViewController *vc = [[LBB_OrderCommentViewController alloc] initWithNibName:@"LBB_OrderCommentViewController" bundle:nil];
-    vc.viewModel = cellInfo;
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
+//    LBB_ApplyAalesViewController *vc = [[LBB_ApplyAalesViewController alloc] initWithNibName:@"LBB_ApplyAalesViewController" bundle:nil];
+//    [self.navigationController pushViewController:vc animated:YES];
+//    return;
     __weak typeof (self) weakSelf = self;
     [cellInfo.loadSupport setDataRefreshblock:^{
         [weakSelf.tableView reloadData];
     }];
     
-  
     [cellInfo.loadSupport setDataRefreshFailBlock:^(NetLoadEvent code,NSString* remak){
         if ([remak length]) {
             [weakSelf showHudPrompt:remak];
@@ -273,13 +273,15 @@ LBB_OrderFooterViewDelegate>
        
         case eApplyAales:
         {
-            
+            LBB_ApplyAalesViewController *vc = [[LBB_ApplyAalesViewController alloc] initWithNibName:@"LBB_ApplyAalesViewController" bundle:nil];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case eCommentOrder:
         {
             LBB_OrderCommentViewController *vc = [[LBB_OrderCommentViewController alloc] initWithNibName:@"LBB_OrderCommentViewController" bundle:nil];
             vc.viewModel = cellInfo;
+            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -328,9 +330,14 @@ LBB_OrderFooterViewDelegate>
 - (void)loadViewControllerWithInfo:(id)info
 {
     //    NSNotification *notification = info;
-    
     [self performSegueWithIdentifier:@"LBB_OrderCommentViewController" sender:nil];
     
+}
+
+#pragma mark - LBB_OrderCommentDelegate
+- (void)didCommentSuccess:(LBB_OrderModelData*)viewModel
+{
+    [self.tableView reloadData];
 }
 
 @end
