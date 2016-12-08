@@ -87,23 +87,23 @@ UICollectionViewDataSource
         [tmpDict setObject:[ticketDict objectForKey:TikcetNameKey] forKey:TikcetNameKey];
         [tmpDict setObject:[ticketDict objectForKey:TikcetImageKey] forKey:TikcetImageKey];
         //以下均为默认内容
-        [tmpDict setObject:[NSNumber numberWithInteger:1] forKey:StarNumKey];
-        [tmpDict setObject:@"此处是评论内容" forKey:CommentDescKey];
-        if (i == 0) {
-            [tmpDict setObject:@[
-                                 @{
-                                     DefaultKey : [NSNumber numberWithBool:YES],
-                                     TicketTagDescKey:@"添加标签"
-                                     }
-                                 ] forKey:TagContentArrayKey];
-        }else {
-            [tmpDict setObject:@[
-                                 @{
-                                     DefaultKey : [NSNumber numberWithBool:YES],
-                                     TicketTagDescKey:@"添加标签"
-                                     }
-                                 ] forKey:TagContentArrayKey];
-        }
+        [tmpDict setObject:[NSNumber numberWithInteger:0] forKey:StarNumKey];
+        [tmpDict setObject:@"" forKey:CommentDescKey];
+//        if (i == 0) {
+//            [tmpDict setObject:@[
+//                                 @{
+//                                     DefaultKey : [NSNumber numberWithBool:YES],
+//                                     TicketTagDescKey:@"添加标签"
+//                                     }
+//                                 ] forKey:TagContentArrayKey];
+//        }else {
+//            [tmpDict setObject:@[
+//                                 @{
+//                                     DefaultKey : [NSNumber numberWithBool:YES],
+//                                     TicketTagDescKey:@"添加标签"
+//                                     }
+//                                 ] forKey:TagContentArrayKey];
+//        }
         
         [tmpDict setObject:@[
                              @{
@@ -218,7 +218,48 @@ UICollectionViewDataSource
 #pragma mark - 立即评论
 
 - (IBAction)commentBtnClickAction:(id)sender {
+    [self.view endEditing:YES];
+    NSMutableArray *commentsArray = [NSMutableArray arrayWithCapacity:0];
+    for (NSDictionary *ticketDict in self.dataSourceArray) {
+        NSMutableDictionary *tmpDict = [NSMutableDictionary dictionary];
+        NSString *goodsID = [ticketDict objectForKey:TikcetIDKey];
+        [tmpDict setObject:@([goodsID intValue]) forKey:@"goodsId"];
+        [tmpDict setObject:[ticketDict objectForKey:CommentDescKey] forKey:@"mind"];
+        [tmpDict setObject:[ticketDict objectForKey:StarNumKey] forKey:@"score"];
+        NSMutableArray *commentPictureArray = [NSMutableArray array];
+        NSArray *ticketGoodArray = [ticketDict objectForKey:PictureContentArrayKey];
+        for (NSDictionary *pictDict in ticketGoodArray) {
+            BOOL isDefault = [[pictDict objectForKey:DefaultKey] boolValue];
+            if (!isDefault) {
+                UIImage *image = [pictDict objectForKey:PictureKey];
+                if (image) {
+                    [commentPictureArray addObject:image];
+                }
+            }
+        }
+        if ([commentPictureArray count]) {
+            [tmpDict setObject:commentPictureArray forKey:@"pics"];
+        }
+        [commentsArray addObject:tmpDict];
+    }
     
+    __weak typeof (self) weakSelf = self;
+    if (self.viewModel) {
+        [self.viewModel.loadSupport setDataRefreshblock:^{
+            [weakSelf showHudPrompt:@"评价成功"];
+            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(didCommentSuccess:)]) {
+                [weakSelf.delegate didCommentSuccess:weakSelf.viewModel];
+            }
+        }];
+        [self.viewModel.loadSupport setDataRefreshFailBlock:^(NetLoadEvent code,NSString* remak){
+            if ([remak length]) {
+                [weakSelf showHudPrompt:remak];
+            }else {
+                [weakSelf showHudPrompt:@"评价失败"];
+            }
+        }];
+        [self.viewModel addComment:commentsArray];
+    }
 }
 
 @end

@@ -31,7 +31,7 @@
     [btn setTitle:@"我的订单" forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor blueColor]];
     [btn addTarget:self action:@selector(btnCLickAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
+//    [self.view addSubview:btn];
 }
 
 - (void)btnCLickAction:(id)sender

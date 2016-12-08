@@ -72,7 +72,7 @@
  *3.6.10 评价
  @comments @{goodsId:123 ,mind:评论, score:1 pics:图片（多张逗号隔开）}
  */
-- (void)addComment:(NSDictionary*)comments;
+- (void)addComment:(NSArray*)comments;
 
 
 @end
@@ -90,22 +90,4 @@
 @end
 
 
-
-@interface LBB_SaleafterTypeModel:BN_BaseDataModel
-
-@property(nonatomic,copy) NSString *display ;//显示名称
-@property(nonatomic,assign) int value;//值
-
-@end
-
-@interface LBB_SaleafterTypeViewModel : BN_BaseDataModel
-
-@property(nonatomic,strong) NSMutableArray<LBB_SaleafterTypeModel*> *dataArray;
-
-/**
- *3.6.6 售后原因列表
- */
-- (void)getSaleafterType;
-
-@end
 
