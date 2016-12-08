@@ -105,7 +105,7 @@ static NSString * const ShopGoodDetailCommentCellIdentifier = @"ShopGoodDetailCo
     [self.tableView setTableViewData:self.viewModel.items];
     
     [self.tableView setBn_data:self.viewModel.items];
-    [self.tableView loadData:self.viewModel.items];
+//    [self.tableView loadData:self.viewModel.items];
     
     [self.tableView setRefreshBlock:^{
         @strongify(self);

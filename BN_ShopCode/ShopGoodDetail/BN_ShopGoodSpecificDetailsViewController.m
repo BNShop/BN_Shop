@@ -96,7 +96,7 @@
 
 - (void)buildWebView {
     if (!_headView) {
-        _headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.headerHight)];
+        _headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.view), self.headerHight)];
     }
     
     self.webss = [[UIWebView alloc] initWithFrame:self.view.bounds];
@@ -105,8 +105,6 @@
     self.webss.backgroundColor = [UIColor whiteColor];
     self.webss.opaque = NO;
     self.webss.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    self.webss.scrollView.minimumZoomScale = 1.0f;
-    self.webss.scrollView.maximumZoomScale = 1.0f;
     self.webss.scalesPageToFit = YES;
     if ([self.webss.subviews count] > 0)
     {

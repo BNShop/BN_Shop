@@ -251,6 +251,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 - (void)bulidStateViewModel {
     self.stateViewModel = [[BN_ShopGoodDetaiStateViewModel alloc] init];
     [self.view setBn_data:self.stateViewModel];
+    
     @weakify(self);
     [self.view setRefreshBlock:^{
         @strongify(self);
@@ -261,7 +262,6 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         self.simpleShowViewModel.shortDescription = self.stateViewModel.simpleDetailModel.name;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self buildStateView];
-            [self buildTransitionControllers];
             [self.simpleShowView updateWith:self.simpleShowViewModel.shortDescription schedule:[self.simpleShowViewModel scheduleWith:0]];
             [self.sellersView updateWith:self.stateViewModel.simpleDetailModel.shop_name iconUrl:self.stateViewModel.simpleDetailModel.shop_logo];
             [self.transitionToolBar updateWith:self.stateViewModel.commentNumStr];
@@ -278,11 +278,14 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
             } else if (self.stateViewModel.state == GoodDetaiState_Panic) {
                 [self.toolBar updateAddToCartWithBuyNow];
             }
+            [self performSelector:@selector(buildTransitionControllers) withObject:nil afterDelay:0.3f];
             
         });
        
     }];
+    
     [self.stateViewModel getSimpleDetailDataWith:self.simpleShowViewModel.goodsId];
+    [self.view loadData:self.stateViewModel];
 }
 
 - (void)buildStateView {
@@ -378,7 +381,6 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         if (newController != self.curController) {
             if ([self.curController respondsToSelector:@selector(setHeadView:)]) {
                 [self.curController performSelectorOnMainThread:@selector(setHeadView:) withObject:[self.subHeadeViews objectAtIndex:selectedIndex] waitUntilDone:NO];
-//                [self.curController performSelectorOnMainThread:@selector(setHeadView:) withObject:nil waitUntilDone:NO];
             }
             if ([newController respondsToSelector:@selector(setHeadView:)]) {
                 [newController performSelectorOnMainThread:@selector(setHeadView:) withObject:self.headeView waitUntilDone:NO];
@@ -472,22 +474,31 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self.controllers addObject:consultancCtr];
     [self addChildViewController:consultancCtr];
     
+    [self.view addSubview:commetnCtr.view];
+    [commetnCtr.view autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.view];
+    [commetnCtr.view autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
+    [commetnCtr.view autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
+    [commetnCtr.view autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.view withOffset:60.0f];
+    self.curController = commetnCtr;
+    [self.view bringSubviewToFront:self.toolBar];
     CGRect rect = self.headeView.frame;
     rect.origin.y = 0;
     self.headeView.frame = rect;
     self.headeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [detailCtr setHeadView:self.headeView];
-    [self.view addSubview:detailCtr.view];
+    [commetnCtr setHeadView:self.headeView];
     
-    [detailCtr.view autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.view];
-    [detailCtr.view autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
-    [detailCtr.view autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
-    [detailCtr.view autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.view withOffset:60.0f];
-    
-    self.curController = detailCtr;
-    
-    [self.view bringSubviewToFront:self.toolBar];
+    [self performSelector:@selector(replaceToDetail) withObject:nil afterDelay:0.5];
+}
 
+- (void)replaceToDetail {
+    UIViewController *detailCtr = [self.controllers objectAtIndex:0];
+    if ([self.curController respondsToSelector:@selector(setHeadView:)]) {
+        [self.curController performSelectorOnMainThread:@selector(setHeadView:) withObject:[self.subHeadeViews objectAtIndex:1] waitUntilDone:NO];
+    }
+    if ([detailCtr respondsToSelector:@selector(setHeadView:)]) {
+        [detailCtr performSelectorOnMainThread:@selector(setHeadView:) withObject:self.headeView waitUntilDone:NO];
+    }
+    [self replaceController:self.curController newController:detailCtr];
 }
 
 - (void)replaceController:(UIViewController *)oldController newController:(UIViewController *)newController

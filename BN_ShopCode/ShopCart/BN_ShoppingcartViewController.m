@@ -175,21 +175,18 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     if (ids.count == 0) {
         return;
     }
-//    @weakify(self);
-//    [self.viewModel deleteShoppingCart:ids success:^{
-//        @strongify(self);
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            self.viewModel.edit = NO;
-//            [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
-//            [self.tableView reloadData];
-//        });
-//    } failure:^(NSString *errorDescription) {
-//        [self showHudPrompt:errorDescription];
-//    }];
-    [self.viewModel clearSelectedItems];
-    self.viewModel.edit = NO;
-    [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
-    [self.tableView reloadData];
+    @weakify(self);
+    [self.viewModel deleteShoppingCart:ids success:^{
+        @strongify(self);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.viewModel.edit = NO;
+            [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
+            [self.tableView reloadData];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"BN_ShopOrdersConfirmation" object:nil];
+        });
+    } failure:^(NSString *errorDescription) {
+        [self showHudPrompt:errorDescription];
+    }];
     
 }
 

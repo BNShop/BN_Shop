@@ -52,34 +52,32 @@
 
 //删除选中的选项
 - (void)clearSelectedItems {
-    __block NSMutableArray *matchs = [NSMutableArray array];
-    [self.dataSource.sections bk_each:^(id obj) {
-        SectionDataSource *sectionDataSource = (SectionDataSource *)obj;
+    NSMutableArray *matchs = [NSMutableArray array];
+    for (SectionDataSource *sectionDataSource in self.dataSource.sections) {
         NSArray *match = [sectionDataSource.items bk_select:^BOOL(BN_ShoppingCartItemModel *obj) {
             return [obj isSelected];
         }];
         if (match) {
             [sectionDataSource deleteItemWithItems:match];
+            [self.shoppingCartList removeObjectsInArray:match];
         }
         if (sectionDataSource.getItemsCount == 0) {
             [matchs addObject:sectionDataSource];
         }
-    }];
+    }
     [self.dataSource.sections removeObjectsInArray:matchs];
-    [matchs removeAllObjects];
 }
 
 - (NSArray *)settlementSelectedItems {
-    __block NSMutableArray *matchs = [NSMutableArray array];
-    [self.dataSource.sections bk_each:^(id obj) {
-        SectionDataSource *sectionDataSource = (SectionDataSource *)obj;
+    NSMutableArray *matchs = [NSMutableArray array];
+    for (SectionDataSource *sectionDataSource in self.dataSource.sections) {
         NSArray *match = [sectionDataSource.items bk_select:^BOOL(BN_ShoppingCartItemModel *obj) {
             return [obj isSelected];
         }];
         if (match) {
             [matchs addObjectsFromArray:match];
         }
-    }];
+    }
     return matchs;
 }
 
@@ -197,7 +195,6 @@
             }
         } else {
             [self clearSelectedItems];
-            [self.shoppingCartList removeObjectsInArray:[self settlementSelectedItems]];
             if (success) {
                 success();
             }
