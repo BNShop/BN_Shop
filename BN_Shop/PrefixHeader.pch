@@ -14,8 +14,6 @@
 
 #ifdef __OBJC__
 
-#import "BN_ShopHeader.h"
-
 #endif
 
 #endif /* PrefixHeader_pch */
