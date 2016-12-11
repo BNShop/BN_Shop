@@ -7,6 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B7D77751DFD96A1006CE905 /* ST_Home.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77731DFD96A1006CE905 /* ST_Home.xcassets */; };
+		1B7D77761DFD96A1006CE905 /* ST_Shop.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77741DFD96A1006CE905 /* ST_Shop.xcassets */; };
+		1B7D77BE1DFD9702006CE905 /* LBB_SaleafterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D777D1DFD9702006CE905 /* LBB_SaleafterModel.m */; };
+		1B7D77BF1DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77801DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.m */; };
+		1B7D77C01DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77811DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.xib */; };
+		1B7D77C11DFD9702006CE905 /* LBB_OrderAalesDescViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77831DFD9702006CE905 /* LBB_OrderAalesDescViewCell.m */; };
+		1B7D77C21DFD9702006CE905 /* LBB_OrderAalesDescViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77841DFD9702006CE905 /* LBB_OrderAalesDescViewCell.xib */; };
+		1B7D77C31DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77861DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.m */; };
+		1B7D77C41DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77871DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.xib */; };
+		1B7D77C51DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77891DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.m */; };
+		1B7D77C61DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D778A1DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.xib */; };
+		1B7D77C71DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D778C1DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.m */; };
+		1B7D77C81DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D778D1DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.xib */; };
+		1B7D77C91DFD9702006CE905 /* LBB_ApplyAalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77901DFD9702006CE905 /* LBB_ApplyAalesViewController.m */; };
+		1B7D77CA1DFD9702006CE905 /* LBB_ApplyAalesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77911DFD9702006CE905 /* LBB_ApplyAalesViewController.xib */; };
+		1B7D77CB1DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77951DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.m */; };
+		1B7D77CC1DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77961DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.xib */; };
+		1B7D77CD1DFD9702006CE905 /* LBB_OrderCommentSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77981DFD9702006CE905 /* LBB_OrderCommentSectionView.m */; };
+		1B7D77CE1DFD9702006CE905 /* LBB_OrderCommentSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77991DFD9702006CE905 /* LBB_OrderCommentSectionView.xib */; };
+		1B7D77CF1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D779B1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.m */; };
+		1B7D77D01DFD9702006CE905 /* LBB_OrderCommentTagViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D779C1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.xib */; };
+		1B7D77D11DFD9702006CE905 /* LBB_OrderCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D779F1DFD9702006CE905 /* LBB_OrderCommentViewController.m */; };
+		1B7D77D21DFD9702006CE905 /* LBB_OrderCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77A01DFD9702006CE905 /* LBB_OrderCommentViewController.xib */; };
+		1B7D77D31DFD9702006CE905 /* LBB_OrderBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77A31DFD9702006CE905 /* LBB_OrderBaseViewController.m */; };
+		1B7D77D41DFD9702006CE905 /* LBB_OrderCommonFun.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77A71DFD9702006CE905 /* LBB_OrderCommonFun.m */; };
+		1B7D77D51DFD9702006CE905 /* LBB_OrderImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77A91DFD9702006CE905 /* LBB_OrderImagePickerViewController.m */; };
+		1B7D77D61DFD9703006CE905 /* LBB_OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77AC1DFD9702006CE905 /* LBB_OrderModel.m */; };
+		1B7D77D71DFD9703006CE905 /* LBB_OrderDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77B01DFD9702006CE905 /* LBB_OrderDetailViewCell.m */; };
+		1B7D77D81DFD9703006CE905 /* LBB_OrderDetailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77B11DFD9702006CE905 /* LBB_OrderDetailViewCell.xib */; };
+		1B7D77D91DFD9703006CE905 /* LBB_OrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77B31DFD9702006CE905 /* LBB_OrderFooterView.m */; };
+		1B7D77DA1DFD9703006CE905 /* LBB_OrderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77B41DFD9702006CE905 /* LBB_OrderFooterView.xib */; };
+		1B7D77DB1DFD9703006CE905 /* LBB_OrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77B61DFD9702006CE905 /* LBB_OrderHeaderView.m */; };
+		1B7D77DC1DFD9703006CE905 /* LBB_OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77B71DFD9702006CE905 /* LBB_OrderHeaderView.xib */; };
+		1B7D77DD1DFD9703006CE905 /* LBB_OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77B91DFD9702006CE905 /* LBB_OrderViewController.m */; };
+		1B7D77DE1DFD9703006CE905 /* LBB_OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77BA1DFD9702006CE905 /* LBB_OrderViewController.xib */; };
+		1B7D77DF1DFD9703006CE905 /* LBB_OrderModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77BD1DFD9702006CE905 /* LBB_OrderModuleViewController.m */; };
 		5422AC1B5A8523AF2C1AD95C /* libPods-BN_Shop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C225C78BECD951B8E84D1A45 /* libPods-BN_Shop.a */; };
 		6A0261DC1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0261DA1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m */; };
 		6A0261DD1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0261DB1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.xib */; };
@@ -131,7 +167,6 @@
 		6A033EF11DE1ACD3000446A0 /* icon_unfocus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A033E831DE1ACD3000446A0 /* icon_unfocus@2x.png */; };
 		6A033EF21DE1ACD3000446A0 /* icon_unfocus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A033E841DE1ACD3000446A0 /* icon_unfocus@3x.png */; };
 		6A033EF31DE1ACD3000446A0 /* QRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033E861DE1ACD3000446A0 /* QRadioButton.m */; };
-		6A033EF71DE1B123000446A0 /* ST_Shop.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A033EF61DE1B123000446A0 /* ST_Shop.xcassets */; };
 		6A033F131DE1BC39000446A0 /* BN_ShopGoodDetailCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033F111DE1BC39000446A0 /* BN_ShopGoodDetailCommentViewController.m */; };
 		6A033F181DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A033F161DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.m */; };
 		6A033F191DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A033F171DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.xib */; };
@@ -216,40 +251,6 @@
 		6ADB5E3D1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB5E3B1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.m */; };
 		6ADB5E3E1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ADB5E3C1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.xib */; };
 		6ADB5E481DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB5E471DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.m */; };
-		8427CA3E1DF943E0004C02E2 /* LBB_ApplyAalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427CA3C1DF943E0004C02E2 /* LBB_ApplyAalesViewController.m */; };
-		8427CA3F1DF943E0004C02E2 /* LBB_ApplyAalesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427CA3D1DF943E0004C02E2 /* LBB_ApplyAalesViewController.xib */; };
-		8427CA421DF945E7004C02E2 /* LBB_SaleafterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427CA411DF945E7004C02E2 /* LBB_SaleafterModel.m */; };
-		8427CA461DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427CA441DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.m */; };
-		8427CA471DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427CA451DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.xib */; };
-		8427CA4B1DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427CA491DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.m */; };
-		8427CA4C1DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427CA4A1DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.xib */; };
-		8427CA501DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427CA4E1DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.m */; };
-		8427CA511DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427CA4F1DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.xib */; };
-		8427CA5A1DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427CA581DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.m */; };
-		8427CA5B1DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427CA591DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.xib */; };
-		8427CA5F1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8427CA5D1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.m */; };
-		8427CA601DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427CA5E1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.xib */; };
-		84A022F11DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022C81DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m */; };
-		84A022F21DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022C91DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib */; };
-		84A022F31DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022CB1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m */; };
-		84A022F41DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022CC1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib */; };
-		84A022F51DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022CE1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m */; };
-		84A022F61DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022CF1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib */; };
-		84A022F71DF82F8B00DC0023 /* LBB_OrderCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022D21DF82F8B00DC0023 /* LBB_OrderCommentViewController.m */; };
-		84A022F81DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022D31DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib */; };
-		84A022F91DF82F8B00DC0023 /* LBB_OrderBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022D61DF82F8B00DC0023 /* LBB_OrderBaseViewController.m */; };
-		84A022FA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022DA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m */; };
-		84A022FB1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022DC1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m */; };
-		84A022FC1DF82F8B00DC0023 /* LBB_OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022DF1DF82F8B00DC0023 /* LBB_OrderModel.m */; };
-		84A022FD1DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022E31DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m */; };
-		84A022FE1DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022E41DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib */; };
-		84A022FF1DF82F8B00DC0023 /* LBB_OrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022E61DF82F8B00DC0023 /* LBB_OrderFooterView.m */; };
-		84A023001DF82F8B00DC0023 /* LBB_OrderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022E71DF82F8B00DC0023 /* LBB_OrderFooterView.xib */; };
-		84A023011DF82F8B00DC0023 /* LBB_OrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022E91DF82F8B00DC0023 /* LBB_OrderHeaderView.m */; };
-		84A023021DF82F8B00DC0023 /* LBB_OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022EA1DF82F8B00DC0023 /* LBB_OrderHeaderView.xib */; };
-		84A023031DF82F8B00DC0023 /* LBB_OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022EC1DF82F8B00DC0023 /* LBB_OrderViewController.m */; };
-		84A023041DF82F8B00DC0023 /* LBB_OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A022ED1DF82F8B00DC0023 /* LBB_OrderViewController.xib */; };
-		84A023051DF82F8B00DC0023 /* LBB_OrderModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A022F01DF82F8B00DC0023 /* LBB_OrderModuleViewController.m */; };
 		C96514F01DD61C86004B5F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514EF1DD61C86004B5F05 /* main.m */; };
 		C96514F31DD61C86004B5F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514F21DD61C86004B5F05 /* AppDelegate.m */; };
 		C96514F61DD61C86004B5F05 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96514F51DD61C86004B5F05 /* ViewController.m */; };
@@ -261,7 +262,6 @@
 		C96515261DD61E50004B5F05 /* BN_ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96515241DD61E50004B5F05 /* BN_ShopViewController.m */; };
 		C96515271DD61E50004B5F05 /* BN_ShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96515251DD61E50004B5F05 /* BN_ShopViewController.xib */; };
 		C965152A1DD61EBC004B5F05 /* ST_TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96515291DD61EBC004B5F05 /* ST_TabBarController.m */; };
-		C965152C1DD621A0004B5F05 /* ST_Home.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C965152B1DD621A0004B5F05 /* ST_Home.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -282,6 +282,63 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B7D77731DFD96A1006CE905 /* ST_Home.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ST_Home.xcassets; sourceTree = "<group>"; };
+		1B7D77741DFD96A1006CE905 /* ST_Shop.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ST_Shop.xcassets; sourceTree = "<group>"; };
+		1B7D777C1DFD9702006CE905 /* LBB_SaleafterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_SaleafterModel.h; sourceTree = "<group>"; };
+		1B7D777D1DFD9702006CE905 /* LBB_SaleafterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_SaleafterModel.m; sourceTree = "<group>"; };
+		1B7D777F1DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesCollectionViewCell.h; sourceTree = "<group>"; };
+		1B7D77801DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesCollectionViewCell.m; sourceTree = "<group>"; };
+		1B7D77811DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesCollectionViewCell.xib; sourceTree = "<group>"; };
+		1B7D77821DFD9702006CE905 /* LBB_OrderAalesDescViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesDescViewCell.h; sourceTree = "<group>"; };
+		1B7D77831DFD9702006CE905 /* LBB_OrderAalesDescViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesDescViewCell.m; sourceTree = "<group>"; };
+		1B7D77841DFD9702006CE905 /* LBB_OrderAalesDescViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesDescViewCell.xib; sourceTree = "<group>"; };
+		1B7D77851DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesFooterReusableView.h; sourceTree = "<group>"; };
+		1B7D77861DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesFooterReusableView.m; sourceTree = "<group>"; };
+		1B7D77871DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesFooterReusableView.xib; sourceTree = "<group>"; };
+		1B7D77881DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesPictureViewCell.h; sourceTree = "<group>"; };
+		1B7D77891DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesPictureViewCell.m; sourceTree = "<group>"; };
+		1B7D778A1DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesPictureViewCell.xib; sourceTree = "<group>"; };
+		1B7D778B1DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesReusableHeadView.h; sourceTree = "<group>"; };
+		1B7D778C1DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesReusableHeadView.m; sourceTree = "<group>"; };
+		1B7D778D1DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesReusableHeadView.xib; sourceTree = "<group>"; };
+		1B7D778F1DFD9702006CE905 /* LBB_ApplyAalesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_ApplyAalesViewController.h; sourceTree = "<group>"; };
+		1B7D77901DFD9702006CE905 /* LBB_ApplyAalesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_ApplyAalesViewController.m; sourceTree = "<group>"; };
+		1B7D77911DFD9702006CE905 /* LBB_ApplyAalesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_ApplyAalesViewController.xib; sourceTree = "<group>"; };
+		1B7D77941DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentPicturViewCell.h; sourceTree = "<group>"; };
+		1B7D77951DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentPicturViewCell.m; sourceTree = "<group>"; };
+		1B7D77961DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentPicturViewCell.xib; sourceTree = "<group>"; };
+		1B7D77971DFD9702006CE905 /* LBB_OrderCommentSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentSectionView.h; sourceTree = "<group>"; };
+		1B7D77981DFD9702006CE905 /* LBB_OrderCommentSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentSectionView.m; sourceTree = "<group>"; };
+		1B7D77991DFD9702006CE905 /* LBB_OrderCommentSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentSectionView.xib; sourceTree = "<group>"; };
+		1B7D779A1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentTagViewCell.h; sourceTree = "<group>"; };
+		1B7D779B1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentTagViewCell.m; sourceTree = "<group>"; };
+		1B7D779C1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentTagViewCell.xib; sourceTree = "<group>"; };
+		1B7D779E1DFD9702006CE905 /* LBB_OrderCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentViewController.h; sourceTree = "<group>"; };
+		1B7D779F1DFD9702006CE905 /* LBB_OrderCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentViewController.m; sourceTree = "<group>"; };
+		1B7D77A01DFD9702006CE905 /* LBB_OrderCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentViewController.xib; sourceTree = "<group>"; };
+		1B7D77A21DFD9702006CE905 /* LBB_OrderBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderBaseViewController.h; sourceTree = "<group>"; };
+		1B7D77A31DFD9702006CE905 /* LBB_OrderBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderBaseViewController.m; sourceTree = "<group>"; };
+		1B7D77A41DFD9702006CE905 /* LBB_OrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderHeader.h; sourceTree = "<group>"; };
+		1B7D77A61DFD9702006CE905 /* LBB_OrderCommonFun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommonFun.h; sourceTree = "<group>"; };
+		1B7D77A71DFD9702006CE905 /* LBB_OrderCommonFun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommonFun.m; sourceTree = "<group>"; };
+		1B7D77A81DFD9702006CE905 /* LBB_OrderImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderImagePickerViewController.h; sourceTree = "<group>"; };
+		1B7D77A91DFD9702006CE905 /* LBB_OrderImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderImagePickerViewController.m; sourceTree = "<group>"; };
+		1B7D77AB1DFD9702006CE905 /* LBB_OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderModel.h; sourceTree = "<group>"; };
+		1B7D77AC1DFD9702006CE905 /* LBB_OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderModel.m; sourceTree = "<group>"; };
+		1B7D77AF1DFD9702006CE905 /* LBB_OrderDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderDetailViewCell.h; sourceTree = "<group>"; };
+		1B7D77B01DFD9702006CE905 /* LBB_OrderDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderDetailViewCell.m; sourceTree = "<group>"; };
+		1B7D77B11DFD9702006CE905 /* LBB_OrderDetailViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderDetailViewCell.xib; sourceTree = "<group>"; };
+		1B7D77B21DFD9702006CE905 /* LBB_OrderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderFooterView.h; sourceTree = "<group>"; };
+		1B7D77B31DFD9702006CE905 /* LBB_OrderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderFooterView.m; sourceTree = "<group>"; };
+		1B7D77B41DFD9702006CE905 /* LBB_OrderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderFooterView.xib; sourceTree = "<group>"; };
+		1B7D77B51DFD9702006CE905 /* LBB_OrderHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderHeaderView.h; sourceTree = "<group>"; };
+		1B7D77B61DFD9702006CE905 /* LBB_OrderHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderHeaderView.m; sourceTree = "<group>"; };
+		1B7D77B71DFD9702006CE905 /* LBB_OrderHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderHeaderView.xib; sourceTree = "<group>"; };
+		1B7D77B81DFD9702006CE905 /* LBB_OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderViewController.h; sourceTree = "<group>"; };
+		1B7D77B91DFD9702006CE905 /* LBB_OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderViewController.m; sourceTree = "<group>"; };
+		1B7D77BA1DFD9702006CE905 /* LBB_OrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderViewController.xib; sourceTree = "<group>"; };
+		1B7D77BC1DFD9702006CE905 /* LBB_OrderModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderModuleViewController.h; sourceTree = "<group>"; };
+		1B7D77BD1DFD9702006CE905 /* LBB_OrderModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderModuleViewController.m; sourceTree = "<group>"; };
 		40BCCF527020ACB10F3CB6A9 /* Pods-BN_Shop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BN_Shop.release.xcconfig"; path = "Pods/Target Support Files/Pods-BN_Shop/Pods-BN_Shop.release.xcconfig"; sourceTree = "<group>"; };
 		6A0261D91DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodDetailNewArribalsCell.h; sourceTree = "<group>"; };
 		6A0261DA1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodDetailNewArribalsCell.m; sourceTree = "<group>"; };
@@ -481,7 +538,6 @@
 		6A033E841DE1ACD3000446A0 /* icon_unfocus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_unfocus@3x.png"; sourceTree = "<group>"; };
 		6A033E851DE1ACD3000446A0 /* QRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRadioButton.h; sourceTree = "<group>"; };
 		6A033E861DE1ACD3000446A0 /* QRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRadioButton.m; sourceTree = "<group>"; };
-		6A033EF61DE1B123000446A0 /* ST_Shop.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ST_Shop.xcassets; sourceTree = "<group>"; };
 		6A033F101DE1BC39000446A0 /* BN_ShopGoodDetailCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodDetailCommentViewController.h; sourceTree = "<group>"; };
 		6A033F111DE1BC39000446A0 /* BN_ShopGoodDetailCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodDetailCommentViewController.m; sourceTree = "<group>"; };
 		6A033F151DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodSpecificDetailsViewController.h; sourceTree = "<group>"; };
@@ -620,61 +676,6 @@
 		6ADB5E3C1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopFlashSaleListViewController.xib; sourceTree = "<group>"; };
 		6ADB5E461DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopFlashSaleListViewModel.h; sourceTree = "<group>"; };
 		6ADB5E471DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopFlashSaleListViewModel.m; sourceTree = "<group>"; };
-		8427CA3B1DF943E0004C02E2 /* LBB_ApplyAalesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_ApplyAalesViewController.h; sourceTree = "<group>"; };
-		8427CA3C1DF943E0004C02E2 /* LBB_ApplyAalesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_ApplyAalesViewController.m; sourceTree = "<group>"; };
-		8427CA3D1DF943E0004C02E2 /* LBB_ApplyAalesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_ApplyAalesViewController.xib; sourceTree = "<group>"; };
-		8427CA401DF945E7004C02E2 /* LBB_SaleafterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_SaleafterModel.h; sourceTree = "<group>"; };
-		8427CA411DF945E7004C02E2 /* LBB_SaleafterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_SaleafterModel.m; sourceTree = "<group>"; };
-		8427CA431DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesCollectionViewCell.h; sourceTree = "<group>"; };
-		8427CA441DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesCollectionViewCell.m; sourceTree = "<group>"; };
-		8427CA451DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesCollectionViewCell.xib; sourceTree = "<group>"; };
-		8427CA481DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesReusableHeadView.h; sourceTree = "<group>"; };
-		8427CA491DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesReusableHeadView.m; sourceTree = "<group>"; };
-		8427CA4A1DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesReusableHeadView.xib; sourceTree = "<group>"; };
-		8427CA4D1DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesPictureViewCell.h; sourceTree = "<group>"; };
-		8427CA4E1DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesPictureViewCell.m; sourceTree = "<group>"; };
-		8427CA4F1DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesPictureViewCell.xib; sourceTree = "<group>"; };
-		8427CA571DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesDescViewCell.h; sourceTree = "<group>"; };
-		8427CA581DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesDescViewCell.m; sourceTree = "<group>"; };
-		8427CA591DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesDescViewCell.xib; sourceTree = "<group>"; };
-		8427CA5C1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderAalesFooterReusableView.h; sourceTree = "<group>"; };
-		8427CA5D1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderAalesFooterReusableView.m; sourceTree = "<group>"; };
-		8427CA5E1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderAalesFooterReusableView.xib; sourceTree = "<group>"; };
-		84A022C71DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentPicturViewCell.h; sourceTree = "<group>"; };
-		84A022C81DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentPicturViewCell.m; sourceTree = "<group>"; };
-		84A022C91DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentPicturViewCell.xib; sourceTree = "<group>"; };
-		84A022CA1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentSectionView.h; sourceTree = "<group>"; };
-		84A022CB1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentSectionView.m; sourceTree = "<group>"; };
-		84A022CC1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentSectionView.xib; sourceTree = "<group>"; };
-		84A022CD1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentTagViewCell.h; sourceTree = "<group>"; };
-		84A022CE1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentTagViewCell.m; sourceTree = "<group>"; };
-		84A022CF1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentTagViewCell.xib; sourceTree = "<group>"; };
-		84A022D11DF82F8B00DC0023 /* LBB_OrderCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommentViewController.h; sourceTree = "<group>"; };
-		84A022D21DF82F8B00DC0023 /* LBB_OrderCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommentViewController.m; sourceTree = "<group>"; };
-		84A022D31DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderCommentViewController.xib; sourceTree = "<group>"; };
-		84A022D51DF82F8B00DC0023 /* LBB_OrderBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderBaseViewController.h; sourceTree = "<group>"; };
-		84A022D61DF82F8B00DC0023 /* LBB_OrderBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderBaseViewController.m; sourceTree = "<group>"; };
-		84A022D71DF82F8B00DC0023 /* LBB_OrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderHeader.h; sourceTree = "<group>"; };
-		84A022D91DF82F8B00DC0023 /* LBB_OrderCommonFun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderCommonFun.h; sourceTree = "<group>"; };
-		84A022DA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderCommonFun.m; sourceTree = "<group>"; };
-		84A022DB1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderImagePickerViewController.h; sourceTree = "<group>"; };
-		84A022DC1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderImagePickerViewController.m; sourceTree = "<group>"; };
-		84A022DE1DF82F8B00DC0023 /* LBB_OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderModel.h; sourceTree = "<group>"; };
-		84A022DF1DF82F8B00DC0023 /* LBB_OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderModel.m; sourceTree = "<group>"; };
-		84A022E21DF82F8B00DC0023 /* LBB_OrderDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderDetailViewCell.h; sourceTree = "<group>"; };
-		84A022E31DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderDetailViewCell.m; sourceTree = "<group>"; };
-		84A022E41DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderDetailViewCell.xib; sourceTree = "<group>"; };
-		84A022E51DF82F8B00DC0023 /* LBB_OrderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderFooterView.h; sourceTree = "<group>"; };
-		84A022E61DF82F8B00DC0023 /* LBB_OrderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderFooterView.m; sourceTree = "<group>"; };
-		84A022E71DF82F8B00DC0023 /* LBB_OrderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderFooterView.xib; sourceTree = "<group>"; };
-		84A022E81DF82F8B00DC0023 /* LBB_OrderHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderHeaderView.h; sourceTree = "<group>"; };
-		84A022E91DF82F8B00DC0023 /* LBB_OrderHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderHeaderView.m; sourceTree = "<group>"; };
-		84A022EA1DF82F8B00DC0023 /* LBB_OrderHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderHeaderView.xib; sourceTree = "<group>"; };
-		84A022EB1DF82F8B00DC0023 /* LBB_OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderViewController.h; sourceTree = "<group>"; };
-		84A022EC1DF82F8B00DC0023 /* LBB_OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderViewController.m; sourceTree = "<group>"; };
-		84A022ED1DF82F8B00DC0023 /* LBB_OrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderViewController.xib; sourceTree = "<group>"; };
-		84A022EF1DF82F8B00DC0023 /* LBB_OrderModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderModuleViewController.h; sourceTree = "<group>"; };
-		84A022F01DF82F8B00DC0023 /* LBB_OrderModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderModuleViewController.m; sourceTree = "<group>"; };
 		B76E7E4AA8C0860864F08677 /* Pods-BN_Shop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BN_Shop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BN_Shop/Pods-BN_Shop.debug.xcconfig"; sourceTree = "<group>"; };
 		C225C78BECD951B8E84D1A45 /* libPods-BN_Shop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BN_Shop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96514EB1DD61C86004B5F05 /* BN_Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BN_Shop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -699,7 +700,6 @@
 		C96515251DD61E50004B5F05 /* BN_ShopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopViewController.xib; sourceTree = "<group>"; };
 		C96515281DD61EBC004B5F05 /* ST_TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_TabBarController.h; sourceTree = "<group>"; };
 		C96515291DD61EBC004B5F05 /* ST_TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_TabBarController.m; sourceTree = "<group>"; };
-		C965152B1DD621A0004B5F05 /* ST_Home.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ST_Home.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -740,6 +740,188 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B7D77771DFD9702006CE905 /* BN_ShopOrder */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77781DFD9702006CE905 /* MyOrder */,
+			);
+			path = BN_ShopOrder;
+			sourceTree = "<group>";
+		};
+		1B7D77781DFD9702006CE905 /* MyOrder */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77791DFD9702006CE905 /* ChildController */,
+				1B7D77A11DFD9702006CE905 /* Common */,
+				1B7D77AA1DFD9702006CE905 /* Model */,
+				1B7D77AD1DFD9702006CE905 /* View */,
+				1B7D77BB1DFD9702006CE905 /* ViewController */,
+			);
+			path = MyOrder;
+			sourceTree = "<group>";
+		};
+		1B7D77791DFD9702006CE905 /* ChildController */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D777A1DFD9702006CE905 /* ApplyAales */,
+				1B7D77921DFD9702006CE905 /* Comment */,
+			);
+			path = ChildController;
+			sourceTree = "<group>";
+		};
+		1B7D777A1DFD9702006CE905 /* ApplyAales */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D777B1DFD9702006CE905 /* Model */,
+				1B7D777E1DFD9702006CE905 /* view */,
+				1B7D778E1DFD9702006CE905 /* ViewController */,
+			);
+			path = ApplyAales;
+			sourceTree = "<group>";
+		};
+		1B7D777B1DFD9702006CE905 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D777C1DFD9702006CE905 /* LBB_SaleafterModel.h */,
+				1B7D777D1DFD9702006CE905 /* LBB_SaleafterModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B7D777E1DFD9702006CE905 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D777F1DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.h */,
+				1B7D77801DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.m */,
+				1B7D77811DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.xib */,
+				1B7D77821DFD9702006CE905 /* LBB_OrderAalesDescViewCell.h */,
+				1B7D77831DFD9702006CE905 /* LBB_OrderAalesDescViewCell.m */,
+				1B7D77841DFD9702006CE905 /* LBB_OrderAalesDescViewCell.xib */,
+				1B7D77851DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.h */,
+				1B7D77861DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.m */,
+				1B7D77871DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.xib */,
+				1B7D77881DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.h */,
+				1B7D77891DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.m */,
+				1B7D778A1DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.xib */,
+				1B7D778B1DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.h */,
+				1B7D778C1DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.m */,
+				1B7D778D1DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		1B7D778E1DFD9702006CE905 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D778F1DFD9702006CE905 /* LBB_ApplyAalesViewController.h */,
+				1B7D77901DFD9702006CE905 /* LBB_ApplyAalesViewController.m */,
+				1B7D77911DFD9702006CE905 /* LBB_ApplyAalesViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		1B7D77921DFD9702006CE905 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77931DFD9702006CE905 /* View */,
+				1B7D779D1DFD9702006CE905 /* ViewController */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		1B7D77931DFD9702006CE905 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77941DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.h */,
+				1B7D77951DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.m */,
+				1B7D77961DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.xib */,
+				1B7D77971DFD9702006CE905 /* LBB_OrderCommentSectionView.h */,
+				1B7D77981DFD9702006CE905 /* LBB_OrderCommentSectionView.m */,
+				1B7D77991DFD9702006CE905 /* LBB_OrderCommentSectionView.xib */,
+				1B7D779A1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.h */,
+				1B7D779B1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.m */,
+				1B7D779C1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B7D779D1DFD9702006CE905 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D779E1DFD9702006CE905 /* LBB_OrderCommentViewController.h */,
+				1B7D779F1DFD9702006CE905 /* LBB_OrderCommentViewController.m */,
+				1B7D77A01DFD9702006CE905 /* LBB_OrderCommentViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		1B7D77A11DFD9702006CE905 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77A21DFD9702006CE905 /* LBB_OrderBaseViewController.h */,
+				1B7D77A31DFD9702006CE905 /* LBB_OrderBaseViewController.m */,
+				1B7D77A41DFD9702006CE905 /* LBB_OrderHeader.h */,
+				1B7D77A51DFD9702006CE905 /* Utils */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1B7D77A51DFD9702006CE905 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77A61DFD9702006CE905 /* LBB_OrderCommonFun.h */,
+				1B7D77A71DFD9702006CE905 /* LBB_OrderCommonFun.m */,
+				1B7D77A81DFD9702006CE905 /* LBB_OrderImagePickerViewController.h */,
+				1B7D77A91DFD9702006CE905 /* LBB_OrderImagePickerViewController.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		1B7D77AA1DFD9702006CE905 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77AB1DFD9702006CE905 /* LBB_OrderModel.h */,
+				1B7D77AC1DFD9702006CE905 /* LBB_OrderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B7D77AD1DFD9702006CE905 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77AE1DFD9702006CE905 /* BaseView */,
+				1B7D77B81DFD9702006CE905 /* LBB_OrderViewController.h */,
+				1B7D77B91DFD9702006CE905 /* LBB_OrderViewController.m */,
+				1B7D77BA1DFD9702006CE905 /* LBB_OrderViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B7D77AE1DFD9702006CE905 /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77AF1DFD9702006CE905 /* LBB_OrderDetailViewCell.h */,
+				1B7D77B01DFD9702006CE905 /* LBB_OrderDetailViewCell.m */,
+				1B7D77B11DFD9702006CE905 /* LBB_OrderDetailViewCell.xib */,
+				1B7D77B21DFD9702006CE905 /* LBB_OrderFooterView.h */,
+				1B7D77B31DFD9702006CE905 /* LBB_OrderFooterView.m */,
+				1B7D77B41DFD9702006CE905 /* LBB_OrderFooterView.xib */,
+				1B7D77B51DFD9702006CE905 /* LBB_OrderHeaderView.h */,
+				1B7D77B61DFD9702006CE905 /* LBB_OrderHeaderView.m */,
+				1B7D77B71DFD9702006CE905 /* LBB_OrderHeaderView.xib */,
+			);
+			path = BaseView;
+			sourceTree = "<group>";
+		};
+		1B7D77BB1DFD9702006CE905 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1B7D77BC1DFD9702006CE905 /* LBB_OrderModuleViewController.h */,
+				1B7D77BD1DFD9702006CE905 /* LBB_OrderModuleViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		4F0718EBA1FCE037CD0240E6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1460,196 +1642,6 @@
 			name = AlipaySDK15.2.0;
 			sourceTree = "<group>";
 		};
-		8427CA371DF943E0004C02E2 /* ApplyAales */ = {
-			isa = PBXGroup;
-			children = (
-				8427CA381DF943E0004C02E2 /* Model */,
-				8427CA391DF943E0004C02E2 /* view */,
-				8427CA3A1DF943E0004C02E2 /* ViewController */,
-			);
-			path = ApplyAales;
-			sourceTree = "<group>";
-		};
-		8427CA381DF943E0004C02E2 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8427CA401DF945E7004C02E2 /* LBB_SaleafterModel.h */,
-				8427CA411DF945E7004C02E2 /* LBB_SaleafterModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		8427CA391DF943E0004C02E2 /* view */ = {
-			isa = PBXGroup;
-			children = (
-				8427CA431DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.h */,
-				8427CA441DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.m */,
-				8427CA451DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.xib */,
-				8427CA481DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.h */,
-				8427CA491DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.m */,
-				8427CA4A1DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.xib */,
-				8427CA4D1DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.h */,
-				8427CA4E1DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.m */,
-				8427CA4F1DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.xib */,
-				8427CA571DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.h */,
-				8427CA581DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.m */,
-				8427CA591DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.xib */,
-				8427CA5C1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.h */,
-				8427CA5D1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.m */,
-				8427CA5E1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.xib */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
-		8427CA3A1DF943E0004C02E2 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				8427CA3B1DF943E0004C02E2 /* LBB_ApplyAalesViewController.h */,
-				8427CA3C1DF943E0004C02E2 /* LBB_ApplyAalesViewController.m */,
-				8427CA3D1DF943E0004C02E2 /* LBB_ApplyAalesViewController.xib */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		84A022C11DF82F8B00DC0023 /* BN_ShopOrder */ = {
-			isa = PBXGroup;
-			children = (
-				84A022C21DF82F8B00DC0023 /* MyOrder */,
-			);
-			path = BN_ShopOrder;
-			sourceTree = "<group>";
-		};
-		84A022C21DF82F8B00DC0023 /* MyOrder */ = {
-			isa = PBXGroup;
-			children = (
-				84A022C31DF82F8B00DC0023 /* ChildController */,
-				84A022D41DF82F8B00DC0023 /* Common */,
-				84A022DD1DF82F8B00DC0023 /* Model */,
-				84A022E01DF82F8B00DC0023 /* View */,
-				84A022EE1DF82F8B00DC0023 /* ViewController */,
-			);
-			path = MyOrder;
-			sourceTree = "<group>";
-		};
-		84A022C31DF82F8B00DC0023 /* ChildController */ = {
-			isa = PBXGroup;
-			children = (
-				8427CA371DF943E0004C02E2 /* ApplyAales */,
-				84A022C41DF82F8B00DC0023 /* Comment */,
-			);
-			path = ChildController;
-			sourceTree = "<group>";
-		};
-		84A022C41DF82F8B00DC0023 /* Comment */ = {
-			isa = PBXGroup;
-			children = (
-				84A022C51DF82F8B00DC0023 /* Model */,
-				84A022C61DF82F8B00DC0023 /* View */,
-				84A022D01DF82F8B00DC0023 /* ViewController */,
-			);
-			path = Comment;
-			sourceTree = "<group>";
-		};
-		84A022C51DF82F8B00DC0023 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		84A022C61DF82F8B00DC0023 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				84A022C71DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.h */,
-				84A022C81DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m */,
-				84A022C91DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib */,
-				84A022CA1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.h */,
-				84A022CB1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m */,
-				84A022CC1DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib */,
-				84A022CD1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.h */,
-				84A022CE1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m */,
-				84A022CF1DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		84A022D01DF82F8B00DC0023 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				84A022D11DF82F8B00DC0023 /* LBB_OrderCommentViewController.h */,
-				84A022D21DF82F8B00DC0023 /* LBB_OrderCommentViewController.m */,
-				84A022D31DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		84A022D41DF82F8B00DC0023 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				84A022D51DF82F8B00DC0023 /* LBB_OrderBaseViewController.h */,
-				84A022D61DF82F8B00DC0023 /* LBB_OrderBaseViewController.m */,
-				84A022D71DF82F8B00DC0023 /* LBB_OrderHeader.h */,
-				84A022D81DF82F8B00DC0023 /* Utils */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		84A022D81DF82F8B00DC0023 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				84A022D91DF82F8B00DC0023 /* LBB_OrderCommonFun.h */,
-				84A022DA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m */,
-				84A022DB1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.h */,
-				84A022DC1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		84A022DD1DF82F8B00DC0023 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				84A022DE1DF82F8B00DC0023 /* LBB_OrderModel.h */,
-				84A022DF1DF82F8B00DC0023 /* LBB_OrderModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		84A022E01DF82F8B00DC0023 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				84A022E11DF82F8B00DC0023 /* BaseView */,
-				84A022EB1DF82F8B00DC0023 /* LBB_OrderViewController.h */,
-				84A022EC1DF82F8B00DC0023 /* LBB_OrderViewController.m */,
-				84A022ED1DF82F8B00DC0023 /* LBB_OrderViewController.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		84A022E11DF82F8B00DC0023 /* BaseView */ = {
-			isa = PBXGroup;
-			children = (
-				84A022E21DF82F8B00DC0023 /* LBB_OrderDetailViewCell.h */,
-				84A022E31DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m */,
-				84A022E41DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib */,
-				84A022E51DF82F8B00DC0023 /* LBB_OrderFooterView.h */,
-				84A022E61DF82F8B00DC0023 /* LBB_OrderFooterView.m */,
-				84A022E71DF82F8B00DC0023 /* LBB_OrderFooterView.xib */,
-				84A022E81DF82F8B00DC0023 /* LBB_OrderHeaderView.h */,
-				84A022E91DF82F8B00DC0023 /* LBB_OrderHeaderView.m */,
-				84A022EA1DF82F8B00DC0023 /* LBB_OrderHeaderView.xib */,
-			);
-			path = BaseView;
-			sourceTree = "<group>";
-		};
-		84A022EE1DF82F8B00DC0023 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				84A022EF1DF82F8B00DC0023 /* LBB_OrderModuleViewController.h */,
-				84A022F01DF82F8B00DC0023 /* LBB_OrderModuleViewController.m */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		A23566919BA0368F43E13E56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1673,9 +1665,6 @@
 		C96514E21DD61C86004B5F05 = {
 			isa = PBXGroup;
 			children = (
-				84A022C11DF82F8B00DC0023 /* BN_ShopOrder */,
-				C965152B1DD621A0004B5F05 /* ST_Home.xcassets */,
-				6A033EF61DE1B123000446A0 /* ST_Shop.xcassets */,
 				C96515221DD61E2E004B5F05 /* BN_ShopCode */,
 				C96514ED1DD61C86004B5F05 /* BN_Shop */,
 				C96515071DD61C86004B5F05 /* BN_ShopTests */,
@@ -1742,6 +1731,9 @@
 		C96515221DD61E2E004B5F05 /* BN_ShopCode */ = {
 			isa = PBXGroup;
 			children = (
+				1B7D77771DFD9702006CE905 /* BN_ShopOrder */,
+				1B7D77731DFD96A1006CE905 /* ST_Home.xcassets */,
+				1B7D77741DFD96A1006CE905 /* ST_Shop.xcassets */,
 				C96515281DD61EBC004B5F05 /* ST_TabBarController.h */,
 				C96515291DD61EBC004B5F05 /* ST_TabBarController.m */,
 				C96515231DD61E50004B5F05 /* BN_ShopViewController.h */,
@@ -1876,9 +1868,10 @@
 				6A033E961DE1ACD3000446A0 /* BN_ShoppingCartEndView.xib in Resources */,
 				6ADB5E3E1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.xib in Resources */,
 				6A033EC61DE1ACD3000446A0 /* BN_ShopBannerCell.xib in Resources */,
-				8427CA4C1DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.xib in Resources */,
 				6A033ED61DE1ACD3000446A0 /* BN_ShopScreeningReusableView.xib in Resources */,
 				6A0262051DE4287000BA5AA3 /* BN_ShopSpecialSubjectHeadView.xib in Resources */,
+				1B7D77DC1DFD9703006CE905 /* LBB_OrderHeaderView.xib in Resources */,
+				1B7D77C81DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.xib in Resources */,
 				C96514FE1DD61C86004B5F05 /* LaunchScreen.storyboard in Resources */,
 				6A033ED41DE1ACD3000446A0 /* BN_ShopScreeningResuablePriceCell.xib in Resources */,
 				6A033ED11DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewController.xib in Resources */,
@@ -1888,79 +1881,78 @@
 				6A033ECC1DE1ACD3000446A0 /* BN_ShopListSelectionToolBar.xib in Resources */,
 				6A035C271DE6AE4A009617A7 /* BN_ShopGoodDetailCommentViewController.xib in Resources */,
 				6A033EF21DE1ACD3000446A0 /* icon_unfocus@3x.png in Resources */,
+				1B7D77751DFD96A1006CE905 /* ST_Home.xcassets in Resources */,
 				6A033EDF1DE1ACD3000446A0 /* BN_ShopOrderBillView.xib in Resources */,
+				1B7D77D81DFD9703006CE905 /* LBB_OrderDetailViewCell.xib in Resources */,
 				6A0261F61DE41CC100BA5AA3 /* BN_ShopSpecialCommentHeadView.xib in Resources */,
 				6A03600C1DE6E89F009617A7 /* BN_ShopGoodDetailTransitionToolBar.xib in Resources */,
 				C96514FB1DD61C86004B5F05 /* Assets.xcassets in Resources */,
+				1B7D77DE1DFD9703006CE905 /* LBB_OrderViewController.xib in Resources */,
 				6A61F0821DF280E400867A69 /* BN_ShopOrderDetailViewController.xib in Resources */,
 				6A033ED81DE1ACD3000446A0 /* BN_ShopScreeningToolBar.xib in Resources */,
 				6A033ECA1DE1ACD3000446A0 /* BN_ShopGoodHorizontalCell.xib in Resources */,
 				6A0B13721DE2AE2600B3715E /* BN_ShopGoodDetailNewArrivalsView.xib in Resources */,
-				8427CA601DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.xib in Resources */,
 				6A033ECE1DE1ACD3000446A0 /* BN_ShopListViewController.xib in Resources */,
 				6AA270041DF57823003688C4 /* AlipaySDK.bundle in Resources */,
 				6A033EF11DE1ACD3000446A0 /* icon_unfocus@2x.png in Resources */,
-				84A023021DF82F8B00DC0023 /* LBB_OrderHeaderView.xib in Resources */,
 				6A033EF01DE1ACD3000446A0 /* icon_focus@3x.png in Resources */,
 				6A033EE11DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewController.xib in Resources */,
 				6A0262001DE4254900BA5AA3 /* BN_ShopSpecialTopicHeadView.xib in Resources */,
 				6A033EA01DE1ACD3000446A0 /* BN_ShopSorterTitleCell.xib in Resources */,
+				1B7D77C41DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.xib in Resources */,
 				6A0261E71DE31AE700BA5AA3 /* BN_ShopSpecialSubjectCell.xib in Resources */,
 				6A80DE821DEF31B40098B33D /* BN_ShopOrderUsePointView.xib in Resources */,
-				8427CA5B1DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.xib in Resources */,
 				6A0261FB1DE4239700BA5AA3 /* BN_ShopSpecialCommentFootView.xib in Resources */,
+				1B7D77C61DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.xib in Resources */,
 				6A033EED1DE1ACD3000446A0 /* LYFreeTimingPlate.xib in Resources */,
 				C96515271DD61E50004B5F05 /* BN_ShopViewController.xib in Resources */,
 				6AAEC69A1DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.xib in Resources */,
-				8427CA3F1DF943E0004C02E2 /* LBB_ApplyAalesViewController.xib in Resources */,
 				6A033EAB1DE1ACD3000446A0 /* BN_ShopGoodDetailSimpleShowView.xib in Resources */,
 				6A035C181DE69A5B009617A7 /* BN_ShopGoodDetailConsultancyHeadView.xib in Resources */,
 				6A033EB01DE1ACD3000446A0 /* BN_ShopGoodDetailViewController.xib in Resources */,
+				1B7D77CA1DFD9702006CE905 /* LBB_ApplyAalesViewController.xib in Resources */,
 				6A033EDA1DE1ACD3000446A0 /* BN_ShopSearchCollectionReusableView.xib in Resources */,
 				6A035C251DE6AE29009617A7 /* BN_ShopGoodDetailConsultancyViewController.xib in Resources */,
 				6A033EDC1DE1ACD3000446A0 /* BN_ShopSearchViewController.xib in Resources */,
 				6AA26FF11DF55F57003688C4 /* BN_ShopPaymentViewController.xib in Resources */,
+				1B7D77761DFD96A1006CE905 /* ST_Shop.xcassets in Resources */,
+				1B7D77D21DFD9702006CE905 /* LBB_OrderCommentViewController.xib in Resources */,
 				6A0261EC1DE3399E00BA5AA3 /* BN_ShopSpecialTopicCell.xib in Resources */,
 				6A033EC01DE1ACD3000446A0 /* BN_ShopHomeSouvenirCell.xib in Resources */,
+				1B7D77D01DFD9702006CE905 /* LBB_OrderCommentTagViewCell.xib in Resources */,
 				6A06E4351DE4468F0036EEF3 /* BN_ShopSpecialSubjectViewController.xib in Resources */,
 				6A033EEF1DE1ACD3000446A0 /* icon_focus@2x.png in Resources */,
-				84A022F81DF82F8B00DC0023 /* LBB_OrderCommentViewController.xib in Resources */,
-				84A022F41DF82F8B00DC0023 /* LBB_OrderCommentSectionView.xib in Resources */,
 				6A848D341DF3CF31004C9070 /* BN_ShopOrderNumberProcessingView.xib in Resources */,
 				6A033EB71DE1ACD3000446A0 /* PurchaseConsultingViewController.xib in Resources */,
 				6A033EBD1DE1ACD3000446A0 /* BN_ShopHomeFlashSaleView.xib in Resources */,
 				6A033EB21DE1ACD3000446A0 /* BN_ShopGoodDetaiNormalStateView.xib in Resources */,
 				6A033E981DE1ACD3000446A0 /* BN_ShoppingCartHeardView.xib in Resources */,
-				8427CA511DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.xib in Resources */,
 				6A81C7A11DEF37660015348D /* BN_ShopOrderNumberView.xib in Resources */,
 				6A06E42A1DE442340036EEF3 /* BN_ShopSpecialSubjectTipCell.xib in Resources */,
 				6A033EA21DE1ACD3000446A0 /* BN_ShopSorterViewController.xib in Resources */,
 				6A033EC81DE1ACD3000446A0 /* BN_ShopGoodCell.xib in Resources */,
-				84A023041DF82F8B00DC0023 /* LBB_OrderViewController.xib in Resources */,
-				6A033EF71DE1B123000446A0 /* ST_Shop.xcassets in Resources */,
-				8427CA471DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.xib in Resources */,
+				1B7D77CC1DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.xib in Resources */,
 				6A033EE61DE1ACD3000446A0 /* BN_ShopOrdersToolBar.xib in Resources */,
 				6A033E9A1DE1ACD3000446A0 /* BN_ShoppingcartViewController.xib in Resources */,
 				6A033F281DE1CA08000446A0 /* BN_ShopGoodDetailCommentHeaderView.xib in Resources */,
 				6AA26FFC1DF56116003688C4 /* BN_ShopPaymentCell.xib in Resources */,
 				C96514F91DD61C86004B5F05 /* Main.storyboard in Resources */,
-				84A022F61DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.xib in Resources */,
 				6A0261DD1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.xib in Resources */,
-				84A023001DF82F8B00DC0023 /* LBB_OrderFooterView.xib in Resources */,
+				1B7D77DA1DFD9703006CE905 /* LBB_OrderFooterView.xib in Resources */,
 				6ABFC6E51DF6D8F50079C597 /* ShopSearchResultCell.xib in Resources */,
 				6A0261F11DE34ADD00BA5AA3 /* BN_ShopSpecialCommentCell.xib in Resources */,
-				84A022FE1DF82F8B00DC0023 /* LBB_OrderDetailViewCell.xib in Resources */,
 				6A033E9E1DE1ACD3000446A0 /* BN_ShopSorterContantCell.xib in Resources */,
 				6A033F191DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.xib in Resources */,
 				6A033EA91DE1ACD3000446A0 /* BN_ShopGoodDetailSellersView.xib in Resources */,
-				84A022F21DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.xib in Resources */,
 				6A81C7A61DEF3B280015348D /* BN_ShopOrderServiceStateView.xib in Resources */,
 				6A033F231DE1C994000446A0 /* BN_ShopGoodDetailCommentsCell.xib in Resources */,
 				6A033EC31DE1ACD3000446A0 /* BN_ShopHomeViewController.xib in Resources */,
+				1B7D77CE1DFD9702006CE905 /* LBB_OrderCommentSectionView.xib in Resources */,
+				1B7D77C01DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.xib in Resources */,
 				6A81C7AB1DEF3FA20015348D /* BN_ShopOrderProcessingView.xib in Resources */,
 				6A033EE41DE1ACD3000446A0 /* BN_ShopOrdersItemCell.xib in Resources */,
+				1B7D77C21DFD9702006CE905 /* LBB_OrderAalesDescViewCell.xib in Resources */,
 				6A033EBA1DE1ACD3000446A0 /* BN_ShopHomeCategoryView.xib in Resources */,
-				C965152C1DD621A0004B5F05 /* ST_Home.xcassets in Resources */,
 				6A033EA71DE1ACD3000446A0 /* BN_ShopGoodDetailFriendlyWarning.xib in Resources */,
 				6A035C1D1DE69D0E009617A7 /* BN_ShopGoodDetailConsultancyCell.xib in Resources */,
 				6A033EAE1DE1ACD3000446A0 /* BN_ShopGoodDetailToolBar.xib in Resources */,
@@ -2041,17 +2033,20 @@
 				6A033ECF1DE1ACD3000446A0 /* BN_ShopListViewModel.m in Sources */,
 				6A033EA61DE1ACD3000446A0 /* BN_ShopGoodDetailFriendlyWarning.m in Sources */,
 				6ADB5E3D1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.m in Sources */,
-				84A023011DF82F8B00DC0023 /* LBB_OrderHeaderView.m in Sources */,
 				6A0261DC1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m in Sources */,
 				6A61F0851DF2811000867A69 /* BN_ShopOrderDetailViewModel.m in Sources */,
+				1B7D77CB1DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.m in Sources */,
 				6A033ED71DE1ACD3000446A0 /* BN_ShopScreeningToolBar.m in Sources */,
+				1B7D77DD1DFD9703006CE905 /* LBB_OrderViewController.m in Sources */,
 				C96514F61DD61C86004B5F05 /* ViewController.m in Sources */,
-				8427CA461DF955CB004C02E2 /* LBB_OrderAalesCollectionViewCell.m in Sources */,
 				C965152A1DD61EBC004B5F05 /* ST_TabBarController.m in Sources */,
+				1B7D77C51DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.m in Sources */,
 				6A033E8E1DE1ACD3000446A0 /* UITableViewCell+Selection.m in Sources */,
 				6A0262031DE4285F00BA5AA3 /* BN_ShopSpecialSubjectHeadView.m in Sources */,
+				1B7D77D71DFD9703006CE905 /* LBB_OrderDetailViewCell.m in Sources */,
 				6A0261F41DE41CB600BA5AA3 /* BN_ShopSpecialCommentHeadView.m in Sources */,
 				6A033F261DE1C9F9000446A0 /* BN_ShopGoodDetailCommentHeaderView.m in Sources */,
+				1B7D77C71DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.m in Sources */,
 				6A848D381DF442E4004C9070 /* BN_ShopToolRequest.m in Sources */,
 				6A033E8B1DE1ACD3000446A0 /* UISearchBar+FMAdd.m in Sources */,
 				6AA270001DF568E1003688C4 /* BN_ShopPaymentViewModel.m in Sources */,
@@ -2063,7 +2058,6 @@
 				6A033EBF1DE1ACD3000446A0 /* BN_ShopHomeSouvenirCell.m in Sources */,
 				6A033E9D1DE1ACD3000446A0 /* BN_ShopSorterContantCell.m in Sources */,
 				6A033EAD1DE1ACD3000446A0 /* BN_ShopGoodDetailToolBar.m in Sources */,
-				84A022F71DF82F8B00DC0023 /* LBB_OrderCommentViewController.m in Sources */,
 				6A033EE01DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewController.m in Sources */,
 				6A033EA31DE1ACD3000446A0 /* BN_ShopSorterViewModel.m in Sources */,
 				6A033F311DE1FC2A000446A0 /* BN_ShopGoodDetailCommentViewModel.m in Sources */,
@@ -2071,25 +2065,22 @@
 				6A033EE71DE1ACD3000446A0 /* BN_ShopOrderUserProfileView.m in Sources */,
 				6A033EA81DE1ACD3000446A0 /* BN_ShopGoodDetailSellersView.m in Sources */,
 				6A0B13701DE2AE1B00B3715E /* BN_ShopGoodDetailNewArrivalsView.m in Sources */,
-				84A022FA1DF82F8B00DC0023 /* LBB_OrderCommonFun.m in Sources */,
 				6A81C7981DEF374E0015348D /* BN_ShopOrderNumberView.m in Sources */,
 				6A06E4381DE446A80036EEF3 /* BN_ShopSpecialSubjectViewModel.m in Sources */,
 				6A80DE7A1DEF26780098B33D /* BN_ShopSpecialDetailModel.m in Sources */,
 				6A033EEC1DE1ACD3000446A0 /* LYFreeTimingPlate.m in Sources */,
-				84A022F51DF82F8B00DC0023 /* LBB_OrderCommentTagViewCell.m in Sources */,
-				84A022F11DF82F8B00DC0023 /* LBB_OrderCommentPicturViewCell.m in Sources */,
+				1B7D77D91DFD9703006CE905 /* LBB_OrderFooterView.m in Sources */,
 				6ABFC6E81DF6E82F0079C597 /* BN_ShopSearchResultViewModel.m in Sources */,
 				6A033EB51DE1ACD3000446A0 /* BN_ShopGoodDetaiStateViewModel.m in Sources */,
 				6A033EAA1DE1ACD3000446A0 /* BN_ShopGoodDetailSimpleShowView.m in Sources */,
 				6A033EC51DE1ACD3000446A0 /* BN_ShopBannerCell.m in Sources */,
 				6A033E871DE1ACD3000446A0 /* Base_BaseViewController+ControlCreate.m in Sources */,
+				1B7D77BE1DFD9702006CE905 /* LBB_SaleafterModel.m in Sources */,
 				6A033EB81DE1ACD3000446A0 /* BN_ShopHomeADViewModel.m in Sources */,
 				6A033E991DE1ACD3000446A0 /* BN_ShoppingcartViewController.m in Sources */,
 				6A033F221DE1C994000446A0 /* BN_ShopGoodDetailCommentsCell.m in Sources */,
 				6A033EA11DE1ACD3000446A0 /* BN_ShopSorterViewController.m in Sources */,
 				6A033ED91DE1ACD3000446A0 /* BN_ShopSearchCollectionReusableView.m in Sources */,
-				84A023031DF82F8B00DC0023 /* LBB_OrderViewController.m in Sources */,
-				8427CA501DF956EC004C02E2 /* LBB_OrderAalesPictureViewCell.m in Sources */,
 				6A033EB91DE1ACD3000446A0 /* BN_ShopHomeCategoryView.m in Sources */,
 				6A033EBB1DE1ACD3000446A0 /* BN_ShopHomeCategoryViewModel.m in Sources */,
 				6A0261E61DE31AE700BA5AA3 /* BN_ShopSpecialSubjectCell.m in Sources */,
@@ -2098,31 +2089,34 @@
 				6A80DE6A1DEF008B0098B33D /* BN_ShopSouvenirModel.m in Sources */,
 				6A033EB31DE1ACD3000446A0 /* BN_ShopGoodDetaiPanicStateView.m in Sources */,
 				6A033EBC1DE1ACD3000446A0 /* BN_ShopHomeFlashSaleView.m in Sources */,
-				84A022FB1DF82F8B00DC0023 /* LBB_OrderImagePickerViewController.m in Sources */,
 				6A033E931DE1ACD3000446A0 /* BN_ShoppingCartCell.m in Sources */,
 				6A80DE741DEF25560098B33D /* BN_ShopGoodSpecialCommentModel.m in Sources */,
 				6AA26FFB1DF56116003688C4 /* BN_ShopPaymentCell.m in Sources */,
 				6A033E881DE1ACD3000446A0 /* NSString+Attributed.m in Sources */,
 				6A033ED31DE1ACD3000446A0 /* BN_ShopScreeningResuablePriceCell.m in Sources */,
+				1B7D77C31DFD9702006CE905 /* LBB_OrderAalesFooterReusableView.m in Sources */,
 				6A033EF31DE1ACD3000446A0 /* QRadioButton.m in Sources */,
 				6A313BCE1DEB3A4A00BC9AF8 /* NSError+Description.m in Sources */,
 				6A033EB11DE1ACD3000446A0 /* BN_ShopGoodDetaiNormalStateView.m in Sources */,
+				1B7D77CD1DFD9702006CE905 /* LBB_OrderCommentSectionView.m in Sources */,
+				1B7D77DF1DFD9703006CE905 /* LBB_OrderModuleViewController.m in Sources */,
 				6A0261F01DE34ADD00BA5AA3 /* BN_ShopSpecialCommentCell.m in Sources */,
 				C96514F31DD61C86004B5F05 /* AppDelegate.m in Sources */,
 				C96515261DD61E50004B5F05 /* BN_ShopViewController.m in Sources */,
 				6A313BCB1DEAF37200BC9AF8 /* BN_ShopConditionTagModel.m in Sources */,
 				6A033E8C1DE1ACD3000446A0 /* UISearchBar+RAC.m in Sources */,
+				1B7D77D51DFD9702006CE905 /* LBB_OrderImagePickerViewController.m in Sources */,
+				1B7D77D61DFD9703006CE905 /* LBB_OrderModel.m in Sources */,
 				6ADB5E481DEDEAB5000175AB /* BN_ShopFlashSaleListViewModel.m in Sources */,
 				6A848D2B1DF3CF23004C9070 /* BN_ShopOrderNumberProcessingView.m in Sources */,
 				6A033EC91DE1ACD3000446A0 /* BN_ShopGoodHorizontalCell.m in Sources */,
 				6A033E9B1DE1ACD3000446A0 /* BN_ShoppingCartViewModel.m in Sources */,
-				8427CA3E1DF943E0004C02E2 /* LBB_ApplyAalesViewController.m in Sources */,
 				6A033F181DE1C5E1000446A0 /* BN_ShopGoodSpecificDetailsViewController.m in Sources */,
+				1B7D77CF1DFD9702006CE905 /* LBB_OrderCommentTagViewCell.m in Sources */,
+				1B7D77D11DFD9702006CE905 /* LBB_OrderCommentViewController.m in Sources */,
 				6AA26FF01DF55F57003688C4 /* BN_ShopPaymentViewController.m in Sources */,
 				6A61F0761DF27C5100867A69 /* BN_ShopOrderItemModel.m in Sources */,
-				8427CA5F1DF965C5004C02E2 /* LBB_OrderAalesFooterReusableView.m in Sources */,
 				6A033EC11DE1ACD3000446A0 /* BN_ShopHomeSouvenirCellModel.m in Sources */,
-				84A022FC1DF82F8B00DC0023 /* LBB_OrderModel.m in Sources */,
 				C96514F01DD61C86004B5F05 /* main.m in Sources */,
 				6A033E9F1DE1ACD3000446A0 /* BN_ShopSorterTitleCell.m in Sources */,
 				6A033ED01DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewController.m in Sources */,
@@ -2131,28 +2125,25 @@
 				6A033F1D1DE1C624000446A0 /* BN_ShopGoodDetailConsultancyViewController.m in Sources */,
 				6A63B43E1DF0845A00F6EF60 /* BN_ShopspecialTagModel.m in Sources */,
 				6A033EE21DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewModel.m in Sources */,
+				1B7D77BF1DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.m in Sources */,
 				6A06E4341DE4468F0036EEF3 /* BN_ShopSpecialSubjectViewController.m in Sources */,
-				84A023051DF82F8B00DC0023 /* LBB_OrderModuleViewController.m in Sources */,
 				6A80DE801DEF319D0098B33D /* BN_ShopOrderUsePointView.m in Sources */,
 				6A033EE91DE1ACD3000446A0 /* BN_ShopOrderUserProfileViewModel.m in Sources */,
 				6A0261EB1DE3399E00BA5AA3 /* BN_ShopSpecialTopicCell.m in Sources */,
 				6A033ED51DE1ACD3000446A0 /* BN_ShopScreeningReusableView.m in Sources */,
-				84A022FD1DF82F8B00DC0023 /* LBB_OrderDetailViewCell.m in Sources */,
-				84A022F31DF82F8B00DC0023 /* LBB_OrderCommentSectionView.m in Sources */,
 				6AC4F6691DEC909B0092A4B0 /* BN_ShopGoodSpecialModel.m in Sources */,
 				6A035C201DE6A3A9009617A7 /* BN_ShopGoodDetailConsultancyViewModel.m in Sources */,
 				6A033F131DE1BC39000446A0 /* BN_ShopGoodDetailCommentViewController.m in Sources */,
 				6A033ECB1DE1ACD3000446A0 /* BN_ShopListSelectionToolBar.m in Sources */,
-				84A022FF1DF82F8B00DC0023 /* LBB_OrderFooterView.m in Sources */,
 				6AA26FF41DF5604F003688C4 /* BN_ShopPayMentChannelModel.m in Sources */,
 				6A61F0791DF27DB100867A69 /* BN_ShopOrderCartItemModel.m in Sources */,
 				6A033ED21DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewModel.m in Sources */,
-				84A022F91DF82F8B00DC0023 /* LBB_OrderBaseViewController.m in Sources */,
 				6A80DE7D1DEF2D2F0098B33D /* BN_ShopSpecialTopicModel.m in Sources */,
 				6A81C7A41DEF3AC40015348D /* BN_ShopOrderServiceStateView.m in Sources */,
 				6A033EC71DE1ACD3000446A0 /* BN_ShopGoodCell.m in Sources */,
 				6A033EA41DE1ACD3000446A0 /* BN_ShopGoodDetaiForwardStateView.m in Sources */,
 				6A033E901DE1ACD3000446A0 /* MultipleSectionTableArraySource.m in Sources */,
+				1B7D77C91DFD9702006CE905 /* LBB_ApplyAalesViewController.m in Sources */,
 				6A033EBE1DE1ACD3000446A0 /* BN_ShopHomeFlashSaleViewModel.m in Sources */,
 				6ABFC6E41DF6D8F50079C597 /* ShopSearchResultCell.m in Sources */,
 				6A033EE51DE1ACD3000446A0 /* BN_ShopOrdersToolBar.m in Sources */,
@@ -2160,7 +2151,6 @@
 				6A61F0811DF280E400867A69 /* BN_ShopOrderDetailViewController.m in Sources */,
 				6A0261F91DE4238A00BA5AA3 /* BN_ShopSpecialCommentFootView.m in Sources */,
 				6A80DE771DEF26120098B33D /* BN_ShopSpecialCollectedRecordModel.m in Sources */,
-				8427CA421DF945E7004C02E2 /* LBB_SaleafterModel.m in Sources */,
 				6A033E921DE1ACD3000446A0 /* TableDataSource.m in Sources */,
 				6A033E8A1DE1ACD3000446A0 /* NSString+URL.m in Sources */,
 				6A033E951DE1ACD3000446A0 /* BN_ShoppingCartEndView.m in Sources */,
@@ -2168,23 +2158,25 @@
 				6A035C161DE69A48009617A7 /* BN_ShopGoodDetailConsultancyHeadView.m in Sources */,
 				6A033EEB1DE1ACD3000446A0 /* BGButton.m in Sources */,
 				6AA26FE51DF551B5003688C4 /* BN_ShopPayment.m in Sources */,
-				8427CA4B1DF956C6004C02E2 /* LBB_OrderAalesReusableHeadView.m in Sources */,
 				6A035C1C1DE69D0E009617A7 /* BN_ShopGoodDetailConsultancyCell.m in Sources */,
 				6A03600A1DE6E891009617A7 /* BN_ShopGoodDetailTransitionToolBar.m in Sources */,
+				1B7D77D41DFD9702006CE905 /* LBB_OrderCommonFun.m in Sources */,
 				6A61F06C1DF2770100867A69 /* BN_ShopUserAddressModel.m in Sources */,
 				6A033EC41DE1ACD3000446A0 /* BN_ShopHomeViewModel.m in Sources */,
 				6A033EE31DE1ACD3000446A0 /* BN_ShopOrdersItemCell.m in Sources */,
 				6A033E8F1DE1ACD3000446A0 /* UIView+NIB.m in Sources */,
+				1B7D77C11DFD9702006CE905 /* LBB_OrderAalesDescViewCell.m in Sources */,
 				6AAEC6991DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.m in Sources */,
 				6A033EAF1DE1ACD3000446A0 /* BN_ShopGoodDetailViewController.m in Sources */,
 				6A033EAC1DE1ACD3000446A0 /* BN_ShopGoodDetailSimpleShowViewModel.m in Sources */,
+				1B7D77D31DFD9702006CE905 /* LBB_OrderBaseViewController.m in Sources */,
 				6A033EB61DE1ACD3000446A0 /* PurchaseConsultingViewController.m in Sources */,
 				6A033E911DE1ACD3000446A0 /* SectionDataSource.m in Sources */,
 				6A06E4291DE442340036EEF3 /* BN_ShopSpecialSubjectTipCell.m in Sources */,
 				6A035C231DE6A648009617A7 /* BN_ShopGoodDetailConsultancyModel.m in Sources */,
+				1B7D77DB1DFD9703006CE905 /* LBB_OrderHeaderView.m in Sources */,
 				6A033EDB1DE1ACD3000446A0 /* BN_ShopSearchViewController.m in Sources */,
 				6A033E891DE1ACD3000446A0 /* NSString+Substitute.m in Sources */,
-				8427CA5A1DF95A7E004C02E2 /* LBB_OrderAalesDescViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
