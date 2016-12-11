@@ -19,4 +19,11 @@ Pod::Spec.new do |s|
 	s.authors  = { 'lzcangel' => '592097271@qq.com' }
 
 	s.dependency 'PKYStepper', '~> 0.0.1'
+	s.dependency 'BN_BaseKit',:git => 'https://github.com/lzcangel/BN_BaseKit.git', :branch => '1.0.1'
+	s.dependency 'ActionSheetPicker-3.0'
+	s.dependency 'BlocksKit'
+	s.dependency 'SDCycleScrollView','~> 1.64'
+	s.dependency 'CocoaLumberjack'
+	s.dependency 'GLPubSub'
+	s.dependency 'SWTableViewCell'
 end
