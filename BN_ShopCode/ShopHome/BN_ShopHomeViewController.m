@@ -13,7 +13,7 @@
 #import "BN_ShopSorterViewController.h"
 #import "BN_ShopGoodDetailViewController.h"
 #import "BN_ShopSpecialSubjectViewController.h"
-#import "ST_TabBarController.h"
+#import <Base_UITabBarBaseController.h>
 #import "BN_ShopFlashSaleListViewController.h"
 
 #import "BN_ShopHomeFlashSaleView.h"
@@ -70,7 +70,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [(ST_TabBarController*)self.tabBarController setTabBarHidden:NO animated:YES];
+    [(Base_UITabBarBaseController*)self.tabBarController setTabBarHidden:NO animated:YES];
 }
 
 - (void)buildControls {

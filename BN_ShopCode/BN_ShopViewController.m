@@ -7,7 +7,7 @@
 //
 
 #import "BN_ShopViewController.h"
-#import "ST_TabBarController.h"
+#import <Base_UITabBarBaseController.h>
 #import "LBB_OrderModuleViewController.h"
 #import "BN_ShopHeader.h"
 
@@ -26,7 +26,7 @@
 {
     [super viewWillAppear:YES];
     [self setNavigationBarHidden:YES];
-    [(ST_TabBarController*)self.tabBarController setTabBarHidden:NO animated:YES];
+    [(Base_UITabBarBaseController*)self.tabBarController setTabBarHidden:NO animated:YES];
     
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 100, 100, 50)];
     [btn setTitle:@"我的订单" forState:UIControlStateNormal];

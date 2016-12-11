@@ -43,6 +43,7 @@
 		1B7D77DD1DFD9703006CE905 /* LBB_OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77B91DFD9702006CE905 /* LBB_OrderViewController.m */; };
 		1B7D77DE1DFD9703006CE905 /* LBB_OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7D77BA1DFD9702006CE905 /* LBB_OrderViewController.xib */; };
 		1B7D77DF1DFD9703006CE905 /* LBB_OrderModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77BD1DFD9702006CE905 /* LBB_OrderModuleViewController.m */; };
+		1B7D77E61DFDAEB4006CE905 /* ST_TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7D77E51DFDAEB4006CE905 /* ST_TabBarController.m */; };
 		5422AC1B5A8523AF2C1AD95C /* libPods-BN_Shop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C225C78BECD951B8E84D1A45 /* libPods-BN_Shop.a */; };
 		6A0261DC1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0261DA1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m */; };
 		6A0261DD1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0261DB1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.xib */; };
@@ -261,7 +262,6 @@
 		C96515141DD61C86004B5F05 /* BN_ShopUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C96515131DD61C86004B5F05 /* BN_ShopUITests.m */; };
 		C96515261DD61E50004B5F05 /* BN_ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96515241DD61E50004B5F05 /* BN_ShopViewController.m */; };
 		C96515271DD61E50004B5F05 /* BN_ShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96515251DD61E50004B5F05 /* BN_ShopViewController.xib */; };
-		C965152A1DD61EBC004B5F05 /* ST_TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96515291DD61EBC004B5F05 /* ST_TabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -340,6 +340,8 @@
 		1B7D77BC1DFD9702006CE905 /* LBB_OrderModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderModuleViewController.h; sourceTree = "<group>"; };
 		1B7D77BD1DFD9702006CE905 /* LBB_OrderModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderModuleViewController.m; sourceTree = "<group>"; };
 		1B7D77E31DFD9EF4006CE905 /* BN_ShopHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BN_ShopHeader.h; sourceTree = "<group>"; };
+		1B7D77E41DFDAEB4006CE905 /* ST_TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_TabBarController.h; sourceTree = "<group>"; };
+		1B7D77E51DFDAEB4006CE905 /* ST_TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_TabBarController.m; sourceTree = "<group>"; };
 		40BCCF527020ACB10F3CB6A9 /* Pods-BN_Shop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BN_Shop.release.xcconfig"; path = "Pods/Target Support Files/Pods-BN_Shop/Pods-BN_Shop.release.xcconfig"; sourceTree = "<group>"; };
 		6A0261D91DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodDetailNewArribalsCell.h; sourceTree = "<group>"; };
 		6A0261DA1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodDetailNewArribalsCell.m; sourceTree = "<group>"; };
@@ -699,8 +701,6 @@
 		C96515231DD61E50004B5F05 /* BN_ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopViewController.h; sourceTree = "<group>"; };
 		C96515241DD61E50004B5F05 /* BN_ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopViewController.m; sourceTree = "<group>"; };
 		C96515251DD61E50004B5F05 /* BN_ShopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopViewController.xib; sourceTree = "<group>"; };
-		C96515281DD61EBC004B5F05 /* ST_TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ST_TabBarController.h; sourceTree = "<group>"; };
-		C96515291DD61EBC004B5F05 /* ST_TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ST_TabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1666,6 +1666,8 @@
 		C96514E21DD61C86004B5F05 = {
 			isa = PBXGroup;
 			children = (
+				1B7D77E41DFDAEB4006CE905 /* ST_TabBarController.h */,
+				1B7D77E51DFDAEB4006CE905 /* ST_TabBarController.m */,
 				C96515221DD61E2E004B5F05 /* BN_ShopCode */,
 				C96514ED1DD61C86004B5F05 /* BN_Shop */,
 				C96515071DD61C86004B5F05 /* BN_ShopTests */,
@@ -1735,8 +1737,6 @@
 				1B7D77771DFD9702006CE905 /* BN_ShopOrder */,
 				1B7D77731DFD96A1006CE905 /* ST_Home.xcassets */,
 				1B7D77741DFD96A1006CE905 /* ST_Shop.xcassets */,
-				C96515281DD61EBC004B5F05 /* ST_TabBarController.h */,
-				C96515291DD61EBC004B5F05 /* ST_TabBarController.m */,
 				C96515231DD61E50004B5F05 /* BN_ShopViewController.h */,
 				C96515241DD61E50004B5F05 /* BN_ShopViewController.m */,
 				C96515251DD61E50004B5F05 /* BN_ShopViewController.xib */,
@@ -2041,7 +2041,6 @@
 				6A033ED71DE1ACD3000446A0 /* BN_ShopScreeningToolBar.m in Sources */,
 				1B7D77DD1DFD9703006CE905 /* LBB_OrderViewController.m in Sources */,
 				C96514F61DD61C86004B5F05 /* ViewController.m in Sources */,
-				C965152A1DD61EBC004B5F05 /* ST_TabBarController.m in Sources */,
 				1B7D77C51DFD9702006CE905 /* LBB_OrderAalesPictureViewCell.m in Sources */,
 				6A033E8E1DE1ACD3000446A0 /* UITableViewCell+Selection.m in Sources */,
 				6A0262031DE4285F00BA5AA3 /* BN_ShopSpecialSubjectHeadView.m in Sources */,
@@ -2142,6 +2141,7 @@
 				6A033ED21DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewModel.m in Sources */,
 				6A80DE7D1DEF2D2F0098B33D /* BN_ShopSpecialTopicModel.m in Sources */,
 				6A81C7A41DEF3AC40015348D /* BN_ShopOrderServiceStateView.m in Sources */,
+				1B7D77E61DFDAEB4006CE905 /* ST_TabBarController.m in Sources */,
 				6A033EC71DE1ACD3000446A0 /* BN_ShopGoodCell.m in Sources */,
 				6A033EA41DE1ACD3000446A0 /* BN_ShopGoodDetaiForwardStateView.m in Sources */,
 				6A033E901DE1ACD3000446A0 /* MultipleSectionTableArraySource.m in Sources */,
