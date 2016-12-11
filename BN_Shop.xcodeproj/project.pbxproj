@@ -339,6 +339,7 @@
 		1B7D77BA1DFD9702006CE905 /* LBB_OrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBB_OrderViewController.xib; sourceTree = "<group>"; };
 		1B7D77BC1DFD9702006CE905 /* LBB_OrderModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBB_OrderModuleViewController.h; sourceTree = "<group>"; };
 		1B7D77BD1DFD9702006CE905 /* LBB_OrderModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBB_OrderModuleViewController.m; sourceTree = "<group>"; };
+		1B7D77E31DFD9EF4006CE905 /* BN_ShopHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BN_ShopHeader.h; sourceTree = "<group>"; };
 		40BCCF527020ACB10F3CB6A9 /* Pods-BN_Shop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BN_Shop.release.xcconfig"; path = "Pods/Target Support Files/Pods-BN_Shop/Pods-BN_Shop.release.xcconfig"; sourceTree = "<group>"; };
 		6A0261D91DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopGoodDetailNewArribalsCell.h; sourceTree = "<group>"; };
 		6A0261DA1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopGoodDetailNewArribalsCell.m; sourceTree = "<group>"; };
@@ -1752,6 +1753,7 @@
 				6A033DD81DE1ACD3000446A0 /* Models */,
 				6A033DC51DE1ACD3000446A0 /* Categorys */,
 				6A033E7F1DE1ACD3000446A0 /* Vendors */,
+				1B7D77E31DFD9EF4006CE905 /* BN_ShopHeader.h */,
 			);
 			path = BN_ShopCode;
 			sourceTree = "<group>";
