@@ -30,6 +30,7 @@
 #import "UIView+BlocksKit.h"
 #import "PureLayout.h"
 #import "BN_ShopToolRequest.h"
+#import "BN_ShopHeader.h"
 
 #import "BN_ShopGoodDetailSimpleShowViewModel.h"
 #import "BN_ShopGoodDetaiStateViewModel.h"

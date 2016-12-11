@@ -7,6 +7,7 @@
 //
 
 #import "LBB_OrderCommonFun.h"
+#import "BN_ShopHeader.h"
 
 @implementation LBB_OrderCommonFun
 

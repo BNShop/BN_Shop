@@ -8,6 +8,7 @@
 
 #import "BN_ShopGoodSpecificDetailsViewController.h"
 #import "PureLayout.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodSpecificDetailsViewController ()
 

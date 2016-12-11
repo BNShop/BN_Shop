@@ -7,6 +7,7 @@
 //
 
 #import "LBB_OrderFooterView.h"
+#import "BN_ShopHeader.h"
 
 @interface LBB_OrderFooterView()
 @property (assign,nonatomic) OrderViewType stateType;

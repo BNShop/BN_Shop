@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopHomeViewModel.h"
+#import "BN_ShopHeader.h"
 
 
 
@@ -27,7 +28,7 @@
 {
     NSDictionary *paraDic = nil;// @{@"type":@1};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/categoryListForIndex?type=1",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/categoryListForIndex?type=1", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.souvenirs.loadSupport.loadEvent = NetLoadingEvent;
     

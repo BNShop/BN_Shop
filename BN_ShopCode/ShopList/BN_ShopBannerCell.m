@@ -8,6 +8,7 @@
 
 #import "BN_ShopBannerCell.h"
 #import "NSObject+BKBlockObservation.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopBannerCell ()
 @property (weak, nonatomic) IBOutlet UILabel *bannerLabel;

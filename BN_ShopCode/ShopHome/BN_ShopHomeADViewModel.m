@@ -25,7 +25,7 @@
 {
     NSDictionary *paraDic = @{@"position":@6};
     
-    NSString *url = [NSString stringWithFormat:@"%@/homePage/advertisementList", BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/homePage/advertisementList", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.adList.loadSupport.loadEvent = NetLoadingEvent;
     

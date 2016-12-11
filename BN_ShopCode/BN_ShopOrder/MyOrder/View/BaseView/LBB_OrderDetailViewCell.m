@@ -8,6 +8,7 @@
 
 #import "LBB_OrderDetailViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "BN_ShopHeader.h"
 
 @implementation LBB_OrderDetailViewCell
 

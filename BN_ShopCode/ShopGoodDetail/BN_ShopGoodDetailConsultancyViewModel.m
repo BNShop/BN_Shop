@@ -39,7 +39,7 @@
 //    }
     [paraDic setValuesForKeysWithDictionary:paraDic0];
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/consulting",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/consulting", Shop_BASEURL];
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -67,7 +67,7 @@
                               @"pageNum" : [NSNumber numberWithInt:10],
                               @"goodsId" : [NSNumber numberWithLong:self.goodsId]};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/answersList",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/answersList", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.items.loadSupport.loadEvent = NetLoadingEvent;
     

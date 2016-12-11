@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopOrderServiceStateView.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrderServiceStateView ()
 @property (weak, nonatomic) IBOutlet UIView *topLine;

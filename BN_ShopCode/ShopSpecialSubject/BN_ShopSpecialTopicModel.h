@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BN_ShopspecialTagModel.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopSpecialTopicModel : NSObject
 @property (nonatomic, assign) long special_id;//商品主键

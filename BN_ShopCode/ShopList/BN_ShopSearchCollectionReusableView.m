@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "NSString+URL.h"
 #import "UIControl+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopSearchCollectionReusableView ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

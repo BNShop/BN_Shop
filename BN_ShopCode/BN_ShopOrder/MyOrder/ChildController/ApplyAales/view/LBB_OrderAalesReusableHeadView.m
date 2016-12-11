@@ -7,6 +7,7 @@
 //
 
 #import "LBB_OrderAalesReusableHeadView.h"
+#import "BN_ShopHeader.h"
 
 @implementation LBB_OrderAalesReusableHeadView
 

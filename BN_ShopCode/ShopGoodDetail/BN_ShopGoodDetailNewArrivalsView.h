@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIView+NIB.h"
+#import "BN_ShopHeader.h"
 
 @protocol BN_ShopGoodDetailNewArrivalsViewDelegate;
 

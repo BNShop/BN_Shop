@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BN_ShopPayment.h"
+#import "BN_ShopHeader.h"
 
 
 @interface AppDelegate ()
@@ -31,7 +32,7 @@
                                   @"deviceId":@"12354222009090890987"
                                   };
         
-        NSString *url = [NSString stringWithFormat:@"%@/mime/login",BASEURL];
+        NSString *url = [NSString stringWithFormat:@"%@/mime/login", Shop_BASEURL];
         
         [[BC_ToolRequest sharedManager] POST:url parameters:paraDic
                                      success:^(NSURLSessionDataTask *operation, id responseObject){

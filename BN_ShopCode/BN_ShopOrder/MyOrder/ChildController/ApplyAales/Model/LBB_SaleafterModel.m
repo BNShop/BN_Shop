@@ -7,6 +7,7 @@
 //
 
 #import "LBB_SaleafterModel.h"
+#import "BN_ShopHeader.h"
 
 
 @implementation LBB_SaleafterTypeModel
@@ -31,7 +32,7 @@
  */
 - (void)getSaleafterType
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/dictList?classes=saleafter_type",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/dictList?classes=saleafter_type",Shop_BASEURL];
     
     __weak typeof(self) weakSelf = self;
     self.dataArray.loadSupport.loadEvent = NetLoadingEvent;

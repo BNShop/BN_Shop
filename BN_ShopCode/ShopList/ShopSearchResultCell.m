@@ -7,6 +7,7 @@
 //
 
 #import "ShopSearchResultCell.h"
+#import "BN_ShopHeader.h"
 
 @interface ShopSearchResultCell ()
 

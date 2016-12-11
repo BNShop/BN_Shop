@@ -8,6 +8,7 @@
 
 #import "BN_ShopSpecialCommentFootView.h"
 #import "UIControl+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopSpecialCommentFootView ()
 @property (weak, nonatomic) IBOutlet UIButton *comentButton;

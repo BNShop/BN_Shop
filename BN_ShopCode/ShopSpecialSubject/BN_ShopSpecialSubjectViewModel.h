@@ -11,6 +11,7 @@
 #import "TableDataSource.h"
 #import "BN_ShopSpecialDetailModel.h"
 #import "BN_ShopSpecialTopicModel.h"
+#import "BN_ShopHeader.h"
 
 
 @interface BN_ShopSpecialSubjectViewModel : BN_BaseDataModel

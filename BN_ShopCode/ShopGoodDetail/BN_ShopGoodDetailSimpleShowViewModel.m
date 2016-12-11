@@ -48,7 +48,7 @@
 - (void)getPicsData {
     NSDictionary *paraDic = @{@"goodsId" : @(self.goodsId)};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsPics",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsPics", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.photoList.loadSupport.loadEvent = NetLoadingEvent;
     

@@ -9,6 +9,7 @@
 #import "BN_ShopGoodDetailTransitionToolBar.h"
 #import "HMSegmentedControl.h"
 #import "PureLayout.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailTransitionToolBar ()
 @property (strong, nonatomic) HMSegmentedControl *segmentedControl;

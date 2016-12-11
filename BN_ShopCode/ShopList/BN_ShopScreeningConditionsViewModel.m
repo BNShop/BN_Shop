@@ -8,6 +8,7 @@
 
 #import "BN_ShopScreeningConditionsViewModel.h"
 #import "NSArray+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopScreeningConditionsViewModel ()
 
@@ -48,7 +49,7 @@
     
     NSDictionary *paraDic = @{@"type":[NSNumber numberWithInt:condition.type], @"classes":[NSNumber numberWithInt:condition.classes]};
     
-    NSString *url = [NSString stringWithFormat:@"%@/homePage/condition/tags", BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/homePage/condition/tags", Shop_BASEURL];
     __weak typeof(condition) temp = condition;
     condition.tags.loadSupport.loadEvent = NetLoadingEvent;
     

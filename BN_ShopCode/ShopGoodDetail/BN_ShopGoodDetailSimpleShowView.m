@@ -8,6 +8,7 @@
 
 #import "BN_ShopGoodDetailSimpleShowView.h"
 #import "SDCycleScrollView.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailSimpleShowView () <SDCycleScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet SDCycleScrollView *thumbnailScrollView;

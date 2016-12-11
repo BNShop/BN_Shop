@@ -11,6 +11,7 @@
 #import "BN_ShopOrderCartItemModel.h"
 #import "BN_ShopUserAddressModel.h"
 #import "BN_ShopGoodDetaiStateViewModel.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopConfirmOrderItemModel : NSObject
 @property (nonatomic, strong) NSArray<BN_ShopOrderCartItemModel*> *shoppingCartList;

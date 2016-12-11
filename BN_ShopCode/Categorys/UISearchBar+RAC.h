@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BN_ShopHeader.h"
 
 @interface UISearchBar (RAC)
 - (RACSignal *)rac_searchBarShouldBeginEditingSignal;

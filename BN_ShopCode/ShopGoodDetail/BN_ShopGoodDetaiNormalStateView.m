@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopGoodDetaiNormalStateView.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetaiNormalStateView ()
 @property (weak, nonatomic) IBOutlet UILabel *realPriceLabel;

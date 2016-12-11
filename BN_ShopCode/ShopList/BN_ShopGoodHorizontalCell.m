@@ -13,6 +13,7 @@
 #import "UIControl+BlocksKit.h"
 #import "LYFreeTimingPlate.h"
 #import "PureLayout.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodHorizontalCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailImgView;

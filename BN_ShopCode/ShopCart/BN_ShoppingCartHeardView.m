@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShoppingCartHeardView.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShoppingCartHeardView ()
 @property (weak, nonatomic) IBOutlet UILabel *warningTitleLabel;

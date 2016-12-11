@@ -12,6 +12,7 @@
 
 #import "BN_ShopGoodDetailCommentViewModel.h"
 #import "TableDataSource.h"
+#import "BN_ShopHeader.h"
 
 #import <UITableView+FDTemplateLayoutCell.h>
 

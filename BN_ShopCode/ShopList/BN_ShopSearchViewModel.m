@@ -8,6 +8,7 @@
 
 #import "BN_ShopSearchViewModel.h"
 #import "BN_ShopspecialTagModel.h"
+#import "BN_ShopHeader.h"
 
 
 @interface BN_ShopSearchViewModel ()
@@ -140,7 +141,7 @@ static NSString * const BN_ShopSearchHotCache = @"Hot";
 }
 
 - (void)getHotSearchTagsDataRes {
-    NSString *url = [NSString stringWithFormat:@"%@/homePage/hot/tags",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/homePage/hot/tags", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.tags.loadSupport.loadEvent = NetLoadingEvent;
     

@@ -9,6 +9,7 @@
 #import "BN_ShopOrderProcessingView.h"
 #import "BGButton.h"
 #import "UIControl+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrderProcessingView ()
 

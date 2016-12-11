@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TableDataSource.h"
 #import "BN_ShopGoodDetailConsultancyModel.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailConsultancyViewModel : NSObject
 @property (nonatomic, strong) TableDataSource *dataSource;

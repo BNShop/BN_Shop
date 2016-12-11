@@ -9,6 +9,7 @@
 #import "BN_ShopOrdersToolBar.h"
 #import "BGButton.h"
 #import "UIControl+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrdersToolBar ()
 @property (weak, nonatomic) IBOutlet UIView *topLineView;

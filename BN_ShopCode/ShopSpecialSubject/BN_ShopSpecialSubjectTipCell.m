@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopSpecialSubjectTipCell.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopSpecialSubjectTipCell ()
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;

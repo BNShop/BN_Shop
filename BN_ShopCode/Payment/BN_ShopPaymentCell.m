@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopPaymentCell.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopPaymentCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgView;

@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopConditionTagModel.h"
+#import "BN_ShopHeader.h"
 
 @implementation BN_ShopConditionTagModel
 

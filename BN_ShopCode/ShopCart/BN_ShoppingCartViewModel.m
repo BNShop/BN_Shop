@@ -138,7 +138,7 @@
     int curPage = clear == YES ? 0 : round(self.shoppingCartList.count/10.0);
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:curPage], @"curPage", [NSNumber numberWithInt:10], @"pageNum", nil];
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/shoppingCartList",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/shoppingCartList", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.shoppingCartList.loadSupport.loadEvent = NetLoadingEvent;
     
@@ -179,7 +179,7 @@
     NSString *shoppingCartIdsStr = [shoppingCartIds componentsJoinedByString:@","];
     NSMutableDictionary *paraDic = nil;//[NSMutableDictionary dictionary];
     paraDic[@"shoppingCartIds"] = shoppingCartIdsStr;
-    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteShoppingCart?shoppingCartIds=%@",BASEURL, shoppingCartIdsStr];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteShoppingCart?shoppingCartIds=%@", Shop_BASEURL, shoppingCartIdsStr];
     @weakify(self);
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         @strongify(self);

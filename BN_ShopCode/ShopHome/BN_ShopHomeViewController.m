@@ -29,6 +29,7 @@
 #import "PureLayout.h"
 #import "NSString+Attributed.h"
 #import "UIView+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 #import "BN_ShopHomeADViewModel.h"
 #import "BN_ShopHomeCategoryViewModel.h"

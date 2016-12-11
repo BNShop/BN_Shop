@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopHomeCategoryView.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopHomeCategoryView ()
 @property (weak, nonatomic) IBOutlet UILabel *categoryTitleLabel0;

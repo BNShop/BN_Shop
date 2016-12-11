@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "NSString+URL.h"
 #import "UIView+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailSellersView ()
 @property (weak, nonatomic) IBOutlet UIView *topLineView;

@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopGoodDetailFriendlyWarning.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailFriendlyWarning ()
 

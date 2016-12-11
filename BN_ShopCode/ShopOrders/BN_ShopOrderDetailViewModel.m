@@ -10,6 +10,7 @@
 #import "NSArray+BlocksKit.h"
 #import "NSError+Description.h"
 
+
 @implementation BN_ShopOrderDetailModel
 
 - (BN_ShopUserAddressModel *)getUserAddress {
@@ -125,7 +126,7 @@
     NSMutableDictionary *paraDic = nil;//[NSMutableDictionary dictionary];
     paraDic[@"orderId"] = self.order_id;
     __weak typeof(self) temp = self;
-    NSString *url = [NSString stringWithFormat:@"%@/mall/orderDetail?orderId=%@",BASEURL, self.order_id];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/orderDetail?orderId=%@", Shop_BASEURL, self.order_id];
     [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         NSLog(@"dic = %@", dic);
@@ -152,7 +153,7 @@
 #pragma mark - 详情页的其他处理
 //取消订单
 - (void)cancelOrderId:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/cancelOrder?orderId=%@",BASEURL, self.order_id];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/cancelOrder?orderId=%@", Shop_BASEURL, self.order_id];
     [[BC_ToolRequest sharedManager] POST:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -179,7 +180,7 @@
 
 //确定收货
 - (void)confirmReceiptOrderId:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",BASEURL, self.order_id];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@", Shop_BASEURL, self.order_id];
     [[BC_ToolRequest sharedManager] POST:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -206,7 +207,7 @@
 
 //确定完成
 - (void)confirmCompleteOrderId:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",BASEURL, self.order_id];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@", Shop_BASEURL, self.order_id];
     [[BC_ToolRequest sharedManager] POST:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {

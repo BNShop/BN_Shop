@@ -11,6 +11,7 @@
 
 #import "LBB_OrderCommonFun.h"
 #import "UIImageView+WebCache.h"
+#import "BN_ShopHeader.h"
 
 #define MaxTagNum  6
 #define MaxPicture 8

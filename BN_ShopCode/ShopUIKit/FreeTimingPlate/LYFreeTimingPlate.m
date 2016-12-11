@@ -7,6 +7,7 @@
 //
 
 #import "LYFreeTimingPlate.h"
+#import "BN_ShopHeader.h"
 
 @interface LYFreeTimingPlate ()
 

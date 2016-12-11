@@ -8,6 +8,7 @@
 
 #ifndef TableViewCellConfigureBlock_h
 #define TableViewCellConfigureBlock_h
+#import <UIKit/UIKit.h>
 
 typedef void (^TableViewCellConfigureBlock)(id cell, id item);
 typedef void (^TableViewSectionConfigureBlock)(UIView *view, id sectionDataSource, NSString *kind, NSIndexPath *indexPath);

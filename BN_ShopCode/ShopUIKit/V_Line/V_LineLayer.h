@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, V_Line_Direction) {
     V_LINE_DIRECTION_UP,

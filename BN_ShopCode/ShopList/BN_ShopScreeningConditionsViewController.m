@@ -12,7 +12,7 @@
 #import "NSArray+BlocksKit.h"
 #import "PureLayout.h"
 #import "UIView+BlocksKit.h"
-
+#import "BN_ShopHeader.h"
 #import "BN_ShopBannerCell.h"
 #import "BN_ShopScreeningReusableView.h"
 #import "BN_ShopScreeningResuablePriceCell.h"

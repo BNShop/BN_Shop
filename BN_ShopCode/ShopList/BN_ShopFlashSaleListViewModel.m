@@ -9,6 +9,7 @@
 #import "BN_ShopFlashSaleListViewModel.h"
 #import "NSArray+BlocksKit.h"
 #import "NSError+Description.h"
+#import "BN_ShopHeader.h"
 
 
 @interface BN_ShopFlashSaleListViewModel ()
@@ -36,7 +37,7 @@
     NSDictionary *paraDic = @{@"curPage" : @(curPage),
                               @"pageNum" : @10};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/buyingGoodsListForFilter",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/buyingGoodsListForFilter", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.goods.loadSupport.loadEvent = NetLoadingEvent;
     

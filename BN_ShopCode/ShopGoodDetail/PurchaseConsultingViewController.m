@@ -9,6 +9,7 @@
 #import "PurchaseConsultingViewController.h"
 #import "UITextView+Placeholder.h"
 #import "BGButton.h"
+#import "BN_ShopHeader.h"
 
 @interface PurchaseConsultingViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *tooltipLabel;

@@ -8,6 +8,7 @@
 
 #import "BN_ShopToolRequest.h"
 #import "NSError+Description.h"
+#import "BN_ShopHeader.h"
 
 @implementation BN_ShopToolRequest
 LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
@@ -15,7 +16,7 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
 //收藏
 - (void)collecteWith:(long)allSpotsId allSpotsType:(int)allSpotsType  success:(void(^)(int collecteState,  NSString *collecteMessage))success failure:(void(^)(NSString *errorDescription))failure {
     NSDictionary *paraDic = @{@"allSpotsId":@(allSpotsId), @"allSpotsType":@(allSpotsType)};
-    NSString *url = [NSString stringWithFormat:@"%@/homePage/scienicSpots/collecte",BASEURL];//[NSString stringWithFormat:@"%@/homePage/scienicSpots/collecte?allSpotsId=%ld&allSpotsType=%d",BASEURL, allSpotsId, allSpotsType];
+    NSString *url = [NSString stringWithFormat:@"%@/homePage/scienicSpots/collecte", Shop_BASEURL];
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -45,7 +46,7 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
 //点赞
 - (void)likeWith:(long)allSpotsId allSpotsType:(int)allSpotsType  success:(void(^)(int likedState, NSString *likedMessage))success failure:(void(^)(NSString *errorDescription))failure {
     NSMutableDictionary *paraDic = nil;//http://xxx.xxx.xxx/homePage/scienicSpots/collecte（POST ）
-    NSString *url = [NSString stringWithFormat:@"%@/homePage/scienicSpots/like?allSpotsId=%ld&allSpotsType=%d",BASEURL, allSpotsId, allSpotsType];
+    NSString *url = [NSString stringWithFormat:@"%@/homePage/scienicSpots/like?allSpotsId=%ld&allSpotsType=%d", Shop_BASEURL, allSpotsId, allSpotsType];
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -80,7 +81,7 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
         return;
     }
     NSMutableDictionary *paraDic = nil;
-    NSString *url = [NSString stringWithFormat:@"%@/wxpay/webchatPrePay?orderId=%@",BASEURL, [orderIDs componentsJoinedByString:@","]];
+    NSString *url = [NSString stringWithFormat:@"%@/wxpay/webchatPrePay?orderId=%@", Shop_BASEURL, [orderIDs componentsJoinedByString:@","]];
     [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -124,7 +125,7 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
         return;
     }
     NSMutableDictionary *paraDic = nil;
-    NSString *url = [NSString stringWithFormat:@"%@/alipay/getOrderInfo?orderId=%@",BASEURL, [orderIDs componentsJoinedByString:@","]];
+    NSString *url = [NSString stringWithFormat:@"%@/alipay/getOrderInfo?orderId=%@", Shop_BASEURL, [orderIDs componentsJoinedByString:@","]];
     [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {
@@ -153,9 +154,9 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
 - (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long warn_id))success failure:(void(^)(NSString *errorDescription))failure {
     NSDictionary *paraDic = nil;
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/warn?goodsId=%ld", BASEURL, goodsId];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/warn?goodsId=%ld", Shop_BASEURL, goodsId];
     if (!isWarn) {
-        url = [NSString stringWithFormat:@"%@/mall/cancelWarn?warnId=%ld", BASEURL, goodsId];
+        url = [NSString stringWithFormat:@"%@/mall/cancelWarn?warnId=%ld", Shop_BASEURL, goodsId];
     }
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
@@ -190,7 +191,7 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
 
 //购物车数量
 - (void)getShoppingCartNumRes:(void(^)(long num))success failure:(void(^)(NSString *errorDescription))failure {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/shoppingCartNum", BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/shoppingCartNum", Shop_BASEURL];
     [[BC_ToolRequest sharedManager] GET:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {

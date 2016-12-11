@@ -70,7 +70,7 @@
 - (void)getTopicsData {
     NSDictionary *paraDic = @{@"specialId" : @(self.specialId)};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/recommendSpecialList",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/recommendSpecialList", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.recommends.loadSupport.loadEvent = NetLoadingEvent;
     
@@ -99,7 +99,7 @@
 - (void)getSpecialDetail {
     NSMutableDictionary *paraDic = nil;
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/specialDetail?specialId=%ld",BASEURL, self.specialId];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/specialDetail?specialId=%ld", Shop_BASEURL, self.specialId];
     __weak typeof(self) temp = self;
     self.loadSupport.loadEvent = NetLoadingEvent;
     

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PaymentMarioHeader.h"
 #import "TableDataSource.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopPaymentViewModel : NSObject
 @property (assign, nonatomic) BN_ShopPaymentType paymentType;

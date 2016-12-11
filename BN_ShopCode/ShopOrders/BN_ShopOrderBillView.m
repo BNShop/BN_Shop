@@ -8,6 +8,7 @@
 
 #import "BN_ShopOrderBillView.h"
 #import "NSObject+BKBlockObservation.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrderBillView ()
 @property (weak, nonatomic) IBOutlet UILabel *retailPriceTitleLabel;

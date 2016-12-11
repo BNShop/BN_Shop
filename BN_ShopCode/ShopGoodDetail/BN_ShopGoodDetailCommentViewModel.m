@@ -35,7 +35,7 @@
                               @"curPage" : @(curPage),
                               @"pageNum" : @10};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/commentLists",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/commentLists", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.items.loadSupport.loadEvent = NetLoadingEvent;
     

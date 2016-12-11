@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopGoodDetailConsultancyCell.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailConsultancyCell ()
 @property (weak, nonatomic) IBOutlet UILabel *qLabel;

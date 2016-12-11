@@ -9,6 +9,7 @@
 #import "BN_ShopGoodDetailNewArribalsCell.h"
 #import "UIImageView+WebCache.h"
 #import "NSString+URL.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailNewArribalsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;

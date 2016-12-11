@@ -11,6 +11,8 @@
 #import "BN_ShopOrderItemProtocol.h"
 #import "BN_ShopOrderItemModel.h"
 #import "TableDataSource.h"
+#import "BN_ShopHeader.h"
+
 typedef NS_ENUM(NSUInteger, BN_ShopOrderState) {
     BN_ShopOrderState_Pay = 0,
     BN_ShopOrderState_Take = 1,

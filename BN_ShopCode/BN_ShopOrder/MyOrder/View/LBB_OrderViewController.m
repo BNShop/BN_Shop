@@ -17,6 +17,7 @@
 #import "LBB_OrderModel.h"
 #import "BN_ShopOrderDetailViewController.h"
 #import "LBB_ApplyAalesViewController.h"
+#import "BN_ShopHeader.h"
 
 @interface LBB_OrderViewController ()
 <UITableViewDataSource,

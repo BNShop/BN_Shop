@@ -14,6 +14,7 @@
 #import "UISearchBar+RAC.h"
 #import "PureLayout.h"
 #import "NSString+TPCategory.h"
+#import "BN_ShopHeader.h"
 
 #import "BN_ShopBannerCell.h"
 #import "BN_ShopSearchCollectionReusableView.h"

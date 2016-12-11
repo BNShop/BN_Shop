@@ -7,6 +7,7 @@
 //
 
 #import "Base_BaseViewController.h"
+#import "BN_ShopHeader.h"
 
 @protocol BN_ShopSearchViewControllerDelegate;
 

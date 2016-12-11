@@ -26,6 +26,7 @@
 #import "UIView+BlocksKit.h"
 
 #import "BN_ShopOrderItemProtocol.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrdersConfirmationViewController ()
 

@@ -10,6 +10,7 @@
 #import "PKYStepper.h"
 #import "NSString+URL.h"
 #import "UIImageView+WebCache.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShoppingCartCell ()
 @property (weak, nonatomic) IBOutlet UIButton *radioButton;

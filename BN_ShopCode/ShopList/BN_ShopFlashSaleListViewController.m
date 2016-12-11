@@ -15,6 +15,7 @@
 
 #import "BN_ShopGoodHorizontalCell.h"
 #import "BN_ShopFlashSaleListViewModel.h"
+#import "BN_ShopHeader.h"
 
 #import "NSString+Attributed.h"
 #import "NSArray+BlocksKit.h"

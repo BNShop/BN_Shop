@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TableDataSource.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailNewArrivalsModel : NSObject
 

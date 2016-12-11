@@ -11,6 +11,7 @@
 #import "PKYStepper.h"
 #import "UIImageView+WebCache.h"
 #import "NSString+URL.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailBuyViewController ()
 

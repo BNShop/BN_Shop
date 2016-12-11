@@ -7,6 +7,8 @@
 //
 
 #import "NSString+Attributed.h"
+#import <Foundation/Foundation.h>
+#import "BN_ShopHeader.h"
 
 @implementation NSString (Attributed)
 - (NSAttributedString *)setFont:(UIFont *)rangeFont restFont:(UIFont *)restFont range:(NSRange)range {

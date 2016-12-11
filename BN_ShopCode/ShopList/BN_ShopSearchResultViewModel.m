@@ -8,6 +8,7 @@
 
 #import "BN_ShopSearchResultViewModel.h"
 #import "NSArray+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopSearchResultViewModel ()<UIScrollViewDelegate>
 
@@ -28,7 +29,7 @@
 - (void)getSearchResultDataRes:(BOOL)clear keyword:(NSString *)keyword {
     int curPage = clear == YES ? 0 : round(self.resultDataSource.getItemsCount/10.0);
     NSMutableDictionary *paraDic = nil;
-    NSString *url = [[NSString stringWithFormat:@"%@/mall/goodsKeyWord?curPage=%d&pageNum=10&word=%@",BASEURL,curPage, keyword] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *url = [[NSString stringWithFormat:@"%@/mall/goodsKeyWord?curPage=%d&pageNum=10&word=%@", Shop_BASEURL, curPage, keyword] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     __weak typeof(self) temp = self;
     self.resultDataSource.items.loadSupport.loadEvent = NetLoadingEvent;
     

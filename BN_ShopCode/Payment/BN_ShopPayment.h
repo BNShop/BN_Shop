@@ -11,6 +11,7 @@
 #import "PaymentMarioHeader.h"
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopPayment : NSObject <WXApiDelegate>
 LY_SINGLETON_FOR_CLASS_HEADER(BN_ShopPayment)

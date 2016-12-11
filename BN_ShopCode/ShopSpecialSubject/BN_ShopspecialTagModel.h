@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopspecialTagModel : NSObject
 @property (nonatomic, assign) long tagId;//主键

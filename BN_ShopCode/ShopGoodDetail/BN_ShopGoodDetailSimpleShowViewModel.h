@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailPicModel : NSObject
 @property (nonatomic, copy) NSString *image_url;

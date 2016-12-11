@@ -109,7 +109,7 @@
 - (void)getSimpleDetailDataWith:(long)goodsId {
     NSDictionary *paraDic = @{@"goodsId" : @(goodsId)};
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsDetail",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsDetail", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.loadSupport.loadEvent = NetLoadingEvent;
     
@@ -143,7 +143,7 @@
     num = MAX(1, num);
     NSDictionary *paraDic = nil;//@{@"goodsId" : @(goodsId),
                             //  @"num" : @(num)};
-    NSString *url = [NSString stringWithFormat:@"%@/mall/shoppingCart?goodsId=%@&num=%@",BASEURL, @(goodsId), @(num)];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/shoppingCart?goodsId=%@&num=%@", Shop_BASEURL, @(goodsId), @(num)];
     
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSLog(@"%@, %@", operation.currentRequest, paraDic);

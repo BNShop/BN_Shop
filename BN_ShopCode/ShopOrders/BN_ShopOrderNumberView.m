@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopOrderNumberView.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrderNumberView ()
 @property (weak, nonatomic) IBOutlet UILabel *titlelabel;

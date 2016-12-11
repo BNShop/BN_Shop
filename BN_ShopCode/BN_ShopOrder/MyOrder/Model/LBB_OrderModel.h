@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BN_ShopHeader.h"
 
 @interface LBB_OrderModelDetail :BN_BaseDataModel
 

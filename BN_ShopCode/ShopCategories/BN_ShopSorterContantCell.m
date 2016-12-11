@@ -9,6 +9,7 @@
 #import "BN_ShopSorterContantCell.h"
 #import "UIImageView+WebCache.h"
 #import "NSString+URL.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopSorterContantCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *contentIconView;

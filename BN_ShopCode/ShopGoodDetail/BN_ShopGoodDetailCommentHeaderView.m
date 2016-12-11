@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopGoodDetailCommentHeaderView.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailCommentHeaderView ()
 

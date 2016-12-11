@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopGoodDetailNewArrivalsView.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailNewArrivalsView () <UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

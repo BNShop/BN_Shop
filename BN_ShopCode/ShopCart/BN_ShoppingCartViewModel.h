@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MultipleSectionTableArraySource.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShoppingCartItemModel : NSObject
 

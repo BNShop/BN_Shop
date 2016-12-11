@@ -18,6 +18,7 @@
 #import "UIView+BlocksKit.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "Base_BaseViewController+ControlCreate.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailConsultancyViewController ()<PurchaseConsultingViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

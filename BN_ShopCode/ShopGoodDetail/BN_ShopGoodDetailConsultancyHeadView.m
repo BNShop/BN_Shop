@@ -7,6 +7,8 @@
 //
 
 #import "BN_ShopGoodDetailConsultancyHeadView.h"
+#import "BN_ShopHeader.h"
+
 @interface BN_ShopGoodDetailConsultancyHeadView ()
 @property (weak, nonatomic) IBOutlet UIView *frameView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

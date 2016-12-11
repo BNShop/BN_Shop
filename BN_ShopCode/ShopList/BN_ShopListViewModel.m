@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopListViewModel.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopListViewModel ()
 @property (nonatomic, strong) TableDataSource *dataSource;
@@ -107,7 +108,7 @@ static NSString * const BN_ShopListSortOrderComposite = @"";
         [paraDic setObject:[NSNumber numberWithLong:self.categoryId] forKey:@"categoryId"];
     }
 
-    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsListForFilter",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsListForFilter", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.goods.loadSupport.loadEvent = NetLoadingEvent;
     

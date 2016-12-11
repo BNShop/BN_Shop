@@ -8,6 +8,7 @@
 
 #import "BN_ShopGoodDetailToolBar.h"
 #import "BGButton.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetailToolBar ()
 

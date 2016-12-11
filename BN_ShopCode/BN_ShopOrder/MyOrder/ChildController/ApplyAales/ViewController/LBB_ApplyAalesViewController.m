@@ -14,6 +14,7 @@
 #import "LBB_OrderAalesDescViewCell.h"
 #import "LBB_OrderImagePickerViewController.h"
 #import "LBB_OrderAalesFooterReusableView.h"
+#import "BN_ShopHeader.h"
 
 #define RowKey  @"rows"
 #define RowType  @"RowType"

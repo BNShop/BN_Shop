@@ -7,7 +7,6 @@
 //
 
 #import "LBB_OrderModel.h"
-//#import "Mine_Common.h"
 
 @implementation LBB_OrderModelDetail
 
@@ -37,7 +36,7 @@
 
 - (void)addSaleafter:(NSString*)saleafterDesc saleafterType:(int)saleafterType saleafterPics:(NSArray*)saleafterPics
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/addSaleafter?orderId=%@",BASEURL,@([self.order_id intValue])];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/addSaleafter?orderId=%@",Shop_BASEURL,@([self.order_id intValue])];
     
     NSDictionary *parames = nil;
     
@@ -72,7 +71,7 @@
  */
 - (void)cancelOrder
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/cancelOrder?orderId=%@",BASEURL,@([self.order_id intValue])];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/cancelOrder?orderId=%@",Shop_BASEURL,@([self.order_id intValue])];
     
     NSDictionary *parames = nil;
     
@@ -108,7 +107,7 @@
  */
 - (void)deleteOrder
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteOrder?orderId=%@",BASEURL,@([self.order_id intValue])];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/deleteOrder?orderId=%@",Shop_BASEURL,@([self.order_id intValue])];
     NSDictionary *parames = nil;
     
     __weak typeof(self) weakSelf = self;
@@ -137,7 +136,7 @@
  */
 - (void)confirmReceipt
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",BASEURL,@([self.order_id intValue])];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmReceipt?orderId=%@",Shop_BASEURL,@([self.order_id intValue])];
     NSDictionary *parames = nil;
     
     __weak typeof(self) weakSelf = self;
@@ -217,7 +216,7 @@
  */
 - (void)postCommentContent:(NSArray*)comments
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/addComment",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/addComment",Shop_BASEURL];
     NSMutableDictionary *parames = [NSMutableDictionary dictionary];
     if ([self.order_id length] == 0) {
         return;
@@ -259,7 +258,7 @@
 #pragma mark - 获取订单详情
 - (void)getShoppingOrderDetail:(void(^)())success failure:(void(^)(NSString *errorDescription))failure {
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/orderDetail?orderId=%@",BASEURL,@([self.order_id intValue])];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/orderDetail?orderId=%@",Shop_BASEURL,@([self.order_id intValue])];
     [[BC_ToolRequest sharedManager] GET:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         NSLog(@"dic = %@", dic);
@@ -308,7 +307,7 @@
  */
 - (void)getDataArray:(int)orderSearchType IsClear:(BOOL)isClear
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/orderList",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/orderList",Shop_BASEURL];
     
     int curPage = isClear == YES ? 0 : round(self.dataArray.count/10.0);
     

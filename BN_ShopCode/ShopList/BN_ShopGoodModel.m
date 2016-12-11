@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopGoodModel.h"
+#import "BN_ShopHeader.h"
 
 @implementation BN_ShopGoodModel
 

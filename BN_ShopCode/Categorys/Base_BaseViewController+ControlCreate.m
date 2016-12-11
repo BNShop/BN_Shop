@@ -9,6 +9,7 @@
 #import "Base_BaseViewController+ControlCreate.h"
 #import "UISearchBar+FMAdd.h"
 #import "UIImage+TPCategory.h"
+#import "BN_ShopHeader.h"
 
 @implementation Base_BaseViewController (ControlCreate)
 

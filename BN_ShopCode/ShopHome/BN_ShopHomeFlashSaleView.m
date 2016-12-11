@@ -12,6 +12,7 @@
 #import "NSString+URL.h"
 #import "PureLayout.h"
 #import "UIView+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 
 @interface BN_ShopHomeFlashSaleView () <LYFreeTimingPlateDelegate>

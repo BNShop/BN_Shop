@@ -7,6 +7,7 @@
 //
 
 #import "V_LineLayer.h"
+#import "BN_ShopHeader.h"
 
 @interface V_LineLayer ()
 {

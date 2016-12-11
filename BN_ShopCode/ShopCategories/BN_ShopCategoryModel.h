@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopSecondCategoryModel : BN_BaseDataModel
 @property (nonatomic, assign) long category_id;//分类主键

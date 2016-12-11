@@ -35,7 +35,7 @@
 
 - (void)getCategoryArray
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/navList", BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/navList", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.categorys.loadSupport.loadEvent = NetLoadingEvent;
     

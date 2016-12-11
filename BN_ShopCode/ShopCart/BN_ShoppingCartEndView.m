@@ -10,6 +10,7 @@
 #import "BGButton.h"
 #import "NSObject+BKBlockObservation.h"
 #import "NSString+Attributed.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShoppingCartEndView ()
 @property (weak, nonatomic) IBOutlet UIButton *RadioButton;

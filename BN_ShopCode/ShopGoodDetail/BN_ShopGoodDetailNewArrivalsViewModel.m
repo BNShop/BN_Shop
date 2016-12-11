@@ -34,7 +34,7 @@
 //                              @"goodsId" : @(goodsId)};
 //    http://112.74.31.159:26088/lbb-app/mall/goodsRecommendList?curPage=0&pageNum=10&goodsId=16
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsRecommendList?curPage=0&pageNum=10&goodsId=%ld&",BASEURL, goodsId];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/goodsRecommendList?curPage=0&pageNum=10&goodsId=%ld&", Shop_BASEURL, goodsId];
     __weak typeof(self) temp = self;
     self.arrivals.loadSupport.loadEvent = NetLoadingEvent;
     

@@ -9,6 +9,7 @@
 #import "BN_ShopListSelectionToolBar.h"
 #import "QRadioButton.h"
 #import "V_LineLayer.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopListSelectionToolBar () <QRadioButtonDelegate, BN_ShopListSelectionToolBarProtocol>
 @property (weak, nonatomic) IBOutlet QRadioButton *generalButton;

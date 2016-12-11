@@ -11,6 +11,7 @@
 #import "BN_ShopGoodSpecialModel.h"
 #import "BN_ShopSpecialCollectedRecordModel.h"
 #import "BN_ShopspecialTagModel.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopSpecialDetailModel : NSObject
 

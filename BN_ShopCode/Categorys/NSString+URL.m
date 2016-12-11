@@ -7,6 +7,7 @@
 //
 
 #import "NSString+URL.h"
+#import "BN_ShopHeader.h"
 
 @implementation NSString (URL)
 

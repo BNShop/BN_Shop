@@ -7,6 +7,7 @@
 //
 
 #import "LBB_OrderBaseViewController.h"
+#import "BN_ShopHeader.h"
 
 @interface LBB_OrderBaseViewController ()
 

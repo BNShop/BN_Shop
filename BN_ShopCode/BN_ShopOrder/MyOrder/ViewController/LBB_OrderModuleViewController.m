@@ -9,6 +9,7 @@
 #import "LBB_OrderModuleViewController.h"
 #import "LBB_OrderViewController.h"
 #import "HMSegmentedControl.h"
+#import "BN_ShopHeader.h"
 
 
 #define  ViewNum 5

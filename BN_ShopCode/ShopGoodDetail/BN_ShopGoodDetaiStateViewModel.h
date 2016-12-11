@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BN_GoodStateHeader.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodSimpleDetailModel : NSObject
 

@@ -22,7 +22,7 @@
 #import "UIView+BlocksKit.h"
 #import "UISearchBar+RAC.h"
 
-
+#import "BN_ShopHeader.h"
 #import "NSString+Attributed.h"
 #import "UICollectionView+TPCategory.h"
 

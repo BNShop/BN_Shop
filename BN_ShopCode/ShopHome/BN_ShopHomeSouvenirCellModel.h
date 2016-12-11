@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TableDataSource.h"
 #import "BN_ShopSouvenirModel.h"
+#import "BN_ShopHeader.h"
 
 
 

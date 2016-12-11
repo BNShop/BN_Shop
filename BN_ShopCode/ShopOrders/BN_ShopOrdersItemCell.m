@@ -9,6 +9,7 @@
 #import "BN_ShopOrdersItemCell.h"
 #import "NSString+URL.h"
 #import "UIImageView+WebCache.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrdersItemCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailImgView;

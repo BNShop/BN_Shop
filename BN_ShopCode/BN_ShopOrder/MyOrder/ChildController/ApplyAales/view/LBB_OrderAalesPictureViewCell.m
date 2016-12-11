@@ -7,6 +7,7 @@
 //
 
 #import "LBB_OrderAalesPictureViewCell.h"
+#import "BN_ShopHeader.h"
 
 @implementation LBB_OrderAalesPictureViewCell
 

@@ -118,12 +118,12 @@
     
     NSString *url = nil;// [NSString stringWithFormat:@"%@/mall/confirmOrder",BASEURL];
     if (self.goodsId > 0 && self.num > 0) {
-        url = [NSString stringWithFormat:@"%@/mall/specialConfirmOrder?goodsId=%ld&num=%d",BASEURL, self.goodsId, self.num];
+        url = [NSString stringWithFormat:@"%@/mall/specialConfirmOrder?goodsId=%ld&num=%d", Shop_BASEURL, self.goodsId, self.num];
         paraDic[@"goodsId"] = @(self.goodsId);
         paraDic[@"num"] = @(self.num);
     } else {
 
-        url = [NSString stringWithFormat:@"%@/mall/confirmOrder?shoppingCartIds=%@&numbers=%@",BASEURL, self.shoppingCartIds, self.numbers];
+        url = [NSString stringWithFormat:@"%@/mall/confirmOrder?shoppingCartIds=%@&numbers=%@", Shop_BASEURL, self.shoppingCartIds, self.numbers];
         paraDic[@"shoppingCartIds"] = self.shoppingCartIds;
         paraDic[@"numbers"] = self.numbers;
     }
@@ -224,7 +224,7 @@
         paraDic[@"rows"] = rowDicS;
     }
     NSLog(@"jsonstr = %@", paraDic[@"rows"]);
-    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmOrder",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/confirmOrder", Shop_BASEURL];
     [[BC_ToolRequest sharedManager] POST:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         if ([responseObject isKindOfClass:[NSData class]]) {

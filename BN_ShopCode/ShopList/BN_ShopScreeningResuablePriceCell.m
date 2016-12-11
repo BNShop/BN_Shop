@@ -8,6 +8,7 @@
 
 #import "BN_ShopScreeningResuablePriceCell.h"
 #import "UITextField+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopScreeningResuablePriceCell ()
 

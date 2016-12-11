@@ -9,6 +9,7 @@
 #import "BN_ShopOrderNumberProcessingView.h"
 #import "BGButton.h"
 #import "UIControl+BlocksKit.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrderNumberProcessingView ()
 @property (weak, nonatomic) IBOutlet UILabel *titlelabel;

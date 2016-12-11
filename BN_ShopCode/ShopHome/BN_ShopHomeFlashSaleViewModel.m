@@ -29,7 +29,7 @@
 
 - (void)getFlashSaleData
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/indexLimitTimeGoods",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/indexLimitTimeGoods", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.flashSaleModel.loadSupport.loadEvent = NetLoadingEvent;
     

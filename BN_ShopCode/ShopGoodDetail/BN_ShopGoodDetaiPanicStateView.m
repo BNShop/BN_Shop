@@ -9,6 +9,7 @@
 #import "BN_ShopGoodDetaiPanicStateView.h"
 #import "LYFreeTimingPlate.h"
 #import "PureLayout.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodDetaiPanicStateView ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pirceBackWidth;

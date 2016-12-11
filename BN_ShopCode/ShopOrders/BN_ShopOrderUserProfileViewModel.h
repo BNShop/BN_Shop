@@ -11,6 +11,7 @@
 #import "BN_ShopOrderItemProtocol.h"
 #import "BN_ShopOrderItemModel.h"
 #import "BN_ShopOrderCartItemModel.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrderUserProfileViewModel : NSObject
 

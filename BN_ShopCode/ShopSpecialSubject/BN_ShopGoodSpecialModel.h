@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopGoodSpecialModel : NSObject
 @property (nonatomic, assign) long obj_id;//对应的对象ID 如类型是景点,则本ID为关联的景点id

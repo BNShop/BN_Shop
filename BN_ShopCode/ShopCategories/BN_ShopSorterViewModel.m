@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopSorterViewModel.h"
+#import "BN_ShopHeader.h"
 
 @implementation BN_ShopSorterViewModel
 
@@ -52,7 +53,7 @@
 #pragma mark - 获取titles的数据
 - (void)getCategories
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/categoryList", BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/categoryList", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.categories.loadSupport.loadEvent = NetLoadingEvent;
     
@@ -92,7 +93,7 @@
                               @"parentCategoryId":[NSNumber numberWithLong:categoryModel.category_id]
                               };
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/secondCategoryList",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/secondCategoryList", Shop_BASEURL];
     __weak typeof(categoryModel) temp = categoryModel;
     categoryModel.secondCategories.loadSupport.loadEvent = NetLoadingEvent;
     

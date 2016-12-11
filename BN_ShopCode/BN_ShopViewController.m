@@ -9,6 +9,7 @@
 #import "BN_ShopViewController.h"
 #import "ST_TabBarController.h"
 #import "LBB_OrderModuleViewController.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopViewController ()
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopPayMentChannelModel : NSObject
 @property (nonatomic, assign) int payType;//1微信 2支付宝

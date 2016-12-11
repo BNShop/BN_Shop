@@ -7,6 +7,7 @@
 //
 
 #import "BN_ShopOrderUserProfileView.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopOrderUserProfileView ()
 @property (weak, nonatomic) IBOutlet UILabel *orderUserNameLabel;

@@ -9,6 +9,7 @@
 #import "BN_ShopSorterTitleCell.h"
 #import "UITableViewCell+Selection.h"
 #import "NSObject+BKBlockObservation.h"
+#import "BN_ShopHeader.h"
 
 @interface BN_ShopSorterTitleCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
