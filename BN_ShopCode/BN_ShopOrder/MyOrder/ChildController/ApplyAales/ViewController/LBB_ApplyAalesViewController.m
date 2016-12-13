@@ -7,7 +7,6 @@
 //
 
 #import "LBB_ApplyAalesViewController.h"
-#import "LBB_SaleafterModel.h"
 #import "LBB_OrderAalesPictureViewCell.h"
 #import "LBB_OrderAalesReusableHeadView.h"
 #import "LBB_OrderAalesCollectionViewCell.h"
@@ -15,6 +14,7 @@
 #import "LBB_OrderImagePickerViewController.h"
 #import "LBB_OrderAalesFooterReusableView.h"
 #import "BN_ShopHeader.h"
+#import "LBB_SaleAalesReasonPickerView.h"
 
 #define RowKey  @"rows"
 #define RowType  @"RowType"
@@ -37,11 +37,15 @@ UITextViewDelegate>
 @property (nonatomic,strong) NSMutableArray *dataSourceArray;
 
 @property (strong,nonatomic) LBB_SaleafterTypeViewModel *viewModel;
+@property(nonatomic,assign) BOOL isViewModelRequestFinish;
 
 @property(nonatomic,copy) NSString* typeContent;
 @property(nonatomic,copy) NSString *reasonContent;
+@property(nonatomic,assign) int   reasonValue;
 @property(nonatomic,copy) NSString *descContent;
 @property(nonatomic,strong) NSMutableArray *picArray;
+
+@property(nonatomic,strong)LBB_SaleAalesReasonPickerView *reasonPickerView;
 
 @end
 
@@ -50,6 +54,7 @@ UITextViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"申请售后";
     NSArray* array = @[
                     @{ SectionKey : @"退款类型",
                           RowKey : @[@"我要退款",@"我要退货"],
@@ -70,6 +75,7 @@ UITextViewDelegate>
                           }];
     
     self.dataSourceArray = [[NSMutableArray alloc] initWithArray:array];
+    [self initViewModel:nil];
 }
 
 - (void)buildControls
@@ -93,6 +99,29 @@ UITextViewDelegate>
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                  withReuseIdentifier:@"LBB_OrderAalesFooterReusableView"];
     
+}
+
+- (void)initViewModel:(void (^)(BOOL result,NSString* errorTips))completeBlock
+{
+    self.isViewModelRequestFinish = NO;
+    if (!self.viewModel) {
+        self.viewModel = [[LBB_SaleafterTypeViewModel alloc] init];
+    }
+    __weak typeof (self) weakSelf = self;
+    [self.viewModel.dataArray.loadSupport setDataRefreshblock:^{
+       weakSelf.isViewModelRequestFinish = YES;
+        if (completeBlock) {
+            completeBlock(YES,nil);
+        }
+    }];
+    [self.viewModel.dataArray.loadSupport setDataRefreshFailBlock:^(NetLoadEvent code,NSString* remak){
+      weakSelf.isViewModelRequestFinish = NO;
+        if (completeBlock) {
+            completeBlock(NO,remak);
+        }
+    }];
+    
+    [self.viewModel getSaleafterType];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -137,7 +166,7 @@ UITextViewDelegate>
     if (section == (self.dataSourceArray.count - 1)) {
         return UIEdgeInsetsMake(5,10,5,10);
     }
-    return UIEdgeInsetsMake(0,0,5,0);
+    return UIEdgeInsetsMake(0,0,0,0);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
@@ -187,29 +216,40 @@ UITextViewDelegate>
         
         NSArray *rowsArray = [dict objectForKey:RowKey];
         cell.textLabel.text = rowsArray[indexPath.row];
-        cell.rightImgView.hidden = YES;
         cell.textLabel.textColor = ColorBlack;
+        cell.textLabel.textColor = ColorGray;
         if (indexPath.section == 0) {
+            cell.rightHeightContraint.constant = 15.f;
+            cell.rightImagWidthConstraint.constant = 15.f;
             if ([cell.textLabel.text isEqualToString:self.typeContent]) {
-                cell.rightImgView.hidden = NO;
-                cell.textLabel.textColor = ColorRed;
+                cell.rightImgView.image = IMAGE(@"我的-选择");
+            }else {
+                cell.rightImgView.image = IMAGE(@"我的-未选择");
             }
         }else {
+            cell.rightHeightContraint.constant = 11.f;
+            cell.rightImagWidthConstraint.constant = 6.f;
+            cell.rightImgView.image = IMAGE(@"右侧箭头");
             if ([self.reasonContent length]) {
                 cell.textLabel.text = self.reasonContent;
-                cell.rightImgView.hidden = NO;
+                cell.textLabel.textColor = ColorGray;
+            }else {
+                cell.textLabel.textColor = ColorLightGray;
             }
         }
+        cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
         resultCell = cell;
     }else if(indexPath.section == 2){//退款说明
         LBB_OrderAalesDescViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier2 forIndexPath:indexPath];
         cell.textView.delegate = self;
+        cell.textView.textColor = ColorGray;
         if ([self.descContent length]) {
             cell.textView.text = self.descContent;
         }else {
             cell.textView.text = nil;
             cell.textView.placeholder = @"输入退款说明";
         }
+        cell.selectedBackgroundView.backgroundColor = RGB(240, 240, 240);
         resultCell = cell;
     }else if(indexPath.section == 3){//图片
         LBB_OrderAalesPictureViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier3 forIndexPath:indexPath];
@@ -240,8 +280,11 @@ UITextViewDelegate>
         if (indexPath.section < self.dataSourceArray.count) {
             NSDictionary *sectionDict = self.dataSourceArray[indexPath.section];
             view.textLabel.text = [sectionDict objectForKey:SectionKey];
+             view.tipLabel.hidden = YES;
             if (indexPath.section == (self.dataSourceArray.count - 1)) {
                 view.textLabel.text = nil;
+            }else if(indexPath.section == 1){
+                view.tipLabel.hidden = NO;
             }
         }
         reusable = view;
@@ -271,7 +314,31 @@ UITextViewDelegate>
         }else {
             [self removePictureAlert:indexPath.row];
         }
+    }else if(indexPath.section == 1) {
+        
+        __weak typeof (self) weakSelf = self;
+        if (!self.isViewModelRequestFinish) {
+            [self initViewModel:^(BOOL reuslt ,NSString *errorTips){
+                [weakSelf showReasonActionSheet];
+            }];
+        }else {
+            [weakSelf showReasonActionSheet];
+        }
     }
+}
+
+- (void)showReasonActionSheet
+{
+    self.reasonPickerView = nil;
+    __weak typeof (self) weakSelf = self;
+    self.reasonPickerView = [[LBB_SaleAalesReasonPickerView alloc] init];
+    self.reasonPickerView.selectBlock = ^(LBB_SaleafterTypeModel *selectModel){
+        weakSelf.reasonContent = selectModel.display;
+        weakSelf.reasonValue = selectModel.value;
+        [weakSelf.collectionView reloadData];
+    };
+    
+    [self.reasonPickerView showPickerViewWithDataSource:self.viewModel.dataArray ParentView:self.view];
 }
 
 #pragma mark - 增加评论图片
@@ -380,7 +447,30 @@ UITextViewDelegate>
 
 - (IBAction)bottomBtnClickAction:(id)sender
 {
+    if ([self.typeContent length] == 0) {
+        [self showHudPrompt:@"请选择退款类型"];
+        return;
+    }
+    if ([self.reasonContent length] == 0) {
+        [self showHudPrompt:@"请选择退款原因"];
+        return;
+    }
     
+    __weak typeof (self) weakSelf = self;
+    [self.orderViewModel.loadSupport setDataRefreshblock:^{
+        [weakSelf showHudPrompt:@"申请成功"];
+        if (weakSelf.completeBlock) {
+            weakSelf.completeBlock(YES);
+        }
+    }];
+    
+    [self.orderViewModel.loadSupport setDataRefreshFailBlock:^(NetLoadEvent code,NSString* remak){
+        [weakSelf showHudPrompt:remak];
+        if (weakSelf.completeBlock) {
+            weakSelf.completeBlock(NO);
+        }
+    }];
+    [self.orderViewModel addSaleafter:[self.descContent Trim] saleafterType:self.reasonValue saleafterPics:self.picArray];
 }
 
 @end

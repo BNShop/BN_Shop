@@ -10,6 +10,11 @@
 
 @interface LBB_OrderAalesCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *rightImgView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightImagWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightHeightContraint;
+
+
 @end

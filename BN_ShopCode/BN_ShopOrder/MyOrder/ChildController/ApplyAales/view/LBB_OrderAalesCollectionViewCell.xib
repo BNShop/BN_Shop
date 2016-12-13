@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,20 +18,32 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukg-bg-AaN">
+                        <rect key="frame" x="15" y="20" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="04q-IU-sYr">
+                        <rect key="frame" x="172" y="15" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="Krn-dP-4ij"/>
                             <constraint firstAttribute="height" constant="30" id="vpb-K1-yZ7"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uao-69-NQI">
+                        <rect key="frame" x="0.0" y="59" width="217" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="2qC-cK-E94"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="Uao-69-NQI" secondAttribute="bottom" id="4qd-D7-g2T"/>
                 <constraint firstItem="ukg-bg-AaN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="BJm-JO-tnF"/>
+                <constraint firstItem="Uao-69-NQI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CTB-Hd-KJz"/>
+                <constraint firstAttribute="trailing" secondItem="Uao-69-NQI" secondAttribute="trailing" id="JjD-Cm-TbX"/>
                 <constraint firstAttribute="trailing" secondItem="04q-IU-sYr" secondAttribute="trailing" constant="15" id="NXa-zq-ttg"/>
                 <constraint firstItem="ukg-bg-AaN" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="loJ-iy-cSK"/>
                 <constraint firstItem="04q-IU-sYr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ukg-bg-AaN" secondAttribute="trailing" constant="10" id="mOv-CZ-pj9"/>
@@ -36,6 +51,9 @@
             </constraints>
             <size key="customSize" width="217" height="60"/>
             <connections>
+                <outlet property="lineView" destination="Uao-69-NQI" id="WzT-to-bOA"/>
+                <outlet property="rightHeightContraint" destination="vpb-K1-yZ7" id="zvr-uw-dPQ"/>
+                <outlet property="rightImagWidthConstraint" destination="Krn-dP-4ij" id="w4p-Sr-RJF"/>
                 <outlet property="rightImgView" destination="04q-IU-sYr" id="PhC-a9-cUo"/>
                 <outlet property="textLabel" destination="ukg-bg-AaN" id="7Gi-he-aSB"/>
             </connections>

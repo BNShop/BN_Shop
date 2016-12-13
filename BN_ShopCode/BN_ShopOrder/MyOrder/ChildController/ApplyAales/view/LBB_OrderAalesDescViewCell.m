@@ -7,12 +7,15 @@
 //
 
 #import "LBB_OrderAalesDescViewCell.h"
+#import "BN_ShopHeader.h"
 
 @implementation LBB_OrderAalesDescViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.lineView.backgroundColor = ColorLine;
+    self.textView.font = Font14;
 }
 
 @end

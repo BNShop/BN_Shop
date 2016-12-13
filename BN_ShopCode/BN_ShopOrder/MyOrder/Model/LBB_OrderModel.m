@@ -26,6 +26,7 @@
 
 /**
  *3.6.4 申请售后
+ *先上传图片到7牛
  */
 //saleafterDesc	String	描述
 //saleafterType	Int	售后类型
@@ -36,14 +37,46 @@
 
 - (void)addSaleafter:(NSString*)saleafterDesc saleafterType:(int)saleafterType saleafterPics:(NSArray*)saleafterPics
 {
-    NSString *url = [NSString stringWithFormat:@"%@/mall/addSaleafter?orderId=%@",Shop_BASEURL,@([self.order_id intValue])];
+    if (saleafterPics.count) {
+        [[BC_ToolRequest sharedManager] uploadfile:saleafterPics block:^(NSArray *files, NSError *error){
+            NSString *fileNames = nil;
+            for (int i = 0; i < files.count; i++) {
+                if (i == 0) {
+                    fileNames = files[i];
+                }else {
+                    fileNames = [NSString stringWithFormat:@"%@,%@",fileNames,files[i]];
+                }
+            }
+            if ([fileNames length]) {
+                [self postSaleafter:saleafterDesc saleafterType:saleafterType saleafterPics:fileNames];
+            }
+        }];
+    }
     
-    NSDictionary *parames = nil;
+    [self postSaleafter:saleafterDesc saleafterType:saleafterType saleafterPics:nil];
+}
+
+/**
+ *3.6.4 申请售后
+ *7牛返回图片url上传到服务器
+ */
+- (void)postSaleafter:(NSString*)saleafterDesc saleafterType:(int)saleafterType saleafterPics:(NSString*)saleafterPics
+{
+    NSString *url = [NSString stringWithFormat:@"%@/mall/addSaleafter",Shop_BASEURL];
     
     __weak typeof(self) weakSelf = self;
     self.loadSupport.loadEvent = NetLoadingEvent;
+    __block NSMutableDictionary *salesAfterDict = [[NSMutableDictionary alloc] init];
+    [salesAfterDict setObject:@([self.order_id intValue]) forKey:@"orderId"];
+    [salesAfterDict setObject:@(saleafterType) forKey:@"saleafterType"];
+    if ([saleafterDesc length]) {
+        [salesAfterDict setObject:@([self.order_id intValue]) forKey:@"saleafterDesc"];
+    }
+    if ([saleafterPics length]) {
+        [salesAfterDict setObject:saleafterPics forKey:@"saleafterPics"];
+    }
     
-    [[BC_ToolRequest sharedManager] POST:url parameters:parames success:^(NSURLSessionDataTask *operation, id responseObject) {
+    [[BC_ToolRequest sharedManager] POST:url parameters:salesAfterDict success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         NSNumber *codeNumber = [dic objectForKey:@"code"];
         if(codeNumber.intValue == 0)
@@ -64,7 +97,6 @@
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         weakSelf.loadSupport.loadFailEvent = NetLoadFailedEvent;
     }];
-    
 }
 /**
  *3.6.7 取消订单
@@ -376,6 +408,62 @@
         }
         weakSelf.dataArray.networkTotal = [dic objectForKey:@"total"];
         weakSelf.dataArray.loadSupport.loadEvent = codeNumber.intValue;
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        weakSelf.dataArray.loadSupport.loadEvent = NetLoadFailedEvent;
+    }];
+}
+
+@end
+
+
+@implementation LBB_SaleafterTypeModel
+
+
+@end
+
+
+@implementation LBB_SaleafterTypeViewModel
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.dataArray = [[NSMutableArray alloc] initFromNet];
+    }
+    return self;
+}
+
+/**
+ *3.6.6 售后原因列表
+ */
+- (void)getSaleafterType
+{
+    NSString *url = [NSString stringWithFormat:@"%@/mall/dictList?classes=saleafter_type",Shop_BASEURL];
+    
+    __weak typeof(self) weakSelf = self;
+    self.dataArray.loadSupport.loadEvent = NetLoadingEvent;
+    
+    
+    [[BC_ToolRequest sharedManager] GET:url parameters:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if(codeNumber.intValue == 0)
+        {
+            NSArray *array = [dic objectForKey:@"rows"];
+            NSArray *returnArray = [LBB_SaleafterTypeModel mj_objectArrayWithKeyValuesArray:array];
+            [weakSelf.dataArray removeAllObjects];
+            [weakSelf.dataArray addObjectsFromArray:returnArray];
+            weakSelf.dataArray.loadSupport.loadEvent = codeNumber.intValue;
+        }
+        else
+        {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            NSLog(@"失败  %@",errorStr);
+            weakSelf.dataArray.loadSupport.netRemark = errorStr;
+            weakSelf.dataArray.loadSupport.loadFailEvent = codeNumber.intValue;
+            
+        }
+        weakSelf.dataArray.networkTotal = [dic objectForKey:@"total"];
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         weakSelf.dataArray.loadSupport.loadEvent = NetLoadFailedEvent;
     }];

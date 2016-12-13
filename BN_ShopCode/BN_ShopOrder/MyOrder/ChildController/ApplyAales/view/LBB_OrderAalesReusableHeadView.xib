@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,17 +15,39 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8N-c0-Amt">
+                    <rect key="frame" x="15" y="15" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHd-pS-vbq">
+                    <rect key="frame" x="67" y="15" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zse-Qa-Csc">
+                    <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="iTA-34-9oN"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KHd-pS-vbq" secondAttribute="trailing" constant="30" id="4gh-2f-iaS"/>
+                <constraint firstAttribute="trailing" secondItem="zse-Qa-Csc" secondAttribute="trailing" id="8BF-CJ-ICq"/>
                 <constraint firstItem="I8N-c0-Amt" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="15" id="Ee0-7u-d8C"/>
                 <constraint firstItem="I8N-c0-Amt" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="TUV-Jf-PJi"/>
+                <constraint firstAttribute="bottom" secondItem="zse-Qa-Csc" secondAttribute="bottom" id="WgR-kK-9pN"/>
+                <constraint firstItem="zse-Qa-Csc" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="d24-eI-ghn"/>
+                <constraint firstItem="KHd-pS-vbq" firstAttribute="leading" secondItem="I8N-c0-Amt" secondAttribute="trailing" constant="10" id="wth-Tm-Mcz"/>
+                <constraint firstItem="KHd-pS-vbq" firstAttribute="centerY" secondItem="I8N-c0-Amt" secondAttribute="centerY" id="ysB-Iq-u8O"/>
             </constraints>
             <connections>
+                <outlet property="lineView" destination="zse-Qa-Csc" id="8aT-rA-Wgd"/>
                 <outlet property="textLabel" destination="I8N-c0-Amt" id="7UQ-vb-Dac"/>
+                <outlet property="tipLabel" destination="KHd-pS-vbq" id="38c-2g-xI0"/>
             </connections>
         </collectionReusableView>
     </objects>

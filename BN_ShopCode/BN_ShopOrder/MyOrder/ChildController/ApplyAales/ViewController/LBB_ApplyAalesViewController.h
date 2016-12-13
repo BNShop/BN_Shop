@@ -7,7 +7,13 @@
 //
 
 #import "LBB_OrderBaseViewController.h"
+#import "LBB_OrderModel.h"
+
+typedef void(^ApplyAalesBlock)(BOOL result);
 
 @interface LBB_ApplyAalesViewController : LBB_OrderBaseViewController
+
+@property(nonatomic,strong) ApplyAalesBlock completeBlock;
+@property(nonatomic,strong) LBB_OrderModelData *orderViewModel;
 
 @end

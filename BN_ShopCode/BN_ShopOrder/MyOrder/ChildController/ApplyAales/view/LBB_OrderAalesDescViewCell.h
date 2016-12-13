@@ -10,5 +10,6 @@
 
 @interface LBB_OrderAalesDescViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 @end

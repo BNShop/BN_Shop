@@ -7,12 +7,15 @@
 //
 
 #import "LBB_OrderAalesCollectionViewCell.h"
+#import "BN_ShopHeader.h"
 
 @implementation LBB_OrderAalesCollectionViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.lineView.backgroundColor = ColorLine;
+    self.textLabel.font = Font14;
 }
 
 @end

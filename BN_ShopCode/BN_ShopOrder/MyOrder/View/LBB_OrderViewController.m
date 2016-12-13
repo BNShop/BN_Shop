@@ -236,9 +236,6 @@ LBB_OrderCommentDelegate>
 - (void)cellBtnClickDelegate:(LBB_OrderModelData*)cellInfo
              TicketClickType:(OrderClickType)clickType
 {
-//    LBB_ApplyAalesViewController *vc = [[LBB_ApplyAalesViewController alloc] initWithNibName:@"LBB_ApplyAalesViewController" bundle:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
-//    return;
     __weak typeof (self) weakSelf = self;
     [cellInfo.loadSupport setDataRefreshblock:^{
         [weakSelf.tableView reloadData];
@@ -275,6 +272,13 @@ LBB_OrderCommentDelegate>
         case eApplyAales:
         {
             LBB_ApplyAalesViewController *vc = [[LBB_ApplyAalesViewController alloc] initWithNibName:@"LBB_ApplyAalesViewController" bundle:nil];
+            vc.orderViewModel = cellInfo;
+            __weak typeof (self) weakSelf = self;
+            vc.completeBlock = ^(BOOL resulut){
+                if (resulut) {
+                    [weakSelf.tableView reloadData];
+                }
+            };
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

@@ -92,3 +92,24 @@
 
 
 
+@interface LBB_SaleafterTypeModel:BN_BaseDataModel
+
+@property(nonatomic,copy) NSString *display ;//显示名称
+@property(nonatomic,assign) int value;//值
+
+@end
+
+@interface LBB_SaleafterTypeViewModel : BN_BaseDataModel
+
+@property(nonatomic,strong) NSMutableArray<LBB_SaleafterTypeModel*> *dataArray;
+
+/**
+ *3.6.6 售后原因列表
+ */
+- (void)getSaleafterType;
+
+
+//http://xxx.xxx.xxx/mall/addSaleafter（POST）
+
+@end
+

@@ -15,6 +15,17 @@
     [super awakeFromNib];
     // Initialization code
     self.backgroundColor = ColorBackground;
+    self.lineView.backgroundColor = ColorLine;
+    self.textLabel.font = Font15;
+    self.tipLabel.font = Font14;
+    self.tipLabel.textColor = ColorLightGray;
+    self.tipLabel.text = @"(可不填)";
+    self.tipLabel.hidden = YES;
 }
 
+- (void)prepareForReuse{
+    [super prepareForReuse];
+    self.tipLabel.hidden = YES;
+    self.textLabel.text = nil;
+}
 @end

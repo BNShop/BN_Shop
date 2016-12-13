@@ -10,5 +10,7 @@
 
 @interface LBB_OrderAalesReusableHeadView : UICollectionReusableView
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 @end

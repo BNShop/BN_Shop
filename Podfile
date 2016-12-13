@@ -12,5 +12,5 @@ pod 'CocoaLumberjack'
 pod 'GLPubSub'
 pod 'SWTableViewCell'
 pod 'PKYStepper', '~> 0.0.1'
-
+pod 'ActionSheetPicker-3.0'
 end

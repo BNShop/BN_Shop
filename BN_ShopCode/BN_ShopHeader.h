@@ -10,6 +10,7 @@
 #define BN_ShopHeader_h
 
 #import "QJTL_Global.h"
+#import "Base_Common.h"
 
 //@"http://169fa47.ittun.com/lbb"//
 
