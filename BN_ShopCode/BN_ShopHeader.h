@@ -11,6 +11,7 @@
 
 #import "QJTL_Global.h"
 
-#define Shop_BASEURL @"http://112.74.31.159:26088/lbb-app"//@"http://169fa47.ittun.com/lbb"//
+#define Shop_BASEURL @"http://139.224.18.14:6082/api"//@"http://169fa47.ittun.com/lbb"//
+
 
 #endif /* BN_ShopHeader_h */
