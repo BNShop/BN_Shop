@@ -56,22 +56,22 @@ UITextViewDelegate>
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"申请售后";
     NSArray* array = @[
-                    @{ SectionKey : @"退款类型",
-                          RowKey : @[@"我要退款",@"我要退货"],
-                          RowType :@(1)
-                           },
+//                    @{ SectionKey : @"退款类型",
+//                          RowKey : @[@"我要退款",@"我要退货"],
+//                          RowType :@(1)
+//                           },
                        @{ SectionKey : @"退款原因",
-                          RowKey : @[@"请选择退款原因"],
-                          RowType :@(1)
+                          RowKey : @[@"请选择退款类型"],
+                          RowType :@(eAalesReasonType)
                           },
                        @{ SectionKey : @"退款说明",
                           SectionTipKey : @"（可不填）",
                           RowKey : @[@"请输入退款说明"],
-                          RowType :@(1)
+                          RowType :@(eAalesDesc)
                           },
                        @{ SectionKey : @"上传图片",
                           RowKey : @[[UIImage imageNamed:@"我的-添加.png"]],
-                          RowType :@(2)
+                          RowType :@(eAalesPic)
                           }];
     
     self.dataSourceArray = [[NSMutableArray alloc] initWithArray:array];
@@ -151,22 +151,52 @@ UITextViewDelegate>
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0 || indexPath.section == 1) {
-        return CGSizeMake(DeviceWidth, 44.f);
-    }else if(indexPath.section == 2) {
-        return CGSizeMake(DeviceWidth, 150.f);
-    }else if(indexPath.section == 3){
-        CGSize mainSize = [[UIScreen mainScreen] bounds].size;
-        return CGSizeMake((mainSize.width - 30)/4.0,((mainSize.width - 30)/4.0 + 25));
+    
+    NSDictionary *sectionDict = self.dataSourceArray[indexPath.section];
+    ApplyAalesType rowType = [[sectionDict objectForKey:RowType] integerValue];
+    
+    CGSize size = CGSizeMake(DeviceWidth, 44.f);
+    switch (rowType) {
+        case eAalesReasonType:
+        {
+            size = CGSizeMake(DeviceWidth, 44.f);
+        }
+            break;
+        case eAalesDesc:
+        {
+            size = CGSizeMake(DeviceWidth, 150.f);
+        }
+            break;
+        case eAalesPic:
+        {
+            CGSize mainSize = [[UIScreen mainScreen] bounds].size;
+            size = CGSizeMake((mainSize.width - 30)/4.0,((mainSize.width - 30)/4.0 + 25));
+        }
+            break;
     }
-    return CGSizeZero;
+    
+    return size;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    if (section == (self.dataSourceArray.count - 1)) {
-        return UIEdgeInsetsMake(5,10,5,10);
+    NSDictionary *sectionDict = self.dataSourceArray[section];
+    ApplyAalesType rowType = [[sectionDict objectForKey:RowType] integerValue];
+    
+    UIEdgeInsets inset = UIEdgeInsetsMake(0,0,0,0);
+    switch (rowType) {
+        case eAalesReasonType:
+        case eAalesDesc:
+        {
+            inset = UIEdgeInsetsMake(0,0,0,0);
+        }
+            break;
+        case eAalesPic:
+        {
+           inset = UIEdgeInsetsMake(5,10,5,10);
+        }
+            break;
     }
-    return UIEdgeInsetsMake(0,0,0,0);
+    return inset;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
@@ -178,18 +208,46 @@ UITextViewDelegate>
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     
-    if (section == self.dataSourceArray.count - 1) {
-        return CGSizeMake(DeviceWidth, 0.1f);
+    NSDictionary *sectionDict = self.dataSourceArray[section];
+    ApplyAalesType rowType = [[sectionDict objectForKey:RowType] integerValue];
+    
+    CGSize size = CGSizeMake(DeviceWidth, 44.f);
+    switch (rowType) {
+        case eAalesReasonType:
+        case eAalesDesc:
+        {
+          size = CGSizeMake(DeviceWidth, 44.f);
+        }
+            break;
+        case eAalesPic:
+        {
+            size = CGSizeMake(DeviceWidth, 0.1f);
+        }
+            break;
     }
-    return CGSizeMake(DeviceWidth, 44.f);
+   
+    return size;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    if (section == 2) {
-         return CGSizeMake(DeviceWidth, 10.f);
+    NSDictionary *sectionDict = self.dataSourceArray[section];
+    ApplyAalesType rowType = [[sectionDict objectForKey:RowType] integerValue];
+    
+    CGSize size =  CGSizeMake(DeviceWidth, 0.1f);
+    switch (rowType) {
+        case eAalesReasonType:
+            break;
+        case eAalesDesc:
+        {
+            size = CGSizeMake(DeviceWidth, 10.f);
+        }
+            break;
+        case eAalesPic:
+            break;
     }
-   return CGSizeMake(DeviceWidth, 0.1f);
+    
+   return size;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -211,22 +269,15 @@ UITextViewDelegate>
     UICollectionViewCell *resultCell = [[UICollectionViewCell alloc] init];
     
     NSDictionary *dict = [self.dataSourceArray objectAtIndex:indexPath.section];
-    if (indexPath.section == 0 || indexPath.section == 1) {//退款类型、退款原因
-        LBB_OrderAalesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier1 forIndexPath:indexPath];
-        
-        NSArray *rowsArray = [dict objectForKey:RowKey];
-        cell.textLabel.text = rowsArray[indexPath.row];
-        cell.textLabel.textColor = ColorBlack;
-        cell.textLabel.textColor = ColorGray;
-        if (indexPath.section == 0) {
-            cell.rightHeightContraint.constant = 15.f;
-            cell.rightImagWidthConstraint.constant = 15.f;
-            if ([cell.textLabel.text isEqualToString:self.typeContent]) {
-                cell.rightImgView.image = IMAGE(@"我的-选择");
-            }else {
-                cell.rightImgView.image = IMAGE(@"我的-未选择");
-            }
-        }else {
+    
+    ApplyAalesType rowType = [[dict objectForKey:RowType] integerValue];
+    switch (rowType) {
+        case eAalesReasonType://退款原因
+        {
+            LBB_OrderAalesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier1 forIndexPath:indexPath];
+            
+            NSArray *rowsArray = [dict objectForKey:RowKey];
+            cell.textLabel.text = rowsArray[indexPath.row];
             cell.rightHeightContraint.constant = 11.f;
             cell.rightImagWidthConstraint.constant = 6.f;
             cell.rightImgView.image = IMAGE(@"右侧箭头");
@@ -236,39 +287,47 @@ UITextViewDelegate>
             }else {
                 cell.textLabel.textColor = ColorLightGray;
             }
+            cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
+            resultCell = cell;
         }
-        cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
-        resultCell = cell;
-    }else if(indexPath.section == 2){//退款说明
-        LBB_OrderAalesDescViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier2 forIndexPath:indexPath];
-        cell.textView.delegate = self;
-        cell.textView.textColor = ColorGray;
-        if ([self.descContent length]) {
-            cell.textView.text = self.descContent;
-        }else {
-            cell.textView.text = nil;
-            cell.textView.placeholder = @"输入退款说明";
+            break;
+        case eAalesDesc://退款说明
+        {
+            LBB_OrderAalesDescViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier2 forIndexPath:indexPath];
+            cell.textView.delegate = self;
+            cell.textView.textColor = ColorGray;
+            if ([self.descContent length]) {
+                cell.textView.text = self.descContent;
+            }else {
+                cell.textView.text = nil;
+                cell.textView.placeholder = @"输入退款说明";
+            }
+            cell.selectedBackgroundView.backgroundColor = RGB(240, 240, 240);
+            resultCell = cell;
         }
-        cell.selectedBackgroundView.backgroundColor = RGB(240, 240, 240);
-        resultCell = cell;
-    }else if(indexPath.section == 3){//图片
-        LBB_OrderAalesPictureViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier3 forIndexPath:indexPath];
-        NSLog(@" indexPath.row = %ld,%ld",indexPath.row,(self.picArray.count - 1));
-        NSInteger picCount = self.picArray.count;
-        if (indexPath.row < picCount) {
-            cell.imageView.image = self.picArray[indexPath.row];
-            cell.addImgView.image = nil;
-        }else {
-            NSArray *rowsArray = [dict objectForKey:RowKey];
-            cell.addImgView.image = rowsArray[0];
-            cell.imageView.image = nil;
-            cell.tipLabel.text = @"上传凭证最多3张";
-        }
-        
-        resultCell = cell;
+            break;
+        case eAalesPic://上传凭证
+        {
+            LBB_OrderAalesPictureViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier3 forIndexPath:indexPath];
+            NSLog(@" indexPath.row = %ld,%ld",indexPath.row,(self.picArray.count - 1));
+            NSInteger picCount = self.picArray.count;
+            if (indexPath.row < picCount) {
+                cell.imageView.image = self.picArray[indexPath.row];
+                cell.addImgView.image = nil;
+            }else {
+                NSArray *rowsArray = [dict objectForKey:RowKey];
+                cell.addImgView.image = rowsArray[0];
+                cell.imageView.image = nil;
+                cell.tipLabel.text = @"上传凭证最多3张";
+            }
+            
+            resultCell = cell;
 
+        }
+            break;
+        default:
+            break;
     }
-    
     return resultCell;
 }
 
@@ -280,11 +339,22 @@ UITextViewDelegate>
         if (indexPath.section < self.dataSourceArray.count) {
             NSDictionary *sectionDict = self.dataSourceArray[indexPath.section];
             view.textLabel.text = [sectionDict objectForKey:SectionKey];
-             view.tipLabel.hidden = YES;
-            if (indexPath.section == (self.dataSourceArray.count - 1)) {
-                view.textLabel.text = nil;
-            }else if(indexPath.section == 1){
-                view.tipLabel.hidden = NO;
+            view.tipLabel.hidden = YES;
+            ApplyAalesType rowType = [[sectionDict objectForKey:RowType] integerValue];
+            switch (rowType) {
+                case eAalesReasonType:
+                    break;
+                case eAalesDesc:
+                {
+                   view.tipLabel.hidden = NO;
+                   view.tipLabel.text = [sectionDict objectForKey:SectionTipKey];
+                }
+                    break;
+                case eAalesPic:
+                {
+                    view.textLabel.text = nil;
+                }
+                    break;
             }
         }
         reusable = view;
@@ -301,29 +371,35 @@ UITextViewDelegate>
     //隐藏键盘
     [self.view endEditing:YES];
     NSDictionary *dict = [self.dataSourceArray objectAtIndex:indexPath.section];
-    if (indexPath.section == 0) {
-        NSArray *rowsArray = [dict objectForKey:RowKey];
-        if (indexPath.row < rowsArray.count) {
-            self.typeContent = rowsArray[indexPath.row];
-        }
-        [self.collectionView reloadData];
-    }else if(indexPath.section == 3){
-        NSArray *pictureArray = self.picArray;
-        if (indexPath.row == pictureArray.count && ([self.picArray count] < 3)) {
-            [self showImagePickerMenu];
-        }else {
-            [self removePictureAlert:indexPath.row];
-        }
-    }else if(indexPath.section == 1) {
-        
-        __weak typeof (self) weakSelf = self;
-        if (!self.isViewModelRequestFinish) {
-            [self initViewModel:^(BOOL reuslt ,NSString *errorTips){
+    ApplyAalesType rowType = [[dict objectForKey:RowType] integerValue];
+    switch (rowType) {
+        case eAalesReasonType:
+        {
+            __weak typeof (self) weakSelf = self;
+            if (!self.isViewModelRequestFinish) {
+                [self initViewModel:^(BOOL reuslt ,NSString *errorTips){
+                    [weakSelf showReasonActionSheet];
+                }];
+            }else {
                 [weakSelf showReasonActionSheet];
-            }];
-        }else {
-            [weakSelf showReasonActionSheet];
+            }
         }
+            break;
+        case eAalesDesc:
+        {
+            
+        }
+            break;
+        case eAalesPic:
+        {
+            NSArray *pictureArray = self.picArray;
+            if (indexPath.row == pictureArray.count && ([self.picArray count] < 3)) {
+                [self showImagePickerMenu];
+            }else {
+                [self removePictureAlert:indexPath.row];
+            }
+        }
+            break;
     }
 }
 
@@ -447,10 +523,10 @@ UITextViewDelegate>
 
 - (IBAction)bottomBtnClickAction:(id)sender
 {
-    if ([self.typeContent length] == 0) {
-        [self showHudPrompt:@"请选择退款类型"];
-        return;
-    }
+//    if ([self.typeContent length] == 0) {
+//        [self showHudPrompt:@"请选择退款类型"];
+//        return;
+//    }
     if ([self.reasonContent length] == 0) {
         [self showHudPrompt:@"请选择退款原因"];
         return;

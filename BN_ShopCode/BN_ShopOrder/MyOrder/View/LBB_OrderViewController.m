@@ -237,6 +237,7 @@ LBB_OrderCommentDelegate>
              TicketClickType:(OrderClickType)clickType
 {
     __weak typeof (self) weakSelf = self;
+    
     [cellInfo.loadSupport setDataRefreshblock:^{
         [weakSelf.tableView reloadData];
     }];
@@ -273,7 +274,6 @@ LBB_OrderCommentDelegate>
         {
             LBB_ApplyAalesViewController *vc = [[LBB_ApplyAalesViewController alloc] initWithNibName:@"LBB_ApplyAalesViewController" bundle:nil];
             vc.orderViewModel = cellInfo;
-            __weak typeof (self) weakSelf = self;
             vc.completeBlock = ^(BOOL resulut){
                 if (resulut) {
                     [weakSelf.tableView reloadData];

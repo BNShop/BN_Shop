@@ -56,4 +56,11 @@ typedef NS_ENUM(NSInteger,OrderViewType)
     eOrderType_AfterAales,  //我的订单_售后
 };
 
+
+typedef NS_ENUM(NSInteger,ApplyAalesType)
+{
+    eAalesReasonType = 1,//退款原因
+    eAalesDesc,  //退款说明
+    eAalesPic//上传凭证
+};
 #endif /* LBB_OrderHeader_h */
