@@ -11,6 +11,10 @@
 #import "BN_ShopOrderDetailViewController.h"
 #import "LBB_OrderViewController.h"
 #import "LBB_OrderModuleViewController.h"
+#if __has_include("ReceiptAddressViewController.h")
+#import "ReceiptAddressViewController.h"
+#define HAS_AddressList 1
+#endif
 
 #import "BN_ShopOrderBillView.h"
 #import "BN_ShopOrdersToolBar.h"
@@ -187,8 +191,6 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
             [self.navigationController popViewControllerAnimated:NO];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"BN_ShopOrdersConfirmation" object:nil];
             if (orderIds.count > 1) {
-//                LBB_OrderViewController *ctr = [[LBB_OrderViewController alloc] initWithNibName:@"LBB_OrderViewController" bundle:nil];
-//                ctr.baseViewType  = eOrderType_WaitPay;
                 LBB_OrderModuleViewController *ctr = [[LBB_OrderModuleViewController alloc] init];
                 [nav pushViewController:ctr animated:YES];
             } else {
@@ -208,11 +210,14 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 
 - (void)buildUserView {
     self.userView = [BN_ShopOrderUserProfileView nib];
-    [self.userView updateWith:self.confirmationviewModel.ordreModel.userAddress.name tel:self.confirmationviewModel.ordreModel.userAddress.telNum tagged:NO provinces:[self.confirmationviewModel.ordreModel.userAddress provinceAndCity] street:self.confirmationviewModel.ordreModel.userAddress.address];
+    if (self.confirmationviewModel.ordreModel.userAddress.isValidAddress) {
+        [self.userView updateWith:self.confirmationviewModel.ordreModel.userAddress.name tel:self.confirmationviewModel.ordreModel.userAddress.telNum tagged:self.confirmationviewModel.ordreModel.userAddress.is_default provinces:[self.confirmationviewModel.ordreModel.userAddress provinceAndCity] street:self.confirmationviewModel.ordreModel.userAddress.address];
+    } else {
+        [self.userView updateWith:nil tel:nil tagged:NO provinces:@"增加地址" street:nil];
+    }
     self.userView.frame = CGRectMake(0, 0, WIDTH(self.view), self.userView.getViewHeight);
     [self.userView bk_whenTapped:^{
-#warning 跳转去改变地址
-//        把地址ID给self.confirmationviewModel.ordreModel.userAddress.address_id （long）
+        [self changeAddress];
     }];
 
 }
@@ -249,10 +254,49 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     [view addSubview:self.pointView];
     self.billView.frame = CGRectMake(0, self.pointView.getViewHeight+5, WIDTH(self.tableView), self.billView.getViewHeight);
     self.pointView.frame = CGRectMake(0, 5, WIDTH(self.tableView), self.pointView.getViewHeight);
+    
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.view), 1)];
+    
     [self.tableView beginUpdates];
     self.tableView.tableFooterView = view;
+    self.tableView.tableHeaderView = headView;
     [self.tableView endUpdates];
     
+}
+
+#pragma mark - change address
+- (void)changeAddress {
+    @weakify(self);
+
+    
+#if HAS_AddressList
+    UIStoryboard *main = [UIStoryboard storyboardWithName:@"MineStoryboard" bundle:nil];
+    ReceiptAddressViewController *addRessVC = [main instantiateViewControllerWithIdentifier:@"ReceiptAddressViewController"];
+    addRessVC.selectBlock = ^(LBB_AddressModel *addressModel){
+        @strongify(self);
+        BN_ShopUserAddressModel *address = [[BN_ShopUserAddressModel alloc] init];
+        address.address_id = addressModel.addressId;//地址主键
+        address.name = addressModel.name;//收货人
+        address.phone = addressModel.phone;//收货手机号
+        if (addressModel.isDefault) {
+            addressModel.is_default = 1;//是否默认
+        }
+        address.prov = addressModel.provinceName;//省份名
+        address.province_id = addressModel.provinceId;//省份ID
+        address.city = addressModel.cityName;//城市名
+        address.city_id = addressModel.cityId;//城市ID
+        address.dist = addressModel.districtName;//县、区名称
+        address.district_id = addressModel.districtId;//县、区ID
+        address.address = addressModel.address;//地址名称
+//        NSString  *zipcode = addressModel.zipcode;//邮件编码
+        self.confirmationviewModel.ordreModel.userAddress = address;
+        if (self.confirmationviewModel.ordreModel.userAddress.isValidAddress) {
+            [self.userView updateWith:self.confirmationviewModel.ordreModel.userAddress.name tel:self.confirmationviewModel.ordreModel.userAddress.telNum tagged:self.confirmationviewModel.ordreModel.userAddress.is_default provinces:[self.confirmationviewModel.ordreModel.userAddress provinceAndCity] street:self.confirmationviewModel.ordreModel.userAddress.address];
+        } else {
+            [self.userView updateWith:nil tel:nil tagged:NO provinces:@"增加地址" street:nil];
+        }
+    };
+#endif
 }
 
 @end

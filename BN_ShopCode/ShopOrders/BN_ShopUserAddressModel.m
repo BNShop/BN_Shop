@@ -31,4 +31,11 @@
 - (NSString *)telNum {
     return [_phone safeStringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
 }
+
+- (BOOL)isValidAddress {
+    if (_prov.length == 0 && _city.length == 0 && _dist.length == 0 && _address.length == 0 && _phone.length == 0 && _name.length == 0) {
+        return NO;
+    }
+    return YES;
+}
 @end

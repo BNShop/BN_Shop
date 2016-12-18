@@ -138,25 +138,26 @@
 - (void)setBuildFooterView {
     //取消监听，因为这里会调整contentSize，避免无限递归
     [self removeObserverForWebViewContentSize];
-    [_footerView removeFromSuperview];
-    
-    CGSize contentSize = self.webss.scrollView.contentSize;
-    
-    _footerView.userInteractionEnabled = YES;
-    _footerView.frame = CGRectMake(0, contentSize.height, contentSize.width, self.footerHight);
-    
-    [self.webss.scrollView addSubview:_footerView];
-    self.webss.scrollView.contentSize = CGSizeMake(contentSize.width, contentSize.height + self.footerHight);
-    
+//    [_footerView removeFromSuperview];
+//    
+//    CGSize contentSize = self.webss.scrollView.contentSize;
+//    
+//
+//    _footerView.frame = CGRectMake(0, contentSize.height, contentSize.width, self.footerHight);
+//    
+//    [self.webss.scrollView addSubview:_footerView];
+//    self.webss.scrollView.contentSize = CGSizeMake(contentSize.width, contentSize.height + self.footerHight);
+    _footerView.frame = CGRectMake(0, Y(self.webBrowserView)+HEIGHT(self.webBrowserView), WIDTH(self.webss.scrollView), self.footerHight);
+    self.webss.scrollView.contentSize = CGSizeMake(WIDTH(self.webss.scrollView), Y(_footerView)+HEIGHT(_footerView));
     //重新监听
     [self addObserverForWebViewContentSize];
 }
 
 #pragma mark - set headView
 - (void)setFooterView:(UIView *)footerView {
-    self.footerHight += 60;
     if (!_footerView) {
         CGSize contentSize = self.webss.scrollView.contentSize;
+        _footerView.userInteractionEnabled = YES;
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, contentSize.height, WIDTH(self.view), self.footerHight)];
         [self.webss.scrollView addSubview:_footerView];
         self.webss.scrollView.contentSize = CGSizeMake(contentSize.width, contentSize.height + self.footerHight);

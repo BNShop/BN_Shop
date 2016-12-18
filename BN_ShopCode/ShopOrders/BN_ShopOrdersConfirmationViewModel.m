@@ -181,6 +181,11 @@
     
     if (self.ordreModel.userAddress.address_id) {
         paraDic[@"addressId"] = @(self.ordreModel.userAddress.address_id);
+    } else {
+        if (failure) {
+            failure(@"请选择或增加有效地址");
+        }
+        return;
     }
     paraDic[@"integral"] = self.ordreModel.availableUse;
 

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -67,6 +66,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Ca-3E-VTB" userLabel="11">
                         <rect key="frame" x="49" y="57" width="75.5" height="75.5"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="75.5" id="kT3-RE-Pqj"/>
                             <constraint firstAttribute="width" secondItem="8Ca-3E-VTB" secondAttribute="height" multiplier="1:1" id="l96-F3-eXX"/>
                         </constraints>
                     </imageView>
@@ -112,6 +112,7 @@
                 <outlet property="dateLabel" destination="ve4-pE-PqV" id="vzY-bA-fdz"/>
                 <outlet property="goodLabel" destination="TyM-Lr-xLb" id="0ub-x8-KFI"/>
                 <outlet property="iconImgView" destination="4Wq-pj-CmI" id="p3z-1b-OoO"/>
+                <outlet property="imgHeightconstraints" destination="kT3-RE-Pqj" id="bI4-f4-FSJ"/>
                 <outlet property="nameLabel" destination="qkB-V6-GxD" id="7WL-Wg-k6J"/>
                 <outletCollection property="imgs" destination="8Ca-3E-VTB" id="5Nh-GH-XHb"/>
                 <outletCollection property="imgs" destination="0tI-ky-taF" id="izj-B5-CB0"/>

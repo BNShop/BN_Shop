@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *goodLabel;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *imgs;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgHeightconstraints;
 
 
 @end
@@ -46,6 +47,7 @@
     for (UIImageView *img in self.imgs) {
         img.q_BorderColor = ColorLine;
         img.q_BorderWidth = 1.0f;
+        img.contentMode = UIViewContentModeScaleAspectFit;
     }
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -74,11 +76,15 @@
         img.hidden = YES;
         img.image = nil;
     }
+    if (imgUrls.count == 0) {
+        self.imgHeightconstraints.constant = 1.0;
+    } else {
+        self.imgHeightconstraints.constant = 75.0;
+    }
     NSArray *urls = imgUrls.copy;
     for (NSInteger index = 0; index < count; index++) {
         UIImageView *img = [self.imgs objectAtIndex:index];
-//        [img sd_setImageWithURL:[[urls objectAtIndex:index] URL] placeholderImage:IMAGE(@"")];
-        [img sd_setImageWithURL:[[urls objectAtIndex:index] URL] placeholderImage:IMAGE(@"Shop_Home_Type0")];
+        [img sd_setImageWithURL:[[urls objectAtIndex:index] URL] placeholderImage:nil];
         img.hidden = NO;
     }
 }

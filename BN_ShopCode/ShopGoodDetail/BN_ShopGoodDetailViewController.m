@@ -252,6 +252,8 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 - (void)bulidStateViewModel {
     self.stateViewModel = [[BN_ShopGoodDetaiStateViewModel alloc] init];
     [self.view setBn_data:self.stateViewModel];
+    [self.view loadData:self.stateViewModel];
+    self.stateViewModel.loadSupport.loadEvent = NetLoadingEvent;
     
     @weakify(self);
     [self.view setRefreshBlock:^{
@@ -286,7 +288,6 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     }];
     
     [self.stateViewModel getSimpleDetailDataWith:self.simpleShowViewModel.goodsId];
-    [self.view loadData:self.stateViewModel];
 }
 
 - (void)buildStateView {
@@ -456,7 +457,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     self.controllers = [NSMutableArray array];
     BN_ShopGoodSpecificDetailsViewController *detailCtr = [[BN_ShopGoodSpecificDetailsViewController alloc] initWithHtml:self.stateViewModel.simpleDetailModel.goodDescription];
     detailCtr.headerHight = self.headerHight;
-    detailCtr.footerHight = 252;
+    detailCtr.footerHight = 312;
     [detailCtr setFooterView:self.arribalsView];
     [detailCtr setHeadView:self.headeView];
     BN_ShopGoodDetailCommentViewController *commetnCtr = [[BN_ShopGoodDetailCommentViewController alloc] initWith:self.simpleShowViewModel.goodsId type:self.simpleShowViewModel.type];

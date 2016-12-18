@@ -24,4 +24,5 @@
 
 - (NSString *)provinceAndCity;
 - (NSString *)telNum;
+- (BOOL)isValidAddress;
 @end
