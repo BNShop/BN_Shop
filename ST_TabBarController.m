@@ -10,6 +10,11 @@
 #import "BN_ShopViewController.h"
 #import "BN_ShopHomeViewController.h"
 
+#if __has_include("ReceiptAddressViewController.h")
+#import "ReceiptAddressViewController.h"
+#define HAS_AddressList 1
+#endif
+
 @interface ST_TabBarController ()<UITabBarControllerDelegate>
 {
     UINavigationController *navigationControllerHome;
@@ -52,6 +57,25 @@
     [centerBtn setBackgroundImage:IMAGE(@"SJR_TabMiddleBtn") forState:UIControlStateNormal];
     [centerBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:centerBtn];
+  
+#if HAS_AddressList
+    UIStoryboard *main = [UIStoryboard storyboardWithName:@"MineStoryboard" bundle:nil];
+    ReceiptAddressViewController *addRessVC = [main instantiateViewControllerWithIdentifier:@"ReceiptAddressViewController"];
+    addRessVC.selectBlock = ^(LBB_AddressModel *addressModel){
+        long addressId = addressModel.addressId;//地址主键
+        NSString *name = addressModel.name;//收货人
+        NSString *phone = addressModel.phone;//收货手机号
+        BOOL isDefault = addressModel.isDefault;//是否默认
+        NSString *provinceName = addressModel.provinceName;//省份名
+        long provinceId = addressModel.provinceId;//省份ID
+        NSString *cityName = addressModel.cityName;//城市名
+        long cityId = addressModel.cityId;//城市ID
+        NSString *districtName = addressModel.districtName;//县、区名称
+        long  districtId = addressModel.districtId;//县、区ID
+        NSString  *address = addressModel.address;//地址名称
+        NSString  *zipcode = addressModel.zipcode;//邮件编码
+    };
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
