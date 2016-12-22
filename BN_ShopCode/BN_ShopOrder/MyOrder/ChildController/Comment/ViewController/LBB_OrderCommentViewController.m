@@ -108,7 +108,7 @@ UICollectionViewDataSource
         [tmpDict setObject:@[
                              @{
                                  DefaultKey : [NSNumber numberWithBool:YES],
-                                 PictureKey:[UIImage imageNamed:@"我的-添加.png"]
+                                 PictureKey:[UIImage imageNamed:@"我的-订单-添加.png"]
                                  }
                              ] forKey:PictureContentArrayKey];
         

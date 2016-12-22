@@ -70,7 +70,7 @@ UITextViewDelegate>
                           RowType :@(eAalesDesc)
                           },
                        @{ SectionKey : @"上传图片",
-                          RowKey : @[[UIImage imageNamed:@"我的-添加.png"]],
+                          RowKey : @[[UIImage imageNamed:@"我的-订单-添加.png"]],
                           RowType :@(eAalesPic)
                           }];
     
@@ -280,7 +280,7 @@ UITextViewDelegate>
             cell.textLabel.text = rowsArray[indexPath.row];
             cell.rightHeightContraint.constant = 11.f;
             cell.rightImagWidthConstraint.constant = 6.f;
-            cell.rightImgView.image = IMAGE(@"右侧箭头");
+            cell.rightImgView.image = IMAGE(@"订单-右侧箭头");
             if ([self.reasonContent length]) {
                 cell.textLabel.text = self.reasonContent;
                 cell.textLabel.textColor = ColorGray;
