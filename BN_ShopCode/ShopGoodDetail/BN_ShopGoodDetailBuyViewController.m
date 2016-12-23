@@ -102,7 +102,7 @@
     self.stepper.minimum = 1;
     [self.stepper setLabelTextColor:[UIColor blackColor]];
     [self.stepper setLabelFont:Font10];
-    [self.stepper setButtonWidth:21.0f];
+    [self.stepper setButtonWidth:40.0f];
     [self.stepper setButtonTextColor:ColorLightGray forState:UIControlStateNormal];
     [self.stepper setButtonFont:Font14];
     [self.stepper setBorderColor:ColorLightGray];

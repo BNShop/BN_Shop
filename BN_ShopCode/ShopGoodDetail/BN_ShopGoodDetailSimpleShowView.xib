@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,14 +16,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDU-fJ-hIU" customClass="SDCycleScrollView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="339"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" secondItem="DDU-fJ-hIU" secondAttribute="width" multiplier="1:1" id="4P1-mF-bOG"/>
+                        <constraint firstAttribute="height" secondItem="DDU-fJ-hIU" secondAttribute="width" multiplier="1.06:1" id="4P1-mF-bOG"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Klt-6m-SFE">
-                    <rect key="frame" x="268.5" y="298" width="26.5" height="12"/>
+                    <rect key="frame" x="265" y="317" width="30" height="12"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="12" id="6Vp-HE-wKQ"/>
                         <constraint firstAttribute="width" constant="30" id="Awk-uI-sRV"/>
@@ -34,7 +33,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SB1-n1-ofT">
-                    <rect key="frame" x="15" y="331" width="290" height="20"/>
+                    <rect key="frame" x="15" y="350" width="290" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="bZn-eV-kSA"/>
                     </constraints>

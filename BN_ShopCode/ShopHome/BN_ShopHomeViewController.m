@@ -59,7 +59,8 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.leftBarButtonItems = nil;
     [self buildViewModel];
 }
 
@@ -235,7 +236,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 #pragma mark - tableHeaderView
 
 - (void)buildADView {
-    self.SDScrollViw = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH(self.view), 160) imageURLStringsGroup:self.adViewModel.adUrlList];
+    self.SDScrollViw = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, WIDTH(self.view), WIDTH(self.view)/1.73) imageURLStringsGroup:self.adViewModel.adUrlList];
     self.SDScrollViw.autoScrollTimeInterval = 5.0f;
     self.SDScrollViw.pageDotImage = IMAGE(@"Shop_Home_Dot");
     self.SDScrollViw.currentPageDotImage = IMAGE(@"Shop_Home_CurrentDot");
@@ -302,7 +303,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
         [self.SDScrollViw autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:view];
         [self.SDScrollViw autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:view];
         [self.SDScrollViw autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:view];
-        [self.SDScrollViw autoSetDimension:ALDimensionHeight toSize:160.0f];
+        [self.SDScrollViw autoSetDimension:ALDimensionHeight toSize:WIDTH(self.tableView)/1.73];
     }
     
     [self.categoryView removeFromSuperview];
@@ -390,9 +391,9 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     BN_ShopHomeSouvenirCellModel *model = [self.viewModel.dataSource itemAtIndexPath:indexPath];
     if (model.souvenirModel.goodsList.count == 0) {
-        return 400.0-170.0;
+        return 40.0+WIDTH(tableView)/1.73;
     }
-    return 400.0f;
+    return 216.0+WIDTH(tableView)/1.73;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

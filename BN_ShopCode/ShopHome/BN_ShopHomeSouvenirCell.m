@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView *midLineView1;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *bottomLineView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
 
 @end
 
@@ -40,6 +41,7 @@
     self.collectionView.delegate = self;
     
     self.adImgView.userInteractionEnabled = YES;
+    self.adImgView.contentMode = UIViewContentModeScaleAspectFit;
     self.titleLabel.userInteractionEnabled = YES;
     @weakify(self);
     [self.adImgView bk_whenTapped:^{
@@ -73,9 +75,11 @@
     if ([dataSource collectionView:self.collectionView numberOfItemsInSection:0] == 0) {
         self.midLineView1.hidden = YES;
         self.collectionView.hidden = YES;
+        self.collectionViewHeight.constant = 0.0;
     } else {
         self.midLineView1.hidden = NO;
         self.collectionView.hidden = NO;
+        self.collectionViewHeight.constant = 176.0f;
     }
 }
 

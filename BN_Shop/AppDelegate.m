@@ -26,7 +26,7 @@
     [[BN_ShopPayment sharedInstance] wxRegisterApp];
 
         NSDictionary *paraDic = @{
-                                  @"phoneNum":@"18006015791",
+                                  @"phoneNum":@"18059240683",
                                   @"passwd":@"123456",
                                   @"deviceSystemType":@(2),
                                   @"deviceId":@"12354222009090890987"

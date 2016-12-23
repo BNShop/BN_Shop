@@ -4,8 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,7 +35,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nXs-Zy-G5V">
                         <rect key="frame" x="0.0" y="40" width="320" height="129.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="129.5" id="oUf-9y-6pn"/>
+                            <constraint firstAttribute="width" secondItem="nXs-Zy-G5V" secondAttribute="height" multiplier="320:185" id="pdp-Uy-g0c"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWB-q2-IW5">
@@ -104,6 +104,7 @@
                 <outlet property="adImgView" destination="nXs-Zy-G5V" id="p0U-XD-Arz"/>
                 <outlet property="bottomLineView" destination="88x-gR-ZHX" id="3sC-5r-9kL"/>
                 <outlet property="collectionView" destination="1tO-LY-THF" id="GU3-ck-USb"/>
+                <outlet property="collectionViewHeight" destination="8UT-I5-ykK" id="KEJ-is-4Dw"/>
                 <outlet property="midLineView0" destination="Txv-jE-PPf" id="HbX-Mj-gyj"/>
                 <outlet property="midLineView1" destination="uhl-mT-vLZ" id="WT9-Up-Tw7"/>
                 <outlet property="titleLabel" destination="iWB-q2-IW5" id="tpV-r4-14W"/>

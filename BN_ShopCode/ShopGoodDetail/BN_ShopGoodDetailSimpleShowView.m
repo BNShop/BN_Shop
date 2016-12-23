@@ -83,6 +83,6 @@
 }
 
 - (CGFloat)getViewHeight {
-    return DeviceWidth+31;
+    return DeviceWidth*1.06+31;
 }
 @end
