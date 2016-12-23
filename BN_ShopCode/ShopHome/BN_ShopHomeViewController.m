@@ -22,12 +22,14 @@
 #import "BN_ShopHomeCategoryView.h"
 #import "BN_ShopHomeSouvenirCell.h"
 #import "BN_ShopGoodCell.h"
+#import "UIImageView+WebCache.h"
 
 #import "Base_BaseViewController+ControlCreate.h"
 #import "UIBarButtonItem+BlocksKit.h"
 #import "UISearchBar+RAC.h"
 #import "PureLayout.h"
 #import "NSString+Attributed.h"
+#import "NSString+URL.h"
 #import "UIView+BlocksKit.h"
 #import "BN_ShopHeader.h"
 
@@ -36,6 +38,10 @@
 #import "BN_ShopHomeFlashSaleViewModel.h"
 #import "BN_ShopHomeSouvenirCellModel.h"
 #import "BN_ShopHomeViewModel.h"
+#if __has_include("LBB_PoohCycleTransManager.h")
+#import "LBB_PoohCycleTransManager.h"
+#define HAS_AddressList 1
+#endif
 
 @interface BN_ShopHomeViewController ()<BN_ShopHomeSouvenirCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -44,6 +50,8 @@
 @property (strong, nonatomic) BN_ShopHomeFlashSaleView *flashSaleView;
 @property (strong, nonatomic) SDCycleScrollView *SDScrollViw;
 @property (strong, nonatomic) BN_ShopHomeCategoryView *categoryView;
+@property (strong, nonatomic) UIView *recommandView;
+@property (strong, nonatomic) NSLayoutConstraint *recommandViewHeight;
 
 @property (strong, nonatomic) BN_ShopHomeADViewModel *adViewModel;
 @property (strong, nonatomic) BN_ShopHomeCategoryViewModel *categoryViewModel;
@@ -81,6 +89,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     
     [self buildADView];
     [self buildCategoryView];
+    [self buildRecommandADView];
     [self buildFlashSaleView];
     [self tableHeaderView];
 }
@@ -192,6 +201,35 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
         [self.adViewModel getADArray];
     }];
     
+    [self.adViewModel getRecommendAdListArray];
+    [self.adViewModel.recommendAdList.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        CGFloat height = WIDTH(self.recommandView)/1.73;
+        for (NSInteger index=0; index<self.adViewModel.recommendAdList.count; index++) {
+            BN_ADModel *model = self.adViewModel.recommendAdList[index];
+            UIImageView *imgView = [[UIImageView alloc] init];
+            [imgView sd_setImageWithURL:[model.picUrl URL] placeholderImage:nil];
+            [self.recommandView addSubview:imgView];
+            [imgView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.recommandView withOffset:index*(20+height)];
+            [imgView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.recommandView];
+            [imgView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.recommandView];
+            [imgView autoSetDimension:ALDimensionHeight toSize:height];
+            imgView.tag = index;
+            
+            [imgView bk_whenTapped:^{
+#if HAS_AddressList
+                @strongify(self);
+                [[LBB_PoohCycleTransManager sharedInstance] transmission:self.adViewModel.recommendAdList[imgView.tag] viewController:self];
+#endif
+            }];
+        }
+        self.recommandViewHeight.constant = (20+height)*self.adViewModel.recommendAdList.count;
+        UIView *recommandADView = self.tableView.tableHeaderView;
+        height = HEIGHT(self.SDScrollViw) + HEIGHT(self.categoryView) + HEIGHT(self.flashSaleView) + self.recommandViewHeight.constant;
+        recommandADView.frame = RECT_CHANGE_height(recommandADView, height);
+        [recommandADView setNeedsLayout];
+        self.tableView.tableHeaderView = recommandADView;
+    }];
 }
 
 - (void)buildCategoryViewModel {
@@ -295,6 +333,10 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     
 }
 
+- (void)buildRecommandADView {
+    self.recommandView = [[UIView alloc] init];
+}
+
 - (void)tableHeaderView {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self.tableView), 0)];
     [self.SDScrollViw removeFromSuperview];
@@ -319,13 +361,21 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
         [self.categoryView autoSetDimension:ALDimensionHeight toSize:self.categoryView.getViewHeight];
     }
     
+    [self.recommandView removeAllSubviews];
+    if (self.recommandView) {
+        [view addSubview:self.recommandView];
+        [self.recommandView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.categoryView];
+        [self.recommandView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:view];
+        [self.recommandView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:view];
+        self.recommandViewHeight = [self.recommandView autoSetDimension:ALDimensionHeight toSize:0.1];
+    }
     
     
     [self.flashSaleView removeFromSuperview];
     if (self.flashSaleView) {
         [self updateFlashSaleView];
         [view addSubview:self.flashSaleView];
-        [self.flashSaleView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.categoryView withOffset:0.0f];
+        [self.flashSaleView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.recommandView withOffset:0.0f];
         [self.flashSaleView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:view];
         [self.flashSaleView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:view];
         [self.flashSaleView autoSetDimension:ALDimensionHeight toSize:self.flashSaleView.getViewHeight];
@@ -335,7 +385,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     
     [view setNeedsLayout];
     [view layoutIfNeeded];
-    CGFloat height = HEIGHT(self.SDScrollViw) + HEIGHT(self.categoryView) + HEIGHT(self.flashSaleView);
+    CGFloat height = HEIGHT(self.SDScrollViw) + HEIGHT(self.categoryView) + HEIGHT(self.flashSaleView) + HEIGHT(self.recommandView);
     view.frame = RECT_CHANGE_height(view, height);
     self.tableView.tableHeaderView = view;
 }

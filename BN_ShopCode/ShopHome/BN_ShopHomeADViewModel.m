@@ -17,6 +17,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.adList = [[NSMutableArray alloc] initFromNet];
+        self.recommendAdList = [[NSMutableArray alloc] initFromNet];
     }
     return self;
 }
@@ -51,6 +52,33 @@
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         
         temp.adList.loadSupport.loadEvent = NetLoadFailedEvent;
+    }];
+    
+}
+
+- (void)getRecommendAdListArray {
+    NSDictionary *paraDic = nil;
+    
+    NSString *url = [NSString stringWithFormat:@"%@/mall/adList", Shop_BASEURL];
+    __weak typeof(self) temp = self;
+    self.recommendAdList.loadSupport.loadEvent = NetLoadingEvent;
+    
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if(codeNumber.intValue == 0) {
+            NSArray *array = [dic objectForKey:@"rows"];
+            NSArray *returnArray = [BN_ADModel mj_objectArrayWithKeyValuesArray:array];
+            [temp.recommendAdList removeAllObjects];
+            [temp.recommendAdList addObjectsFromArray:returnArray];
+            temp.recommendAdList.networkTotal = [dic objectForKey:@"total"];
+        } else {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+        }
+        
+        temp.recommendAdList.loadSupport.loadEvent = codeNumber.intValue;
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        temp.recommendAdList.loadSupport.loadEvent = NetLoadFailedEvent;
     }];
     
 }

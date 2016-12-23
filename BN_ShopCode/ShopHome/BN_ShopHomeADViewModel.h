@@ -23,9 +23,10 @@
 @interface BN_ShopHomeADViewModel : NSObject
 
 @property (nonatomic, strong) NSMutableArray<BN_ADModel*> *adList;
+@property (nonatomic, strong) NSMutableArray<BN_ADModel*> *recommendAdList;
 
 - (void)getADArray;
-
+- (void)getRecommendAdListArray;
 - (NSArray *)adUrlList;
 - (NSInteger)adCount;
 - (id)adItemWithIndex:(NSInteger)index;
