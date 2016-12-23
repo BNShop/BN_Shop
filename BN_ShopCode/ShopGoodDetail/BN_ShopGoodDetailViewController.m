@@ -412,6 +412,10 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 - (void)airLine {
 #warning 商品详情页的客服服务
+    if ([BC_ToolRequest sharedManager].token.length == 0) {
+        [self showHudError:TEXT(@"没有权限联系客服") title:TEXT(@"请先登录")];
+        return;
+    }
 }
 
 - (void)followAction {
@@ -422,7 +426,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         [self.toolBar updateWithSelect:collecteState];
     } failure:^(NSString *errorDescription) {
         @strongify(self);
-        [self showHudError:errorDescription title:TEXT(@"操作失败")];
+//        [self showHudError:errorDescription title:TEXT(@"操作失败")];
         [self.toolBar updateWithAoppositeSelect];
     }];
 }
