@@ -38,10 +38,6 @@
 #import "BN_ShopHomeFlashSaleViewModel.h"
 #import "BN_ShopHomeSouvenirCellModel.h"
 #import "BN_ShopHomeViewModel.h"
-#if __has_include("LBB_PoohCycleTransManager.h")
-#import "LBB_PoohCycleTransManager.h"
-#define HAS_AddressList 1
-#endif
 
 @interface BN_ShopHomeViewController ()<BN_ShopHomeSouvenirCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -215,12 +211,16 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
             [imgView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.recommandView];
             [imgView autoSetDimension:ALDimensionHeight toSize:height];
             imgView.tag = index;
+            imgView.userInteractionEnabled = YES;
             
             [imgView bk_whenTapped:^{
-#if HAS_AddressList
-                @strongify(self);
-                [[LBB_PoohCycleTransManager sharedInstance] transmission:self.adViewModel.recommendAdList[imgView.tag] viewController:self];
-#endif
+                Class LBB_PoohCycleTransManager = NSClassFromString(@"LBB_PoohCycleTransManager");
+                if (LBB_PoohCycleTransManager) {
+                    SEL shareManagerSel = NSSelectorFromString(@"sharedInstance");
+                    id shareManager = [[LBB_PoohCycleTransManager self] performSelector:shareManagerSel];
+                    [shareManager performSelector:NSSelectorFromString(@"transmission:viewController:") withObject:self.adViewModel.recommendAdList[imgView.tag] withObject:self];
+                }
+                
             }];
         }
         self.recommandViewHeight.constant = (20+height)*self.adViewModel.recommendAdList.count;

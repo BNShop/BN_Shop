@@ -66,7 +66,7 @@
     self.dateLabel.text = dateStr;
     self.contentLabel.text = conten;
     self.goodLabel.text = goodStr;
-    [self.iconImgView sd_setImageWithURL:[icon URL] placeholderImage:nil];
+    [self.iconImgView sd_setImageWithURL:[icon URL] placeholderImage:IMAGE(@"Shop_Default_Avart")];
     self.iconImgView.backgroundColor = [UIColor redColor];
 }
 

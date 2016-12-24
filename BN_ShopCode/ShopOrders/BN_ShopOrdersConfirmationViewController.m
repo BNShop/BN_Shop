@@ -11,10 +11,6 @@
 #import "BN_ShopOrderDetailViewController.h"
 #import "LBB_OrderViewController.h"
 #import "LBB_OrderModuleViewController.h"
-#if __has_include("ReceiptAddressViewController.h")
-#import "ReceiptAddressViewController.h"
-#define HAS_AddressList 1
-#endif
 
 #import "BN_ShopOrderBillView.h"
 #import "BN_ShopOrdersToolBar.h"
@@ -267,28 +263,26 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 #pragma mark - change address
 - (void)changeAddress {
     @weakify(self);
-
-    
-#if HAS_AddressList
     UIStoryboard *main = [UIStoryboard storyboardWithName:@"MineStoryboard" bundle:nil];
-    ReceiptAddressViewController *addRessVC = [main instantiateViewControllerWithIdentifier:@"ReceiptAddressViewController"];
-    addRessVC.selectBlock = ^(LBB_AddressModel *addressModel){
+    id addRessVC = [main instantiateViewControllerWithIdentifier:@"ReceiptAddressViewController"];
+    
+    void (^selectBlock)(id addressModel) = ^(id addressModel){
         @strongify(self);
         BN_ShopUserAddressModel *address = [[BN_ShopUserAddressModel alloc] init];
-        address.address_id = addressModel.addressId;//地址主键
-        address.name = addressModel.name;//收货人
-        address.phone = addressModel.phone;//收货手机号
-        if (addressModel.isDefault) {
-            addressModel.is_default = 1;//是否默认
+        address.address_id = [[addressModel valueForKey:@"addressId"] intValue];//地址主键
+        address.name = [addressModel valueForKey:@"name"];//收货人
+        address.phone = [addressModel valueForKey:@"phone"];//收货手机号
+        if ([[addressModel valueForKey:@"isDefault"] boolValue]) {
+            address.is_default = 1;//是否默认
         }
-        address.prov = addressModel.provinceName;//省份名
-        address.province_id = addressModel.provinceId;//省份ID
-        address.city = addressModel.cityName;//城市名
-        address.city_id = addressModel.cityId;//城市ID
-        address.dist = addressModel.districtName;//县、区名称
-        address.district_id = addressModel.districtId;//县、区ID
-        address.address = addressModel.address;//地址名称
-//        NSString  *zipcode = addressModel.zipcode;//邮件编码
+        address.prov = [addressModel valueForKey:@"provinceName"];//省份名
+        address.province_id = [[addressModel valueForKey:@"provinceId"] intValue];//省份ID
+        address.city = [addressModel valueForKey:@"cityName"];//城市名
+        address.city_id = [[addressModel valueForKey:@"cityId"] intValue];//城市ID
+        address.dist = [addressModel valueForKey:@"districtName"];//县、区名称
+        address.district_id = [[addressModel valueForKey:@"districtId"] intValue];//县、区ID
+        address.address = [addressModel valueForKey:@"address"];//地址名称
+        //        NSString  *zipcode = addressModel.zipcode;//邮件编码
         self.confirmationviewModel.ordreModel.userAddress = address;
         if (self.confirmationviewModel.ordreModel.userAddress.isValidAddress) {
             [self.userView updateWith:self.confirmationviewModel.ordreModel.userAddress.name tel:self.confirmationviewModel.ordreModel.userAddress.telNum tagged:self.confirmationviewModel.ordreModel.userAddress.is_default provinces:[self.confirmationviewModel.ordreModel.userAddress provinceAndCity] street:self.confirmationviewModel.ordreModel.userAddress.address];
@@ -296,7 +290,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
             [self.userView updateWith:nil tel:nil tagged:NO provinces:@"增加地址" street:nil];
         }
     };
-#endif
+    [addRessVC setValue:selectBlock forKey:@"selectBlock"];
 }
 
 @end
