@@ -291,6 +291,9 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         }
     };
     [addRessVC setValue:selectBlock forKey:@"selectBlock"];
+    if (addRessVC) {
+        [self.navigationController pushViewController:addRessVC animated:YES];
+    }
 }
 
 @end
