@@ -282,19 +282,25 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     self.SDScrollViw.clickItemOperationBlock = ^(NSInteger currentIndex) {
         @strongify(self);
         BN_ADModel *adObj = [self.adViewModel adItemWithIndex:currentIndex];
-        if (adObj.type == 14) {
-            //去专题页面
-            BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:adObj.objId];
-            [self.navigationController pushViewController:ctr animated:YES];
-            
-        } else if (adObj.type == 4) {
-            
-            BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:adObj.objId];
-            [self.navigationController pushViewController:ctr animated:YES];
-            
-        } else if (adObj.hrefUrl) {
-#warning 点击广告图的跳转 外部链接
-            
+//        if (adObj.type == 14) {
+//            //去专题页面
+//            BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:adObj.objId];
+//            [self.navigationController pushViewController:ctr animated:YES];
+//            
+//        } else if (adObj.type == 4) {
+//            
+//            BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:adObj.objId];
+//            [self.navigationController pushViewController:ctr animated:YES];
+//            
+//        } else if (adObj.hrefUrl) {
+//#warning 点击广告图的跳转 外部链接
+//            
+//        }
+        Class LBB_PoohCycleTransManager = NSClassFromString(@"LBB_PoohCycleTransManager");
+        if (LBB_PoohCycleTransManager) {
+            SEL shareManagerSel = NSSelectorFromString(@"sharedInstance");
+            id shareManager = [[LBB_PoohCycleTransManager self] performSelector:shareManagerSel];
+            [shareManager performSelector:NSSelectorFromString(@"transmission:viewController:") withObject:adObj withObject:self];
         }
     };
 }
