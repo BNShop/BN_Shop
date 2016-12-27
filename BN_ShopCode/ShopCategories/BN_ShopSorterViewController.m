@@ -140,7 +140,12 @@ static NSString * const ShopSorterCollectCellIdentifier = @"ShopSorterCollectCel
 - (void)buildSecondDataSource:(BN_ShopCategoryModel *)model {
     if (model.secondCategories.count) {
         [self.viewModel getSecondDataSourceWith:model.secondCategories];
+        model.secondCategories.loadSupport.loadEvent = NetLoadSuccessfulEvent;
+        [self.contentCollectionView setBn_data:model.secondCategories];
+        [self.contentCollectionView setCollectionViewData:model.secondCategories];
+        [self.contentCollectionView loadData:model.secondCategories];
         [self.contentCollectionView reloadData];
+        
         return;
     }
     @weakify(self);
