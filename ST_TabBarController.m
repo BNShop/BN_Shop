@@ -97,7 +97,7 @@
     navigationControllerSquare            = [[UINavigationController alloc]initWithRootViewController:viewController2];
     navigationControllerSquare.title      = @"广场";
     navigationControllerMall       = [[UINavigationController alloc]initWithRootViewController:viewController3];
-    navigationControllerMall.title = @"商城";
+    navigationControllerMall.title = @"伴手礼";
     navigationControllerMy         = [[UINavigationController alloc]initWithRootViewController:viewController4];
     navigationControllerMy.title   = @"我的";
     
