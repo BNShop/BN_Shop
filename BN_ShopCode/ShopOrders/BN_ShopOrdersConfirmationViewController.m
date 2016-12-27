@@ -284,11 +284,13 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         address.address = [addressModel valueForKey:@"address"];//地址名称
         //        NSString  *zipcode = addressModel.zipcode;//邮件编码
         self.confirmationviewModel.ordreModel.userAddress = address;
-        if (self.confirmationviewModel.ordreModel.userAddress.isValidAddress) {
-            [self.userView updateWith:self.confirmationviewModel.ordreModel.userAddress.name tel:self.confirmationviewModel.ordreModel.userAddress.telNum tagged:self.confirmationviewModel.ordreModel.userAddress.is_default provinces:[self.confirmationviewModel.ordreModel.userAddress provinceAndCity] street:self.confirmationviewModel.ordreModel.userAddress.address];
-        } else {
-            [self.userView updateWith:nil tel:nil tagged:NO provinces:@"增加地址" street:nil];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.confirmationviewModel.ordreModel.userAddress.isValidAddress) {
+                [self.userView updateWith:self.confirmationviewModel.ordreModel.userAddress.name tel:self.confirmationviewModel.ordreModel.userAddress.telNum tagged:self.confirmationviewModel.ordreModel.userAddress.is_default provinces:[self.confirmationviewModel.ordreModel.userAddress provinceAndCity] street:self.confirmationviewModel.ordreModel.userAddress.address];
+            } else {
+                [self.userView updateWith:nil tel:nil tagged:NO provinces:@"增加地址" street:nil];
+            }
+        });
     };
     [addRessVC setValue:selectBlock forKey:@"selectBlock"];
     if (addRessVC) {
