@@ -23,6 +23,7 @@
     // Initialization code
     self.imgView.q_BorderWidth = 1.0f;
     self.imgView.q_BorderColor = ColorLine;
+    self.imgView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)updateWith:(NSString *)imgUrl {
