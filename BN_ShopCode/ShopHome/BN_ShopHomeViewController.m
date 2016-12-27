@@ -351,7 +351,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
         [self.SDScrollViw autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:view];
         [self.SDScrollViw autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:view];
         [self.SDScrollViw autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:view];
-        [self.SDScrollViw autoSetDimension:ALDimensionHeight toSize:WIDTH(self.tableView)/1.73];
+        [self.SDScrollViw autoMatchDimension:ALDimensionHeight toDimension:ALDimensionWidth ofView:self.SDScrollViw withMultiplier:0.57];
     }
     
     [self.categoryView removeFromSuperview];
