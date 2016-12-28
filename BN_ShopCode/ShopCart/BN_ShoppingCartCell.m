@@ -37,7 +37,7 @@
     self.thumbnailImageView.q_BorderColor = ColorLine;
     self.thumbnailImageView.q_BorderWidth = 1.0f;
     
-    
+    self.stepper.minimum = 1.0;
     [self.stepper setLabelTextColor:[UIColor blackColor]];
     [self.stepper setLabelFont:Font10];
     [self.stepper setButtonWidth:21.0f];
