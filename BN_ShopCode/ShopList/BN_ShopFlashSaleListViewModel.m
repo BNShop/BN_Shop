@@ -59,7 +59,11 @@
             }
             
             [temp.goods addObjectsFromArray:returnArray];
-            temp.goods.networkTotal = [dic objectForKey:@"total"];
+            if (returnArray.count < 10) {
+                temp.goods.networkTotal = @(temp.goods.count);
+            } else {
+                temp.goods.networkTotal = [dic objectForKey:@"total"];
+            }
         }
         else
         {
