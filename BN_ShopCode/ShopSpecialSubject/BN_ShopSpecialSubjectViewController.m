@@ -220,7 +220,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     
     [self.subjectHeadView updateWith:self.viewModel.specialDetail.cover_img comment:[NSString stringWithFormat:@"%d", self.viewModel.specialDetail.total_comment] follow:[NSString stringWithFormat:@"%d", self.viewModel.specialDetail.total_collected] like:[NSString stringWithFormat:@"%d", self.viewModel.specialDetail.total_like] content:self.viewModel.specialDetail.content_display];
     
-    [self.subjectHeadView updateWith:self.viewModel.dataSource];
+    [self.subjectHeadView updateWith:self.viewModel.tagDataSource];
 
 }
 
@@ -340,13 +340,16 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
 }
 
 - (void)addToCart:(BN_ShopGoodSpecialModel *)good {
-    BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:good.pic_url standards:good.vice_title_display price:good.real_price];
-    ctr.view.backgroundColor = [ColorBlack colorWithAlphaComponent:0.17];
-    [ctr setModalPresentationStyle:UIModalPresentationCustom];
-    [ctr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    ctr.delegate = self;
-    ctr.goodId = good.obj_id;
-    [self presentViewController:ctr animated:YES completion:nil];
+//    BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:good.pic_url standards:good.vice_title_display price:good.real_price];
+//    ctr.view.backgroundColor = [ColorBlack colorWithAlphaComponent:0.17];
+//    [ctr setModalPresentationStyle:UIModalPresentationCustom];
+//    [ctr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+//    ctr.delegate = self;
+//    ctr.goodId = good.obj_id;
+//    [self presentViewController:ctr animated:YES completion:nil];
+    
+    BN_ShopGoodDetailViewController *dCtr = [[BN_ShopGoodDetailViewController alloc] initWith:good.obj_id];
+    [self.navigationController pushViewController:dCtr animated:YES];
 }
 
 #pragma mark - BN_ShopGoodDetailBuyViewControllerDelegate
