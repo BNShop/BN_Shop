@@ -416,6 +416,13 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
         [self showHudError:TEXT(@"没有权限联系客服") title:TEXT(@"请先登录")];
         return;
     }
+    
+    Class LBB_ShopChatViewController = NSClassFromString(@"LBB_ShopChatViewController");
+    if (LBB_ShopChatViewController) {
+        id newobj = [[LBB_ShopChatViewController alloc] init];
+        [newobj performSelector:NSSelectorFromString(@"setupChatID:") withObject:@"鹭爸爸888"];
+        [self.navigationController pushViewController:newobj animated:YES];
+    }
 }
 
 - (void)followAction {
