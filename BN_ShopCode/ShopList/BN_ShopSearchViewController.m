@@ -38,6 +38,18 @@ static NSString * const ShopSearchResultCellIdentifier = @"ShopSearchResultCellI
 
 @implementation BN_ShopSearchViewController
 
++ (id)shopSearchViewController {
+    Class LBB_HomeSearchViewController = NSClassFromString(@"LBB_HomeSearchViewController");
+    if (LBB_HomeSearchViewController) {
+        id searchVC = [[LBB_HomeSearchViewController alloc] init];
+        return searchVC;
+    }
+    return nil;
+//    LBB_HomeSearchViewController* searchVC = [[LBB_HomeSearchViewController alloc]init];
+//    searchVC.searchType = LBBPoohHomeSearchTypeScenic;
+//    [self.navigationController pushViewController:searchVC animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

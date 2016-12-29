@@ -63,18 +63,22 @@ static NSString * const ShopSorterCollectCellIdentifier = @"ShopSorterCollectCel
     [[searchBar rac_searchBarShouldBeginEditingSignal] subscribeNext:^(id x) {
         [searchBar resignFirstResponder];
         @strongify(self);
-        BN_ShopSearchViewController *ctr = [[BN_ShopSearchViewController alloc] init];
-        [[ctr rac_searchTextDidEndEditingSignal] subscribeNext:^(id x) {
-            @strongify(self);
-            NSLog(@"=== %@, %@", [x class], x);
-            BN_ShopListViewController *listCtr = [[BN_ShopListViewController alloc] initWithGoodName:x];
-            [self.navigationController pushViewController:listCtr animated:YES];
-            
-        }];
-        UINavigationController *navCtr = [[UINavigationController alloc]initWithRootViewController:ctr];
-        [navCtr setModalPresentationStyle:UIModalPresentationCustom];
-        [navCtr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-        [self presentViewController:navCtr animated:YES completion:nil];
+//        BN_ShopSearchViewController *ctr = [[BN_ShopSearchViewController alloc] init];
+//        [[ctr rac_searchTextDidEndEditingSignal] subscribeNext:^(id x) {
+//            @strongify(self);
+//            NSLog(@"=== %@, %@", [x class], x);
+//            BN_ShopListViewController *listCtr = [[BN_ShopListViewController alloc] initWithGoodName:x];
+//            [self.navigationController pushViewController:listCtr animated:YES];
+//            
+//        }];
+//        UINavigationController *navCtr = [[UINavigationController alloc]initWithRootViewController:ctr];
+//        [navCtr setModalPresentationStyle:UIModalPresentationCustom];
+//        [navCtr setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+//        [self presentViewController:navCtr animated:YES completion:nil];
+        id ctr = [BN_ShopSearchViewController shopSearchViewController];
+        if (ctr) {
+            [self.navigationController pushViewController:ctr animated:YES];
+        }
     }];
 }
 

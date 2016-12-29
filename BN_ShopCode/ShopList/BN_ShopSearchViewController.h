@@ -13,6 +13,9 @@
 
 @interface BN_ShopSearchViewController : Base_BaseViewController
 @property (weak, nonatomic) id<BN_ShopSearchViewControllerDelegate> delegate;
+
++ (id)shopSearchViewController;
+
 @end
 
 @protocol BN_ShopSearchViewControllerDelegate <NSObject>
