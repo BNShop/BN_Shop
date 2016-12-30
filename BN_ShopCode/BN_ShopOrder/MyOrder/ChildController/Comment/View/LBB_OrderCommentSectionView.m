@@ -63,6 +63,8 @@ UITextViewDelegate
         }
     }
     self.iconImgView.backgroundColor = ColorLine;
+    self.iconImgView.image = IMAGE(@"商城默认无图片");
+    self.iconImgView.contentMode = UIViewContentModeScaleAspectFill;
     self.textView.placeholder =@"请输入评论内容";
 }
 
@@ -70,6 +72,7 @@ UITextViewDelegate
 {
     [super prepareForReuse];
     _cellInfo = nil;
+    self.iconImgView.image = nil;
     [self.collectionView reloadData];
 }
 - (void)setCellInfo:(NSMutableDictionary *)cellInfo
@@ -86,7 +89,7 @@ UITextViewDelegate
     if ([ticketImageURL length]) {
         [self.iconImgView sd_setImageWithURL:[NSURL URLWithString:ticketImageURL] placeholderImage:nil];
     }else{
-        self.iconImgView.image = nil;
+        self.iconImgView.image = IMAGE(@"商城默认无图片");
     }
      
     self.nameLabel.text = [_cellInfo objectForKey:TikcetNameKey];

@@ -45,6 +45,8 @@ CGFloat orderCellHeight(LBB_OrderModelDetail* cellInfo)
     self.monneyLabel.font = Font15;
     self.numLabel.font = Font15;
     self.imageWidthContraint.constant = 80.f;
+    self.imgView.image = IMAGE(@"商城默认无图片");
+    self.imgView.contentMode = UIViewContentModeScaleAspectFill;
 }
 
 - (void)prepareForReuse
@@ -67,7 +69,7 @@ CGFloat orderCellHeight(LBB_OrderModelDetail* cellInfo)
     if ([cellInfo.pic_url length]) {
         [self.imgView sd_setImageWithURL:[NSURL URLWithString:cellInfo.pic_url] placeholderImage:nil];
     }else{
-        self.imgView.image = nil;
+        self.imgView.image = IMAGE(@"商城默认无图片");
     }
     self.accessoryView =  nil;
 }
