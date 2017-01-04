@@ -10,6 +10,9 @@
 #import <Base_UITabBarBaseController.h>
 #import "LBB_OrderModuleViewController.h"
 #import "BN_ShopHeader.h"
+#import "BN_MySouvenirViewController.h"
+#import "BN_MyCollectionViewController.h"
+#import "BN_MyLimitBuyViewController.h"
 
 @interface BN_ShopViewController ()
 
@@ -33,6 +36,40 @@
     [btn setBackgroundColor:[UIColor blueColor]];
     [btn addTarget:self action:@selector(btnCLickAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
+    
+    UIButton *btna = [[UIButton alloc] initWithFrame:CGRectMake(200, 100, 100, 50)];
+    [btna setTitle:@"我的收藏" forState:UIControlStateNormal];
+    [btna setBackgroundColor:[UIColor blueColor]];
+    [btna addTarget:self action:@selector(myCollection) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btna];
+    
+    UIButton *btnb = [[UIButton alloc] initWithFrame:CGRectMake(50, 300, 100, 50)];
+    [btnb setTitle:@"限时抢购" forState:UIControlStateNormal];
+    [btnb setBackgroundColor:[UIColor blueColor]];
+    [btnb addTarget:self action:@selector(myLimitbuy) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnb];
+    
+    UIButton *btnc = [[UIButton alloc] initWithFrame:CGRectMake(200, 300, 100, 50)];
+    [btnc setTitle:@"伴手礼" forState:UIControlStateNormal];
+    [btnc setBackgroundColor:[UIColor blueColor]];
+    [btnc addTarget:self action:@selector(mySouvenir) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnc];
+}
+
+- (void)myCollection {
+    BN_MyCollectionViewController *vc = [[BN_MyCollectionViewController alloc] initWithNibName:@"BN_MyCollectionViewController" bundle:[NSBundle mainBundle]];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)myLimitbuy {
+    BN_MyLimitBuyViewController *vc = [[BN_MyLimitBuyViewController alloc] initWithNibName:@"BN_MyLimitBuyViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)mySouvenir {
+    BN_MySouvenirViewController *vc = [[BN_MySouvenirViewController alloc] initWithNibName:@"BN_MySouvenirViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)btnCLickAction:(id)sender

@@ -262,6 +262,23 @@
 		C96515141DD61C86004B5F05 /* BN_ShopUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C96515131DD61C86004B5F05 /* BN_ShopUITests.m */; };
 		C96515261DD61E50004B5F05 /* BN_ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C96515241DD61E50004B5F05 /* BN_ShopViewController.m */; };
 		C96515271DD61E50004B5F05 /* BN_ShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C96515251DD61E50004B5F05 /* BN_ShopViewController.xib */; };
+		F28956AD1E1BD78B00F10C39 /* BN_MyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F28956AB1E1BD78B00F10C39 /* BN_MyCollectionViewCell.m */; };
+		F28956AE1E1BD78B00F10C39 /* BN_MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F28956AC1E1BD78B00F10C39 /* BN_MyCollectionViewCell.xib */; };
+		F293C6151E178D9D008D9F86 /* BN_MyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F293C6131E178D9D008D9F86 /* BN_MyCollectionViewController.m */; };
+		F293C6161E178D9D008D9F86 /* BN_MyCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F293C6141E178D9D008D9F86 /* BN_MyCollectionViewController.xib */; };
+		F293C61E1E178FD2008D9F86 /* BN_MyCollectionToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F293C61D1E178FD2008D9F86 /* BN_MyCollectionToolBar.m */; };
+		F293C6211E17E69E008D9F86 /* BN_MycollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F293C6201E17E69E008D9F86 /* BN_MycollectionModel.m */; };
+		F293C6241E17ED7B008D9F86 /* BN_MyCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F293C6231E17ED7B008D9F86 /* BN_MyCollectionViewModel.m */; };
+		F293C6281E18D644008D9F86 /* BN_MyLimitBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F293C6261E18D644008D9F86 /* BN_MyLimitBuyViewController.m */; };
+		F293C6291E18D644008D9F86 /* BN_MyLimitBuyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F293C6271E18D644008D9F86 /* BN_MyLimitBuyViewController.xib */; };
+		F293C62D1E18D6BA008D9F86 /* BN_MyLimitBuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F293C62B1E18D6BA008D9F86 /* BN_MyLimitBuyCell.m */; };
+		F293C62E1E18D6BA008D9F86 /* BN_MyLimitBuyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F293C62C1E18D6BA008D9F86 /* BN_MyLimitBuyCell.xib */; };
+		F293C6311E1B19B7008D9F86 /* BN_MyLimitBuyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F293C6301E1B19B7008D9F86 /* BN_MyLimitBuyViewModel.m */; };
+		F2E2768F1E16534A001A4FF1 /* BN_MySouvenirViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E2768D1E16534A001A4FF1 /* BN_MySouvenirViewController.m */; };
+		F2E276901E16534A001A4FF1 /* BN_MySouvenirViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E2768E1E16534A001A4FF1 /* BN_MySouvenirViewController.xib */; };
+		F2E276941E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E276921E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.m */; };
+		F2E276951E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E276931E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.xib */; };
+		F2E2769B1E169A73001A4FF1 /* BN_MySouvenirModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E2769A1E169A73001A4FF1 /* BN_MySouvenirModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -701,6 +718,34 @@
 		C96515231DD61E50004B5F05 /* BN_ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_ShopViewController.h; sourceTree = "<group>"; };
 		C96515241DD61E50004B5F05 /* BN_ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_ShopViewController.m; sourceTree = "<group>"; };
 		C96515251DD61E50004B5F05 /* BN_ShopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_ShopViewController.xib; sourceTree = "<group>"; };
+		F28956AA1E1BD78B00F10C39 /* BN_MyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_MyCollectionViewCell.h; sourceTree = "<group>"; };
+		F28956AB1E1BD78B00F10C39 /* BN_MyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_MyCollectionViewCell.m; sourceTree = "<group>"; };
+		F28956AC1E1BD78B00F10C39 /* BN_MyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_MyCollectionViewCell.xib; sourceTree = "<group>"; };
+		F293C6121E178D9D008D9F86 /* BN_MyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_MyCollectionViewController.h; sourceTree = "<group>"; };
+		F293C6131E178D9D008D9F86 /* BN_MyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_MyCollectionViewController.m; sourceTree = "<group>"; };
+		F293C6141E178D9D008D9F86 /* BN_MyCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_MyCollectionViewController.xib; sourceTree = "<group>"; };
+		F293C61C1E178FD2008D9F86 /* BN_MyCollectionToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_MyCollectionToolBar.h; sourceTree = "<group>"; };
+		F293C61D1E178FD2008D9F86 /* BN_MyCollectionToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_MyCollectionToolBar.m; sourceTree = "<group>"; };
+		F293C61F1E17E69E008D9F86 /* BN_MycollectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BN_MycollectionModel.h; path = BN_ShopCode/BN_MyCollection/View/BN_MycollectionModel.h; sourceTree = SOURCE_ROOT; };
+		F293C6201E17E69E008D9F86 /* BN_MycollectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BN_MycollectionModel.m; path = BN_ShopCode/BN_MyCollection/View/BN_MycollectionModel.m; sourceTree = SOURCE_ROOT; };
+		F293C6221E17ED7B008D9F86 /* BN_MyCollectionViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BN_MyCollectionViewModel.h; path = BN_ShopCode/BN_MyCollection/View/BN_MyCollectionViewModel.h; sourceTree = SOURCE_ROOT; };
+		F293C6231E17ED7B008D9F86 /* BN_MyCollectionViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BN_MyCollectionViewModel.m; path = BN_ShopCode/BN_MyCollection/View/BN_MyCollectionViewModel.m; sourceTree = SOURCE_ROOT; };
+		F293C6251E18D644008D9F86 /* BN_MyLimitBuyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_MyLimitBuyViewController.h; sourceTree = "<group>"; };
+		F293C6261E18D644008D9F86 /* BN_MyLimitBuyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_MyLimitBuyViewController.m; sourceTree = "<group>"; };
+		F293C6271E18D644008D9F86 /* BN_MyLimitBuyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_MyLimitBuyViewController.xib; sourceTree = "<group>"; };
+		F293C62A1E18D6BA008D9F86 /* BN_MyLimitBuyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_MyLimitBuyCell.h; sourceTree = "<group>"; };
+		F293C62B1E18D6BA008D9F86 /* BN_MyLimitBuyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_MyLimitBuyCell.m; sourceTree = "<group>"; };
+		F293C62C1E18D6BA008D9F86 /* BN_MyLimitBuyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_MyLimitBuyCell.xib; sourceTree = "<group>"; };
+		F293C62F1E1B19B7008D9F86 /* BN_MyLimitBuyViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BN_MyLimitBuyViewModel.h; path = BN_ShopCode/BN_MyLimitBuy/View/BN_MyLimitBuyViewModel.h; sourceTree = SOURCE_ROOT; };
+		F293C6301E1B19B7008D9F86 /* BN_MyLimitBuyViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BN_MyLimitBuyViewModel.m; path = BN_ShopCode/BN_MyLimitBuy/View/BN_MyLimitBuyViewModel.m; sourceTree = SOURCE_ROOT; };
+		F2E2768C1E16534A001A4FF1 /* BN_MySouvenirViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_MySouvenirViewController.h; sourceTree = "<group>"; };
+		F2E2768D1E16534A001A4FF1 /* BN_MySouvenirViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_MySouvenirViewController.m; sourceTree = "<group>"; };
+		F2E2768E1E16534A001A4FF1 /* BN_MySouvenirViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_MySouvenirViewController.xib; sourceTree = "<group>"; };
+		F2E276911E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_MSouvenirTableViewCell.h; sourceTree = "<group>"; };
+		F2E276921E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_MSouvenirTableViewCell.m; sourceTree = "<group>"; };
+		F2E276931E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BN_MSouvenirTableViewCell.xib; sourceTree = "<group>"; };
+		F2E276991E169A73001A4FF1 /* BN_MySouvenirModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BN_MySouvenirModel.h; sourceTree = "<group>"; };
+		F2E2769A1E169A73001A4FF1 /* BN_MySouvenirModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BN_MySouvenirModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1734,6 +1779,9 @@
 		C96515221DD61E2E004B5F05 /* BN_ShopCode */ = {
 			isa = PBXGroup;
 			children = (
+				F2E2767F1E162986001A4FF1 /* BN_MySouvenir */,
+				F2E2767E1E162962001A4FF1 /* BN_MyLimitBuy */,
+				F2E2767D1E16290C001A4FF1 /* BN_MyCollection */,
 				1B7D77771DFD9702006CE905 /* BN_ShopOrder */,
 				1B7D77731DFD96A1006CE905 /* ST_Home.xcassets */,
 				1B7D77741DFD96A1006CE905 /* ST_Shop.xcassets */,
@@ -1756,6 +1804,143 @@
 				1B7D77E31DFD9EF4006CE905 /* BN_ShopHeader.h */,
 			);
 			path = BN_ShopCode;
+			sourceTree = "<group>";
+		};
+		F2E2767D1E16290C001A4FF1 /* BN_MyCollection */ = {
+			isa = PBXGroup;
+			children = (
+				F2E276881E162A2C001A4FF1 /* Model */,
+				F2E276891E162A2C001A4FF1 /* View */,
+				F2E2768A1E162A2C001A4FF1 /* ViewController */,
+				F2E2768B1E162A2C001A4FF1 /* ViewModel */,
+			);
+			path = BN_MyCollection;
+			sourceTree = "<group>";
+		};
+		F2E2767E1E162962001A4FF1 /* BN_MyLimitBuy */ = {
+			isa = PBXGroup;
+			children = (
+				F2E276841E1629FC001A4FF1 /* Model */,
+				F2E276851E1629FC001A4FF1 /* View */,
+				F2E276861E1629FC001A4FF1 /* ViewController */,
+				F2E276871E1629FC001A4FF1 /* ViewModel */,
+			);
+			path = BN_MyLimitBuy;
+			sourceTree = "<group>";
+		};
+		F2E2767F1E162986001A4FF1 /* BN_MySouvenir */ = {
+			isa = PBXGroup;
+			children = (
+				F2E276801E1629C7001A4FF1 /* Model */,
+				F2E276811E1629C7001A4FF1 /* View */,
+				F2E276821E1629C7001A4FF1 /* ViewController */,
+			);
+			path = BN_MySouvenir;
+			sourceTree = "<group>";
+		};
+		F2E276801E1629C7001A4FF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2E276991E169A73001A4FF1 /* BN_MySouvenirModel.h */,
+				F2E2769A1E169A73001A4FF1 /* BN_MySouvenirModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2E276811E1629C7001A4FF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F2E276911E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.h */,
+				F2E276921E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.m */,
+				F2E276931E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F2E276821E1629C7001A4FF1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F2E2768C1E16534A001A4FF1 /* BN_MySouvenirViewController.h */,
+				F2E2768D1E16534A001A4FF1 /* BN_MySouvenirViewController.m */,
+				F2E2768E1E16534A001A4FF1 /* BN_MySouvenirViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F2E276841E1629FC001A4FF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2E276851E1629FC001A4FF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F293C62A1E18D6BA008D9F86 /* BN_MyLimitBuyCell.h */,
+				F293C62B1E18D6BA008D9F86 /* BN_MyLimitBuyCell.m */,
+				F293C62C1E18D6BA008D9F86 /* BN_MyLimitBuyCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F2E276861E1629FC001A4FF1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F293C6251E18D644008D9F86 /* BN_MyLimitBuyViewController.h */,
+				F293C6261E18D644008D9F86 /* BN_MyLimitBuyViewController.m */,
+				F293C6271E18D644008D9F86 /* BN_MyLimitBuyViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F2E276871E1629FC001A4FF1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F293C62F1E1B19B7008D9F86 /* BN_MyLimitBuyViewModel.h */,
+				F293C6301E1B19B7008D9F86 /* BN_MyLimitBuyViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F2E276881E162A2C001A4FF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F293C61F1E17E69E008D9F86 /* BN_MycollectionModel.h */,
+				F293C6201E17E69E008D9F86 /* BN_MycollectionModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2E276891E162A2C001A4FF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F293C61C1E178FD2008D9F86 /* BN_MyCollectionToolBar.h */,
+				F293C61D1E178FD2008D9F86 /* BN_MyCollectionToolBar.m */,
+				F28956AA1E1BD78B00F10C39 /* BN_MyCollectionViewCell.h */,
+				F28956AB1E1BD78B00F10C39 /* BN_MyCollectionViewCell.m */,
+				F28956AC1E1BD78B00F10C39 /* BN_MyCollectionViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F2E2768A1E162A2C001A4FF1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F293C6121E178D9D008D9F86 /* BN_MyCollectionViewController.h */,
+				F293C6131E178D9D008D9F86 /* BN_MyCollectionViewController.m */,
+				F293C6141E178D9D008D9F86 /* BN_MyCollectionViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F2E2768B1E162A2C001A4FF1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F293C6221E17ED7B008D9F86 /* BN_MyCollectionViewModel.h */,
+				F293C6231E17ED7B008D9F86 /* BN_MyCollectionViewModel.m */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1869,11 +2054,13 @@
 			files = (
 				6A033E961DE1ACD3000446A0 /* BN_ShoppingCartEndView.xib in Resources */,
 				6ADB5E3E1DEDC51B000175AB /* BN_ShopFlashSaleListViewController.xib in Resources */,
+				F293C62E1E18D6BA008D9F86 /* BN_MyLimitBuyCell.xib in Resources */,
 				6A033EC61DE1ACD3000446A0 /* BN_ShopBannerCell.xib in Resources */,
 				6A033ED61DE1ACD3000446A0 /* BN_ShopScreeningReusableView.xib in Resources */,
 				6A0262051DE4287000BA5AA3 /* BN_ShopSpecialSubjectHeadView.xib in Resources */,
 				1B7D77DC1DFD9703006CE905 /* LBB_OrderHeaderView.xib in Resources */,
 				1B7D77C81DFD9702006CE905 /* LBB_OrderAalesReusableHeadView.xib in Resources */,
+				F28956AE1E1BD78B00F10C39 /* BN_MyCollectionViewCell.xib in Resources */,
 				C96514FE1DD61C86004B5F05 /* LaunchScreen.storyboard in Resources */,
 				6A033ED41DE1ACD3000446A0 /* BN_ShopScreeningResuablePriceCell.xib in Resources */,
 				6A033ED11DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewController.xib in Resources */,
@@ -1916,6 +2103,7 @@
 				6A033EDA1DE1ACD3000446A0 /* BN_ShopSearchCollectionReusableView.xib in Resources */,
 				6A035C251DE6AE29009617A7 /* BN_ShopGoodDetailConsultancyViewController.xib in Resources */,
 				6A033EDC1DE1ACD3000446A0 /* BN_ShopSearchViewController.xib in Resources */,
+				F293C6291E18D644008D9F86 /* BN_MyLimitBuyViewController.xib in Resources */,
 				6AA26FF11DF55F57003688C4 /* BN_ShopPaymentViewController.xib in Resources */,
 				1B7D77761DFD96A1006CE905 /* ST_Shop.xcassets in Resources */,
 				1B7D77D21DFD9702006CE905 /* LBB_OrderCommentViewController.xib in Resources */,
@@ -1927,7 +2115,9 @@
 				6A848D341DF3CF31004C9070 /* BN_ShopOrderNumberProcessingView.xib in Resources */,
 				6A033EB71DE1ACD3000446A0 /* PurchaseConsultingViewController.xib in Resources */,
 				6A033EBD1DE1ACD3000446A0 /* BN_ShopHomeFlashSaleView.xib in Resources */,
+				F2E276951E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.xib in Resources */,
 				6A033EB21DE1ACD3000446A0 /* BN_ShopGoodDetaiNormalStateView.xib in Resources */,
+				F293C6161E178D9D008D9F86 /* BN_MyCollectionViewController.xib in Resources */,
 				6A033E981DE1ACD3000446A0 /* BN_ShoppingCartHeardView.xib in Resources */,
 				6A81C7A11DEF37660015348D /* BN_ShopOrderNumberView.xib in Resources */,
 				6A06E42A1DE442340036EEF3 /* BN_ShopSpecialSubjectTipCell.xib in Resources */,
@@ -1949,6 +2139,7 @@
 				6A81C7A61DEF3B280015348D /* BN_ShopOrderServiceStateView.xib in Resources */,
 				6A033F231DE1C994000446A0 /* BN_ShopGoodDetailCommentsCell.xib in Resources */,
 				6A033EC31DE1ACD3000446A0 /* BN_ShopHomeViewController.xib in Resources */,
+				F2E276901E16534A001A4FF1 /* BN_MySouvenirViewController.xib in Resources */,
 				1B7D77CE1DFD9702006CE905 /* LBB_OrderCommentSectionView.xib in Resources */,
 				1B7D77C01DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.xib in Resources */,
 				6A81C7AB1DEF3FA20015348D /* BN_ShopOrderProcessingView.xib in Resources */,
@@ -2021,7 +2212,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2038,6 +2229,8 @@
 				6A0261DC1DE3169800BA5AA3 /* BN_ShopGoodDetailNewArribalsCell.m in Sources */,
 				6A61F0851DF2811000867A69 /* BN_ShopOrderDetailViewModel.m in Sources */,
 				1B7D77CB1DFD9702006CE905 /* LBB_OrderCommentPicturViewCell.m in Sources */,
+				F293C61E1E178FD2008D9F86 /* BN_MyCollectionToolBar.m in Sources */,
+				F293C6281E18D644008D9F86 /* BN_MyLimitBuyViewController.m in Sources */,
 				6A033ED71DE1ACD3000446A0 /* BN_ShopScreeningToolBar.m in Sources */,
 				1B7D77DD1DFD9703006CE905 /* LBB_OrderViewController.m in Sources */,
 				C96514F61DD61C86004B5F05 /* ViewController.m in Sources */,
@@ -2064,6 +2257,7 @@
 				6A033EA31DE1ACD3000446A0 /* BN_ShopSorterViewModel.m in Sources */,
 				6A033F311DE1FC2A000446A0 /* BN_ShopGoodDetailCommentViewModel.m in Sources */,
 				6A0261FE1DE4253D00BA5AA3 /* BN_ShopSpecialTopicHeadView.m in Sources */,
+				F293C6241E17ED7B008D9F86 /* BN_MyCollectionViewModel.m in Sources */,
 				6A033EE71DE1ACD3000446A0 /* BN_ShopOrderUserProfileView.m in Sources */,
 				6A033EA81DE1ACD3000446A0 /* BN_ShopGoodDetailSellersView.m in Sources */,
 				6A0B13701DE2AE1B00B3715E /* BN_ShopGoodDetailNewArrivalsView.m in Sources */,
@@ -2079,6 +2273,7 @@
 				6A033E871DE1ACD3000446A0 /* Base_BaseViewController+ControlCreate.m in Sources */,
 				6A033EB81DE1ACD3000446A0 /* BN_ShopHomeADViewModel.m in Sources */,
 				6A033E991DE1ACD3000446A0 /* BN_ShoppingcartViewController.m in Sources */,
+				F293C6211E17E69E008D9F86 /* BN_MycollectionModel.m in Sources */,
 				6A033F221DE1C994000446A0 /* BN_ShopGoodDetailCommentsCell.m in Sources */,
 				6A033EA11DE1ACD3000446A0 /* BN_ShopSorterViewController.m in Sources */,
 				6A033ED91DE1ACD3000446A0 /* BN_ShopSearchCollectionReusableView.m in Sources */,
@@ -2103,6 +2298,7 @@
 				1B7D77DF1DFD9703006CE905 /* LBB_OrderModuleViewController.m in Sources */,
 				6A0261F01DE34ADD00BA5AA3 /* BN_ShopSpecialCommentCell.m in Sources */,
 				C96514F31DD61C86004B5F05 /* AppDelegate.m in Sources */,
+				F2E276941E1655E6001A4FF1 /* BN_MSouvenirTableViewCell.m in Sources */,
 				C96515261DD61E50004B5F05 /* BN_ShopViewController.m in Sources */,
 				6A313BCB1DEAF37200BC9AF8 /* BN_ShopConditionTagModel.m in Sources */,
 				6A033E8C1DE1ACD3000446A0 /* UISearchBar+RAC.m in Sources */,
@@ -2118,6 +2314,7 @@
 				6AA26FF01DF55F57003688C4 /* BN_ShopPaymentViewController.m in Sources */,
 				6A61F0761DF27C5100867A69 /* BN_ShopOrderItemModel.m in Sources */,
 				6A033EC11DE1ACD3000446A0 /* BN_ShopHomeSouvenirCellModel.m in Sources */,
+				F2E2768F1E16534A001A4FF1 /* BN_MySouvenirViewController.m in Sources */,
 				C96514F01DD61C86004B5F05 /* main.m in Sources */,
 				6A033E9F1DE1ACD3000446A0 /* BN_ShopSorterTitleCell.m in Sources */,
 				6A033ED01DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewController.m in Sources */,
@@ -2125,7 +2322,9 @@
 				6A033EDE1DE1ACD3000446A0 /* BN_ShopOrderBillView.m in Sources */,
 				6A033F1D1DE1C624000446A0 /* BN_ShopGoodDetailConsultancyViewController.m in Sources */,
 				6A63B43E1DF0845A00F6EF60 /* BN_ShopspecialTagModel.m in Sources */,
+				F2E2769B1E169A73001A4FF1 /* BN_MySouvenirModel.m in Sources */,
 				6A033EE21DE1ACD3000446A0 /* BN_ShopOrdersConfirmationViewModel.m in Sources */,
+				F293C6151E178D9D008D9F86 /* BN_MyCollectionViewController.m in Sources */,
 				1B7D77BF1DFD9702006CE905 /* LBB_OrderAalesCollectionViewCell.m in Sources */,
 				6A06E4341DE4468F0036EEF3 /* BN_ShopSpecialSubjectViewController.m in Sources */,
 				6A80DE801DEF319D0098B33D /* BN_ShopOrderUsePointView.m in Sources */,
@@ -2137,6 +2336,7 @@
 				6A033F131DE1BC39000446A0 /* BN_ShopGoodDetailCommentViewController.m in Sources */,
 				6A033ECB1DE1ACD3000446A0 /* BN_ShopListSelectionToolBar.m in Sources */,
 				6AA26FF41DF5604F003688C4 /* BN_ShopPayMentChannelModel.m in Sources */,
+				F293C62D1E18D6BA008D9F86 /* BN_MyLimitBuyCell.m in Sources */,
 				6A61F0791DF27DB100867A69 /* BN_ShopOrderCartItemModel.m in Sources */,
 				6A033ED21DE1ACD3000446A0 /* BN_ShopScreeningConditionsViewModel.m in Sources */,
 				6A80DE7D1DEF2D2F0098B33D /* BN_ShopSpecialTopicModel.m in Sources */,
@@ -2167,6 +2367,7 @@
 				6A033EC41DE1ACD3000446A0 /* BN_ShopHomeViewModel.m in Sources */,
 				6A033EE31DE1ACD3000446A0 /* BN_ShopOrdersItemCell.m in Sources */,
 				6A033E8F1DE1ACD3000446A0 /* UIView+NIB.m in Sources */,
+				F28956AD1E1BD78B00F10C39 /* BN_MyCollectionViewCell.m in Sources */,
 				1B7D77C11DFD9702006CE905 /* LBB_OrderAalesDescViewCell.m in Sources */,
 				6AAEC6991DEDB0E700AAAB62 /* BN_ShopGoodDetailBuyViewController.m in Sources */,
 				6A033EAF1DE1ACD3000446A0 /* BN_ShopGoodDetailViewController.m in Sources */,
@@ -2175,6 +2376,7 @@
 				6A033EB61DE1ACD3000446A0 /* PurchaseConsultingViewController.m in Sources */,
 				6A033E911DE1ACD3000446A0 /* SectionDataSource.m in Sources */,
 				6A06E4291DE442340036EEF3 /* BN_ShopSpecialSubjectTipCell.m in Sources */,
+				F293C6311E1B19B7008D9F86 /* BN_MyLimitBuyViewModel.m in Sources */,
 				6A035C231DE6A648009617A7 /* BN_ShopGoodDetailConsultancyModel.m in Sources */,
 				1B7D77DB1DFD9703006CE905 /* LBB_OrderHeaderView.m in Sources */,
 				6A033EDB1DE1ACD3000446A0 /* BN_ShopSearchViewController.m in Sources */,
