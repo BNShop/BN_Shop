@@ -78,7 +78,10 @@
 
 
 - (CGFloat)getViewHeight {
-    CGFloat h = HEIGHT(self.imgView) + self.collectionHeight.constant + self.contentHeight.constant + 40 + 60;
+    CGFloat h = HEIGHT(self.imgView) + self.collectionHeight.constant + self.contentHeight.constant + 40;
+    if (self.collectionHeight.constant > 1.0 || self.contentHeight.constant > 1.0) {
+        h += 60;
+    }
     return h;
 }
 
