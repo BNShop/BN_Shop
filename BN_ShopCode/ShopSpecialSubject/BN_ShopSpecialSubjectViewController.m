@@ -142,14 +142,15 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     SectionDataSource *specialsSection = [self.viewModel.dataSource sectionAtIndex:0];
     specialsSection.cellIdentifier = ShopSpecialSubjectCellIdentifier;
     specialsSection.configureCellBlock = ^(id cell, BN_ShopGoodSpecialModel *item){
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
+        @strongify(self);
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:((UITableViewCell *)cell).center];
+        [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)(indexPath.row+1)] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
         [(BN_ShopSpecialSubjectCell *)cell updateWith:item.image_url1 subImgUrl:item.image_url2 completed:^(id cell) {
-            @strongify(self);
-            NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
-            if (indexpath) {
-                [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationMiddle];
-            }
+//            @strongify(self);
+//            NSIndexPath *indexpath = [self.tableView indexPathForRowAtPoint:((UITableViewCell *)cell).center];
+//            if (indexpath) {
+//                [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationMiddle];
+//            }
         }];
         [(BN_ShopSpecialSubjectCell *)cell  clickedAction:^(id sender) {
             @strongify(self);
@@ -178,6 +179,7 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
         dispatch_async(dispatch_get_main_queue(), ^{
             [specialsSection resetItems:self.viewModel.specials];
             [commentSection resetItems:self.viewModel.commentsRecord];
+            self.title = self.viewModel.specialDetail.name;
             [self.viewModel.tagDataSource resetItems:self.viewModel.tags];
             [self updateFollowBarItem];
             self.tableView.dataSource = self.viewModel.dataSource;
@@ -260,11 +262,11 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
             BN_ShopGoodSpecialModel *item = [self.viewModel.dataSource itemAtIndexPath:indexPath];
             [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
             [(BN_ShopSpecialSubjectCell *)cell updateWith:item.image_url1 subImgUrl:item.image_url2 completed:^(id cell) {
-                @strongify(self);
-                NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
-                if (indexpath) {
-                    [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationMiddle];
-                }
+//                @strongify(self);
+//                NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
+//                if (indexpath) {
+//                    [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationMiddle];
+//                }
             }];
         }];
         return height;
