@@ -426,6 +426,10 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 }
 
 - (void)followAction {
+    if ([BC_ToolRequest sharedManager].token.length == 0) {
+        [self showHudError:TEXT(@"没有权限收藏") title:TEXT(@"请先登录")];
+        return;
+    }
     @weakify(self);
     [[BN_ShopToolRequest sharedInstance] collecteWith:self.simpleShowViewModel.goodsId allSpotsType:self.stateViewModel.simpleDetailModel.type success:^(int collecteState, NSString *collecteMessage) {
         @strongify(self);
@@ -439,6 +443,10 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 }
 
 - (void)addToCart {
+    if ([BC_ToolRequest sharedManager].token.length == 0) {
+        [self showHudError:TEXT(@"没有权限加入购物车") title:TEXT(@"请先登录")];
+        return;
+    }
     BN_ShopGoodDetailBuyViewController *ctr = [[BN_ShopGoodDetailBuyViewController alloc] initWith:self.stateViewModel.simpleDetailModel.pic_url standards:self.stateViewModel.simpleDetailModel.name price:self.stateViewModel.simpleDetailModel.real_price];
     ctr.goodId = self.simpleShowViewModel.goodsId;
     ctr.view.backgroundColor = [ColorBlack colorWithAlphaComponent:0.17];
@@ -565,8 +573,8 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
                 [self.toolBar updateWith:[NSString stringWithFormat:@"%d", self.simpleShowViewModel.cartNum]];
             }];
         } failure:^(NSString *errorDescription) {
-            @strongify(self);
-            [self showHudError:errorDescription title:TEXT(@"加入购物车失败")];
+//            @strongify(self);
+//            [self showHudError:errorDescription title:TEXT(@"加入购物车失败")];
         }];
     }
 }

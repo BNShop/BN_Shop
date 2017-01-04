@@ -141,7 +141,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     for (BN_ShopSouvenirModel *model in self.viewModel.souvenirs) {
         TableDataSource *cellSource = [[TableDataSource alloc] initWithItems:model.goodsList cellIdentifier:ShopHomeSouvenirCellIdentifier configureCellBlock:^(id cell, BN_ShopSouvenirGoodModel *item) {
             [(BN_ShopGoodCell *)cell typeFace0];
-            [(BN_ShopGoodCell *)cell updateWith:item.pic_url title:item.name front:[item.front_price strikethroughAttribute] real:item.real_price additional:nil];
+            [(BN_ShopGoodCell *)cell updateWith:item.pic_url title:item.name front:[[NSString stringWithFormat:@"¥%@", item.front_price] strikethroughAttribute] real:[NSString stringWithFormat:@"¥%@",item.real_price] additional:nil];
         }];
         BN_ShopHomeSouvenirCellModel *cellModel = [[BN_ShopHomeSouvenirCellModel alloc] init];
         cellModel.dataSource = cellSource;
@@ -432,7 +432,7 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
 - (void)clickThumbnailWith:(UITableViewCell *)cell{
     NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
     NSLog(@"首页点击缩略图 section = %ld", (long)sectionIndex.row);
-    BN_ShopSouvenirModel *model = [self.viewModel.souvenirs objectAtIndex:sectionIndex.section];
+    BN_ShopSouvenirModel *model = [self.viewModel.souvenirs objectAtIndex:sectionIndex.row];
     BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:model.obj_id];
     [self.navigationController pushViewController:ctr animated:YES];
 }
