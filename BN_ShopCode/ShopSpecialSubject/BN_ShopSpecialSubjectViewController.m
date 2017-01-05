@@ -27,6 +27,7 @@
 
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "NSString+Attributed.h"
+#import "NSObject+PerformSelector.h"
 
 #import "BN_ShopToolRequest.h"
 
@@ -79,7 +80,8 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     [super loadCustomNavigationButton];
     @weakify(self);
     UIBarButtonItem *item0 = [[UIBarButtonItem alloc] bk_initWithImage:IMAGE(@"Shop_SpecialSubject_NavShare") style:UIBarButtonItemStylePlain handler:^(id sender) {
-#warning 分享操作
+        @strongify(self);
+        [self shareAction];
     }];
     UIBarButtonItem *item1 = [[UIBarButtonItem alloc] bk_initWithImage:IMAGE(@"Shop_SpecialSubject_UnFollow") style:UIBarButtonItemStylePlain handler:^(id sender) {
         [[BN_ShopToolRequest sharedInstance] collecteWith:self.viewModel.specialId allSpotsType:14 success:^(int collecteState, NSString *collecteMessage) {
@@ -257,7 +259,6 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        @weakify(self);
         CGFloat height = [tableView fd_heightForCellWithIdentifier:ShopSpecialSubjectCellIdentifier configuration:^(id cell) {
             BN_ShopGoodSpecialModel *item = [self.viewModel.dataSource itemAtIndexPath:indexPath];
             [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
@@ -331,6 +332,17 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
         [self showGoodDetail:good.obj_id];
     }
     
+}
+
+#pragma mark - 分享
+- (void)shareAction {
+    Class LBB_Share = NSClassFromString(@"LBB_Share");
+    if (LBB_Share) {
+        id sharedManager = [[LBB_Share self] sharedManager];
+        if ([sharedManager respondsToSelector:@selector(shareTitle:url:text:image:viewController:)]) {
+            [sharedManager performSelector:@selector(shareTitle:url:text:image:viewController:) withObjects:@[self.viewModel.shareTitle, self.viewModel.shareUrl, self.viewModel.shareContent, [NSNull null], self]];
+        }
+    }
 }
 
 #pragma mark - 进行购买跟跳转

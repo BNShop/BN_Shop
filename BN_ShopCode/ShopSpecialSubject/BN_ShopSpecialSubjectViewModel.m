@@ -12,27 +12,29 @@
 
 @implementation BN_ShopSpecialSubjectViewModel
 
-//- (void)setTags:(NSArray<BN_ShopspecialTagModel *> *)tags {
-//    NSMutableArray *array = (NSMutableArray *)[tags map:^id(NSDictionary *element) {
-//        return [BN_ShopspecialTagModel mj_objectWithKeyValues:element];
-//    }];
-//    _tags = array;
-//}
-//
-//- (void)setCollectedRecord:(NSArray<BN_ShopSpecialCollectedRecordModel *> *)collectedRecord {
-//    NSMutableArray *array = (NSMutableArray *)[collectedRecord map:^id(NSDictionary *element) {
-//        return [BN_ShopSpecialCollectedRecordModel mj_objectWithKeyValues:element];
-//    }];
-//    _collectedRecord = array;
-//}
-//
-//- (void)setCommentsRecord:(NSArray<BN_ShopGoodSpecialCommentModel *> *)commentsRecord {
-//    NSMutableArray *array = (NSMutableArray *)[commentsRecord map:^id(NSDictionary *element) {
-//        return [BN_ShopGoodSpecialCommentModel mj_objectWithKeyValues:element];
-//    }];
-//    _commentsRecord = array;
-//}
+- (void)setShareUrl:(NSString *)shareUrl {
+    if (shareUrl == nil) {
+        _shareUrl = @"";
+    } else {
+        _shareUrl = shareUrl;
+    }
+}
 
+- (void)setShareTitle:(NSString *)shareTitle {
+    if (shareTitle == nil) {
+        _shareTitle = @"";
+    } else {
+        _shareTitle = shareTitle;
+    }
+}
+
+- (void)setShareContent:(NSString *)shareContent {
+    if (shareContent == nil) {
+        _shareContent = @"";
+    } else {
+        _shareContent = shareContent;
+    }
+}
 
 - (instancetype)init
 {
@@ -110,6 +112,9 @@
         if(codeNumber.intValue == 0)
         {
             dic = dic[@"result"];
+            temp.shareUrl = dic[@"shareUrl"];
+            temp.shareTitle = dic[@"shareTitle"];
+            temp.shareContent = dic[@"shareContent"];
             temp.specialDetail = [BN_ShopSpecialDetailModel mj_objectWithKeyValues:dic[@"detail"]];
             temp.specialDetail.isAlreadyCollect = [dic[@"isAlreadyCollect"] intValue];
             temp.tags = [BN_ShopspecialTagModel mj_objectArrayWithKeyValuesArray:dic[@"tags"]];

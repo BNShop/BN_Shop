@@ -37,8 +37,9 @@
 @property (nonatomic, assign) int type;//1:普通商2:限时商品
 @property (nonatomic, assign) int is_collect;//是否收藏了
 @property (nonatomic, assign) int warn_id;//是否设置提醒的id
-
-
+@property (nonatomic, copy) NSString *shareUrl;//分享地址
+@property (nonatomic, copy) NSString *shareTitle;//分享标题
+@property (nonatomic, copy) NSString *shareContent;//分享内容
 
 @end
 

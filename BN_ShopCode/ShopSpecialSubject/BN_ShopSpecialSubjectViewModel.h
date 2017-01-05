@@ -23,6 +23,11 @@
 @property (nonatomic, strong) NSArray<BN_ShopSpecialCollectedRecordModel*> *collectedRecord;//收藏记录（具体几个后台控制）
 @property (nonatomic, strong) NSArray<BN_ShopGoodSpecialCommentModel*> *commentsRecord;//评论记录（具体几个后台控制）
 
+@property (nonatomic, copy) NSString *shareUrl;//分享地址
+@property (nonatomic, copy) NSString *shareTitle;//分享标题
+@property (nonatomic, copy) NSString *shareContent;//分享内容
+
+
 
 @property (nonatomic, strong) BN_ShopSpecialDetailModel *specialDetail;
 @property (nonatomic, strong) TableDataSource *tagDataSource;

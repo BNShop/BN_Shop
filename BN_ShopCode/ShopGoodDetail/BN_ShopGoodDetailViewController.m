@@ -28,6 +28,7 @@
 
 #import "UIBarButtonItem+BlocksKit.h"
 #import "UIView+BlocksKit.h"
+#import "NSObject+PerformSelector.h"
 #import "PureLayout.h"
 #import "BN_ShopToolRequest.h"
 #import "BN_ShopHeader.h"
@@ -400,7 +401,13 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
 
 #pragma mark - action's for nav
 - (void)shareForGood {
-#warning 商品详情页的分享处理
+    Class LBB_Share = NSClassFromString(@"LBB_Share");
+    if (LBB_Share) {
+        id sharedManager = [[LBB_Share self] sharedManager];
+        if ([sharedManager respondsToSelector:@selector(shareTitle:url:text:image:viewController:)]) {
+            [sharedManager performSelector:@selector(shareTitle:url:text:image:viewController:) withObjects:@[self.stateViewModel.simpleDetailModel.shareTitle, self.stateViewModel.simpleDetailModel.shareUrl, self.stateViewModel.simpleDetailModel.shareContent, [NSNull null], self]];
+        }
+    }
 }
 
 #pragma mark - ToolBar

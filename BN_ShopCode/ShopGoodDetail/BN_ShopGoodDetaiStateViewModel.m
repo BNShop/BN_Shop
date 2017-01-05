@@ -14,6 +14,31 @@
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{@"goodDescription":@"description"};
 }
+
+- (void)setShareUrl:(NSString *)shareUrl {
+    if (shareUrl == nil) {
+        _shareUrl = @"";
+    } else {
+        _shareUrl = shareUrl;
+    }
+}
+
+- (void)setShareTitle:(NSString *)shareTitle {
+    if (shareTitle == nil) {
+        _shareTitle = @"";
+    } else {
+        _shareTitle = shareTitle;
+    }
+}
+
+- (void)setShareContent:(NSString *)shareContent {
+    if (shareContent == nil) {
+        _shareContent = @"";
+    } else {
+        _shareContent = shareContent;
+    }
+}
+
 @end
 
 @implementation BN_ShopGoodDetaiStateViewModel
