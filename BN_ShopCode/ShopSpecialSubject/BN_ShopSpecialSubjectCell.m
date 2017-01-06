@@ -38,6 +38,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.imgView.contentMode = UIViewContentModeScaleAspectFit;
+    self.subImgView.contentMode = UIViewContentModeScaleAspectFit;
     self.topLineView.backgroundColor = ColorLine;
     self.fenceLineView.backgroundColor = ColorLine;
     self.numLabel.q_BorderWidth = 1.0f;
@@ -94,8 +96,8 @@
         [self.titleLabel sizeToFit];
         self.titleWidth.constant = [self.titleLabel sizeThatFits:CGSizeZero].width;
         [self.contentLabel sizeToFit];
-        [self.numLabel sizeToFit];
-        self.numWidth.constant = MAX(WIDTH(self.numLabel)+10, 20);
+//        [self.numLabel sizeToFit];
+        self.numWidth.constant = 20.0;//MAX(WIDTH(self.numLabel)+10, 20);
         
     });
 }
@@ -107,46 +109,66 @@
         self.viewTopToImgBottom.constant = 10;
         self.imgHeight.constant = 20;
         @weakify(self);
-        [self.imgView sd_setImageWithURL:[imgUrl URL] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            @strongify(self);
-            if (image.size.width > 0) {
-                self.imgHeight.constant = image.size.height * WIDTH(self) / image.size.width;
-            } else {
-                self.imgHeight.constant = 1;
-                self.viewTopToImgBottom.constant = -8;
-            }
-            if (block) {
-                block(self);
-            }
-        }];
+        NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[imgUrl URL]];
+        UIImage *image = [[[SDWebImageManager sharedManager] imageCache] imageFromDiskCacheForKey:key];
+        if (image) {
+            self.imgView.image = image;
+            self.imgHeight.constant = image.size.height * WIDTH(self) / image.size.width;
+        } else {
+            [self.imgView sd_setImageWithURL:[imgUrl URL] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                @strongify(self);
+                if (image.size.width > 0) {
+                    self.imgHeight.constant = image.size.height * WIDTH(self) / image.size.width;
+                } else {
+                    self.imgHeight.constant = 1;
+                    self.viewTopToImgBottom.constant = -10;
+                }
+                if (block) {
+                    block(self);
+                }
+            }];
+        }
+        
     } else {
         self.imgHeight.constant = 0;
-        self.viewTopToImgBottom.constant = -8;
+        self.viewTopToImgBottom.constant = -10;
     }
     self.subImgView.image = nil;
     if ([subImgUrl isURLString]) {
          self.contentTopToImgBottom.constant = 10;
         self.subImgHeight.constant = 20;
-        @weakify(self);
-        [self.subImgView sd_setImageWithURL:[subImgUrl URL] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            @strongify(self);
-            if (image.size.width > 0) {
-                self.subImgHeight.constant = image.size.height * WIDTH(self) / image.size.width;
-                
-            } else {
-                self.subImgHeight.constant = 1;
-            self.contentTopToImgBottom.constant = -8;
-            }
-            if (block) {
-                block(self);
-            }
-        }];
+        
+        NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[subImgUrl URL]];
+        UIImage *image = [[[SDWebImageManager sharedManager] imageCache] imageFromDiskCacheForKey:key];
+        if (image) {
+            self.subImgView.image = image;
+            self.subImgHeight.constant = image.size.height * WIDTH(self) / image.size.width;
+        } else {
+            @weakify(self);
+            [self.subImgView sd_setImageWithURL:[subImgUrl URL] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                @strongify(self);
+                if (image.size.width > 0) {
+                    self.subImgHeight.constant = image.size.height * WIDTH(self) / image.size.width;
+                    
+                } else {
+                    self.subImgHeight.constant = 1;
+                    self.contentTopToImgBottom.constant = -10;
+                }
+                if (block) {
+                    block(self);
+                }
+            }];
+        }
+        
     } else {
         self.subImgHeight.constant = 1;
-        self.contentTopToImgBottom.constant = -8;
+        self.contentTopToImgBottom.constant = -10;
         
     }
 }
 
+- (CGFloat)getViewHeight {
+    return self.subImgHeight.constant + self.imgHeight.constant + 45.0 + 180.0 + HEIGHT(self.contentLabel);
+}
 
 @end

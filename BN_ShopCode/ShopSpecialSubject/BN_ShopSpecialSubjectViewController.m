@@ -28,7 +28,8 @@
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "NSString+Attributed.h"
 #import "NSObject+PerformSelector.h"
-
+#import <SDWebImageManager.h>
+#import "NSString+URL.h"
 #import "BN_ShopToolRequest.h"
 
 
@@ -146,13 +147,20 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     specialsSection.configureCellBlock = ^(id cell, BN_ShopGoodSpecialModel *item){
         @strongify(self);
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:((UITableViewCell *)cell).center];
+        if ([(UITableViewCell *)cell tag] == indexPath.row+1) {
+            return;
+        }
+        [(UITableViewCell *)cell setTag:indexPath.row+1];
         [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)(indexPath.row+1)] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
         [(BN_ShopSpecialSubjectCell *)cell updateWith:item.image_url1 subImgUrl:item.image_url2 completed:^(id cell) {
-//            @strongify(self);
-//            NSIndexPath *indexpath = [self.tableView indexPathForRowAtPoint:((UITableViewCell *)cell).center];
-//            if (indexpath) {
-//                [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationMiddle];
-//            }
+            @strongify(self);
+//            [self.tableView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSIndexPath *indexpath = [self.tableView indexPathForRowAtPoint:((UITableViewCell *)cell).center];
+                if (indexpath.row < [self.tableView numberOfRowsInSection:0]) {
+                    [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationMiddle];
+                }
+            });
         }];
         [(BN_ShopSpecialSubjectCell *)cell  clickedAction:^(id sender) {
             @strongify(self);
@@ -259,17 +267,42 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        CGFloat height = [tableView fd_heightForCellWithIdentifier:ShopSpecialSubjectCellIdentifier configuration:^(id cell) {
-            BN_ShopGoodSpecialModel *item = [self.viewModel.dataSource itemAtIndexPath:indexPath];
-            [(BN_ShopSpecialSubjectCell *)cell updateWith:[NSString stringWithFormat:@"%ld", (long)indexPath.row] title:item.title_display subTitle:item.vice_title_display content:[self.viewModel contentAttributed:item.content_display] follow:[item followStr] price:[item priceAttributed]];
-            [(BN_ShopSpecialSubjectCell *)cell updateWith:item.image_url1 subImgUrl:item.image_url2 completed:^(id cell) {
-//                @strongify(self);
-//                NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
-//                if (indexpath) {
-//                    [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationMiddle];
-//                }
-            }];
-        }];
+        CGFloat height = 45.0 + 100.0;
+        BN_ShopGoodSpecialModel *item = [self.viewModel.dataSource itemAtIndexPath:indexPath];
+        if ([item.image_url1 isURLString]) {
+            height += 10.0;
+            NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[item.image_url1 URL]];
+            UIImage *image = [[[SDWebImageManager sharedManager] imageCache] imageFromDiskCacheForKey:key];
+            if (image == nil) {
+                height += 20;
+            } else {
+                height += image.size.height*WIDTH(self.view)/image.size.width;
+            }
+        } else {
+            height += 1;
+        }
+        
+        if ([item.image_url2 isURLString]) {
+            height += 10.0;
+            NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[item.image_url2 URL]];
+            UIImage *image = [[[SDWebImageManager sharedManager] imageCache] imageFromDiskCacheForKey:key];
+            if (image == nil) {
+                height += 20;
+            } else {
+                height += image.size.height*WIDTH(self.view)/image.size.width;
+            }
+        } else {
+            height += 1;
+        }
+        if (item.content_display.length > 0) {
+            UILabel *tempLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, WIDTH(self.view)-27, CGFLOAT_MAX)];
+            tempLabel.attributedText = [self.viewModel contentAttributed:item.content_display];
+            tempLabel.numberOfLines = 0;
+            [tempLabel sizeToFit];
+            CGSize size = tempLabel.frame.size;
+            size = CGSizeMake(ceilf(size.width), ceilf(size.height));
+            height += size.height + 10;
+        }
         return height;
         
     } else if (indexPath.section == 1) {

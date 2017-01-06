@@ -14,4 +14,5 @@
 - (void)clickedAction:(void (^)(id sender))handler;
 - (void)updateWith:(NSString *)num title:(NSString *)title subTitle:(NSString *)subTitle content:(NSAttributedString *)conten follow:(NSString *)follow price:(NSAttributedString *)price;
 - (void)updateWith:(NSString *)imgUrl subImgUrl:(NSString *)subImgUrl completed:(void(^)(id cell))block;
+- (CGFloat)getViewHeight;
 @end
