@@ -18,7 +18,7 @@
 @property (nonatomic, strong) MultipleSectionTableArraySource *dataSource;
 @property (nonatomic, assign) long specialId;//专题主键
 @property (nonatomic, strong) NSMutableArray<BN_ShopGoodSpecialModel*> *specials;//商品的列表
-@property (nonatomic, strong) NSArray<BN_ShopSpecialTopicModel*> *recommends;//推荐列表
+@property (nonatomic, strong) NSMutableArray<BN_ShopSpecialTopicModel*> *recommends;//推荐列表
 @property (nonatomic, strong) NSArray<BN_ShopspecialTagModel*> *tags;//标签列表
 @property (nonatomic, strong) NSArray<BN_ShopSpecialCollectedRecordModel*> *collectedRecord;//收藏记录（具体几个后台控制）
 @property (nonatomic, strong) NSArray<BN_ShopGoodSpecialCommentModel*> *commentsRecord;//评论记录（具体几个后台控制）

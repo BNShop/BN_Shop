@@ -35,6 +35,7 @@
     self.tipLabel.textColor = ColorBtnYellow;
     self.tipLabel.q_BorderColor = ColorBtnYellow;
     self.tipLabel.q_BorderWidth = 1.0f;
+    self.imgView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -47,12 +48,17 @@
 }
 
 - (void)updateWith:(NSString *)imgUrl title:(NSString *)title subTitle:(NSString *)subTitle tip:(NSString *)tip {
-    [self.imageView sd_setImageWithURL:[imgUrl URL] placeholderImage:nil];
+    [self.imgView sd_setImageWithURL:[imgUrl URL] placeholderImage:nil];
     self.titleLabel.text = title;
     self.subTitleLabel.text = subTitle;
-    self.tipLabel.text = tip;
-    [self.tipLabel sizeToFit];
-    self.tipWidth.constant = WIDTH(self.tipLabel) + 20;
+    if (tip.length > 0) {
+        self.tipLabel.text = tip;
+        [self.tipLabel sizeToFit];
+        self.tipWidth.constant = WIDTH(self.tipLabel) + 20;
+        self.tipLabel.hidden = NO;
+    } else {
+        self.tipLabel.hidden = YES;
+    }
 }
 
 @end

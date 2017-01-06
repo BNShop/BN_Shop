@@ -363,6 +363,10 @@ static NSString * const ShopSpecialCommentCellIdentifier = @"ShopSpecialCommentC
     if (indexPath.section == 0) {
         BN_ShopGoodSpecialModel *good = [self.viewModel.dataSource itemAtIndexPath:indexPath];
         [self showGoodDetail:good.obj_id];
+    } else if (indexPath.section == 2) {
+        BN_ShopSpecialTopicModel *model = [self.viewModel.dataSource itemAtIndexPath:indexPath];
+        BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:model.special_id];
+        [self.navigationController pushViewController:ctr animated:YES];
     }
     
 }

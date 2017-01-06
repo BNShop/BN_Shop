@@ -13,4 +13,8 @@
     _tags = [BN_ShopspecialTagModel mj_objectArrayWithKeyValuesArray:tags];
     self.tagName = _tags.firstObject.tagName;
 }
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{@"special_id":@"specialId"};
+}
 @end

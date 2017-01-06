@@ -83,7 +83,11 @@
         if(codeNumber.intValue == 0)
         {
             NSArray *array = [dic objectForKey:@"rows"];
-            temp.recommends = [BN_ShopSpecialTopicModel mj_objectArrayWithKeyValuesArray:array];
+            NSArray *arrays = [BN_ShopSpecialTopicModel mj_objectArrayWithKeyValuesArray:array];
+            [temp.recommends removeAllObjects];
+            if (arrays) {
+                [temp.recommends addObjectsFromArray:arrays];
+            }
             temp.recommends.networkTotal = [dic objectForKey:@"total"];
         }
         else
