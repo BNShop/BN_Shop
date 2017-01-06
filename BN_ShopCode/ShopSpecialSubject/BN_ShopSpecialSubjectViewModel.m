@@ -127,7 +127,7 @@
             temp.commentsRecord = [BN_ShopGoodSpecialCommentModel mj_objectArrayWithKeyValuesArray:dic[@"commentPicList"]];
             SectionDataSource *secton = [temp.dataSource sectionAtIndex:1];
             [secton resetItems:temp.commentsRecord];
-            temp.tagDataSource = [[TableDataSource alloc] initWithItems:temp.tags cellIdentifier:nil configureCellBlock:nil];
+            [temp.tagDataSource resetItems:temp.tags];
         }
         else
         {

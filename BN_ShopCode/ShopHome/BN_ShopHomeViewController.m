@@ -224,9 +224,6 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
                     id shareManager = [[LBB_PoohCycleTransManager self] performSelector:shareManagerSel];
                     [shareManager performSelector:NSSelectorFromString(@"transmission:viewController:") withObject:self.adViewModel.recommendAdList[imgView.tag] withObject:self];
                 }
-                BN_ADModel *adObj = self.adViewModel.recommendAdList[imgView.tag];
-                BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:adObj.objId];
-                [self.navigationController pushViewController:ctr animated:YES];
                 
             }];
         }
@@ -291,9 +288,9 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
         BN_ADModel *adObj = [self.adViewModel adItemWithIndex:currentIndex];
 //        if (adObj.type == 14) {
 //            //去专题页面
-            BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:adObj.objId];
-            [self.navigationController pushViewController:ctr animated:YES];
-        return ;
+//            BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:adObj.objId];
+//            [self.navigationController pushViewController:ctr animated:YES];
+//        return ;
 //
 //        } else if (adObj.type == 4) {
 //            
