@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIView+NIB.h"
 
 @interface BN_ShopGoodDetailTransitionToolBar : UIView
 - (void)updateWith:(NSString *)commentNum segmentedControlChangedValue:(void(^)(NSInteger selectedIndex))block;

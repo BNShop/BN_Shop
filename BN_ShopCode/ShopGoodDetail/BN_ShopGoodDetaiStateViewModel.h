@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BN_GoodStateHeader.h"
 #import "BN_ShopHeader.h"
+#import "BN_ShopGoodDetailNewestOrderModel.h"
 
 @interface BN_ShopGoodSimpleDetailModel : NSObject
 
@@ -46,8 +47,10 @@
 
 @interface BN_ShopGoodDetaiStateViewModel : BN_BaseDataModel
 @property (nonatomic, strong) BN_ShopGoodSimpleDetailModel *simpleDetailModel;
+@property (nonatomic, strong) NSMutableArray<BN_ShopGoodDetailNewestOrderModel*> *newestOrders;
 
 - (void)getSimpleDetailDataWith:(long)goodsId;
+- (void)getNewestOrdersDataWith:(long)goodsId;
 - (void)addShoppingCartWith:(long)goodsId num:(int)num success:(void(^)())success failure:(void(^)(NSString *errorDescription))failure;
 
 - (NSAttributedString *)frontPriceAttrStr;

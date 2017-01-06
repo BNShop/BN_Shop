@@ -25,6 +25,7 @@
 #import "BN_ShopGoodDetailTransitionToolBar.h"
 #import "BN_ShopGoodDetailNewArrivalsView.h"
 #import "BN_ShopGoodDetailNewArribalsCell.h"
+#import "BN_ShopGoodDetailNewestOrdersView.h"
 
 #import "UIBarButtonItem+BlocksKit.h"
 #import "UIView+BlocksKit.h"
@@ -50,6 +51,7 @@
 @property (nonatomic, assign) CGFloat headerHight;
 @property (nonatomic, strong) NSArray *subHeadeViews;
 @property (nonatomic, strong) BN_ShopGoodDetailNewArrivalsView *arribalsView;
+@property (nonatomic, strong) BN_ShopGoodDetailNewestOrdersView *newestView;
 
 @property (nonatomic, strong) BN_ShopGoodDetailSimpleShowViewModel *simpleShowViewModel;
 @property (nonatomic, strong) BN_ShopGoodDetaiStateViewModel *stateViewModel;
@@ -138,7 +140,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     [self buildFriendWarningView];
     [self buildSellersView];
     [self buildTransitionToolBar];
-    
+    [self buildNewestOrdersView];
     CGFloat stateHeight = 54.0f;
     CGFloat height = [self.simpleShowView getViewHeight] + stateHeight + [self.friendlyWarningView getViewHeight] + [self.sellersView getViewHeight] + [self.transitionToolBar getViewHeight];
     self.headeView.frame = CGRectMake(0, 0, WIDTH(self.view), height);
@@ -250,6 +252,31 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     }];
 }
 
+- (void)buildNewestOrders {
+    @weakify(self);
+    [self.stateViewModel getNewestOrdersDataWith:self.simpleShowViewModel.goodsId];
+    [self.stateViewModel.newestOrders.loadSupport setDataRefreshblock:^{
+        @strongify(self);
+        if (self.stateViewModel.newestOrders.count > 0) {
+            BN_ShopGoodDetailNewestOrderModel *mode = [self.stateViewModel.newestOrders lastObject];
+            [self.newestView updateWith:mode.user_img_url title:mode.info];
+            [self.newestView removeConstraint:self.newestView.widthConstraint];
+            self.newestView.widthConstraint = [self.newestView autoSetDimension:ALDimensionWidth toSize:[self.newestView getViewWidth]];
+        }
+    }];
+}
+
+- (void)buildNewestOrdersView {
+    self.newestView = [BN_ShopGoodDetailNewestOrdersView nib];
+    self.newestView.q_CornerRadius = 17.5;
+    self.newestView.backgroundColor = [ColorGray colorWithAlphaComponent:0.8];
+    [self.headeView addSubview:self.newestView];
+    [self.newestView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.headeView withOffset:20.0];
+    [self.newestView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.headeView withOffset:23.0];
+    [self.newestView autoSetDimension:ALDimensionHeight toSize:35.0f];
+    self.newestView.widthConstraint = [self.newestView autoSetDimension:ALDimensionWidth toSize:0.0];
+}
+
 - (void)bulidStateViewModel {
     self.stateViewModel = [[BN_ShopGoodDetaiStateViewModel alloc] init];
     [self.view setBn_data:self.stateViewModel];
@@ -289,6 +316,7 @@ static NSString * const ShopGoodDetailNewArrivalsCellIdentifier = @"ShopGoodDeta
     }];
     
     [self.stateViewModel getSimpleDetailDataWith:self.simpleShowViewModel.goodsId];
+    [self buildNewestOrders];
 }
 
 - (void)buildStateView {

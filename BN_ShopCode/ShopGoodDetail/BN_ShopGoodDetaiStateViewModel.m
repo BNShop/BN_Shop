@@ -48,6 +48,7 @@
     self = [super init];
     if (self) {
         self.simpleDetailModel = [[BN_ShopGoodSimpleDetailModel alloc] init];
+        self.newestOrders = [[NSMutableArray alloc] initFromNet];
     }
     return self;
 }
@@ -118,7 +119,11 @@
 
 - (NSString *)freeShippingStatus {
     if (self.simpleDetailModel.free_shipping_status == 0) {
-        return [NSString stringWithFormat:@"%@:%@", TEXT(@"邮费"), self.simpleDetailModel.free_shipping_amount];
+        if (self.simpleDetailModel.free_shipping_amount.length > 0) {
+            return [NSString stringWithFormat:@"%@:%@", TEXT(@"邮费"), self.simpleDetailModel.free_shipping_amount];
+        } else {
+            return TEXT(@"不包邮");
+        }
     } else if (self.simpleDetailModel.free_shipping_status == 1) {
         return [NSString stringWithFormat:@"%@%@%@", TEXT(@"满"), self.simpleDetailModel.shipping_amount, TEXT(@"包邮")];
     } else {
@@ -195,5 +200,36 @@
     
 }
 
+- (void)getNewestOrdersDataWith:(long)goodsId {
+    NSDictionary *paraDic = @{@"goodsId" : @(goodsId)};
+    
+    NSString *url = [NSString stringWithFormat:@"%@/mall/newestOrder", Shop_BASEURL];
+    __weak typeof(self) temp = self;
+    self.newestOrders.loadSupport.loadEvent = NetLoadingEvent;
+    
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        NSLog(@"url = %@", operation.currentRequest);
+        if(codeNumber.intValue == 0)
+        {
+            [self.newestOrders removeAllObjects];
+            NSArray *orders = [BN_ShopGoodDetailNewestOrderModel mj_objectArrayWithKeyValuesArray:dic[@"rows"]];
+            if (orders) {
+                [self.newestOrders addObjectsFromArray:orders];
+            }
+        }
+        else
+        {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+        }
+        
+        temp.newestOrders.loadSupport.loadEvent = codeNumber.intValue;
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        
+        temp.newestOrders.loadSupport.loadEvent = NetLoadFailedEvent;
+    }];
+    
+}
 
 @end
