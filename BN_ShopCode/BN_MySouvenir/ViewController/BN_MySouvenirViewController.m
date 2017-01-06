@@ -122,7 +122,7 @@ static NSString * const SouvenirCellIdentifier = @"SouvenirCellIdentifier";
 #pragma mark - 数据
 - (void)getDataArrayIsClear:(BOOL)clear {
     int curPage = clear == YES ? 0 : round(self.dataArray.count/10.0);
-    NSDictionary *dic = @{@"token":[BC_ToolRequest sharedManager].token,@"curPage":@(curPage),@"pageNum":@10,@"type":@14};
+    NSDictionary *dic = @{@"curPage":@(curPage),@"pageNum":@10,@"type":@14};
     NSString *url = [NSString stringWithFormat:@"%@/mime/myCollect/special/list",BASEURL];
     __weak typeof(self) temp = self;
     self.dataArray.loadSupport.loadEvent = NetLoadingEvent;
