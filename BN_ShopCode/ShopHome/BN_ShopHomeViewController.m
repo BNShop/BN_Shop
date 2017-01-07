@@ -417,7 +417,6 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     
     BN_ShopHomeSouvenirCellModel *cellModel = [self.viewModel.dataSource itemAtIndex:sectionIndex.row];
     BN_ShopSouvenirGoodModel *good = [cellModel.dataSource itemAtIndex:indexPath.row];
-    
     BN_ShopGoodDetailViewController *detailCtr = [[BN_ShopGoodDetailViewController alloc] initWith:good.goods_id];
     [self.navigationController pushViewController:detailCtr animated:YES];
 
@@ -434,8 +433,14 @@ static NSString * const ShopHomeSouvenirCellIdentifier = @"ShopHomeSouvenirCellI
     NSIndexPath *sectionIndex = [self.tableView indexPathForCell:cell];
     NSLog(@"首页点击缩略图 section = %ld", (long)sectionIndex.row);
     BN_ShopSouvenirModel *model = [self.viewModel.souvenirs objectAtIndex:sectionIndex.row];
-    BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:model.obj_id];
-    [self.navigationController pushViewController:ctr animated:YES];
+    if (model.obj_type == 14) {
+        BN_ShopSpecialSubjectViewController *ctr = [[BN_ShopSpecialSubjectViewController alloc] initWith:model.obj_id];
+        [self.navigationController pushViewController:ctr animated:YES];
+    } else {
+        BN_ShopGoodDetailViewController *ctr = [[BN_ShopGoodDetailViewController alloc] initWith:model.obj_id];
+        [self.navigationController pushViewController:ctr animated:YES];
+    }
+    
 }
 
 #pragma mark - UIScrollViewDelegate
