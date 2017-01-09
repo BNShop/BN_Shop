@@ -123,7 +123,7 @@ static NSString * const SouvenirCellIdentifier = @"SouvenirCellIdentifier";
 - (void)getDataArrayIsClear:(BOOL)clear {
     int curPage = clear == YES ? 0 : round(self.dataArray.count/10.0);
     NSDictionary *dic = @{@"curPage":@(curPage),@"pageNum":@10,@"type":@14};
-    NSString *url = [NSString stringWithFormat:@"%@/mime/myCollect/special/list",BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mime/myCollect/special/list",Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.dataArray.loadSupport.loadEvent = NetLoadingEvent;
     [[BC_ToolRequest sharedManager] GET:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
@@ -163,7 +163,7 @@ static NSString * const SouvenirCellIdentifier = @"SouvenirCellIdentifier";
     if (model.isCollected) {
         NSDictionary *dic = @{@"collectId":@(model.specialId)};
         
-        NSString *url = [NSString stringWithFormat:@"%@/mall/deleteCollect",BASEURL];
+        NSString *url = [NSString stringWithFormat:@"%@/mall/deleteCollect",Shop_BASEURL];
         @weakify(self);
         [[BC_ToolRequest sharedManager] POST:url parameters:dic success:^(NSURLSessionDataTask *operation, id responseObject) {
             @strongify(self);
