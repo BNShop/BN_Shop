@@ -117,7 +117,7 @@
     int curPage = clear == YES ? 0 : round(self.collectionList.count/10.0);
     NSMutableDictionary *paraDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:curPage], @"curPage", [NSNumber numberWithInt:10], @"pageNum",[NSNumber numberWithInt:1], @"type", nil];
     
-    NSString *url = [NSString stringWithFormat:@"%@/mall/collectGoodsList", BASEURL];
+    NSString *url = [NSString stringWithFormat:@"%@/mall/collectGoodsList", Shop_BASEURL];
     __weak typeof(self) temp = self;
     self.collectionList.loadSupport.loadEvent = NetLoadingEvent;
     
