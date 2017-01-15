@@ -14,7 +14,8 @@
 
 typedef NS_ENUM(NSUInteger, BN_ShopPaymentType) {
     BN_ShopPaymentType_WX = 0,
-    BN_ShopPaymentType_Alipay = 1
+    BN_ShopPaymentType_Alipay = 1,
+    BN_ShopPaymentType_Pingan = 2
 };
 
 typedef void (^WXPaymentCompletionHandler)(NSString *returnKey, int errCode);

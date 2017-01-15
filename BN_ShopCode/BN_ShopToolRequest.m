@@ -150,6 +150,41 @@ LY_SINGLETON_FOR_CLASS(BN_ShopToolRequest)
     
 }
 
+
+//平安支付
+- (void)pinganPrePayWith:(NSArray *)orderIDs success:(void(^)(NSString *payUrlForApp))success failure:(void(^)(NSString *errorDescription))failure {
+    if (orderIDs.count == 0) {
+        if (failure) {
+            failure(TEXT(@"选择支付选项"));
+        }
+        return;
+    }
+    NSMutableDictionary *paraDic = nil;
+    NSString *url = [NSString stringWithFormat:@"%@/mall/payUrlForApp?orderId=%@", Shop_BASEURL, [orderIDs componentsJoinedByString:@","]];
+    [[BC_ToolRequest sharedManager] GET:url parameters:paraDic success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        }
+        NSNumber *codeNumber = [dic objectForKey:@"code"];
+        if (codeNumber.intValue != 0) {
+            NSString *errorStr = [dic objectForKey:@"remark"];
+            if (failure) {
+                failure(errorStr);
+            }
+        } else {
+            if (success) {
+                success((dic[@"result"])[@"payUrlForApp"]);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        if (failure) {
+            failure([error errorDescription]);
+        }
+    }];
+    
+}
+
 //设置提醒已否
 - (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long warn_id))success failure:(void(^)(NSString *errorDescription))failure {
     NSDictionary *paraDic = nil;

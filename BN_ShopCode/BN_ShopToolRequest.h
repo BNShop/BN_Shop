@@ -25,6 +25,9 @@ LY_SINGLETON_FOR_CLASS_HEADER(BN_ShopToolRequest)
 //支付宝支付
 - (void)alipayPrePayWith:(NSArray *)orderIDs success:(void(^)(NSString *orderInfo))success failure:(void(^)(NSString *errorDescription))failure;
 
+//平安支付s
+- (void)pinganPrePayWith:(NSArray *)orderIDs success:(void(^)(NSString *payUrlForApp))success failure:(void(^)(NSString *errorDescription))failure;
+
 //设置提醒已否
 - (void)warnORCancelRes:(BOOL)isWarn goodsId:(long)goodsId success:(void(^)(long warn_id))success failure:(void(^)(NSString *errorDescription))failure;
 

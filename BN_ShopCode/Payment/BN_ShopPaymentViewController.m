@@ -108,6 +108,24 @@ static NSString * const ShopPaymentCellIdentifier = @"ShopPaymentCellIdentifier"
     }];
 }
 
+#pragma mark - 平安致富
+- (void)pinganPay {
+    @weakify(self);
+    [[BN_ShopToolRequest sharedInstance] pinganPrePayWith:self.viewModel.orderIds success:^(NSString *payUrlForApp) {
+        @strongify(self);
+        Class LBB_ToWebViewController = NSClassFromString(@"LBB_ToWebViewController");
+        if (LBB_ToWebViewController && payUrlForApp) {
+            id webViewController = [LBB_ToWebViewController new];
+            [webViewController setValue:[NSURL URLWithString:payUrlForApp] forKey:@"url"];
+            [self.navigationController pushViewController:webViewController animated:YES];
+        }
+        
+    } failure:^(NSString *errorDescription) {
+        @strongify(self);
+        [self showHudPrompt:errorDescription];
+    }];
+}
+
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -132,6 +150,8 @@ static NSString * const ShopPaymentCellIdentifier = @"ShopPaymentCellIdentifier"
         [self wxPay];
     } else if (item.payType == BN_ShopPaymentType_Alipay) {
         [self alipay];
+    } else if (item.payType == BN_ShopPaymentType_Pingan) {
+        [self pinganPay];
     }
 }
 
