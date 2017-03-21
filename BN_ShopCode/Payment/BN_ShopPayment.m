@@ -26,28 +26,18 @@ LY_SINGLETON_FOR_CLASS(BN_ShopPayment)
     if ([resp isKindOfClass:[PayResp class]])
     {
         PayResp *response = (PayResp *)resp;
-        
-        
-        if (response.returnKey.length == 0) {
-            if (response.errCode == WXErrCodeUserCancel) {
-                response.returnKey = TEXT(@"用户取消支付");
-            } else if (response.errCode == WXErrCodeUnsupport) {
-                response.returnKey = TEXT(@"微信不支持");
-            } else {
-                response.returnKey = TEXT(@"支付失败");
-            }
+        if (response.errCode == WXErrCodeUserCancel) {
+            response.returnKey = TEXT(@"用户取消支付");
+        } else if (response.errCode == WXErrCodeUnsupport) {
+            response.returnKey = TEXT(@"微信不支持");
+        } else if (response.errCode == WXErrCodeSentFail) {
+            response.returnKey = TEXT(@"发送失败");
+        } else if (response.errCode == WXErrCodeAuthDeny) {
+            response.returnKey = TEXT(@"授权失败");
+        } else if (response.errCode == WXErrCodeCommon) {
+            response.returnKey = TEXT(@"支付失败");
         }
         self.wxPaymentHandler(response.returnKey, response.errCode);
-//        switch (response.errCode)
-//        {
-//            case WXSuccess:
-//                //服务器端查询支付通知或查询API返回的结果再提示成功
-//                self.wxPaymentHandler(response.returnKey, response.errCode);
-//                break;
-//            default:
-//                
-//                break;
-//        }
     }
     
 }
@@ -87,6 +77,13 @@ LY_SINGLETON_FOR_CLASS(BN_ShopPayment)
             NSString *aliCheckRecepitData = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             self.alipayPaymentHandler (aliCheckRecepitData, resultStatus, memo);
         } else {
+            if (memo.length == 0) {
+                if (resultStatus == 6001) {
+                    memo = @"取消支付";
+                } else {
+                    memo = @"支付失败";
+                }
+            }
             self.alipayPaymentHandler (nil, resultStatus, memo);
         }
     }

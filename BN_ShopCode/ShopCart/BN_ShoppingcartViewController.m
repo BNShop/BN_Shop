@@ -18,6 +18,7 @@
 #import "NSObject+BKBlockObservation.h"
 
 #import "NSArray+BlocksKit.h"
+#import "MJRefresh.h"
 
 
 @interface BN_ShoppingcartViewController () <UITableViewDelegate, BN_ShoppingCartEndViewDelegate, BN_ShoppingCartCellDelegate>
@@ -72,15 +73,16 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
     self.tableView.backgroundColor = ColorWhite;
 }
 
-- (void)loadCustomNavigationButton {
-    [super loadCustomNavigationButton];
-    
-    @weakify(self);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:TEXT(@"编辑") style:UIBarButtonItemStylePlain handler:^(id sender) {
-        @strongify(self);
-        self.viewModel.edit = !self.viewModel.edit;
-    }];
-    self.navigationItem.rightBarButtonItem.tintColor = ColorBlack;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        @weakify(self);
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:TEXT(@"编辑") style:UIBarButtonItemStylePlain handler:^(id sender) {
+            @strongify(self);
+            self.viewModel.edit = !self.viewModel.edit;
+        }];
+        self.navigationItem.rightBarButtonItem.tintColor = ColorBlack;
+    });
 }
 
 #pragma mark - viewModel
@@ -124,6 +126,7 @@ static NSString * const ShoppingCartTableCellIdentifier = @"ShoppingCartTableCel
         self.tableView.dataSource = self.viewModel.dataSource;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.endView updateWith:[self.viewModel selectedItemPriceShow] settlementTitle:[self.viewModel settlementCount]];
+            [self.tableView.mj_header endRefreshing];
             [self.tableView reloadData];
         });
     }];

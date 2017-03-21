@@ -199,8 +199,6 @@
                 success();
             }
         }
-        
-        self.shoppingCartList.loadSupport.loadEvent = NetLoadSuccessfulEvent;
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         if (failure) {
             failure([error errorDescription]);
