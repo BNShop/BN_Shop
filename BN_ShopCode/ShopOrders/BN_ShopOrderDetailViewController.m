@@ -244,7 +244,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
                 [self showHudError:errorDescription title:TEXT(@"确认收货失败")];
             }];
         }];
-    } else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Finish) {
+    } else {
         [processView updateWith:@"申请售后" rightTitle:@"立即评价"];
         [processView addLeftEventHandler:^(id sender) {
 #warning 订单详情页的申请售后
