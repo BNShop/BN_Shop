@@ -244,7 +244,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
                 [self showHudError:errorDescription title:TEXT(@"确认收货失败")];
             }];
         }];
-    } else {
+    } else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Recommend) {
         [processView updateWith:@"申请售后" rightTitle:@"立即评价"];
         [processView addLeftEventHandler:^(id sender) {
 #warning 订单详情页的申请售后
@@ -253,16 +253,11 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 #warning 订单详情页的立即评价
         }];
     }
-//    else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Finish) {
-////        [processView updateWith:nil rightTitle:@"确认完成"];
-////        [processView addLeftEventHandler:nil];
-////        [processView addRightEventHandler:^(id sender) {
-////#warning 确认完成
-////        }];
-//        [processView updateWith:nil rightTitle:nil];
-//        [processView addLeftEventHandler:nil];
-//        [processView addRightEventHandler:nil];
-//    }
+    else {
+        [processView updateWith:nil rightTitle:nil];
+        [processView addLeftEventHandler:nil];
+        [processView addRightEventHandler:nil];
+    }
     [self.footerView addSubview:processView];
     [processView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.footerView];
     [processView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.footerView];
