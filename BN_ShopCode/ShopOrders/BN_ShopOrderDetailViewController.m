@@ -17,9 +17,12 @@
 #import "BN_ShopOrderNumberProcessingView.h"
 #import "Base_BaseViewController+ControlCreate.h"
 #import "BN_ShopPaymentViewController.h"
+#import "LBB_OrderCommentViewController.h"
+#import "LBB_ApplyAalesViewController.h"
 
 #import "BN_ShopOrderUserProfileViewModel.h"
 #import "BN_ShopOrderDetailViewModel.h"
+#import "BN_ShoppingCartViewModel.h"
 
 #import "PureLayout.h"
 #import "UIView+BlocksKit.h"
@@ -27,8 +30,9 @@
 
 #import "BN_ShopOrderItemProtocol.h"
 #import "BN_ShopHeader.h"
+#import "NSArray+BlocksKit.h"
 
-@interface BN_ShopOrderDetailViewController ()<BN_ShopPaymentViewControllerDelegate>
+@interface BN_ShopOrderDetailViewController ()<BN_ShopPaymentViewControllerDelegate, LBB_OrderCommentDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIView *headerView;
@@ -247,10 +251,22 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     } else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Recommend) {
         [processView updateWith:@"申请售后" rightTitle:@"立即评价"];
         [processView addLeftEventHandler:^(id sender) {
-#warning 订单详情页的申请售后
+            LBB_ApplyAalesViewController *vc = [[LBB_ApplyAalesViewController alloc] initWithNibName:@"LBB_ApplyAalesViewController" bundle:nil];
+            vc.orderViewModel = [self getLBB_OrderModelData];
+            @weakify(self);
+            vc.completeBlock = ^(BOOL resulut){
+                @strongify(self);
+                if (resulut) {
+                    [self buildViewModelRes];
+                }
+            };
+            [self.navigationController pushViewController:vc animated:YES];
         }];
         [processView addRightEventHandler:^(id sender) {
-#warning 订单详情页的立即评价
+            LBB_OrderCommentViewController *vc = [[LBB_OrderCommentViewController alloc] initWithNibName:@"LBB_OrderCommentViewController" bundle:nil];
+            vc.viewModel = [self getLBB_OrderModelData];
+            vc.delegate = self;
+            [self.navigationController pushViewController:vc animated:YES];
         }];
     }
     else {
@@ -290,6 +306,38 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
     
 }
 
+
+- (LBB_OrderModelData *)getLBB_OrderModelData {
+    BN_ShopOrderDetailModel *detailModel = self.orderViewModel.detailModel;
+    NSArray *rrderModelDetailS = [detailModel.goodsList bk_map:^id(BN_ShopOrderItemModel *obj) {
+        LBB_OrderModelDetail *detail = [LBB_OrderModelDetail new];
+        detail.front_price = obj.front_price;
+        detail.goods_id = [@(obj.goods_id) stringValue];
+        detail.goods_num = obj.goods_num;
+        detail.order_id = [@(obj.order_id) stringValue];
+        detail.order_no = obj.order_no;
+        detail.order_state_name = obj.order_state_name;
+        detail.pic_url = obj.pic_url;
+        detail.real_price = obj.real_price;
+        detail.standard = obj.standard;
+        detail.goods_name = obj.goods_name;
+        return detail;
+    }];
+    LBB_OrderModelData *orderData = [LBB_OrderModelData new];
+    orderData.goodsList = rrderModelDetailS.mutableCopy;
+    orderData.integral_amount = detailModel.integral_amount;
+    orderData.goods_amount = detailModel.goods_amount;
+    orderData.freight_amount = detailModel.freight_amount;
+    orderData.pay_type = detailModel.pay_type;
+    orderData.order_id = detailModel.order_id;
+    orderData.order_state = detailModel.order_state;
+    orderData.order_state_name = detailModel.order_state_name;
+    orderData.comment_state_name = detailModel.comment_state_name;
+    orderData.saleafter_state_name = detailModel.saleafter_state_name;
+    orderData.saleafter_state = detailModel.saleafter_state;
+    return orderData;
+}
+
 #pragma mark - 支付处理
 - (void)payment {
     BN_ShopPaymentViewModel *viewModel = [BN_ShopPaymentViewModel paymentViewModelWith:@[self.orderViewModel.detailModel.order_id] type:self.orderViewModel.detailModel.pay_type needPay:self.orderViewModel.detailModel.pay_amount];
@@ -306,6 +354,12 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+#pragma mark - LBB_OrderCommentDelegate
+- (void)didCommentSuccess:(LBB_OrderModelData*)viewModel
+{
+    [self buildViewModelRes];
 }
 
 @end
