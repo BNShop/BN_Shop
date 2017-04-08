@@ -73,8 +73,9 @@ static NSString * const ShopPaymentCellIdentifier = @"ShopPaymentCellIdentifier"
             if (errCode == 0) { //成功
                 if ([self.delegate respondsToSelector:@selector(paymentViewControllerWithSucess:type:payAccount:)]) {
                     [self.delegate paymentViewControllerWithSucess:self.viewModel.orderIds type:self.viewModel.paymentType payAccount:self.viewModel.needPay];
+                } else {
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
-                [self.navigationController popViewControllerAnimated:YES];
             } else {
                 [self showHudPrompt:returnKey];
             }
@@ -95,8 +96,9 @@ static NSString * const ShopPaymentCellIdentifier = @"ShopPaymentCellIdentifier"
             if (resultStatus == 9000) {
                 if ([self.delegate respondsToSelector:@selector(paymentViewControllerWithSucess:type:payAccount:)]) {
                     [self.delegate paymentViewControllerWithSucess:self.viewModel.orderIds type:self.viewModel.paymentType payAccount:self.viewModel.needPay];
+                } else {
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
-                [self.navigationController popViewControllerAnimated:YES];
             } else {
                 [self showHudPrompt:memo];
             }

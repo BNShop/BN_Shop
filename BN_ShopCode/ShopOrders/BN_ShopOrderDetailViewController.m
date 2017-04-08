@@ -19,6 +19,7 @@
 #import "BN_ShopPaymentViewController.h"
 #import "LBB_OrderCommentViewController.h"
 #import "LBB_ApplyAalesViewController.h"
+#import "LBB_OrderModuleViewController.h"
 
 #import "BN_ShopOrderUserProfileViewModel.h"
 #import "BN_ShopOrderDetailViewModel.h"
@@ -348,7 +349,24 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
 
 #pragma mark - BN_ShopPaymentViewControllerDelegate
 - (void)paymentViewControllerWithSucess:(NSArray *)orderIds type:(BN_ShopPaymentType)type payAccount:(NSString *)payAccount {
-    [self buildViewModelRes];
+//    [self buildViewModelRes];
+    UINavigationController *nav = self.navigationController;
+    LBB_OrderModuleViewController *vc = [nav.viewControllers bk_match:^BOOL(id obj) {
+        if ([obj isKindOfClass:[LBB_OrderModuleViewController class]]) {
+            return YES;
+        }
+        return NO;
+    }];
+    if (vc) {
+        [vc refreshBlock];
+        [nav popToViewController:vc animated:YES];
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        
+        vc = [[LBB_OrderModuleViewController alloc] init];
+        vc.baseViewType = eOrderType;
+        [nav pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - UITableViewDelegate
