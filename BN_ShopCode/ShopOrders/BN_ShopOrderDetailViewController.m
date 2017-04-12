@@ -280,6 +280,8 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
                 };
                 [self.navigationController pushViewController:vc animated:YES];
             }];
+        } else {
+            [processView addLeftEventHandler:nil];
         }
         
         [processView addRightEventHandler:^(id sender) {
