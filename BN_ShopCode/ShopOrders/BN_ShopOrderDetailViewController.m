@@ -165,6 +165,7 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         [serviceView updateServerHelp];
         [serviceView bk_whenTapped:^{
 #warning 订单详情页的联系客服的操作
+            @strongify(self);
             if ([BC_ToolRequest sharedManager].token.length == 0) {
                 [self showHudError:TEXT(@"没有权限联系客服") title:TEXT(@"请先登录")];
                 return;
