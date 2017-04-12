@@ -261,19 +261,27 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
             }];
         }];
     } else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Recommend) {
-        [processView updateWith:@"申请售后" rightTitle:@"立即评价"];
-        [processView addLeftEventHandler:^(id sender) {
-            LBB_ApplyAalesViewController *vc = [[LBB_ApplyAalesViewController alloc] initWithNibName:@"LBB_ApplyAalesViewController" bundle:nil];
-            vc.orderViewModel = [self getLBB_OrderModelData];
-            @weakify(self);
-            vc.completeBlock = ^(BOOL resulut){
-                @strongify(self);
-                if (resulut) {
-                    [self buildViewModelRes];
-                }
-            };
-            [self.navigationController pushViewController:vc animated:YES];
-        }];
+        if (self.orderViewModel.detailModel.saleafter_state == 1) {
+            [processView updateWith:@"申请售后" rightTitle:@"立即评价"];
+        } else {
+            [processView updateWith:nil rightTitle:@"立即评价"];
+        }
+        
+        if (self.orderViewModel.detailModel.saleafter_state == 1) {
+            [processView addLeftEventHandler:^(id sender) {
+                LBB_ApplyAalesViewController *vc = [[LBB_ApplyAalesViewController alloc] initWithNibName:@"LBB_ApplyAalesViewController" bundle:nil];
+                vc.orderViewModel = [self getLBB_OrderModelData];
+                @weakify(self);
+                vc.completeBlock = ^(BOOL resulut){
+                    @strongify(self);
+                    if (resulut) {
+                        [self buildViewModelRes];
+                    }
+                };
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
+        }
+        
         [processView addRightEventHandler:^(id sender) {
             LBB_OrderCommentViewController *vc = [[LBB_OrderCommentViewController alloc] initWithNibName:@"LBB_OrderCommentViewController" bundle:nil];
             vc.viewModel = [self getLBB_OrderModelData];
