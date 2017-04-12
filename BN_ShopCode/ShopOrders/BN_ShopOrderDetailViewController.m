@@ -165,7 +165,17 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
         [serviceView updateServerHelp];
         [serviceView bk_whenTapped:^{
 #warning 订单详情页的联系客服的操作
+            if ([BC_ToolRequest sharedManager].token.length == 0) {
+                [self showHudError:TEXT(@"没有权限联系客服") title:TEXT(@"请先登录")];
+                return;
+            }
             
+            Class LBB_ShopChatViewController = NSClassFromString(@"LBB_ShopChatViewController");
+            if (LBB_ShopChatViewController) {
+                id newobj = [[LBB_ShopChatViewController alloc] init];
+                [newobj performSelector:NSSelectorFromString(@"setupChatID:") withObject:@"鹭爸爸888"];
+                [self.navigationController pushViewController:newobj animated:YES];
+            }
         }];
     }
     [self.footerView addSubview:serviceView];
