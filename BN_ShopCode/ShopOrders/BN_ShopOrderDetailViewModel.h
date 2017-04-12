@@ -49,7 +49,8 @@ typedef NS_ENUM(int, BN_ShopOrderSaleafterState) {
 @property (nonatomic, copy) NSString *integral_amount;//积分金额
 @property (nonatomic, copy) NSString *comment_state_name;//评论状态名
 @property (nonatomic, copy) NSString *saleafter_state_name;//售后状态名
-@property (nonatomic, assign) int saleafter_state;//订单售后状态 
+@property (nonatomic, assign) int saleafter_state;//订单售后状态
+@property (nonatomic, assign) int if_saleafter;//可否申请售后，1可 0否
 
 - (int)orderState;//0 代之父 1代收货 2代评价 3已完成
 - (int)saleafter;//售后状态 0求租 1等待 2 万次

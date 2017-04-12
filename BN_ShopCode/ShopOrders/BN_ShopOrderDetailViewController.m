@@ -261,13 +261,13 @@ static NSString * const ShopOrdersConfirmationTableCellIdentifier = @"ShopOrders
             }];
         }];
     } else if ([self.orderViewModel.detailModel orderState] == BN_ShopOrderState_Recommend) {
-        if (self.orderViewModel.detailModel.saleafter_state == 1) {
+        if (self.orderViewModel.detailModel.if_saleafter == 1) {
             [processView updateWith:@"申请售后" rightTitle:@"立即评价"];
         } else {
             [processView updateWith:nil rightTitle:@"立即评价"];
         }
         
-        if (self.orderViewModel.detailModel.saleafter_state == 1) {
+        if (self.orderViewModel.detailModel.if_saleafter == 1) {
             [processView addLeftEventHandler:^(id sender) {
                 LBB_ApplyAalesViewController *vc = [[LBB_ApplyAalesViewController alloc] initWithNibName:@"LBB_ApplyAalesViewController" bundle:nil];
                 vc.orderViewModel = [self getLBB_OrderModelData];
