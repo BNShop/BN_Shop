@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BN_ShopGoodDetailNewArrivalsView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7f-uC-FPO">
+                    <rect key="frame" x="14" y="6" width="11" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="11" id="QY5-G9-ZXc"/>
+                        <constraint firstAttribute="height" constant="15" id="byi-z1-Ngq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsU-Q4-YhN">
+                    <rect key="frame" x="29" y="6" width="321" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="fEn-sk-yZk"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qry-Wf-fzD">
+                    <rect key="frame" x="0.0" y="27" width="375" height="165"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="caO-7T-FgN">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Xm-8W-F4Q">
+                    <rect key="frame" x="14" y="27" width="355" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="snx-R9-UIC"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Qry-Wf-fzD" secondAttribute="trailing" id="1we-Ow-i6W"/>
+                <constraint firstItem="JsU-Q4-YhN" firstAttribute="leading" secondItem="P7f-uC-FPO" secondAttribute="trailing" constant="4" id="7IM-il-h7e"/>
+                <constraint firstItem="P7f-uC-FPO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="B9N-jM-o53"/>
+                <constraint firstItem="5Xm-8W-F4Q" firstAttribute="top" secondItem="P7f-uC-FPO" secondAttribute="bottom" constant="6" id="EKg-em-8aH"/>
+                <constraint firstAttribute="trailing" secondItem="JsU-Q4-YhN" secondAttribute="trailing" constant="25" id="NcT-p2-1dv"/>
+                <constraint firstItem="P7f-uC-FPO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="Ylg-y7-4hG"/>
+                <constraint firstAttribute="trailing" secondItem="5Xm-8W-F4Q" secondAttribute="trailing" constant="6" id="e2q-ad-KcY"/>
+                <constraint firstItem="Qry-Wf-fzD" firstAttribute="top" secondItem="P7f-uC-FPO" secondAttribute="bottom" constant="6" id="kfk-fU-ckg"/>
+                <constraint firstItem="5Xm-8W-F4Q" firstAttribute="leading" secondItem="P7f-uC-FPO" secondAttribute="leading" id="omS-j5-gGe"/>
+                <constraint firstAttribute="bottom" secondItem="Qry-Wf-fzD" secondAttribute="bottom" id="otC-Xz-D9f"/>
+                <constraint firstItem="JsU-Q4-YhN" firstAttribute="top" secondItem="P7f-uC-FPO" secondAttribute="top" id="p9E-5F-GUe"/>
+                <constraint firstItem="Qry-Wf-fzD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tfz-9H-n0F"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bottomLineView" destination="5Xm-8W-F4Q" id="ddZ-2n-rfB"/>
+                <outlet property="collectionView" destination="Qry-Wf-fzD" id="n3A-oe-wW1"/>
+                <outlet property="subTitleLabel" destination="JsU-Q4-YhN" id="R4M-fH-cKG"/>
+                <outlet property="titleLabel" destination="P7f-uC-FPO" id="m9H-fp-nAq"/>
+            </connections>
+            <point key="canvasLocation" x="307" y="78"/>
+        </view>
+    </objects>
+</document>

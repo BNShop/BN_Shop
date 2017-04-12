@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BN_ShopListSelectionToolBar">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ee8-OY-BPf" customClass="QRadioButton">
+                    <rect key="frame" x="0.0" y="0.0" width="73" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="73" id="dmD-NS-1Jw"/>
+                    </constraints>
+                    <state key="normal" title="综合"/>
+                    <state key="selected" title="综合"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rjn-W8-wq2" customClass="QRadioButton">
+                    <rect key="frame" x="74" y="0.0" width="73" height="55"/>
+                    <state key="normal" title="销量"/>
+                    <state key="selected" title="销量"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rno-qj-e7M" customClass="QRadioButton">
+                    <rect key="frame" x="148" y="0.0" width="73" height="55"/>
+                    <state key="normal" title="价格"/>
+                    <state key="selected" title="价格"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHm-yG-tlb">
+                    <rect key="frame" x="325" y="0.0" width="50" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="3UL-na-zHu"/>
+                    </constraints>
+                    <state key="normal" title="筛选"/>
+                    <connections>
+                        <action selector="filterAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="KrJ-nw-pq7"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Rjn-W8-wq2" firstAttribute="height" secondItem="ee8-OY-BPf" secondAttribute="height" id="6k2-9F-Ygg"/>
+                <constraint firstItem="Rjn-W8-wq2" firstAttribute="width" secondItem="ee8-OY-BPf" secondAttribute="width" id="8tW-Ru-9Jo"/>
+                <constraint firstItem="rno-qj-e7M" firstAttribute="centerY" secondItem="Rjn-W8-wq2" secondAttribute="centerY" id="9S3-md-6gV"/>
+                <constraint firstItem="rno-qj-e7M" firstAttribute="leading" secondItem="Rjn-W8-wq2" secondAttribute="trailing" constant="1" id="BB8-Y7-EzQ"/>
+                <constraint firstItem="ee8-OY-BPf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="EGq-g6-xKu"/>
+                <constraint firstAttribute="bottom" secondItem="ee8-OY-BPf" secondAttribute="bottom" constant="-15" id="GjA-Db-6jy"/>
+                <constraint firstItem="Rjn-W8-wq2" firstAttribute="centerY" secondItem="ee8-OY-BPf" secondAttribute="centerY" id="Vq4-od-9jX"/>
+                <constraint firstAttribute="bottom" secondItem="eHm-yG-tlb" secondAttribute="bottom" id="bc8-vV-HcH"/>
+                <constraint firstItem="Rjn-W8-wq2" firstAttribute="leading" secondItem="ee8-OY-BPf" secondAttribute="trailing" constant="1" id="dMJ-K7-fSF"/>
+                <constraint firstItem="eHm-yG-tlb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fD9-JD-k0r"/>
+                <constraint firstAttribute="trailing" secondItem="eHm-yG-tlb" secondAttribute="trailing" id="gRb-xK-kLv"/>
+                <constraint firstItem="rno-qj-e7M" firstAttribute="width" secondItem="Rjn-W8-wq2" secondAttribute="width" id="kDp-Ok-0wP"/>
+                <constraint firstItem="rno-qj-e7M" firstAttribute="height" secondItem="Rjn-W8-wq2" secondAttribute="height" id="u0R-eh-CFS"/>
+                <constraint firstItem="ee8-OY-BPf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wtY-0Q-qlh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="filterButton" destination="eHm-yG-tlb" id="bJJ-NX-bNN"/>
+                <outlet property="generalButton" destination="ee8-OY-BPf" id="9un-Xy-i41"/>
+                <outlet property="priceButton" destination="rno-qj-e7M" id="arF-Qn-Oca"/>
+                <outlet property="salesButton" destination="Rjn-W8-wq2" id="384-Mj-OBS"/>
+            </connections>
+            <point key="canvasLocation" x="26.5" y="-225"/>
+        </view>
+    </objects>
+</document>

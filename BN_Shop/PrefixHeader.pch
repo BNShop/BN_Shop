@@ -13,9 +13,8 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #ifdef __OBJC__
-
-#import "QJTL_Global.h"
-
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 #endif
 

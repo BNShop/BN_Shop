@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ZTw-kL-oUa" customClass="BN_ShopOrderNumberProcessingView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4RH-eA-FPD">
+                    <rect key="frame" x="15" y="12" width="343" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="KKU-61-Tsk"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Vx0-g2-aEU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="siF-kW-Hcz">
+                    <rect key="frame" x="359" y="12" width="0.0" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zIN-Ti-cA5">
+                    <rect key="frame" x="0.0" y="44" width="375" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="b1N-Uo-9jX"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gb7-9g-f3m" customClass="BGButton">
+                    <rect key="frame" x="300" y="8" width="50" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="CbB-S1-gLW"/>
+                        <constraint firstAttribute="width" constant="50" id="tPw-fV-Nd4"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="4RH-eA-FPD" firstAttribute="centerY" secondItem="ZTw-kL-oUa" secondAttribute="centerY" id="7jH-Ja-kdn"/>
+                <constraint firstItem="zIN-Ti-cA5" firstAttribute="leading" secondItem="ZTw-kL-oUa" secondAttribute="leading" id="Jyu-G9-Czt"/>
+                <constraint firstAttribute="trailing" secondItem="zIN-Ti-cA5" secondAttribute="trailing" id="N6F-ft-hnS"/>
+                <constraint firstItem="siF-kW-Hcz" firstAttribute="centerY" secondItem="4RH-eA-FPD" secondAttribute="centerY" id="Sje-Op-6Ti"/>
+                <constraint firstAttribute="trailing" secondItem="gb7-9g-f3m" secondAttribute="trailing" constant="15" id="WyN-IM-IC3"/>
+                <constraint firstItem="siF-kW-Hcz" firstAttribute="leading" secondItem="4RH-eA-FPD" secondAttribute="trailing" constant="1" id="aJ6-kB-udo"/>
+                <constraint firstItem="siF-kW-Hcz" firstAttribute="trailing" secondItem="gb7-9g-f3m" secondAttribute="leading" constant="-5" id="dBG-yP-7gC"/>
+                <constraint firstItem="siF-kW-Hcz" firstAttribute="height" secondItem="4RH-eA-FPD" secondAttribute="height" id="k46-tx-5Lq"/>
+                <constraint firstItem="4RH-eA-FPD" firstAttribute="leading" secondItem="ZTw-kL-oUa" secondAttribute="leading" constant="15" id="tU8-7p-OAb"/>
+                <constraint firstItem="gb7-9g-f3m" firstAttribute="centerY" secondItem="siF-kW-Hcz" secondAttribute="centerY" id="vCw-EV-WcO"/>
+                <constraint firstAttribute="bottom" secondItem="zIN-Ti-cA5" secondAttribute="bottom" id="xHB-ch-7Ha"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bottomLine" destination="zIN-Ti-cA5" id="sa7-3J-N8L"/>
+                <outlet property="contentLabel" destination="siF-kW-Hcz" id="7Nk-LH-U9o"/>
+                <outlet property="precessingBtn" destination="gb7-9g-f3m" id="hsh-FA-6ez"/>
+                <outlet property="titlelabel" destination="4RH-eA-FPD" id="2Pf-q1-kt8"/>
+            </connections>
+            <point key="canvasLocation" x="-127.5" y="-83.5"/>
+        </view>
+    </objects>
+</document>

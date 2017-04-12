@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BN_ShopOrdersToolBar">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7RI-Wa-Oku">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="9cd-oA-utV"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgX-42-fPb" customClass="BGButton">
+                    <rect key="frame" x="257" y="0.0" width="118" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="118" id="D2O-Ko-U4I"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gP5-x8-WjE">
+                    <rect key="frame" x="20" y="10" width="42" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="56" id="faM-f6-Pfi"/>
+                        <constraint firstAttribute="height" constant="20" id="rTn-jL-KCq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBQ-iZ-Kd0">
+                    <rect key="frame" x="67" y="10" width="177" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="ZPg-Eo-y2k"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="IBQ-iZ-Kd0" firstAttribute="trailing" secondItem="RgX-42-fPb" secondAttribute="leading" id="BZX-ga-FYW"/>
+                <constraint firstAttribute="bottom" secondItem="RgX-42-fPb" secondAttribute="bottom" id="GEe-se-Ouj"/>
+                <constraint firstItem="gP5-x8-WjE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="HHL-2H-5Pa"/>
+                <constraint firstAttribute="trailing" secondItem="RgX-42-fPb" secondAttribute="trailing" id="HJH-Qq-7GZ"/>
+                <constraint firstItem="gP5-x8-WjE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="RFj-Pb-llX"/>
+                <constraint firstAttribute="trailing" secondItem="7RI-Wa-Oku" secondAttribute="trailing" id="Rdr-Vz-qwi"/>
+                <constraint firstItem="7RI-Wa-Oku" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VP1-vM-JaO"/>
+                <constraint firstItem="IBQ-iZ-Kd0" firstAttribute="leading" secondItem="gP5-x8-WjE" secondAttribute="trailing" id="gTd-oH-zPC"/>
+                <constraint firstItem="RgX-42-fPb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="o1Q-bm-OrJ"/>
+                <constraint firstItem="IBQ-iZ-Kd0" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ukx-Se-fyy"/>
+                <constraint firstItem="7RI-Wa-Oku" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vVX-OE-MCn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="placeAnOrderButton" destination="RgX-42-fPb" id="hpM-W6-iZi"/>
+                <outlet property="realPriceLabel" destination="IBQ-iZ-Kd0" id="j2O-73-dWD"/>
+                <outlet property="realPriceTitleLabel" destination="gP5-x8-WjE" id="JAH-0B-QZq"/>
+                <outlet property="topLineView" destination="7RI-Wa-Oku" id="tZN-FI-b5B"/>
+            </connections>
+            <point key="canvasLocation" x="39.5" y="99"/>
+        </view>
+    </objects>
+</document>

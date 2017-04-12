@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BN_ShopGoodDetailSimpleShowView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDU-fJ-hIU" customClass="SDCycleScrollView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="339"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" secondItem="DDU-fJ-hIU" secondAttribute="width" multiplier="1.06:1" id="4P1-mF-bOG"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Klt-6m-SFE">
+                    <rect key="frame" x="265" y="317" width="30" height="12"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="12" id="6Vp-HE-wKQ"/>
+                        <constraint firstAttribute="width" constant="30" id="Awk-uI-sRV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SB1-n1-ofT">
+                    <rect key="frame" x="15" y="350" width="290" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="bZn-eV-kSA"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="DDU-fJ-hIU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="7cp-oz-07j"/>
+                <constraint firstItem="Klt-6m-SFE" firstAttribute="bottom" secondItem="DDU-fJ-hIU" secondAttribute="bottom" constant="-10" id="HzA-xS-Pdy"/>
+                <constraint firstAttribute="trailing" secondItem="SB1-n1-ofT" secondAttribute="trailing" constant="15" id="R1c-WA-Nqa"/>
+                <constraint firstItem="SB1-n1-ofT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="Voe-kX-2aL"/>
+                <constraint firstItem="SB1-n1-ofT" firstAttribute="top" secondItem="DDU-fJ-hIU" secondAttribute="bottom" constant="11" id="dKK-nG-oCJ"/>
+                <constraint firstItem="DDU-fJ-hIU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="m10-q6-bTK"/>
+                <constraint firstAttribute="trailing" secondItem="DDU-fJ-hIU" secondAttribute="trailing" id="obe-58-CLo"/>
+                <constraint firstItem="Klt-6m-SFE" firstAttribute="trailing" secondItem="DDU-fJ-hIU" secondAttribute="trailing" constant="-25" id="wSu-MV-mu4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="scheduleLabel" destination="Klt-6m-SFE" id="1fD-Eh-mOX"/>
+                <outlet property="thumbnailScrollView" destination="DDU-fJ-hIU" id="bG3-Ui-rqw"/>
+                <outlet property="titleLabel" destination="SB1-n1-ofT" id="hUc-qb-d9j"/>
+            </connections>
+            <point key="canvasLocation" x="27" y="121.5"/>
+        </view>
+    </objects>
+</document>

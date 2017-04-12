@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LBB_ApplyAalesViewController">
+            <connections>
+                <outlet property="bottomBtn" destination="88h-Xe-Tdk" id="axJ-hm-MwY"/>
+                <outlet property="bottomViewBottomContraint" destination="PoV-bg-Eo0" id="3qK-oZ-KXg"/>
+                <outlet property="collectionView" destination="Joa-ky-97O" id="ltn-UM-Sh2"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Joa-ky-97O">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="K0M-D7-rEL">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Hed-0t-iOV"/>
+                        <outlet property="delegate" destination="-1" id="OiD-ID-0BV"/>
+                    </connections>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88h-Xe-Tdk">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <color key="backgroundColor" red="0.79941998110000001" green="0.59218091920000004" blue="0.2881092871" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="JEZ-V6-w32"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <state key="normal" title="提交申请">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="bottomBtnClickAction:" destination="-1" eventType="touchUpInside" id="RdE-ai-uVl"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="88h-Xe-Tdk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8Fr-7U-Lfs"/>
+                <constraint firstAttribute="bottom" secondItem="88h-Xe-Tdk" secondAttribute="bottom" id="PoV-bg-Eo0"/>
+                <constraint firstItem="Joa-ky-97O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Wf0-yD-6kn"/>
+                <constraint firstItem="Joa-ky-97O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eGG-Fb-neu"/>
+                <constraint firstItem="88h-Xe-Tdk" firstAttribute="top" secondItem="Joa-ky-97O" secondAttribute="bottom" id="p4R-s6-Wvx"/>
+                <constraint firstAttribute="trailing" secondItem="88h-Xe-Tdk" secondAttribute="trailing" id="rgm-Ju-Vby"/>
+                <constraint firstAttribute="trailing" secondItem="Joa-ky-97O" secondAttribute="trailing" id="uDY-u1-P6W"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

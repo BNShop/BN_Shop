@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "BN_ShopPayment.h"
+#import "BN_ShopHeader.h"
+
 
 @interface AppDelegate ()
 
@@ -17,6 +20,45 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+
+    [[BN_ShopPayment sharedInstance] wxRegisterApp];
+
+        NSDictionary *paraDic = @{
+                                  @"phoneNum":@"18059240683",
+                                  @"passwd":@"123456",
+                                  @"deviceSystemType":@(2),
+                                  @"deviceId":@"12354222009090890987"
+                                  };
+        
+        NSString *url = [NSString stringWithFormat:@"%@/mime/login", Shop_BASEURL];
+        
+        [[BC_ToolRequest sharedManager] POST:url parameters:paraDic
+                                     success:^(NSURLSessionDataTask *operation, id responseObject){
+
+                                         
+                                         NSDictionary *dict = (NSDictionary*)responseObject;
+                                         
+                                         NSLog(@"responseObject = %@",dict);
+                                         if ([dict isKindOfClass:[NSDictionary class]]) {
+                                             int code = [[dict objectForKey:@"code"] intValue];
+                                             
+                                             if (code == 0) {
+                                                 NSDictionary *result = [dict objectForKey:@"result"];
+                                                 if (result && [result isKindOfClass:[NSDictionary class]]) {
+                                                     [BC_ToolRequest sharedManager].token = [result objectForKey:@"token"];
+                                                 }
+                                                 
+                                             }
+                                         }
+                                         
+                                     } failure:^(NSURLSessionDataTask *operation, NSError *error){
+                                         
+                                         NSLog(@"error = %@",error);
+
+                                     }];
+    
     return YES;
 }
 
@@ -47,5 +89,32 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    if ([url.host isEqualToString:@"pay"]) {
+        return [WXApi handleOpenURL:url delegate:[BN_ShopPayment sharedInstance]];
+    } else if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            [[BN_ShopPayment sharedInstance] alipayCallBackWith:resultDic];
+        }];
+        return YES;
+    }
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    NSLog(@"url host = %@", url.host);
+    if ([url.host isEqualToString:@"pay"]) {
+        return [WXApi handleOpenURL:url delegate:[BN_ShopPayment sharedInstance]];
+    } else if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            [[BN_ShopPayment sharedInstance] alipayCallBackWith:resultDic];
+        }];
+        return YES;
+    }
+    return YES;
+    
+}
 
 @end

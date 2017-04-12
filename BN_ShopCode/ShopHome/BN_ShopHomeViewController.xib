@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BN_ShopHomeViewController">
+            <connections>
+                <outlet property="scrollToTopButton" destination="6gW-pV-kTJ" id="xOJ-AM-heY"/>
+                <outlet property="tableView" destination="8ox-ih-FdL" id="BcZ-IM-j2X"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8ox-ih-FdL">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="601"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <view key="tableFooterView" contentMode="scaleToFill" id="rp2-oJ-XO0">
+                        <rect key="frame" x="0.0" y="552" width="600" height="49"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Caj-dv-pIL"/>
+                    </connections>
+                </tableView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gW-pV-kTJ">
+                    <rect key="frame" x="560" y="561" width="30" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="N9y-K3-hmr"/>
+                        <constraint firstAttribute="height" constant="31" id="eN2-w2-Yj7"/>
+                    </constraints>
+                    <state key="normal" image="Shop_Home_ScrollToTop"/>
+                    <state key="highlighted" image="Shop_Home_ScrollToTopd"/>
+                    <connections>
+                        <action selector="scrollToTop:" destination="-1" eventType="touchUpInside" id="7bU-PV-SAz"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="8ox-ih-FdL" secondAttribute="trailing" id="Bub-TE-5Nr"/>
+                <constraint firstAttribute="bottom" secondItem="6gW-pV-kTJ" secondAttribute="bottom" constant="8" id="E6U-xB-uhh"/>
+                <constraint firstAttribute="trailing" secondItem="6gW-pV-kTJ" secondAttribute="trailing" constant="10" id="G1t-gs-4Vn"/>
+                <constraint firstItem="8ox-ih-FdL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="a8k-lV-7od"/>
+                <constraint firstItem="8ox-ih-FdL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pR8-HK-aKW"/>
+                <constraint firstAttribute="bottom" secondItem="8ox-ih-FdL" secondAttribute="bottom" constant="-1" id="sXI-6u-BpS"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="Shop_Home_ScrollToTop" width="30" height="31"/>
+        <image name="Shop_Home_ScrollToTopd" width="30" height="31"/>
+    </resources>
+</document>
